@@ -73,9 +73,9 @@
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "Introduction",
       "pages": [
-        "api-reference/introduction"
+        "introduction/introduction"
       ]
     },
     {
