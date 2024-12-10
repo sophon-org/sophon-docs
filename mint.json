@@ -43,15 +43,18 @@
     {
       "group": "Introduction",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
+        "getting-started",
+        "ecosystem"
       ]
     },
     {
       "group": "Learn",
       "pages": [
-        "learn/introduction"
+        "learn/what-is-sophon",
+        "learn/why-sophon",
+        "learn/architecture",
+        "learn/nodes-and-guardians",
+        "learn/tokenomics"
       ]
     },
     {
