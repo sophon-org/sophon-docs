@@ -31,26 +31,9 @@
       "url": "api-reference"
     }
   ],
-  "anchors": [
-    {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
-    }
-  ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Introduction",
       "pages": [
         "introduction",
         "quickstart",
@@ -58,14 +41,19 @@
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Learn",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "ABC",
+        "ABC",
+        "ABC"
+      ]
+    },
+    {
+      "group": "Build",
+      "pages": [
+        "ABC",
+        "ABC",
+        "ABC"
       ]
     },
     {
@@ -84,8 +72,8 @@
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://linkedin.com/company/mintlify"
+    "x": "https://x.com/sophon",
+    "github": "https://github.com/sophon-org",
+    "linkedin": "https://www.linkedin.com/company/sophon-labs"
   }
 }
