@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Sophon",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -15,20 +15,28 @@
       "to": "#07C983"
     }
   },
-  "topbarLinks": [
-    {
-      "name": "Support",
-      "url": "mailto:hi@mintlify.com"
-    }
-  ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+  "feedback": {
+    "thumbsRating": true
   },
+  "background": {
+    "style": "grid"
+  },
+  "primaryTab": {
+    "name": "Introduction"
+  },
+  "layout": "topnav",
   "tabs": [
     {
-      "name": "API Reference",
-      "url": "api-reference"
+      "name": "Learn",
+      "url": "learn"
+    },
+    {
+      "name": "Build",
+      "url": "build"
+    },
+    {
+      "name": "Farming SOPH",
+      "url": "farming"
     }
   ],
   "navigation": [
@@ -43,31 +51,19 @@
     {
       "group": "Learn",
       "pages": [
-        "ABC",
-        "ABC",
-        "ABC"
+        "learn/introduction"
       ]
     },
     {
       "group": "Build",
       "pages": [
-        "ABC",
-        "ABC",
-        "ABC"
+        "build/introduction"
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "Farming SOPH",
       "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoint Examples",
-      "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "farming/introduction"
       ]
     }
   ],
