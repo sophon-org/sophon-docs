@@ -35,7 +35,7 @@
       "url": "build"
     },
     {
-      "name": "Farming SOPH",
+      "name": "Farming",
       "url": "farming"
     }
   ],
@@ -60,13 +60,14 @@
     {
       "group": "Build",
       "pages": [
-        "build/introduction"
+        "build/smart-contracts",
+        "build/dev-frameworks"
       ]
     },
     {
-      "group": "Farming SOPH",
+      "group": "Farming",
       "pages": [
-        "farming/introduction"
+        "farming/farming-cycle"
       ]
     }
   ],
