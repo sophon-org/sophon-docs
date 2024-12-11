@@ -7,9 +7,9 @@
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#175aad",
+    "light": "#2b95ff",
+    "dark": "#1710a1",
     "anchors": {
       "from": "#0D9373",
       "to": "#07C983"
@@ -19,7 +19,7 @@
     "thumbsRating": true
   },
   "background": {
-    "style": "grid"
+    "style": "gradient"
   },
   "primaryTab": {
     "name": "Introduction"
@@ -35,8 +35,8 @@
       "url": "build"
     },
     {
-      "name": "Farming",
-      "url": "farming"
+      "name": "Farm",
+      "url": "farm"
     }
   ],
   "navigation": [
@@ -65,9 +65,14 @@
       ]
     },
     {
-      "group": "Farming",
+      "group": "Farm",
       "pages": [
-        "farming/farming-cycle"
+        "farm/farming-cycle",
+        "farm/introduction",
+        "farm/active-pools",
+        "farm/points-calculations",
+        "farm/boosts",
+        "farm/withdrawals"
       ]
     }
   ],
