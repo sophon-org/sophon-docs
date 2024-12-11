@@ -57,6 +57,7 @@
         "ecosystem/ai-compute",
         "ecosystem/gaming",
         "ecosystem/gambling",
+        "ecosystem/infrastructure",
         "ecosystem/ticketing"
       ]
     },
@@ -65,7 +66,14 @@
       "pages": [
         "learn/what-is-sophon",
         "learn/why-sophon",
-        "learn/architecture",
+        {
+          "group": "Architecture",
+          "pages": [
+            "learn/architecture/validiums",
+            "learn/architecture/zk-stack",
+            "learn/architecture/account-abstraction"
+          ]
+        },
         "learn/nodes-and-guardians",
         "learn/tokenomics"
       ]

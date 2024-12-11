@@ -1,0 +1,29 @@
+---
+title: 'Native Account Abstraction'
+description: 'Enhancing the user experience'
+---
+
+Many crypto proponents consider account abstraction revolutionary because of its potential to improve user experience. So let’s break it down.
+
+The Ethereum network has 2 different types of accounts:
+ 
+- Externally Owned Accounts (EOAs)
+- Contract Accounts
+
+The EOAs are the common hot wallets used to make on-chain transactions. They are controlled by private keys and can send messages by creating and signing transactions. So when you initiate any on-chain transaction, you are using an EOA. Examples include Rabby Wallet, Metamask, and Coinbase Wallet.
+
+Contract accounts, on the other hand, can be coded to implement arbitrary logic. These accounts, however, can only create and send messages after receiving an initial message. As the name suggests, they are governed by smart contracts.
+
+The optimal solution would be to have an account type that can effectively do both. The introduction of EIP-4337 made this possible.
+
+EIP-4337 introduced account abstraction wallets at the protocol level. These are smart contract wallets that can initiate and send transactions while still having the ability to code arbitrary logic into them to allow for more complex actions through a single account.
+
+While EIP-4337 was a major technical leap forward for the industry, it still has some challenges, specifically regarding implementation.
+
+It requires complex infrastructure to implement effectively and is not fully compatible with many parts of the Ethereum ecosystem. To resolve this, account abstraction is natively built into Sophon.
+
+All Sophon accounts will be smart contract accounts.
+
+This means transactions can be initiated in the same way EOAs do, but they will also be customizable by coding custom logic into them. This means elements such as signature schemes, native multi-sig capabilities, and application-specific restrictions become very easy to implement.
+
+In addition, Sophon accounts are further elevated through the implementation of paymasters.
