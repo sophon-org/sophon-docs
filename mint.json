@@ -54,8 +54,10 @@
       "group": "Ecosystem",
       "pages": [
         "ecosystem/introduction",
-        "ecosystem/defi",
-        "ecosystem/gaming"
+        "ecosystem/ai-compute",
+        "ecosystem/gaming",
+        "ecosystem/gambling",
+        "ecosystem/ticketing"
       ]
     },
     {
