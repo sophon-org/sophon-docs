@@ -47,13 +47,15 @@
     {
       "group": "Introduction",
       "pages": [
-        "getting-started"
+        "welcome"
       ]
     },
     {
       "group": "Ecosystem",
       "pages": [
-        "ecosystem/ecosystem"
+        "ecosystem/introduction",
+        "ecosystem/defi",
+        "ecosystem/gaming"
       ]
     },
     {
@@ -76,8 +78,8 @@
     {
       "group": "Farm",
       "pages": [
-        "farm/farming-cycle",
         "farm/introduction",
+        "farm/farming-cycle",
         "farm/active-pools",
         "farm/points-calculations",
         "farm/boosts",
