@@ -27,6 +27,10 @@
   "layout": "topnav",
   "tabs": [
     {
+      "name": "Ecosystem",
+      "url": "ecosystem"
+    },
+    {
       "name": "Learn",
       "url": "learn"
     },
@@ -43,8 +47,13 @@
     {
       "group": "Introduction",
       "pages": [
-        "getting-started",
-        "ecosystem"
+        "getting-started"
+      ]
+    },
+    {
+      "group": "Ecosystem",
+      "pages": [
+        "ecosystem/ecosystem"
       ]
     },
     {
