@@ -47,7 +47,8 @@
     {
       "group": "Introduction",
       "pages": [
-        "welcome"
+        "welcome",
+        "get-started"
       ]
     },
     {
@@ -71,10 +72,16 @@
           "pages": [
             "learn/architecture/validiums",
             "learn/architecture/zk-stack",
-            "learn/architecture/account-abstraction"
+            "learn/architecture/account-abstraction",
+            "learn/architecture/paymasters"
           ]
         },
-        "learn/nodes-and-guardians",
+        {
+          "group": "Nodes & Guardians",
+          "pages": [
+            "learn/nodes-and-guardians/sophon-nodes"
+          ]
+        },
         "learn/tokenomics"
       ]
     },
