@@ -1,0 +1,217 @@
+---
+title: "LayerZero Integration"
+description: "Deploy and use your OFT token on Sophon"
+---
+The main difference in Sophon is that bridging tokens out requires the use of an Helper contract during this initial phase, as $SOPH is not distributed yet.
+The section below shows the difference from the LayerZero [docs](https://docs.layerzero.network/v2/developers/evm/oft/quickstart), the remaining steps (e.g. deploying an OFT token or bridging tokens in) are the same.
+
+
+# Calling `send`
+LzOftHelper contract: `TODO`
+
+For native OFT tokens:
+1. Approve the OFT token amount to the `LzOftHelper` contract
+2. Call `LzOftHelper.send(oftContract, IOFT.SendParam)` (the `quoteSend` step is not needed)
+
+For tokens using the OFT Adapter:
+1. approve the underlying token to the `LzOftHelper` contract
+2. Call `LzOftHelper.send(OFTAdapter, IOFT.SendParam)` (the `quoteSend` step is not needed)
+
+Here's how the function should be called.
+
+<CodeGroup>
+```typescript Hardhat Task
+import { getNetworkNameForEid, types } from '@layerzerolabs/devtools-evm-hardhat';
+import type { EndpointId } from '@layerzerolabs/lz-definitions';
+import { addressToBytes32 } from '@layerzerolabs/lz-v2-utilities';
+import { Options } from '@layerzerolabs/lz-v2-utilities';
+import type { BigNumberish, BytesLike } from 'ethers';
+import { task } from 'hardhat/config';
+
+// LzOftHelper ABI (only the functions we need)
+const HELPER_ABI = [
+    "function send(address oftContract, tuple(uint32 dstEid, bytes to, uint256 amountLD, uint256 minAmountLD, bytes extraOptions, bytes composeMsg, bytes oftCmd) sendParam) external returns (tuple(bytes32 guid, uint256 nonce, bytes32 recipient, bytes message), tuple(uint256 amountLD, uint256 minAmountLD))",
+    "function addressToBytes32(address _addr) external pure returns (bytes32)"
+];
+
+// Helper contract address
+const HELPER_ADDRESS = "0x..."; // TODO: Add the actual deployed helper address
+
+interface Args {
+    amount: string;
+    to: string;
+    toEid: EndpointId;
+    sophon?: boolean;
+}
+
+interface SendParam {
+    dstEid: EndpointId; // Destination endpoint ID, represented as a number.
+    to: BytesLike; // Recipient address, represented as bytes.
+    amountLD: BigNumberish; // Amount to send in local decimals.
+    minAmountLD: BigNumberish; // Minimum amount to send in local decimals.
+    extraOptions: BytesLike; // Additional options supplied by the caller to be used in the LayerZero message.
+    composeMsg: BytesLike; // The composed message for the send() operation.
+    oftCmd: BytesLike; // The OFT command to be executed, unused in default OFT implementations.
+}
+
+// send tokens from a contract on one network to another
+task('lz:oft:send', 'Sends tokens from either OFT or OFTAdapter')
+    .addParam('to', 'contract address on network B', undefined, types.string)
+    .addParam('toEid', 'destination endpoint ID', undefined, types.eid)
+    .addParam('amount', 'amount to transfer in token decimals', undefined, types.string)
+    .addOptionalParam('sophon', 'use LzOftHelper for Sophon network', false, types.boolean)
+    .setAction(async (taskArgs: Args, { ethers, deployments }) => {
+        const toAddress = taskArgs.to;
+        const eidB = taskArgs.toEid;
+
+        // Get the contract factories
+        const oftDeployment = await deployments.get('MyOFT');
+
+        const [signer] = await ethers.getSigners();
+
+        // Create contract instances
+        const oftContract = new ethers.Contract(oftDeployment.address, oftDeployment.abi, signer);
+        const helperContract = new ethers.Contract(HELPER_ADDRESS, HELPER_ABI, signer);
+
+        const decimals = await oftContract.decimals();
+        const amount = ethers.utils.parseUnits(taskArgs.amount, decimals);
+        const options = Options.newOptions().addExecutorLzReceiveOption(65000, 0).toBytes();
+
+        // Now you can interact with the correct contract
+        const oft = oftContract;
+
+        const sendParam: SendParam = {
+            dstEid: eidB,
+            to: addressToBytes32(toAddress),
+            amountLD: amount,
+            minAmountLD: amount,
+            extraOptions: options,
+            composeMsg: ethers.utils.arrayify('0x'), // Assuming no composed message
+            oftCmd: ethers.utils.arrayify('0x'), // Assuming no OFT command is needed
+        };
+        console.log(
+            `sending ${taskArgs.amount} token(s) to network ${getNetworkNameForEid(eidB)} (${eidB})`
+        );
+
+        if (taskArgs.sophon) {
+            const innerTokenAddress = await oft.token();
+            const ERC20Factory = await ethers.getContractFactory('ERC20');
+            const innerToken = ERC20Factory.attach(innerTokenAddress);
+
+            // Approve tokens to helper contract
+            await innerToken.approve(helperContract.address, amount);
+
+            // Send via helper
+            const tx = await helperContract.send(oftContract.address, sendParam);
+            console.log(`Send tx initiated via helper. See: https://layerzeroscan.com/tx/${tx.hash}`);
+        } else {
+            // Original direct sending logic
+            const feeQuote = await oft.quoteSend(sendParam, false);
+            const nativeFee = feeQuote.nativeFee;
+        
+            console.log(
+              `sending ${taskArgs.amount} token(s) to network ${getNetworkNameForEid(eidB)} (${eidB})`,
+            );
+        
+            const ERC20Factory = await ethers.getContractFactory('ERC20');
+            const innerTokenAddress = await oft.token();
+        
+            // // If the token address !== address(this), then this is an OFT Adapter
+            // if (innerTokenAddress !== oft.address) {
+            //     // If the contract is OFT Adapter, get decimals from the inner token
+            //     const innerToken = ERC20Factory.attach(innerTokenAddress);
+        
+            //     // Approve the amount to be spent by the oft contract
+            //     await innerToken.approve(oftDeployment.address, amount);
+            // }
+        
+            const r = await oft.send(sendParam, {nativeFee: nativeFee, lzTokenFee: 0}, signer.address, {
+              value: nativeFee,
+            });
+            console.log(`Send tx initiated directly. See: https://layerzeroscan.com/tx/${r.hash}`);
+        }
+    });
+```
+
+```rust Foundry Script
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import {console, Script } from "forge-std/Script.sol";
+
+import { MessagingFee } from "@layerzerolabs/oapp-evm/contracts/oapp/OApp.sol";
+import { IOAppCore } from "@layerzerolabs/oapp-evm/contracts/oapp/interfaces/IOAppCore.sol";
+import { OptionsBuilder } from "@layerzerolabs/oapp-evm/contracts/oapp/libs/OptionsBuilder.sol";
+import { OFTReceipt, SendParam } from "@layerzerolabs/oft-evm/contracts/interfaces/IOFT.sol";
+import { MyOFT } from "../contracts/MyOFT.sol";
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
+// Helper interface for the minimal functions we need
+interface ILzOftHelper {
+    function send(address oftContract, SendParam calldata sendParam) external returns (MessagingReceipt memory, OFTReceipt memory);
+    function addressToBytes32(address _addr) external pure returns (bytes32);
+}
+
+contract SendOFT is Script {
+    using OptionsBuilder for bytes;
+
+    // Helper contract address
+    address constant HELPER_ADDRESS = address(0x...); // TODO: Add the actual deployed helper address
+
+    function addressToBytes32(address _addr) internal pure returns (bytes32) {
+        return bytes32(uint256(uint160(_addr)));
+    }
+
+    function run() public {
+        // Fetching environment variables
+        address oftAddress = vm.envAddress("OFT_ADDRESS");
+        address toAddress = vm.envAddress("TO_ADDRESS");
+        uint256 _tokensToSend = vm.envUint("TOKENS_TO_SEND");
+        bool isSophon = vm.envBool("IS_SOPHON");
+
+        // Fetch the private key from environment variable
+        uint256 privateKey = vm.envUint("PRIVATE_KEY");
+
+        // Start broadcasting with the private key
+        vm.startBroadcast(privateKey);
+
+        MyOFT sourceOFT = MyOFT(oftAddress);
+        
+        bytes memory _extraOptions = OptionsBuilder.newOptions().addExecutorLzReceiveOption(65000, 0);
+        SendParam memory sendParam = SendParam(
+            30111, // You can also make this dynamic if needed
+            addressToBytes32(toAddress),
+            _tokensToSend,
+            _tokensToSend * 9 / 10,
+            _extraOptions,
+            "",
+            ""
+        );
+
+        if (isSophon) {
+            // Get the underlying token
+            address innerTokenAddress = sourceOFT.token();
+            IERC20 innerToken = IERC20(innerTokenAddress);
+            
+            // Approve tokens to helper contract
+            innerToken.approve(HELPER_ADDRESS, _tokensToSend);
+            
+            // Send via helper
+            ILzOftHelper helper = ILzOftHelper(HELPER_ADDRESS);
+            helper.send(address(sourceOFT), sendParam);
+            
+            console.log("Transaction sent via Sophon helper");
+        } else {
+            MessagingFee memory fee = sourceOFT.quoteSend(sendParam, false);
+            console.log("Fee amount: ", fee.nativeFee);
+            
+            sourceOFT.send{value: fee.nativeFee}(sendParam, fee, msg.sender);
+            console.log("Transaction sent directly");
+        }
+
+        // Stop broadcasting
+        vm.stopBroadcast();
+    }
+}
+```
+</CodeGroup>

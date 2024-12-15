@@ -89,7 +89,8 @@
       "group": "Build",
       "pages": [
         "build/smart-contracts",
-        "build/dev-frameworks"
+        "build/dev-frameworks",
+        "build/layerzero_integration"
       ]
     },
     {
