@@ -7,7 +7,9 @@ The section below shows the difference from the LayerZero [docs](https://docs.la
 
 
 # Calling `send`
-LzOftHelper contract: `TODO`
+`LzOftHelper` contract: `TODO`
+
+<Note>You will need to contact product@sophon.xyz first to get your OFT token whitelisted on the `LzOftHelper` contract.</Note>
 
 For native OFT tokens:
 1. Approve the OFT token amount to the `LzOftHelper` contract
@@ -17,10 +19,10 @@ For tokens using the OFT Adapter:
 1. approve the underlying token to the `LzOftHelper` contract
 2. Call `LzOftHelper.send(OFTAdapter, IOFT.SendParam)` (the `quoteSend` step is not needed)
 
-Here's how the function should be called.
-
-<CodeGroup>
-```typescript Hardhat Task
+Below the full `send` flow.
+<Tabs>
+  <Tab title="Hardhat Task">
+  ```typescript
 import { getNetworkNameForEid, types } from '@layerzerolabs/devtools-evm-hardhat';
 import type { EndpointId } from '@layerzerolabs/lz-definitions';
 import { addressToBytes32 } from '@layerzerolabs/lz-v2-utilities';
@@ -132,8 +134,9 @@ task('lz:oft:send', 'Sends tokens from either OFT or OFTAdapter')
         }
     });
 ```
-
-```rust Foundry Script
+  </Tab>
+  <Tab title="Foundry Script">
+    ```rust
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
@@ -214,4 +217,6 @@ contract SendOFT is Script {
     }
 }
 ```
-</CodeGroup>
+  </Tab>
+</Tabs>
+
