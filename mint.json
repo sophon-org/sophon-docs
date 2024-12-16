@@ -41,7 +41,7 @@
   ],
   "navigation": [
     {
-      "group": "Introduction",
+      "group": "",
       "pages": ["welcome", "get-started", "what-is-sophon", "why-sophon"]
     },
     {
@@ -54,7 +54,7 @@
       ]
     },
     {
-      "group": "Build",
+      "group": "",
       "pages": [
         "build/smart-contracts",
         "build/dev-frameworks",
@@ -62,8 +62,8 @@
       ]
     },
     {
-      "group": "Farm",
-      "pages": ["farm/introduction"]
+      "group": "",
+      "pages": ["farm/farming-intro"]
     },
     {
       "group": "ABC",
@@ -77,9 +77,12 @@
       ]
     },
     {
-      "group": "Nodes",
+      "group": "",
+      "pages": ["nodes/nodes-intro"]
+    },
+    {
+      "group": "Node Types",
       "pages": [
-        "nodes/introduction",
         "nodes/full-nodes",
         "nodes/light-nodes",
         "nodes/guardians"
