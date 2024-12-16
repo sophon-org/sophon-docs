@@ -31,8 +31,8 @@
       "url": "build"
     },
     {
-      "name": "Farm",
-      "url": "farm"
+      "name": "Discover",
+      "url": "discover"
     },
     {
       "name": "Nodes",
@@ -69,15 +69,15 @@
     },
     {
       "group": "",
-      "pages": ["farm/farming-intro", "farm/farming-cycle"]
+      "pages": ["discover/farming-intro", "discover/farming-cycle"]
     },
     {
-      "group": "ABC",
+      "group": "Farming",
       "pages": [
-        "farm/active-pools",
-        "farm/points-calculations",
-        "farm/boosts",
-        "farm/withdrawals"
+        "discover/active-pools",
+        "discover/points-calculations",
+        "discover/boosts",
+        "discover/withdrawals"
       ]
     },
     {
