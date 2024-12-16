@@ -5,8 +5,6 @@ description: ''
 
 Account abstraction is widely regarded as a **revolutionary concept** in the crypto world due to its potential to greatly enhance the user experience. Let’s break it down step by step.
 
----
-
 ## Types of Ethereum Accounts
 
 Ethereum currently supports 2 types of accounts:
@@ -69,45 +67,52 @@ The introduction of [EIP-4337](https://www.erc4337.io/docs) brought account abst
 
 Sophon leverages **native account abstraction (AA)** built into ZKsync, offering significant advantages over Ethereum's **EIP-4337**. While both approaches aim to improve account flexibility and user experience, the **native AA** of ZKsync—and by extension Sophon—provides a seamless, efficient, and unified solution.
 
-## Key Differences: Native AA vs. EIP-4337
+## Native AA vs. EIP-4337
 
 ### **1. Implementation Level**
 
-- **Sophon (ZKsync Native AA)**:
-  - Integrated directly at the **protocol level**, enabling a foundational, seamless experience.
-- **EIP-4337**:
-  - Operates outside the protocol as an overlay, avoiding protocol-level changes but introducing complexity.
+**Sophon (ZKsync Native AA)**: Integrated directly at the **protocol level**, enabling a foundational, seamless experience.
+
+**EIP-4337**: Operates outside the protocol as an overlay, avoiding protocol-level changes but introducing complexity.
 
 ### **2. Account Types**
-- **Sophon (ZKsync Native AA)**:
-  - All accounts, including EOAs, behave like **smart contract accounts** under the hood.
-  - **Paymasters** are supported natively for **all account types**.
-  - Smart contract accounts and paymasters are treated as **first-class citizens**, enabling uniform functionality.
 
-- **EIP-4337**:
-  - Introduces **smart contract wallets** but retains EOAs as separate entities.
-  - Paymasters are limited to smart contract accounts, excluding EOAs from benefitting.
+**Sophon (ZKsync Native AA)**:
+
+- All accounts, including EOAs, behave like **smart contract accounts** under the hood.
+- **Paymasters** are supported natively for **all account types**.
+- Smart contract accounts and paymasters are treated as **first-class citizens**, enabling uniform functionality.
+
+**EIP-4337**:
+
+- Introduces **smart contract wallets** but retains EOAs as separate entities.
+- Paymasters are limited to smart contract accounts, excluding EOAs from benefitting.
 
 ### **3. Transaction Processing**
-- **Sophon (ZKsync Native AA)**:
-  - Features a **unified transaction flow** with a **single mempool** for both EOAs and smart contract accounts.
-  - The **Operator** bundles transactions (regardless of account type) and sends them to the **Bootloader**, which processes them seamlessly.
 
-- **EIP-4337**:
-  - Introduces a **separate transaction flow** for smart contract accounts.
-  - Relies on a separate **user operations mempool** and specialized nodes called **Bundlers** to group user operations.
-  - Requires 2 distinct flows for processing transactions:
-    - Traditional flow for EOAs.
-    - New flow for smart contract accounts via the **EntryPoint** contract.
+**Sophon (ZKsync Native AA)**:
+- Features a **unified transaction flow** with a **single mempool** for both EOAs and smart contract accounts.
+- The **Operator** bundles transactions (regardless of account type) and sends them to the **Bootloader**, which processes them seamlessly.
+
+**EIP-4337**:
+
+- Introduces a **separate transaction flow** for smart contract accounts.
+- Relies on a separate **user operations mempool** and specialized nodes called **Bundlers** to group user operations.
+- Requires 2 distinct flows for processing transactions:
+  - Traditional flow for EOAs.
+  - New flow for smart contract accounts via the **EntryPoint** contract.
 
 ### **4. Paymasters Support**
-- **Sophon (ZKsync Native AA)**:
-  - Supports **paymasters** for both EOAs and smart contract accounts due to its unified transaction flow.
-  - Enables seamless **gas abstraction**, allowing users to pay transaction fees in tokens rather than ETH.
 
-- **EIP-4337**:
-  - Paymasters are limited to the **new transaction flow** for smart contract accounts.
-  - EOAs are excluded from using paymasters, resulting in limited functionality.
+**Sophon (ZKsync Native AA)**:
+
+- Supports **paymasters** for both EOAs and smart contract accounts due to its unified transaction flow.
+- Enables seamless **gas abstraction**, allowing users to pay transaction fees in tokens rather than ETH.
+
+**EIP-4337**:
+
+- Paymasters are limited to the **new transaction flow** for smart contract accounts.
+- EOAs are excluded from using paymasters, resulting in limited functionality.
 
 ---
 
@@ -116,6 +121,7 @@ Sophon leverages **native account abstraction (AA)** built into ZKsync, offering
 By utilizing **native account abstraction** instead of relying on EIP-4337, Sophon simplifies the user experience while enhancing the flexibility and functionality of accounts:
 
 ### **Advantages of Native AA on Sophon**
+
 - **Unified User Experience**: No separate flows or complex infrastructure; all accounts behave consistently.
 - **Gas Abstraction for All**: Both EOAs and smart contract accounts benefit from paymasters, making gas payments more user-friendly.
 - **Streamlined Transactions**: A single mempool ensures faster and more efficient processing.

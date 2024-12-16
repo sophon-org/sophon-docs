@@ -54,6 +54,12 @@
       ]
     },
     {
+      "group": "Tokenomics",
+      "pages": [
+        "tokenomics/tokenomics-intro"
+      ]
+    },
+    {
       "group": "",
       "pages": [
         "build/smart-contracts",
@@ -63,17 +69,15 @@
     },
     {
       "group": "",
-      "pages": ["farm/farming-intro"]
+      "pages": ["farm/farming-intro", "farm/farming-cycle"]
     },
     {
       "group": "ABC",
       "pages": [
-        "farm/farming-cycle",
         "farm/active-pools",
         "farm/points-calculations",
         "farm/boosts",
-        "farm/withdrawals",
-        "farm/tokenomics"
+        "farm/withdrawals"
       ]
     },
     {

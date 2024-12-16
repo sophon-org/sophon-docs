@@ -1,14 +1,18 @@
 ---
 title: 'Validiums'
-description: 'What is a Validium?'
+description: ''
 ---
 
-A Validium is a specialized blockchain scaling solution that uses off-chain data availability to offer better privacy and cheaper transaction costs.
+A Validium is a specialized blockchain scaling solution designed to improve scalability by utilizing off-chain data availability. This approach offers several advantages, including enhanced privacy and reduced transaction costs.
 
-Validiums process transactions off-chain and only publish limited transaction data to the Ethereum base layer.
+## Key Features of Validiums
 
-Validiums use validity proofs on Ethereum layer 1 to ensure that the transaction data is trustworthy and not malicious.
+**Off-Chain Transaction Processing:** Validiums process most transactions off-chain, reducing the load on the base layer. Only a limited set of transaction data is published to the Ethereum base layer, optimizing performance and lowering costs.
 
-A validity proof is a proof attached to every batch of transactions published to the Ethereum base layer. These transactions are only accepted and verified on the base layer if they have this attached validity proof, which proves their correctness.
+**Validity Proofs:** To ensure the integrity of off-chain transactions, Validiums use validity proofs on Ethereum Layer 1. These proofs ensure that the transaction data is trustworthy and has not been tampered with.
 
-Sophon uses this Validium technology and will be live on ZKsync’s Elastic Chain.
+**Transaction Verification:** A validity proof is attached to every batch of transactions before it is published on the Ethereum base layer. The Ethereum network only accepts and verifies these transactions if they are accompanied by a valid proof, confirming the correctness of the data.
+
+### Sophon and Validiums
+
+Sophon leverages Validium technology to provide an efficient, scalable solution. It will be implemented on the ZKsync Elastic Chain, bringing the benefits of Validium’s off-chain processing and privacy features to the ZKsync ecosystem.
