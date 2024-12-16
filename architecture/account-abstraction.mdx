@@ -1,33 +1,139 @@
 ---
 title: 'Native Account Abstraction'
-description: 'Enhancing the user experience'
+description: ''
 ---
 
-Many crypto proponents consider account abstraction revolutionary because of its potential to improve user experience. So let’s break it down.
+Account abstraction is widely regarded as a **revolutionary concept** in the crypto world due to its potential to greatly enhance the user experience. Let’s break it down step by step.
 
-The Ethereum network has 2 different types of accounts:
- 
-<Steps>
-  <Step title="Externally Owned Accounts (EOAs)">
-  </Step>
-  <Step title="Contract Accounts">
-  </Step>
-</Steps>
+---
 
-The EOAs are the common hot wallets used to make on-chain transactions. They are controlled by private keys and can send messages by creating and signing transactions. So when you initiate any on-chain transaction, you are using an EOA. Examples include Rabby Wallet, Metamask, and Coinbase Wallet.
+## Types of Ethereum Accounts
 
-Contract accounts, on the other hand, can be coded to implement arbitrary logic. These accounts, however, can only create and send messages after receiving an initial message. As the name suggests, they are governed by smart contracts.
+Ethereum currently supports 2 types of accounts:
 
-The optimal solution would be to have an account type that can effectively do both. The introduction of EIP-4337 made this possible.
+### **1. Externally Owned Accounts (EOAs)**
 
-EIP-4337 introduced account abstraction wallets at the protocol level. These are smart contract wallets that can initiate and send transactions while still having the ability to code arbitrary logic into them to allow for more complex actions through a single account.
+These are the common hot wallets used to make on-chain transactions.
 
-While EIP-4337 was a major technical leap forward for the industry, it still has some challenges, specifically regarding implementation.
+- **Controlled by:** Private keys.
+- **Functionality:**
 
-It requires complex infrastructure to implement effectively and is not fully compatible with many parts of the Ethereum ecosystem. To resolve this, account abstraction is natively built into Sophon.
+  - Can send messages by creating and signing transactions.
+  - Initiate on-chain transactions directly.
 
-All Sophon accounts will be smart contract accounts.
+- **Examples:**
 
-This means transactions can be initiated in the same way EOAs do, but they will also be customizable by coding custom logic into them. This means elements such as signature schemes, native multi-sig capabilities, and application-specific restrictions become very easy to implement.
+  - [Rabby Wallet](https://rabby.io/)
+  - [Metamask](https://metamask.io/)
+  - [Coinbase Wallet](https://www.coinbase.com/wallet)
 
-In addition, Sophon accounts are further elevated through the implementation of paymasters.
+<Note>Whenever you initiate an on-chain transaction, you are using an EOA.</Note>
+
+### **2. Contract Accounts**
+
+These accounts are governed by **smart contracts** and offer programmable logic.
+
+- **Functionality:**
+
+  - Can execute complex, custom-coded logic.
+  - Can only create and send messages after receiving an initial message.
+
+<Tip>Ideal for building applications that require custom behavior.</Tip>
+
+---
+
+### **The Ideal Solution**
+
+The optimal account type would combine the flexibility of **Contract Accounts** with the direct usability of **EOAs**. Enter **Account Abstraction**.
+
+## What is Account Abstraction?
+
+The introduction of [EIP-4337](https://www.erc4337.io/docs) brought account abstraction wallets to the Ethereum ecosystem.
+
+### **EIP-4337: A Major Leap**
+
+- Introduced **smart contract wallets** that:
+
+  - Can **initiate and send transactions** like EOAs.
+  - Incorporate **arbitrary logic** for more complex actions through a single account.
+
+- Enabled features such as:
+
+  - Custom signature schemes.
+  - Native multi-signature capabilities.
+  - Application-specific restrictions.
+
+<Warning>Despite its technical advancements, EIP-4337 faces implementation issues due to its **complex infrastructure requirements** and **partial compatibility** with the Ethereum ecosystem.</Warning>
+
+## Sophon's Approach to Account Abstraction
+
+Sophon leverages **native account abstraction (AA)** built into ZKsync, offering significant advantages over Ethereum's **EIP-4337**. While both approaches aim to improve account flexibility and user experience, the **native AA** of ZKsync—and by extension Sophon—provides a seamless, efficient, and unified solution.
+
+## Key Differences: Native AA vs. EIP-4337
+
+### **1. Implementation Level**
+
+- **Sophon (ZKsync Native AA)**:
+  - Integrated directly at the **protocol level**, enabling a foundational, seamless experience.
+- **EIP-4337**:
+  - Operates outside the protocol as an overlay, avoiding protocol-level changes but introducing complexity.
+
+### **2. Account Types**
+- **Sophon (ZKsync Native AA)**:
+  - All accounts, including EOAs, behave like **smart contract accounts** under the hood.
+  - **Paymasters** are supported natively for **all account types**.
+  - Smart contract accounts and paymasters are treated as **first-class citizens**, enabling uniform functionality.
+
+- **EIP-4337**:
+  - Introduces **smart contract wallets** but retains EOAs as separate entities.
+  - Paymasters are limited to smart contract accounts, excluding EOAs from benefitting.
+
+### **3. Transaction Processing**
+- **Sophon (ZKsync Native AA)**:
+  - Features a **unified transaction flow** with a **single mempool** for both EOAs and smart contract accounts.
+  - The **Operator** bundles transactions (regardless of account type) and sends them to the **Bootloader**, which processes them seamlessly.
+
+- **EIP-4337**:
+  - Introduces a **separate transaction flow** for smart contract accounts.
+  - Relies on a separate **user operations mempool** and specialized nodes called **Bundlers** to group user operations.
+  - Requires 2 distinct flows for processing transactions:
+    - Traditional flow for EOAs.
+    - New flow for smart contract accounts via the **EntryPoint** contract.
+
+### **4. Paymasters Support**
+- **Sophon (ZKsync Native AA)**:
+  - Supports **paymasters** for both EOAs and smart contract accounts due to its unified transaction flow.
+  - Enables seamless **gas abstraction**, allowing users to pay transaction fees in tokens rather than ETH.
+
+- **EIP-4337**:
+  - Paymasters are limited to the **new transaction flow** for smart contract accounts.
+  - EOAs are excluded from using paymasters, resulting in limited functionality.
+
+---
+
+## Why Sophon’s Native AA Matters
+
+By utilizing **native account abstraction** instead of relying on EIP-4337, Sophon simplifies the user experience while enhancing the flexibility and functionality of accounts:
+
+### **Advantages of Native AA on Sophon**
+- **Unified User Experience**: No separate flows or complex infrastructure; all accounts behave consistently.
+- **Gas Abstraction for All**: Both EOAs and smart contract accounts benefit from paymasters, making gas payments more user-friendly.
+- **Streamlined Transactions**: A single mempool ensures faster and more efficient processing.
+- **Protocol-Level Security**: Native integration eliminates reliance on external overlays, enhancing robustness and reducing vulnerabilities.
+
+<Note>Sophon eliminates the need for complex infrastructure, making account abstraction seamless and efficient.</Note>
+
+---
+
+### **Enhancing Sophon Accounts with Paymasters**
+
+Paymasters further elevate the functionality of Sophon accounts by:
+
+- **Abstracting transaction fees:** Allowing applications to subsidize or manage gas fees on behalf of users.
+- **Improving user experience:** Enabling gasless transactions and simplified interactions.
+
+---
+
+## Conclusion
+
+Account abstraction is no longer just a theoretical leap. With Sophon’s native implementation, users and developers can harness the best of both **EOAs** and **Contract Accounts**, unlocking new possibilities for innovation and usability.
