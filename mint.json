@@ -77,12 +77,9 @@
       "group": "Nodes",
       "pages": [
         "nodes/introduction",
-        "nodes/farming-cycle",
-        "nodes/active-pools",
-        "nodes/points-calculations",
-        "nodes/boosts",
-        "nodes/withdrawals",
-        "nodes/tokenomics"
+        "nodes/full-nodes",
+        "nodes/light-nodes",
+        "nodes/guardians"
       ]
     }
   ],
