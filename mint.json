@@ -27,62 +27,30 @@
   "layout": "topnav",
   "tabs": [
     {
-      "name": "Ecosystem",
-      "url": "ecosystem"
-    },
-    {
-      "name": "Learn",
-      "url": "learn"
-    },
-    {
       "name": "Build",
       "url": "build"
     },
     {
       "name": "Farm",
       "url": "farm"
+    },
+    {
+      "name": "Nodes",
+      "url": "nodes"
     }
   ],
   "navigation": [
     {
       "group": "Introduction",
-      "pages": [
-        "welcome",
-        "get-started"
-      ]
+      "pages": ["welcome", "get-started", "what-is-sophon", "why-sophon"]
     },
     {
-      "group": "Ecosystem",
+      "group": "Architecture",
       "pages": [
-        "ecosystem/introduction",
-        "ecosystem/ai-compute",
-        "ecosystem/gaming",
-        "ecosystem/gambling",
-        "ecosystem/infrastructure",
-        "ecosystem/ticketing"
-      ]
-    },
-    {
-      "group": "Learn",
-      "pages": [
-        "learn/what-is-sophon",
-        "learn/why-sophon",
-        {
-          "group": "Architecture",
-          "pages": [
-            "learn/architecture/validiums",
-            "learn/architecture/zk-stack",
-            "learn/architecture/account-abstraction",
-            "learn/architecture/paymasters"
-          ]
-        },
-        {
-          "group": "Nodes & Guardians",
-          "pages": [
-            "learn/nodes-and-guardians/sophon-nodes"
-          ]
-        },
-        "learn/tokenomics"
+        "architecture/validiums",
+        "architecture/zk-stack",
+        "architecture/account-abstraction",
+        "architecture/paymasters"
       ]
     },
     {
@@ -101,7 +69,20 @@
         "farm/active-pools",
         "farm/points-calculations",
         "farm/boosts",
-        "farm/withdrawals"
+        "farm/withdrawals",
+        "farm/tokenomics"
+      ]
+    },
+    {
+      "group": "Nodes",
+      "pages": [
+        "nodes/introduction",
+        "nodes/farming-cycle",
+        "nodes/active-pools",
+        "nodes/points-calculations",
+        "nodes/boosts",
+        "nodes/withdrawals",
+        "nodes/tokenomics"
       ]
     }
   ],
