@@ -63,8 +63,11 @@
     },
     {
       "group": "Farm",
+      "pages": ["farm/introduction"]
+    },
+    {
+      "group": "ABC",
       "pages": [
-        "farm/introduction",
         "farm/farming-cycle",
         "farm/active-pools",
         "farm/points-calculations",
