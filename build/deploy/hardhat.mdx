@@ -1,0 +1,187 @@
+---
+title: 'Hardhat'
+description: 'Learn about how to develop on Sophon using Hardhat'
+---
+
+
+## Getting Started
+
+### Project Setup
+
+We recommend scaffolding your project using the [zksync-cli](https://github.com/matter-labs/zksync-cli).
+
+### Configuration
+
+Create a `hardhat.config.ts` file with the following configuration:
+<CodeGroup>
+
+```typescript hardhat.config.ts
+import type { HardhatUserConfig } from "hardhat/config";
+import "@matterlabs/hardhat-zksync";
+import * as dotenv from 'dotenv';
+
+dotenv.config();
+
+const config: HardhatUserConfig = {
+  defaultNetwork: "sophonTestnet",
+  networks: {
+    sophonTestnet: {
+      url: "https://rpc.testnet.sophon.xyz",
+      ethNetwork: "sepolia",
+      verifyURL: "https://api-explorer-verify.testnet.sophon.xyz/contract_verification",
+      browserVerifyURL: "https://explorer.testnet.sophon.xyz/",
+      enableVerifyURL: true,
+      zksync: true,
+      accounts: [process.env.WALLET_PRIVATE_KEY as string]
+    },
+  },
+  zksolc: {
+    version: "latest",
+    settings: {},
+  },
+  solidity: {
+    version: "0.8.27",
+  },
+  etherscan: {
+    apiKey: {
+      sophonTestnet: process.env.ETHERSCAN_SOPHON_API_KEY as string,
+    },
+    customChains: [
+      {
+        network: "sophonTestnet",
+        chainId: 531050104,
+        urls: {
+          apiURL: "https://api-testnet.sophscan.xyz/api",
+          browserURL: "https://testnet.sophscan.xyz",
+        },
+      },
+    ],
+  }
+};
+
+export default config;
+```
+</CodeGroup>
+
+Create a `.env` file with your configuration:
+
+```env
+WALLET_PRIVATE_KEY=your_private_key_here
+ETHERSCAN_SOPHON_API_KEY=your_sophscan_api_key_here
+```
+
+## Contract Deployment
+
+### Basic Deployment
+
+Here's how to deploy a contract without using the paymaster:
+
+```typescript
+import { utils } from "zksync-ethers";
+
+const deployer = new Deployer(hre, wallet);
+const artifact = await deployer.loadArtifact("Your_Contract");
+const contract = await deployer.deploy(
+    artifact,
+    constructorArguments || []
+);
+```
+
+### Deployment with Paymaster
+
+During the alpha stage, you'll need to use our Paymaster to sponsor transactions. Here's how to deploy using the paymaster:
+
+```typescript
+import { utils } from "zksync-ethers";
+
+const deployer = new Deployer(hre, wallet);
+const artifact = await deployer.loadArtifact("Your_Contract");
+
+const params = utils.getPaymasterParams(
+  "0x98546B226dbbA8230cf620635a1e4ab01F6A99B2", // Paymaster address
+  {
+    type: "General",
+    innerInput: new Uint8Array(),
+  }
+);
+
+const contract = await deployer.deploy(
+    artifact,
+    constructorArguments || [], 
+    {
+      customData: {
+        paymasterParams: params,
+        gasPerPubdata: utils.DEFAULT_GAS_PER_PUBDATA_LIMIT,
+    },
+});
+```
+
+### Proxy Deployment
+
+To deploy proxy contracts with paymaster support:
+
+```typescript
+import { utils } from "zksync-ethers";
+
+const deployer = new Deployer(hre, wallet);
+const artifact = await deployer.loadArtifact("Your_Contract");
+
+await hre.zkUpgrades.deployProxy(deployer.zkWallet, artifact, [initializerArgs], 
+ {
+   initializer: "initialize",
+   paymasterProxyParams: params,
+   paymasterImplParams: params,
+ }
+);
+```
+
+## Contract Interaction
+
+To interact with deployed contracts using the paymaster:
+
+```typescript
+import { utils } from "zksync-ethers";
+
+const paymasterParams = utils.getPaymasterParams(
+  "0x98546B226dbbA8230cf620635a1e4ab01F6A99B2",
+  {
+    type: "General",
+    innerInput: new Uint8Array(),
+  }
+);
+
+const tx = await contract.yourFunction(params, {
+  customData: {
+    gasPerPubdata: utils.DEFAULT_GAS_PER_PUBDATA_LIMIT,
+    paymasterParams: paymasterParams,
+  },
+});
+```
+
+## Contract Verification
+
+You can verify contracts on both Sophscan and Sophon's explorer:
+
+```bash
+npx hardhat verify --network sophonTestnet DEPLOYED_CONTRACT_ADDRESS constructor_arguments
+```
+
+## Network Information
+
+### Testnet
+- RPC URL: `https://rpc.testnet.sophon.xyz`
+- Chain ID: 531050104
+- Explorer: https://explorer.testnet.sophon.xyz
+- Sophscan: https://testnet.sophscan.xyz
+
+### Mainnet
+- RPC URL: `https://rpc.sophon.xyz`
+- Chain ID: 50104
+- Explorer: https://explorer.sophon.xyz
+- Sophscan: https://sophscan.xyz
+
+## Important Notes
+
+- The Paymaster will automatically whitelist your deployed contracts after about 30 seconds
+- Wait a few moments after deployment before interacting with newly deployed contracts
+- The latest `zksolc` versions 1.5.7 and 1.5.8 are not currently supported for verification on Etherscan

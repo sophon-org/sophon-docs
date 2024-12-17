@@ -7,7 +7,7 @@ The section below shows the difference from the LayerZero [docs](https://docs.la
 
 
 # Calling `send`
-`LzOftHelper` contract: `TODO`
+`LzOftHelper` contract: `0x88172F3041Bd0787520dbc9Bd33D3d48e1fb46dc`
 
 <Note>You will need to contact product@sophon.xyz first to get your OFT token whitelisted on the `LzOftHelper` contract.</Note>
 
@@ -37,7 +37,7 @@ const HELPER_ABI = [
 ];
 
 // Helper contract address
-const HELPER_ADDRESS = "0x..."; // TODO: Add the actual deployed helper address
+const HELPER_ADDRESS = "0x88172F3041Bd0787520dbc9Bd33D3d48e1fb46dc";
 
 interface Args {
     amount: string;
@@ -159,7 +159,7 @@ contract SendOFT is Script {
     using OptionsBuilder for bytes;
 
     // Helper contract address
-    address constant HELPER_ADDRESS = address(0x...); // TODO: Add the actual deployed helper address
+    address constant HELPER_ADDRESS = address(0x88172F3041Bd0787520dbc9Bd33D3d48e1fb46dc);
 
     function addressToBytes32(address _addr) internal pure returns (bytes32) {
         return bytes32(uint256(uint160(_addr)));

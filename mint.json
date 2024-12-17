@@ -62,8 +62,16 @@
     {
       "group": "",
       "pages": [
-        "build/smart-contracts",
-        "build/dev-frameworks",
+        "build/getting-started",
+        {
+          "group": "Deploy on Sophon",
+          "pages": [
+            "build/deploy/hardhat",
+            "build/deploy/foundry"
+          ]
+        },
+        "build/contracts",
+        "build/ecosystem",
         "build/layerzero_integration"
       ]
     },
