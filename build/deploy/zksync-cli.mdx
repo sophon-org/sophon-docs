@@ -1,0 +1,70 @@
+---
+title: 'zksync-cli'
+description: 'Learn about how to develop on Sophon using zksync-cli'
+---
+
+The [ZKsync CLI](https://github.com/matter-labs/zksync-cli) is a powerful tool designed to simplify the setup, development, testing, and deployment of contracts on ZK Chains. It also provides a way to scaffold dApps using templates leveraging various frontend and web3 libraries. ZKsync CLI is published on npm as [**`zksync-cli`**](https://www.npmjs.com/package/zksync-cli). Commands are invoked using `npx zksync-cli` in the terminal.
+
+### **Prerequisites**
+
+- [Node.js v18 or higher](https://nodejs.org/en)
+- [Git](https://git-scm.com/downloads)
+- [Docker](https://www.docker.com/get-started/) (for `zksync-cli dev` commands)
+
+### **Usage**
+
+You can run commands without installation: `npx zksync-cli`. For example: `npx zksync-cli dev start`.
+
+### **Available Commands**
+
+To learn more about the available commands in ZKsync CLI, see the [**CLI reference**](https://docs.zksync.io/zksync-era/tooling/zksync-cli/reference).
+
+Here are the main command categories and their common use cases:
+
+- **Bridge**: Transfer assets between L1 and L2
+  ```bash
+  npx zksync-cli bridge deposit        # Move funds from Ethereum (L1) to ZKsync (L2)
+  npx zksync-cli bridge withdraw       # Initiate withdrawal from L2 to L1
+  npx zksync-cli bridge withdraw-finalize  # Complete the withdrawal process to L1
+  ```
+
+- **Config Chains**: Manage custom chain configurations
+  ```bash
+  npx zksync-cli config chains add     # Add a new custom chain
+  npx zksync-cli config chains edit    # Modify existing chain settings
+  ```
+
+- **Contract**: Interact with smart contracts
+  ```bash
+  npx zksync-cli contract read         # Execute read-only contract methods
+  npx zksync-cli contract write        # Send transactions to contracts
+  npx zksync-cli contract encode       # Generate calldata from contract methods
+  ```
+
+- **Create**: Bootstrap new projects using templates
+  ```bash
+  npx zksync-cli create               # Create new projects with various templates:
+                                      # - Frontend (Vue, React, Next.js, Nuxt, Vite)
+                                      # - Contracts (Hardhat with Solidity/Vyper)
+                                      # - Scripting (Node.js automation)
+  ```
+
+- **Dev**: Manage local development environment
+  ```bash
+  npx zksync-cli dev start            # Start local dev environment
+  npx zksync-cli dev clean            # Clean data for configured modules
+  npx zksync-cli dev config           # Select modules to run locally
+  ```
+
+- **Transaction**: Query transaction details
+  ```bash
+  npx zksync-cli transaction info     # Get detailed information about a transaction
+  ```
+
+- **Wallet**: Manage wallet operations
+  ```bash
+  npx zksync-cli wallet balance       # Check token balance for an address
+  npx zksync-cli wallet transfer      # Send funds on L2 to another account
+  ```
+
+
