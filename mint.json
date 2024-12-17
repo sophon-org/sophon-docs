@@ -59,17 +59,11 @@
     },
     {
       "group": "Links",
-      "pages": [
-        "links/security",
-        "links/socials"
-      ]
+      "pages": ["links/security", "links/socials"]
     },
     {
-      "group": "",
-      "pages": [
-        "build/getting-started",
-        "build/network-information"
-      ]
+      "group": "Setup",
+      "pages": ["build/getting-started", "build/network-information"]
     },
     {
       "group": "Deploy on Sophon",
@@ -77,7 +71,20 @@
     },
     {
       "group": "Contracts",
-      "pages": ["build/mainnet", "build/testnet", "build/ecosystem", "build/layerzero_integration"]
+      "pages": ["build/mainnet", "build/testnet", "build/layerzero_integration"]
+    },
+    {
+      "group": "Partners",
+      "pages": [
+        "build/partners/overview",
+        "build/partners/block-explorers",
+        "build/partners/indexers",
+        "build/partners/infrastructure",
+        "build/partners/account-abstraction",
+        "build/partners/oracles",
+        "build/partners/gaming",
+        "build/partners/payments"
+      ]
     },
     {
       "group": "",
