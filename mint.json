@@ -86,10 +86,13 @@
     },
     {
       "group": "Node Types",
+      "pages": ["nodes/full-nodes", "nodes/light-nodes"]
+    },
+    {
+      "group": "Guardians",
       "pages": [
-        "nodes/full-nodes",
-        "nodes/light-nodes",
-        "nodes/guardians"
+        "nodes/what-are-guardians",
+        "nodes/guardian-membership"
       ]
     }
   ],
