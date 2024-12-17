@@ -109,6 +109,10 @@
       "pages": ["nodes/full-nodes", "nodes/light-nodes"]
     },
     {
+      "group": "Node Rewards",
+      "pages": ["nodes/calculating-rewards"]
+    },
+    {
       "group": "Guardians",
       "pages": ["nodes/what-are-guardians", "nodes/guardian-membership", "nodes/operator-address"]
     }
