@@ -54,7 +54,7 @@
     },
     {
       "group": "Links",
-      "pages": ["links/security", "links/socials"]
+      "pages": ["links/audits", "links/security", "links/socials"]
     },
     {
       "group": "",
