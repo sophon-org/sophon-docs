@@ -3,39 +3,24 @@ title: 'Light Nodes'
 description: ''
 ---
 
-Deploying a light client node is the most accessible way to help maintain the Sophon Network. Light nodes don’t require powerful hardware to be ran successfully and launching is a straight forward process regardless of your chosen setup. When deploying your light node, you have 3 options and these are all easy to select from within our Guardians App [Provide Link]
+# How to Find Node Operator Address
 
-## Use a Direct Service Provider (Easy)
+Every **Light Node** needs an operator address to participate in the rewards program, and this address is the one that must receive Guardian Membership delegations.
 
-The Guardian App currently directly supports Easeflow setup [Link]. Just follow the instructions and your light node will automatically be configured and deployed. 
+The guide below will help you find or setup the address.
 
-<Note>Easeflow has no upfront cost but takes a 3% commission on operator rewards.</Note>
+---
 
-Other 3rd parties may also provide Worry Free setup through their own platforms.
+### If you did one click deploy with Easeflow
 
-## Use Railway Cloud Provider (Intermediate)
+Don’t worry, **Easeflow** automatically manages and sets the operator address for your light node. Just follow the steps within the Guardians app to configure and manage. 
 
-Use Railway [Link] to automatically deploy your environment. Follow the steps within the Guardians App to configure. 
+### If you are using another Node as a Service (NaaS) platform
 
-This set up gives you full control of your light node and has an estimated cost of $5/Month.
+If the operator address isn’t provided within the application, you may need to contact the platform to retrieve this information. 
 
-## Configure With Docker (Advanced)
+### If you are using Railway or running Docker images
 
-If you’re comfortable with running and maintaining your own environment, you can utilise our Docker Filers here. [Link]
+When you initiate your deployment, you had to provide some Environment Variables, including the operator address. 
 
-For more detailed set up instructions, you can check that out here. [Note to Brynn, not sure if Gio is drafting these, if not, feel free to take this sentence out]
-
-If you choose to run your own hardware, these are the minimum system requirements for light nodes:
-
-| **Component**                 | **Minimum** | **Recommended** |
-| ----------------------------- | ----------- | --------------- |
-| RAM                           | 512MB       | 1 GB            |
-| CPU (amd64/x86 Architecture)  | 2 core      | 4 core          |
-
-## Guardians App Dashboard
-
-No matter your setup choice above, you can use the guardians app to monitor the status of your light node in our node dashboard.
-
-You can also see and manage your rewards from this interface as you receive them.
-
-[If you cover this kind of thing elsewhere, just ignore this section but if not, might be good to get a screenshot here]
+<Note>IMPORTANT: If you didn't set a different address to receive your comission rewards, you must have control over the operator address to claim your **$SOPH** when they are available.</Note>
