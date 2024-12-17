@@ -67,7 +67,7 @@
     },
     {
       "group": "Setup",
-      "pages": ["build/early-partners", "build/network-information"]
+      "pages": ["build/early-partners", "build/network-information", "build/evm-differences"]
     },
     {
       "group": "Deploy & Interact",
