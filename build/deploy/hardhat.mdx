@@ -165,23 +165,3 @@ You can verify contracts on both Sophscan and Sophon's explorer:
 ```bash
 npx hardhat verify --network sophonTestnet DEPLOYED_CONTRACT_ADDRESS constructor_arguments
 ```
-
-## Network Information
-
-### Testnet
-- RPC URL: `https://rpc.testnet.sophon.xyz`
-- Chain ID: 531050104
-- Explorer: https://explorer.testnet.sophon.xyz
-- Sophscan: https://testnet.sophscan.xyz
-
-### Mainnet
-- RPC URL: `https://rpc.sophon.xyz`
-- Chain ID: 50104
-- Explorer: https://explorer.sophon.xyz
-- Sophscan: https://sophscan.xyz
-
-## Important Notes
-
-- The Paymaster will automatically whitelist your deployed contracts after about 30 seconds
-- Wait a few moments after deployment before interacting with newly deployed contracts
-- The latest `zksolc` versions 1.5.7 and 1.5.8 are not currently supported for verification on Etherscan

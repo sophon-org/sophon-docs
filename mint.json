@@ -55,9 +55,7 @@
     },
     {
       "group": "Tokenomics",
-      "pages": [
-        "tokenomics/intro"
-      ]
+      "pages": ["tokenomics/intro"]
     },
     {
       "group": "Links",
@@ -77,10 +75,17 @@
     {
       "group": "Setup",
       "pages": [
-        "build/contracts",
-        "build/ecosystem",
-        "build/layerzero_integration"
+        "build/getting-started",
+        "build/network-information"
       ]
+    },
+    {
+      "group": "Deploy on Sophon",
+      "pages": ["build/deploy/hardhat", "build/deploy/foundry"]
+    },
+    {
+      "group": "Contracts",
+      "pages": ["build/contracts", "build/ecosystem", "build/layerzero_integration"]
     },
     {
       "group": "",
@@ -107,10 +112,7 @@
     },
     {
       "group": "Guardians",
-      "pages": [
-        "nodes/what-are-guardians",
-        "nodes/guardian-membership"
-      ]
+      "pages": ["nodes/what-are-guardians", "nodes/guardian-membership"]
     }
   ],
   "footerSocials": {
