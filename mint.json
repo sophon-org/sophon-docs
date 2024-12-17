@@ -84,7 +84,7 @@
     },
     {
       "group": "Tokens",
-      "pages": ["build/layerzero_integration"]
+      "pages": ["build/tokens/layerzero_integration"]
     },
     {
       "group": "Partners",
