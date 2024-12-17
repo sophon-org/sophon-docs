@@ -65,7 +65,7 @@
       ]
     },
     {
-      "group": "Setup",
+      "group": "",
       "pages": [
         "build/getting-started",
         "build/network-information"
@@ -77,7 +77,7 @@
     },
     {
       "group": "Contracts",
-      "pages": ["build/contracts", "build/ecosystem", "build/layerzero_integration"]
+      "pages": ["build/mainnet", "build/testnet", "build/ecosystem", "build/layerzero_integration"]
     },
     {
       "group": "",
