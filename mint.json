@@ -46,12 +46,7 @@
     },
     {
       "group": "Architecture",
-      "pages": [
-        "architecture/validiums",
-        "architecture/zk-stack",
-        "architecture/account-abstraction",
-        "architecture/paymasters"
-      ]
+      "pages": ["architecture/validiums", "architecture/zk-stack", "architecture/account-abstraction","architecture/paymasters"]
     },
     {
       "group": "Tokenomics",
@@ -62,8 +57,12 @@
       "pages": ["links/security", "links/socials"]
     },
     {
+      "group": "",
+      "pages": ["build/start-building"]
+    },
+    {
       "group": "Setup",
-      "pages": ["build/getting-started", "build/network-information"]
+      "pages": ["build/early-partners", "build/network-information"]
     },
     {
       "group": "Deploy on Sophon",
@@ -111,7 +110,7 @@
     },
     {
       "group": "Guardians",
-      "pages": ["nodes/what-are-guardians", "nodes/guardian-membership"]
+      "pages": ["nodes/what-are-guardians", "nodes/guardian-membership", "nodes/operator-address"]
     }
   ],
   "footerSocials": {
