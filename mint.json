@@ -133,6 +133,13 @@
         "nodes/guardian-membership",
         "nodes/operator-address"
       ]
+    },
+    {
+      "group": "Node Sale",
+      "pages": [
+        "nodes/details",
+        "nodes/contracts"
+      ]
     }
   ],
   "footerSocials": {
