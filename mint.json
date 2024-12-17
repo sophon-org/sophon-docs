@@ -50,7 +50,7 @@
     },
     {
       "group": "Tokenomics",
-      "pages": ["tokenomics/intro"]
+      "pages": ["tokenomics/soph"]
     },
     {
       "group": "Links",
@@ -87,7 +87,7 @@
     },
     {
       "group": "",
-      "pages": ["discover/discover-intro"]
+      "pages": ["discover/our-universe"]
     },
     {
       "group": "Farming",
@@ -102,7 +102,7 @@
     },
     {
       "group": "",
-      "pages": ["nodes/nodes-intro"]
+      "pages": ["nodes/our-infra"]
     },
     {
       "group": "Node Types",
