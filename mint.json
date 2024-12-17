@@ -42,7 +42,7 @@
   "navigation": [
     {
       "group": "",
-      "pages": ["welcome", "get-started", "what-is-sophon", "why-sophon"]
+      "pages": ["welcome", "using-sophon", "what-is-sophon", "why-sophon"]
     },
     {
       "group": "Architecture",
@@ -60,16 +60,23 @@
       ]
     },
     {
-      "group": "",
+      "group": "Links",
       "pages": [
-        "build/getting-started",
-        {
-          "group": "Deploy on Sophon",
-          "pages": [
-            "build/deploy/hardhat",
-            "build/deploy/foundry"
-          ]
-        },
+        "links/security",
+        "links/socials"
+      ]
+    },
+    {
+      "group": "",
+      "pages": ["build/getting-started"]
+    },
+    {
+      "group": "Deploy on Sophon",
+      "pages": ["build/deploy/hardhat", "build/deploy/foundry"]
+    },
+    {
+      "group": "Setup",
+      "pages": [
         "build/contracts",
         "build/ecosystem",
         "build/layerzero_integration"
@@ -77,11 +84,13 @@
     },
     {
       "group": "",
-      "pages": ["discover/farming-intro", "discover/farming-cycle"]
+      "pages": ["discover/discover-intro"]
     },
     {
       "group": "Farming",
       "pages": [
+        "discover/farming-intro",
+        "discover/farming-cycle",
         "discover/active-pools",
         "discover/points-calculations",
         "discover/boosts",
