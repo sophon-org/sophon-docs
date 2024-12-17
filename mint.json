@@ -46,7 +46,12 @@
     },
     {
       "group": "Architecture",
-      "pages": ["architecture/validiums", "architecture/zk-stack", "architecture/account-abstraction","architecture/paymasters"]
+      "pages": [
+        "architecture/validiums",
+        "architecture/zk-stack",
+        "architecture/account-abstraction",
+        "architecture/paymasters"
+      ]
     },
     {
       "group": "Tokenomics",
@@ -65,12 +70,21 @@
       "pages": ["build/early-partners", "build/network-information"]
     },
     {
-      "group": "Deploy on Sophon",
-      "pages": ["build/deploy/hardhat", "build/deploy/foundry", "build/deploy/zksync-cli"]
+      "group": "Deploy & Interact",
+      "pages": [
+        "build/interact/hardhat",
+        "build/interact/foundry",
+        "build/interact/zksync-cli",
+        "build/interact/sdks"
+      ]
     },
     {
       "group": "Contracts",
-      "pages": ["build/mainnet", "build/testnet", "build/layerzero_integration"]
+      "pages": ["build/mainnet", "build/testnet"]
+    },
+    {
+      "group": "Tokens",
+      "pages": ["build/layerzero_integration"]
     },
     {
       "group": "Partners",
@@ -114,7 +128,11 @@
     },
     {
       "group": "Guardians",
-      "pages": ["nodes/what-are-guardians", "nodes/guardian-membership", "nodes/operator-address"]
+      "pages": [
+        "nodes/what-are-guardians",
+        "nodes/guardian-membership",
+        "nodes/operator-address"
+      ]
     }
   ],
   "footerSocials": {
