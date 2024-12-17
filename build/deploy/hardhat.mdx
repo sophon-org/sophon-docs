@@ -12,19 +12,33 @@ We recommend scaffolding your project using the [zksync-cli](https://github.com/
 
 ### Configuration
 
-Create a `hardhat.config.ts` file with the following configuration:
+Set up your project with the following configuration:
 <CodeGroup>
 
 ```typescript hardhat.config.ts
 import type { HardhatUserConfig } from "hardhat/config";
+
 import "@matterlabs/hardhat-zksync";
 import * as dotenv from 'dotenv';
 
+// Load environment variables from .env file
 dotenv.config();
 
 const config: HardhatUserConfig = {
   defaultNetwork: "sophonTestnet",
   networks: {
+    hardhat: {
+      zksync: true,
+    },
+    sophonMainnet: {
+      url: "https://rpc.sophon.xyz",
+      ethNetwork: "mainnet",
+      verifyURL: "https://verification-explorer.sophon.xyz/contract_verification",
+      browserVerifyURL: "https://explorer.sophon.xyz/",
+      enableVerifyURL: true,
+      zksync: true,
+      accounts: [process.env.WALLET_PRIVATE_KEY as string]
+    },
     sophonTestnet: {
       url: "https://rpc.testnet.sophon.xyz",
       ethNetwork: "sepolia",
@@ -37,14 +51,17 @@ const config: HardhatUserConfig = {
   },
   zksolc: {
     version: "latest",
-    settings: {},
+    settings: {
+    },
   },
   solidity: {
     version: "0.8.27",
   },
   etherscan: {
+    enabled: true,
     apiKey: {
       sophonTestnet: process.env.ETHERSCAN_SOPHON_API_KEY as string,
+      sophonMainnet: process.env.ETHERSCAN_SOPHON_API_KEY as string,
     },
     customChains: [
       {
@@ -55,20 +72,26 @@ const config: HardhatUserConfig = {
           browserURL: "https://testnet.sophscan.xyz",
         },
       },
+      {
+        network: "sophonMainnet",
+        chainId: 50104,
+        urls: {
+          apiURL: "https://api.sophscan.xyz/api",
+          browserURL: "https://sophscan.xyz",
+        },
+      },
     ],
   }
 };
 
 export default config;
 ```
-</CodeGroup>
-
-Create a `.env` file with your configuration:
-
-```env
+```env .env
 WALLET_PRIVATE_KEY=your_private_key_here
 ETHERSCAN_SOPHON_API_KEY=your_sophscan_api_key_here
 ```
+</CodeGroup>
+
 
 ## Contract Deployment
 
