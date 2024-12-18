@@ -64,7 +64,7 @@ source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --privat
 
 ### Deployment using paymaster
 - Same as [Basic deployment](###basic-deployment) but you append the `--zk-paymaster-address` flag
-- **Note** that the paymaster allows you to perform gasless transactions, no need to have a SOPH balance)
+- **Note** that the paymaster allows you to perform gasless transactions, no need to have a SOPH balance
 
 ```
 source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --zk-paymaster-address $PAYMASTER_ADDRESS --zk-paymaster-input $(cast calldata "general(bytes)" "0x")
@@ -136,7 +136,7 @@ To use the paymaster within a script you have 2 options: using a **cheatcode** o
 
 
 #### Using a low-level call (in case you can't install the cheatcode library)
-- For simplicity, you can copy paste the following script (**note** that here we are using `address(vm).call`:
+- For simplicity, you can copy paste the following script (**note** that here we are using `address(vm).call`):
     
     ```
     // SPDX-License-Identifier: UNLICENSED
@@ -188,7 +188,8 @@ source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-k
 ```
 
 ## Contract verification
-If you want to verify an already deployed contract, you can do so on [Sophscan]([url](https://sophscan.xyz/)) (an Etherscan-like explorer) and/or on [Sophon's explorer]([url](https://explorer.sophon.xyz/)).
+
+If you want to verify an already deployed contract, you can do so on [Sophscan](https://sophscan.xyz) (an Etherscan-like explorer) and/or on [Sophon's Explorer](https://explorer.sophon.xyz).
 
 - on Sophscan (NOT WOKRING)
 ```
