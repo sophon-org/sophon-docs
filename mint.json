@@ -164,15 +164,15 @@
     },
     {
       "source": "/sophon/introduction/sophon-token-usdsoph",
-      "destination": "/tokenomics/intro"
+      "destination": "/tokenomics/soph"
     },
     {
       "source": "/sophon/introduction/sophon-token-usdsoph/token-distribution",
-      "destination": "/tokenomics/intro"
+      "destination": "/tokenomics/soph"
     },
     {
       "source": "/sophon/building-and-interacting/getting-started",
-      "destination": "/build/getting-started"
+      "destination": "/build/start-building"
     },
     {
       "source": "/sophon/building-and-interacting/launching-on-sophon",
@@ -224,7 +224,7 @@
     },
     {
       "source": "/sophon/sophon-guardians-and-nodes/overview",
-      "destination": "/nodes/nodes-intro"
+      "destination": "/nodes/our-infra"
     },
     {
       "source": "/sophon/sophon-guardians-and-nodes/sophon-guardian-membership",
