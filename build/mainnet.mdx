@@ -3,59 +3,23 @@ title: 'Mainnet'
 description: ''
 ---
 
-## L1 Contracts
+### Chain Contracts
 
-| **Name**           | **Address**                                   | **Comments**               |
-|--------------------|-----------------------------------------------|----------------------------|
-| Diamond Proxy      | `0x05eDE6aD1f39B7A16C949d5C33a0658c9C7241e3`  |                            |
-| Chain Admin        | `0xE1eeA4D6443b19D373Fe99De838b930Ef0ac2Ad3`  |                            |
-| Bridgehub          | `0x303a465B659cBB0ab36eE643eA362c509EEb5213`  |                            |
-| L1SharedBridge     | `0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB`  |                            |
-| L1ERC20Bridge      |                                               |                            |
-| STM                | `0xc2eE6b6af7d616f6e27ce7F4A451Aedc2b0F5f5C`  | No                         |
-| SophonFarming      | `0xeff8e65ac06d7fe70842a4d54959e8692d6ae064`  |                            |
-| L1Paymaster        | `0xC97F5f2FDE4fe6e220069F8D3718bE4FaC7C00f0`  |                            |
-| L1USDCBridge       | `0xf553E6D903AA43420ED7e3bc2313bE9286A8F987`  |                            |
-
-## L2 Contracts
-
-### Addresses
-
-| **Name**                  | **Address**                                   | **Comments**                   |
-|---------------------------|-----------------------------------------------|--------------------------------|
-| L2 Operator               | `0x4cB9ac68A2151f14E8242a984b1F1faDb36EBF60`  | Collects fees                  |
-| L1 ETH Sender / Operator  | `0x4cc87b0a504047967ced9a955431b3229237e7de`  | Commits batches                |
-| L1 ETH Sender / Operator  | `0xf3b07f6744e06cd5074b7d15ed2c33760837ce1f`  | Prove and Execute batches      |
-| Governance Address        |                                               | ChainAdmin owner               |
-| L2 Tech Multisig          |                                               |                                |
-| Token Multiplier Setter   | `0xe14828e4405239dd331f194f1b7883eed73bcbf3`  |                                |
-| Matter Labs               |                                               |                                |
-| Treasury                  |                                               |                                |
-
-### Protocol Contracts
-
-| **Name**           | **Address**                                     | **Implementation**                           | **Comments** |
-|--------------------|-------------------------------------------------|----------------------------------------------|--------------|
-| L2SharedBridge     | `0x954ba8223a6BFEC1Cc3867139243A02BA0Bc66e4`    | `0x0ba08b2e2fc141c4def0d80638486490dc503205` |              |
+| Name | Address | Comment |
+|------|---------|---------|
+| BridgeHub Proxy | `0x303a465B659cBB0ab36eE643eA362c509EEb5213` ([link](https://etherscan.io/address/0x303a465B659cBB0ab36eE643eA362c509EEb5213)) | Acts as a hub for bridges, so that they have a single point of communication with all ZK chain contracts ([reference](https://docs.zksync.io/zk-stack/components/shared-bridges#components-bridgehub)) |
+| Diamond Proxy | `0x05eDE6aD1f39B7A16C949d5C33a0658c9C7241e3` ([link](https://etherscan.io/address/0x05eDE6aD1f39B7A16C949d5C33a0658c9C7241e3)) | The main contract uses [EIP-2535](https://eips.ethereum.org/EIPS/eip-2535) diamond proxy pattern ([reference](https://docs.zksync.io/build/developer-reference/era-contracts/l1-contracts#diamondproxy)) |
+| Governance | `0xE1eeA4D6443b19D373Fe99De838b930Ef0ac2Ad3` ([link](https://etherscan.io/address/0xE1eeA4D6443b19D373Fe99De838b930Ef0ac2Ad3)) | Deployer and Admin multi-sig for ZK chains |
+| Shared Bridge | L1: `0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB` ([link](https://etherscan.io/address/0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB))<br/>L2: `0x954ba8223a6BFEC1Cc3867139243A02BA0Bc66e4` ([link](https://explorer.sophon.xyz/address/0x954ba8223a6BFEC1Cc3867139243A02BA0Bc66e4)) | Bridges assets between L1 and hyperchains, supporting both ETH and ERC20 tokens ([reference](https://docs.zksync.io/zk-stack/components/shared-bridges)) |
+| Verifier | `0xc2eE6b6af7d616f6e27ce7F4A451Aedc2b0F5f5C` ([link](https://etherscan.io/address/0xc2eE6b6af7d616f6e27ce7F4A451Aedc2b0F5f5C)) | ZK proof verifier contract |
 
 ### Useful Contracts
 
-| **Name**                     | **Address**                                  | **Comments**                   |
-|------------------------------|----------------------------------------------|--------------------------------|
-| Paymaster                    | `0x98546B226dbbA8230cf620635a1e4ab01F6A99B2` |                                |
-| ETH                          | `0x72af9F169B619D85A47Dfa8fefbCD39dE55c567D` |                                |
-| WSOPH                        | `0x2b1A859dE6A55c553520D7780Bc5805712B128F9` |                                |
-| USDT                         | `0x6386dA73545ae4E2B2E0393688fA8B65Bb9a7169` |                                |
-| Permit2                      | `0xb8e9B994102309E820cf29BA0D98673C8995Ebad` |                                |
-| Multicall3                   | `0x5f4867441d2416cA88B1b3fd38f21811680CD2C8` |                                |
-| SignatureChecker             | `0xb0A2cf27Bf984bd0c56dCFb37C9DA0F2c5028844` | Lib used by USDC               |
-| USDC-impl                    | `0x3E1FCbA109574C17be3053B242BD417A10f29655` |                                |
-| USDC                         | `0x9Aa0F72392B5784Ad86c6f3E899bCc053D00Db4F` |                                |
-| MasterMinter                 | `0x4c79285e25c6b9b4c16588a69d2b248624964691` | Used by USDC                   |
-| Seaport                      | `0x9E5EAD5eD29BBc92be13b0969Ca17CC26fB390E6` | Used by Beam for Sphere        |
-| Conduit (for Seaport)        | `0x62bBD1e348eb2646dc19D7F3b1F70408da13B898` | Used by Beam for Sphere        |
-| Conduit Controller (Seaport) | `0x0E5267441f3dC4BEC3bbC7f0e6588239c76C1B75` | Used by Beam for Sphere        |
-| GuardianNFT                  | `0x5F85230BC3bE312B566878f132fdA198F223C917` |                                |
-| GuardianDelegation           | `0xd8E3A935706c08B5e6f8e05D63D3E67ce2ae330C` |                                |
-| SophonCustomRestriction      | `0x8D7faBA273cB3a62130807dDB7a1896fAcC59D4B` |                                |
-| L2USDCBridge                 | `0x0f44bac3ec514be912aa4359017593b35e868d74` |                                |
+| Name | Address | Comment |
+|------|---------|---------|
+| Sophon Global Paymaster | L2: `0x98546B226dbbA8230cf620635a1e4ab01F6A99B2` ([link](https://explorer.sophon.xyz/address/0x98546B226dbbA8230cf620635a1e4ab01F6A99B2)) | Sponsors all transactions |
+| WSOPH | `0x2b1A859dE6A55c553520D7780Bc5805712B128F9` ([link](https://explorer.sophon.xyz/address/0x2b1A859dE6A55c553520D7780Bc5805712B128F9)) | Wrapped SOPH |
+| Bridged USDC | L2: `0x9Aa0F72392B5784Ad86c6f3E899bCc053D00Db4F` ([link](https://explorer.sophon.xyz/address/0x9Aa0F72392B5784Ad86c6f3E899bCc053D00Db4F))<br/>L2 Custom Bridge: `0x0f44bac3ec514be912aa4359017593b35e868d74` ([link](https://explorer.sophon.xyz/address/0x0f44bac3ec514be912aa4359017593b35e868d74)) | Main USDC contract - Follows Circle standard |
+| Multicall | `0x5f4867441d2416cA88B1b3fd38f21811680CD2C8` ([link](https://explorer.sophon.xyz/address/0x5f4867441d2416cA88B1b3fd38f21811680CD2C8)) | Enables more efficient contract querying: [https://github.com/mds1/multicall](https://github.com/mds1/multicall) |
+| Permit2 | `0xb8e9B994102309E820cf29BA0D98673C8995Ebad` ([link](https://explorer.sophon.xyz/address/0xb8e9B994102309E820cf29BA0D98673C8995Ebad)) | Makes token approvals easier and more secure: [https://github.com/Uniswap/permit2](https://github.com/Uniswap/permit2) |
+| LzOftHelper | `0x88172F3041Bd0787520dbc9Bd33D3d48e1fb46dc` | LayerZero OFT Helper contract - See [LayerZero Integration](/build/tokens/layerzero_integration) |
