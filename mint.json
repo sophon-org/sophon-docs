@@ -67,7 +67,11 @@
     },
     {
       "group": "Setup",
-      "pages": ["build/early-partners", "build/network-information", "build/evm-differences"]
+      "pages": [
+        "build/early-partners",
+        "build/network-information",
+        "build/evm-differences"
+      ]
     },
     {
       "group": "Deploy & Interact",
@@ -137,15 +141,158 @@
     },
     {
       "group": "Node Sale",
-      "pages": [
-        "nodes/details",
-        "nodes/contracts"
-      ]
+      "pages": ["nodes/details", "nodes/contracts"]
     }
   ],
   "footerSocials": {
     "x": "https://x.com/sophon",
     "github": "https://github.com/sophon-org",
     "linkedin": "https://www.linkedin.com/company/sophon-labs"
-  }
+  },
+  "redirects": [
+    {
+      "source": "/sophon/:slug*",
+      "destination": "/:slug*"
+    },
+    {
+      "source": "/sophon/introduction/what-is-sophon",
+      "destination": "/what-is-sophon"
+    },
+    {
+      "source": "/sophon/introduction/why-sophon",
+      "destination": "/why-sophon"
+    },
+    {
+      "source": "/sophon/introduction/sophon-token-usdsoph",
+      "destination": "/tokenomics/intro"
+    },
+    {
+      "source": "/sophon/introduction/sophon-token-usdsoph/token-distribution",
+      "destination": "/tokenomics/intro"
+    },
+    {
+      "source": "/sophon/building-and-interacting/getting-started",
+      "destination": "/build/getting-started"
+    },
+    {
+      "source": "/sophon/building-and-interacting/launching-on-sophon",
+      "destination": "/build/early-partners"
+    },
+    {
+      "source": "/sophon/building-and-interacting/chain-information",
+      "destination": "/build/network-information"
+    },
+    {
+      "source": "/sophon/building-and-interacting/chain-information/contracts",
+      "destination": "/build/mainnet"
+    },
+    {
+      "source": "/sophon/building-and-interacting/tooling",
+      "destination": "/build/interact"
+    },
+    {
+      "source": "/sophon/building-and-interacting/tooling/zsync-cli",
+      "destination": "/build/interact/zksync-cli"
+    },
+    {
+      "source": "/sophon/building-and-interacting/tooling/hardhat",
+      "destination": "/build/interact/hardhat"
+    },
+    {
+      "source": "/sophon/building-and-interacting/tooling/foundry",
+      "destination": "/build/interact/foundry"
+    },
+    {
+      "source": "/sophon/building-and-interacting/tooling/sdks",
+      "destination": "/build/interact/sdks"
+    },
+    {
+      "source": "/sophon/building-and-interacting/infra-partners",
+      "destination": "/build/partners/overview"
+    },
+    {
+      "source": "/sophon/sophon-network/architecture",
+      "destination": "/architecture/validiums"
+    },
+    {
+      "source": "/sophon/sophon-network/zk-stack-and-the-elastic-chain",
+      "destination": "/architecture/zk-stack"
+    },
+    {
+      "source": "/sophon/sophon-network/features",
+      "destination": "/architecture/account-abstraction"
+    },
+    {
+      "source": "/sophon/sophon-guardians-and-nodes/overview",
+      "destination": "/nodes/nodes-intro"
+    },
+    {
+      "source": "/sophon/sophon-guardians-and-nodes/sophon-guardian-membership",
+      "destination": "/nodes/what-are-guardians"
+    },
+    {
+      "source": "/sophon/sophon-guardians-and-nodes/sophon-nodes",
+      "destination": "/nodes/light-nodes"
+    },
+    {
+      "source": "/sophon/sophon-guardians-and-nodes/node-rewards",
+      "destination": "/nodes/calculating-rewards"
+    },
+    {
+      "source": "/sophon/sophon-guardians-and-nodes/node-sale",
+      "destination": "nodes/details"
+    },
+    {
+      "source": "/sophon/sophon-guardians-and-nodes/node-sale/contracts",
+      "destination": "nodes/contracts"
+    },
+    {
+      "source": "/sophon/farming/the-farming-cycle",
+      "destination": "discover/farming-cycle"
+    },
+    {
+      "source": "/sophon/farming/introduction",
+      "destination": "/discover/farming-intro"
+    },
+    {
+      "source": "/sophon/farming/active-pools",
+      "destination": "/discover/active-pools"
+    },
+    {
+      "source": "/sophon/farming/sophon-points-sp-calculations",
+      "destination": "/discover/points-calculations"
+    },
+    {
+      "source": "/sophon/farming/sophon-points-sp-calculations/sp-to-usdsoph-conversion",
+      "destination": "/discover/points-calculations"
+    },
+    {
+      "source": "/sophon/farming/sophon-points-sp-calculations/tracking-your-sp",
+      "destination": "/discover/points-calculations"
+    },
+    {
+      "source": "/sophon/farming/boosts",
+      "destination": "/discover/boosts"
+    },
+    {
+      "source": "/sophon/farming/boosts/activating-boosts",
+      "destination": "/discover/boosts"
+    },
+    {
+      "source": "/sophon/farming/boosts/calculating-boosts",
+      "destination": "/discover/boosts"
+    },
+    {
+      "source": "/sophon/farming/withdrawals",
+      "destination": "/discover/withdrawals"
+    },
+    {
+      "source": "/sophon/links/security-and-audits",
+      "destination": "/links/security"
+    },
+    {
+      "source": "/sophon/links/community",
+      "destination": "/links/socials"
+    }
+  ]
 }
