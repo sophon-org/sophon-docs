@@ -42,7 +42,12 @@
   "navigation": [
     {
       "group": "",
-      "pages": ["welcome", "using-sophon", "what-is-sophon", "why-sophon"]
+      "pages": [
+        "welcome",
+        "using-sophon",
+        "what-is-sophon",
+        "why-sophon"
+      ]
     },
     {
       "group": "Architecture",
@@ -55,15 +60,23 @@
     },
     {
       "group": "Tokenomics",
-      "pages": ["tokenomics/soph"]
+      "pages": [
+        "tokenomics/soph"
+      ]
     },
     {
       "group": "Links",
-      "pages": ["links/audits", "links/security", "links/socials"]
+      "pages": [
+        "links/audits",
+        "links/security",
+        "links/socials"
+      ]
     },
     {
       "group": "",
-      "pages": ["build/start-building"]
+      "pages": [
+        "build/start-building"
+      ]
     },
     {
       "group": "Setup",
@@ -84,11 +97,17 @@
     },
     {
       "group": "Contracts",
-      "pages": ["build/mainnet", "build/testnet"]
+      "pages": [
+        "build/mainnet",
+        "build/testnet"
+      ]
     },
     {
       "group": "Tokens",
-      "pages": ["build/tokens/USDC", "build/tokens/layerzero_integration"]
+      "pages": [
+        "build/tokens/USDC",
+        "build/tokens/layerzero_integration"
+      ]
     },
     {
       "group": "Partners",
@@ -105,7 +124,9 @@
     },
     {
       "group": "",
-      "pages": ["discover/our-universe"]
+      "pages": [
+        "discover/our-universe"
+      ]
     },
     {
       "group": "Farming",
@@ -120,15 +141,22 @@
     },
     {
       "group": "",
-      "pages": ["nodes/our-infra"]
+      "pages": [
+        "nodes/our-infra"
+      ]
     },
     {
       "group": "Node Types",
-      "pages": ["nodes/full-nodes", "nodes/light-nodes"]
+      "pages": [
+        "nodes/full-nodes",
+        "nodes/light-nodes"
+      ]
     },
     {
       "group": "Node Rewards",
-      "pages": ["nodes/calculating-rewards"]
+      "pages": [
+        "nodes/calculating-rewards"
+      ]
     },
     {
       "group": "Guardians",
@@ -141,7 +169,10 @@
     },
     {
       "group": "Node Sale",
-      "pages": ["nodes/details", "nodes/contracts"]
+      "pages": [
+        "nodes/details",
+        "nodes/contracts"
+      ]
     }
   ],
   "footerSocials": {

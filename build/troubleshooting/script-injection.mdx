@@ -1,0 +1,52 @@
+# Troubleshooting Script Injection Issues
+
+This guide helps you resolve common issues where JavaScript scripts work locally but fail to inject properly in production environments.
+
+## Common Issues and Solutions
+
+### Scripts Working Locally but Not in Production
+
+If your JavaScript scripts are working correctly in your local development environment but are not being injected in production, check the following:
+
+1. **Build Configuration**
+   - Ensure your build configuration properly includes the script files
+   - Verify that the build process is correctly processing and bundling your scripts
+   - Check if your production build settings differ from development settings
+
+2. **Path References**
+   - Confirm that script paths are correct for the production environment
+   - Check if you're using absolute vs relative paths appropriately
+   - Verify that the production server's file structure matches your expectations
+
+3. **Environment Variables**
+   - Verify that any required environment variables are properly set in production
+   - Check if your script injection logic depends on environment-specific configurations
+
+4. **Deployment Process**
+   - Ensure all script files are included in your deployment package
+   - Verify that file permissions are set correctly on the production server
+   - Check if your deployment process is skipping or excluding any necessary files
+
+5. **Content Security Policy (CSP)**
+   - Check if your production environment has CSP rules that might be blocking script injection
+   - Verify that your scripts comply with any existing CSP headers
+
+## Quick Fixes
+
+1. Clear your production build cache and rebuild
+2. Double-check your build configuration files
+3. Verify script paths in your production environment
+4. Review your deployment logs for any errors
+
+## Prevention Tips
+
+- Always test script injection in a staging environment before deploying to production
+- Use automated tests to verify script loading
+- Implement proper error logging for script injection failures
+- Document any environment-specific configuration requirements
+
+If the above solutions don't resolve the issue, consider:
+- Reviewing your bundler configuration
+- Checking for any conflicts with other scripts or libraries
+- Examining browser console errors in the production environment
+- Verifying that your script injection method is production-ready

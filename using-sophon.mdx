@@ -3,14 +3,16 @@ title: 'Using Sophon'
 description: ''
 ---
 
+import { connectWalletAndAddNetwork } from '@/lib/wallet-utils'
+
 Follow these steps to begin:
 
 ### Connecting Your Wallet
 
 As an EVM chain, Sophon will be readily available on every wallet interface and supported by Metamask, Rabby, Rainbow, and any other EVM wallet.
 
-<span class="wallet-related">
-  <span class="soph-button" onClick={() => connectWalletAndAddNetwork()}>
+<span className="wallet-related">
+  <span className="soph-button" onClick={connectWalletAndAddNetwork}>
     <span>Add network to wallet</span>
   </span>
 </span>
