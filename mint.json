@@ -115,7 +115,8 @@
         "discover/active-pools",
         "discover/points-calculations",
         "discover/boosts",
-        "discover/withdrawals"
+        "discover/withdrawals",
+        "discover/farming-faqs"
       ]
     },
     {
@@ -124,7 +125,7 @@
     },
     {
       "group": "Node Types",
-      "pages": ["nodes/full-nodes", "nodes/light-nodes"]
+      "pages": ["nodes/full-nodes", "nodes/light-nodes", "nodes/nodes-faqs"]
     },
     {
       "group": "Node Rewards",
@@ -136,7 +137,7 @@
         "nodes/what-are-guardians",
         "nodes/guardian-membership",
         "nodes/operator-address",
-        "nodes/faqs"
+        "nodes/guardian-faqs"
       ]
     },
     {
