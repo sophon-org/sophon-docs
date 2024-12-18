@@ -16,6 +16,7 @@ USDC on Sophon is implemented through a custom bridge implementation that enable
 ## Bridging USDC
 
 ### L1 → L2 (Ethereum to Sophon)
+
 1. Call `bridgehub.requestL2TransactionTwoBridges` with the custom L1 bridge address as `secondBridgeAddress`
 2. The bridgehub contract forwards the call to `customBridgeL1.bridgehubDeposit`
 3. USDC is transferred from the user to the bridge contract
@@ -23,6 +24,7 @@ USDC on Sophon is implemented through a custom bridge implementation that enable
 5. The L2 bridge mints USDC on Sophon
 
 ### L2 → L1 (Sophon to Ethereum)
+
 1. Call `customBridgeL2.withdraw` on Sophon
 2. Once the batch is sealed, call `customL1Bridge.finalizeWithdrawal` on Ethereum to complete the withdrawal
 
@@ -57,7 +59,7 @@ The bridge implementation includes required functionality for potential future u
 ### Role Management
 
 The token contract implements Circle's role-based access control system:
-- Implementation Owner: Controls assignment of all roles and can be transferred to Circle for native upgrade
-- ProxyAdmin: Manages proxy upgrades
-- Minter Role: Assigned to the bridge contract for minting operations
 
+- **Implementation Owner:** Controls assignment of all roles and can be transferred to Circle for native upgrade
+- **ProxyAdmin:** Manages proxy upgrades
+- **Minter Role:** Assigned to the bridge contract for minting operations
