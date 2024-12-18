@@ -131,7 +131,8 @@
       "pages": [
         "nodes/what-are-guardians",
         "nodes/guardian-membership",
-        "nodes/operator-address"
+        "nodes/operator-address",
+        "nodes/faqs"
       ]
     },
     {
