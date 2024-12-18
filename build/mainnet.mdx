@@ -1,0 +1,25 @@
+---
+title: 'Mainnet'
+description: ''
+---
+
+### Chain Contracts
+
+| Name | Address | Comment |
+|------|---------|---------|
+| BridgeHub Proxy | `0x303a465B659cBB0ab36eE643eA362c509EEb5213` ([link](https://etherscan.io/address/0x303a465B659cBB0ab36eE643eA362c509EEb5213)) | Acts as a hub for bridges, so that they have a single point of communication with all ZK chain contracts ([reference](https://docs.zksync.io/zk-stack/components/shared-bridges#components-bridgehub)) |
+| Diamond Proxy | `0x05eDE6aD1f39B7A16C949d5C33a0658c9C7241e3` ([link](https://etherscan.io/address/0x05eDE6aD1f39B7A16C949d5C33a0658c9C7241e3)) | The main contract uses [EIP-2535](https://eips.ethereum.org/EIPS/eip-2535) diamond proxy pattern ([reference](https://docs.zksync.io/build/developer-reference/era-contracts/l1-contracts#diamondproxy)) |
+| Governance | `0xE1eeA4D6443b19D373Fe99De838b930Ef0ac2Ad3` ([link](https://etherscan.io/address/0xE1eeA4D6443b19D373Fe99De838b930Ef0ac2Ad3)) | Deployer and Admin multi-sig for ZK chains |
+| Shared Bridge | L1: `0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB` ([link](https://etherscan.io/address/0xD7f9f54194C633F36CCD5F3da84ad4a1c38cB2cB))<br/>L2: `0x954ba8223a6BFEC1Cc3867139243A02BA0Bc66e4` ([link](https://explorer.sophon.xyz/address/0x954ba8223a6BFEC1Cc3867139243A02BA0Bc66e4)) | Bridges assets between L1 and hyperchains, supporting both ETH and ERC20 tokens ([reference](https://docs.zksync.io/zk-stack/components/shared-bridges)) |
+| Verifier | `0xc2eE6b6af7d616f6e27ce7F4A451Aedc2b0F5f5C` ([link](https://etherscan.io/address/0xc2eE6b6af7d616f6e27ce7F4A451Aedc2b0F5f5C)) | ZK proof verifier contract |
+
+### Useful Contracts
+
+| Name | Address | Comment |
+|------|---------|---------|
+| Sophon Global Paymaster | L2: `0x98546B226dbbA8230cf620635a1e4ab01F6A99B2` ([link](https://explorer.sophon.xyz/address/0x98546B226dbbA8230cf620635a1e4ab01F6A99B2)) | Sponsors all transactions |
+| WSOPH | `0x2b1A859dE6A55c553520D7780Bc5805712B128F9` ([link](https://explorer.sophon.xyz/address/0x2b1A859dE6A55c553520D7780Bc5805712B128F9)) | Wrapped SOPH |
+| Bridged USDC | L2: `0x9Aa0F72392B5784Ad86c6f3E899bCc053D00Db4F` ([link](https://explorer.sophon.xyz/address/0x9Aa0F72392B5784Ad86c6f3E899bCc053D00Db4F))<br/>L2 Custom Bridge: `0x0f44bac3ec514be912aa4359017593b35e868d74` ([link](https://explorer.sophon.xyz/address/0x0f44bac3ec514be912aa4359017593b35e868d74)) | Main USDC contract - Follows Circle standard |
+| Multicall | `0x5f4867441d2416cA88B1b3fd38f21811680CD2C8` ([link](https://explorer.sophon.xyz/address/0x5f4867441d2416cA88B1b3fd38f21811680CD2C8)) | Enables more efficient contract querying: [https://github.com/mds1/multicall](https://github.com/mds1/multicall) |
+| Permit2 | `0xb8e9B994102309E820cf29BA0D98673C8995Ebad` ([link](https://explorer.sophon.xyz/address/0xb8e9B994102309E820cf29BA0D98673C8995Ebad)) | Makes token approvals easier and more secure: [https://github.com/Uniswap/permit2](https://github.com/Uniswap/permit2) |
+| LzOftHelper | `0x88172F3041Bd0787520dbc9Bd33D3d48e1fb46dc` | LayerZero OFT Helper contract - See [LayerZero Integration](/build/tokens/layerzero_integration) |

@@ -1,0 +1,65 @@
+---
+title: "USDC"
+description: "Learn about how to use USDC on Sophon"
+---
+
+# USDC on Sophon
+
+USDC on Sophon is implemented through a custom bridge implementation that enables seamless transfer of USDC between **Ethereum** (L1) and **Sophon** (L2). This bridge serves as an interim solution until ZKSync completes its interoperability implementation.
+
+## Contract Addresses
+
+- **L2 USDC Token**: [`0x9Aa0F72392B5784Ad86c6f3E899bCc053D00Db4F`](https://explorer.sophon.xyz/address/0x9Aa0F72392B5784Ad86c6f3E899bCc053D00Db4F)
+- **L1 USDC Bridge**: [`0xf553E6D903AA43420ED7e3bc2313bE9286A8F987`](https://etherscan.io/address/0xf553E6D903AA43420ED7e3bc2313bE9286A8F987)
+- **L2 USDC Bridge**: [`0x0f44bac3ec514be912aa4359017593b35e868d74`](https://explorer.sophon.xyz/address/0x0f44bac3ec514be912aa4359017593b35e868d74)
+
+## Bridging USDC
+
+### L1 → L2 (Ethereum to Sophon)
+
+1. Call `bridgehub.requestL2TransactionTwoBridges` with the custom L1 bridge address as `secondBridgeAddress`
+2. The bridgehub contract forwards the call to `customBridgeL1.bridgehubDeposit`
+3. USDC is transferred from the user to the bridge contract
+4. Sequencers pick up the event and call `customL2Bridge.finalizeDeposit` on L2
+5. The L2 bridge mints USDC on Sophon
+
+### L2 → L1 (Sophon to Ethereum)
+
+1. Call `customBridgeL2.withdraw` on Sophon
+2. Once the batch is sealed, call `customL1Bridge.finalizeWithdrawal` on Ethereum to complete the withdrawal
+
+## Technical Details
+
+The custom bridge implementation is based on the [Shared Bridge](https://docs.zksync.io/zk-stack/components/shared-bridges) code but modified to support the native [USDC standard](https://github.com/matter-labs/usdc-bridge). The bridge consists of two main contracts:
+
+- `L1USDCBridge.sol`: Handles operations on Ethereum
+- `L2USDCBridge.sol`: Handles operations on Sophon
+
+The L2 bridge contract has the MINTER role on the USDC token contract, allowing it to mint USDC tokens on Sophon when deposits are finalized.
+
+## Bridged USDC Standard
+
+The USDC implementation on Sophon follows Circle's [Bridged USDC Standard](https://www.circle.com/bridged-usdc), which provides a secure and standardized way to implement bridged USDC with the possibility of upgrading to native USDC issuance in the future.
+
+### Key Features
+
+- **Standardized Implementation**: The bridged USDC token contract uses Circle's audited FiatToken implementation, the same code that secures billions in USDC liquidity across other chains
+- **Upgradability**: The implementation supports in-place upgrades to native USDC, allowing for a seamless transition without requiring time-consuming liquidity migration
+- **Security**: Built on open-source, audited ERC-20 contract code that follows Circle's security standards
+- **Compatibility**: While bridged USDC is not initially compatible with CCTP (Cross-Chain Transfer Protocol), the upgrade path to native USDC would enable this functionality
+
+### Bridge Requirements
+
+The bridge implementation includes required functionality for potential future upgrades:
+
+1. **Pausable Bridging**: The ability to pause USDC transfers to finalize the token supply
+2. **USDC Burning**: Capability to burn locked USDC on the source chain during potential upgrades
+3. **Ownership Transfer**: Support for secure transfer of contract ownership to Circle if an upgrade to native USDC is mutually agreed upon
+
+### Role Management
+
+The token contract implements Circle's role-based access control system:
+
+- **Implementation Owner:** Controls assignment of all roles and can be transferred to Circle for native upgrade
+- **ProxyAdmin:** Manages proxy upgrades
+- **Minter Role:** Assigned to the bridge contract for minting operations

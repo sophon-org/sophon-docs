@@ -1,0 +1,190 @@
+---
+title: 'Hardhat'
+description: 'Learn about how to develop on Sophon using Hardhat'
+---
+
+
+## Getting Started
+
+### Project Setup
+
+We recommend scaffolding your project using the [zksync-cli](https://github.com/matter-labs/zksync-cli).
+
+### Configuration
+
+Set up your project with the following configuration:
+<CodeGroup>
+
+```typescript hardhat.config.ts
+import type { HardhatUserConfig } from "hardhat/config";
+
+import "@matterlabs/hardhat-zksync";
+import * as dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
+
+const config: HardhatUserConfig = {
+  defaultNetwork: "sophonTestnet",
+  networks: {
+    hardhat: {
+      zksync: true,
+    },
+    sophonMainnet: {
+      url: "https://rpc.sophon.xyz",
+      ethNetwork: "mainnet",
+      verifyURL: "https://verification-explorer.sophon.xyz/contract_verification",
+      browserVerifyURL: "https://explorer.sophon.xyz/",
+      enableVerifyURL: true,
+      zksync: true,
+      accounts: [process.env.WALLET_PRIVATE_KEY as string]
+    },
+    sophonTestnet: {
+      url: "https://rpc.testnet.sophon.xyz",
+      ethNetwork: "sepolia",
+      verifyURL: "https://api-explorer-verify.testnet.sophon.xyz/contract_verification",
+      browserVerifyURL: "https://explorer.testnet.sophon.xyz/",
+      enableVerifyURL: true,
+      zksync: true,
+      accounts: [process.env.WALLET_PRIVATE_KEY as string]
+    },
+  },
+  zksolc: {
+    version: "latest",
+    settings: {
+    },
+  },
+  solidity: {
+    version: "0.8.27",
+  },
+  etherscan: {
+    enabled: true,
+    apiKey: {
+      sophonTestnet: process.env.ETHERSCAN_SOPHON_API_KEY as string,
+      sophonMainnet: process.env.ETHERSCAN_SOPHON_API_KEY as string,
+    },
+    customChains: [
+      {
+        network: "sophonTestnet",
+        chainId: 531050104,
+        urls: {
+          apiURL: "https://api-testnet.sophscan.xyz/api",
+          browserURL: "https://testnet.sophscan.xyz",
+        },
+      },
+      {
+        network: "sophonMainnet",
+        chainId: 50104,
+        urls: {
+          apiURL: "https://api.sophscan.xyz/api",
+          browserURL: "https://sophscan.xyz",
+        },
+      },
+    ],
+  }
+};
+
+export default config;
+```
+```env .env
+WALLET_PRIVATE_KEY=your_private_key_here
+ETHERSCAN_SOPHON_API_KEY=your_sophscan_api_key_here
+```
+</CodeGroup>
+
+
+## Contract Deployment
+
+### Basic Deployment
+
+Here's how to deploy a contract without using the paymaster:
+
+```typescript
+import { utils } from "zksync-ethers";
+
+const deployer = new Deployer(hre, wallet);
+const artifact = await deployer.loadArtifact("Your_Contract");
+const contract = await deployer.deploy(
+    artifact,
+    constructorArguments || []
+);
+```
+
+### Deployment with Paymaster
+
+During the alpha stage, you'll need to use our Paymaster to sponsor transactions. Here's how to deploy using the paymaster:
+
+```typescript
+import { utils } from "zksync-ethers";
+
+const deployer = new Deployer(hre, wallet);
+const artifact = await deployer.loadArtifact("Your_Contract");
+
+const params = utils.getPaymasterParams(
+  "0x98546B226dbbA8230cf620635a1e4ab01F6A99B2", // Paymaster address
+  {
+    type: "General",
+    innerInput: new Uint8Array(),
+  }
+);
+
+const contract = await deployer.deploy(
+    artifact,
+    constructorArguments || [], 
+    {
+      customData: {
+        paymasterParams: params,
+        gasPerPubdata: utils.DEFAULT_GAS_PER_PUBDATA_LIMIT,
+    },
+});
+```
+
+### Proxy Deployment
+
+To deploy proxy contracts with paymaster support:
+
+```typescript
+import { utils } from "zksync-ethers";
+
+const deployer = new Deployer(hre, wallet);
+const artifact = await deployer.loadArtifact("Your_Contract");
+
+await hre.zkUpgrades.deployProxy(deployer.zkWallet, artifact, [initializerArgs], 
+ {
+   initializer: "initialize",
+   paymasterProxyParams: params,
+   paymasterImplParams: params,
+ }
+);
+```
+
+## Contract Interaction
+
+To interact with deployed contracts using the paymaster:
+
+```typescript
+import { utils } from "zksync-ethers";
+
+const paymasterParams = utils.getPaymasterParams(
+  "0x98546B226dbbA8230cf620635a1e4ab01F6A99B2",
+  {
+    type: "General",
+    innerInput: new Uint8Array(),
+  }
+);
+
+const tx = await contract.yourFunction(params, {
+  customData: {
+    gasPerPubdata: utils.DEFAULT_GAS_PER_PUBDATA_LIMIT,
+    paymasterParams: paymasterParams,
+  },
+});
+```
+
+## Contract Verification
+
+You can verify contracts on both Sophscan and Sophon's explorer:
+
+```bash
+npx hardhat verify --network sophonTestnet DEPLOYED_CONTRACT_ADDRESS constructor_arguments
+```

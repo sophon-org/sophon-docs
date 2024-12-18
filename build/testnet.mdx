@@ -1,0 +1,31 @@
+---
+title: 'Testnet'
+description: ''
+---
+
+### Chain Contracts
+
+| Name | Address | Comment |
+|------|---------|---------|
+| BridgeHub Proxy | L1: `0x35a54c8c757806eb6820629bc82d90e056394c92` ([link](https://sepolia.etherscan.io/address/0x35a54c8c757806eb6820629bc82d90e056394c92)) | Acts as a hub for bridges, so that they have a single point of communication with all ZK chain contracts ([reference](https://docs.zksync.io/zk-stack/components/shared-bridges#components-bridgehub)) |
+| Create2 Factory | L1: `0xce0042b868300000d44a59004da54a005ffdcf9f` ([link](https://sepolia.etherscan.io/address/0xce0042b868300000d44a59004da54a005ffdcf9f)) | CREATE2 factory contract for deterministic address deployment |
+| Default Upgrade | L1: `0x27a7f18106281fe53d371958e8bc3f833694d24a` ([link](https://sepolia.etherscan.io/address/0x27a7f18106281fe53d371958e8bc3f833694d24a)) | Used to upgrade chain contracts. |
+| Diamond Proxy | L1: `0xdd02368f378eed3779b358d2020a77e4d022236d` ([link](https://sepolia.etherscan.io/address/0xdd02368f378eed3779b358d2020a77e4d022236d)) | The main contract uses [EIP-2535](https://eips.ethereum.org/EIPS/eip-2535) diamond proxy pattern ([reference](https://docs.zksync.io/build/developer-reference/era-contracts/l1-contracts#diamondproxy)) |
+| ERC20 Bridge | L1: `0x2ae09702f77a4940621572fbcdae2382d44a2cba` ([link](https://sepolia.etherscan.io/address/0x2ae09702f77a4940621572fbcdae2382d44a2cba))<br/>L2: `0xb10dd9f622ad0192cb007e12d5359081b90273bb` ([link](https://explorer.testnet.sophon.xyz/address/0xb10dd9f622ad0192cb007e12d5359081b90273bb)) | Canonical bridge for ERC20 tokens ([reference](https://docs.zksync.io/zk-stack/components/shared-bridges#main-asset-shared-bridges)) |
+| Governance | L1: `0x8550bc5b4a16f62a86f7bbd2d89412915c9587e6` ([link](https://sepolia.etherscan.io/address/0x8550bc5b4a16f62a86f7bbd2d89412915c9587e6)) | Deployer and Admin multi-sig for ZK chains |
+| Shared Bridge | L1: `0x3e8b2fe58675126ed30d0d12dea2a9bda72d18ae` ([link](https://sepolia.etherscan.io/address/0x3e8b2fe58675126ed30d0d12dea2a9bda72d18ae))<br/>L2: `0xb10dd9f622ad0192cb007e12d5359081b90273bb` ([link](https://explorer.testnet.sophon.xyz/address/0xb10dd9f622ad0192cb007e12d5359081b90273bb)) | Bridges assets between L1 and hyperchains, supporting both ETH and ERC20 tokens ([reference](https://docs.zksync.io/zk-stack/components/shared-bridges)) |
+| State Transition Proxy | L1: `0x4e39e90746a9ee410a8ce173c7b96d3afed444a5` ([link](https://sepolia.etherscan.io/address/0x4e39e90746a9ee410a8ce173c7b96d3afed444a5)) | Acts as a connector between Ethereum (L1) and ZK Chain (L2) ([reference](https://docs.zksync.io/build/developer-reference/era-contracts/l1-contracts#diamond-also-mentioned-as-state-transition-contract)) |
+| Transparent Proxy Admin | L1: `0x0358baca94dcd7931b7ba7aaf8a5ac6090e143a5` ([link](https://sepolia.etherscan.io/address/0x0358baca94dcd7931b7ba7aaf8a5ac6090e143a5)) | Admin Contract for the Transparent Proxy |
+| Validator Timelock | L1: `0xd3876643180a79d0a56d0900c060528395f34453` ([link](https://sepolia.etherscan.io/address/0xd3876643180a79d0a56d0900c060528395f34453)) | An intermediate smart contract between the validator EOA account and the ZKsync smart contract ([reference](https://docs.zksync.io/build/developer-reference/era-contracts/l1-contracts#validatortimelock)) |
+| Verifier | L1: `0xac3a2dc46cea843f0a9d6554f8804aed18ff0795` ([link](https://sepolia.etherscan.io/address/0xac3a2dc46cea843f0a9d6554f8804aed18ff0795)) | ZK proof verifier contract |
+
+### Useful Contracts
+
+| Name | Address | Comment |
+|------|---------|---------|
+| Sophon Global Paymaster | L2: `0x98546B226dbbA8230cf620635a1e4ab01F6A99B2` ([link](https://explorer.testnet.sophon.xyz/address/0x98546B226dbbA8230cf620635a1e4ab01F6A99B2)) | Sponsors all transactions |
+| WSOPH | `0x9B7EA63EF5062661570afe548e3AD691D5652527` ([link](https://explorer.testnet.sophon.xyz/address/0x9B7EA63EF5062661570afe548e3AD691D5652527)) | Wrapped SOPH |
+| Bridged USDC | L2: `0x27553b610304b6AB77855a963f8208443D773E60` ([link](https://explorer.testnet.sophon.xyz/address/0x27553b610304b6AB77855a963f8208443D773E60))<br/>L2 Custom Bridge: `0x72591d4135B712861d8d4513a2f6860Ac30A684D` ([link](https://explorer.testnet.sophon.xyz/address/0x72591d4135B712861d8d4513a2f6860Ac30A684D))<br/>L1: `0xbf4fdf7bf4014ea78c0a07259fbc4315cb10d94e` ([link](https://sepolia.etherscan.io/address/0xbf4fdf7bf4014ea78c0a07259fbc4315cb10d94e)) | Main USDC contract - Follows Circle standard |
+| Multicall | `0x83c04d112adedA2C6D9037bb6ecb42E7f0b108Af` ([link](https://explorer.testnet.sophon.xyz/address/0x83c04d112adedA2C6D9037bb6ecb42E7f0b108Af)) | Enables more efficient contract querying: [https://github.com/mds1/multicall](https://github.com/mds1/multicall) |
+| Permit2 | `0x37CcE35d6A19C3948e9557308E705Ee64404B3D0` ([link](https://explorer.testnet.sophon.xyz/address/0x37CcE35d6A19C3948e9557308E705Ee64404B3D0)) | Makes token approvals easier and more secure: [https://github.com/Uniswap/permit2](https://github.com/Uniswap/permit2) |
+| LzOftHelper | `0x88172F3041Bd0787520dbc9Bd33D3d48e1fb46dc` ([link](https://explorer.testnet.sophon.xyz/address/0x88172F3041Bd0787520dbc9Bd33D3d48e1fb46dc)) | LayerZero OFT Helper contract - See [LayerZero Integration](/build/tokens/layerzero_integration) |

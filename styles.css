@@ -1,0 +1,19 @@
+.soph-button {
+  padding: 14px 20px;
+  color: white;
+  background-color: rgb(0, 150, 247);
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 24px;
+  cursor: pointer;
+  margin: 8px 0;
+  display: inline-block;
+}
+
+.wallet-related {
+  display: none;
+}
+
+.visible {
+  display: inline-block;
+}
