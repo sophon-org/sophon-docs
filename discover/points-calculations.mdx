@@ -23,7 +23,7 @@ Sophon Farming is a staking system where users can earn **Sophon Points (SP)** b
 
 ### Pool Value Calculations
 
-Each pool's value is calculated using the following formula:
+Each pool's value is calculated using the following formula **(note that the multiplier is `1e18` based):**
 
 <Tip>
 $ \text{Pool Value} = \frac{\text{Total Tokens Staked} \times \text{Token Price} \times \text{Pool Multiplier}}{10^{18}} $
@@ -177,3 +177,5 @@ This results in a **50% increase** in point earnings.
 - Points accrue **continuously** while staked.
 - Only **unboosted tokens** can be withdrawn.
 </Warning>
+
+**For more information, please see the [relevant contract](https://github.com/sophon-org/farming-contracts/blob/bridgin/contracts/farm/SophonFarmingL2.sol) on our [GitHub](https://github.com/sophon-org).**
