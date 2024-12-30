@@ -35,13 +35,15 @@ Imagine we have 3 active pools with a combined value of $1,000:
 
 <Tip>
 - **Total System Value:** $1,000
-- **Total Points Per Block:** 10 SPs
+- **Total SPs Per Block:** 10 SPs
+- **Emission Rate:** 0.01 SP per USD equivalent staked
+- **Pool A Share:** 0.005 SPs (50% of emissions)
 </Tip>
 
 ### Pool Value Calculation
 
 ```
-Pool Value = (Total Tokens Staked × Token Price × Pool Multiplier) ÷ 1e18
+Pool Value = (Total Tokens Staked × Token Price × Pool Multiplier)
 ```
 
 The higher a pool's relative value, the more points it receives from the global distribution.
@@ -63,12 +65,6 @@ Distribution:
 
 ## Pool Mechanics
 
-Each pool tracks:
-
-- **Points per Share:** Reward rate per token.
-- **Last Updated Block:** Most recent calculation timestamp.
-- **Total Staked Tokens:** Including Boosts.
-
 <Info>
 **Pools update during:**
 - Token deposits and withdrawals.
@@ -81,16 +77,14 @@ Each pool tracks:
 To calculate your earnings, use the following forumla:
 
 ```
-Pending Points = (Your Stake × Points per Share ÷ 1e18) + Settled Points - Reward Debt
+SPs per block = (Your Stake / Pool Total Stake) x Pool Share
 ```
 
 Where:
 
-- **Your Stake:** How many tokens you've deposited in a pool.
-- **Points per Share:** How many points each token has earned so far.
-- **1e18:** This makes sure you get the exact right amount of points.
-- **Settled Points:** Points you've earned but haven't claimed yet.
-- **Reward Debt:** Points that have already been counted for your stake.
+- **Your Stake:** Amount of tokens you've deposited in the pool.
+- **Pool Total Stake:** Total amount of tokens deposited in the pool by all users.
+- **Pool Share:** Number of SPs allocated to the pool per block.
 
 <Tip>Points accumulate continuously while staking.</Tip>
 
@@ -100,8 +94,8 @@ Where:
 
 Boosts are multipliers that enhance your earning power by increasing your effective stake. When you apply a boost:
 
-- You choose how many of your staked tokens to boost.
-- The boosted tokens earn multiplied rewards.
+- You choose **how many** of your staked tokens to boost.
+- The boosted tokens earn **multiplied rewards**.
 - Those tokens remain locked until the boost period ends.
 - Unboosted tokens can still be withdrawn anytime.
 

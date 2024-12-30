@@ -3,16 +3,34 @@ title: 'Calculating Rewards'
 description: ''
 ---
 
+<Warning>
+**TLDR**
+- **Guardians** receive **20%** of **total $SOPH supply**
+- **10%** comes automatically from **Full Node Delegation**
+- **Additional 10% unlocked** by **Light Node Delegation**
+- You should delegate to **both Node Types** to maximize your rewards
+</Warning>
+
 <Info>
 **Overview**
-- The total $SOPH supply is **10 billion** (10,000,000,000)
+- The **total $SOPH supply** is **10 billion** (10,000,000,000)
 - Rewards are distributed weekly over the course of **156 weeks** (3 years)
-- You must maintain **active status** to qualify for rewards
+- You must **maintain active status** to **qualify for rewards** (meaning you have delegated your membership or memberships)
+- **Minimum Uptime** is currently set at **60%**
+- Full and Light Node operators might have set a % commission
+- Guardian NFT claiming auto-delegates to the **current Full Node** (Sophon-managed), making you eligible for **half (50%)** of your pro-rata reward allocation
+- To receive your **full 20% allocation**, delegate to both **Full Nodes** (automatic) *and* **Light Nodes** (manual)
+- Delegating to a **Light Node** is easily done via the [Guardian App](https://guardian.sophon.xyz)
+- Your **reward rate** will be **adjusted if you **remove delegation** from **either Node Type**
 </Info>
 
 ## Reward Formula
 
-Your weekly rewards are calculated using this formula:
+<Tip>
+**Reward Calculation Methodology**
+
+Below is how your weekly rewards are calculated based on your delegation status. As long as you maintain active delegation to **both Full and Light Nodes**, you'll earn your **pro-rata share** of the **20% token supply**.
+</Tip>
 
 ```
 Weekly Reward = (Total Supply × Allocation % × Your Memberships) ÷ (Total Memberships × Total Weeks)
@@ -21,7 +39,7 @@ Weekly Reward = (Total Supply × Allocation % × Your Memberships) ÷ (Total Mem
 <Note>
 **Where**
 - **Total Supply** = 10 billion (10,000,000,000)
-- **Allocation %** varies (**5% for Full Nodes, 10% for Light Nodes, 5% for Delegated Guardians**)
+- **Allocation %** = **5%** for **Full Node Delegation** + **10%** for **Light Node Delegation** + **5% Bonus** for participating = **20% total**
 - **Total Weeks** = 156 (3 years)
 </Note>
 
@@ -31,12 +49,16 @@ Weekly Reward = (Total Supply × Allocation % × Your Memberships) ÷ (Total Mem
 
 A total of **5%** of the $SOPH supply is allocated to Full Node rewards. This will be distributed proportionally over **3 years**, with approximately **0.032%** distributed weekly.
 
+<Warning>
+**Each Guardian Membership NFT** is **automatically delegated** to a **Full Node** when claimed.
+</Warning>
+
 <Info>
 **Steps**
 1. **Start with total supply:** 10 billion $SOPH
-2. **Multiply by allocation:** 10 billion × 0.05
+2. **Multiply by allocation:** 10 billion **×** 0.05
 3. **Multiply by your memberships**
-4. **Divide by** (total memberships × 156 weeks)
+4. **Divide by** (total memberships **×** 156 weeks)
 </Info>
 
 **Example:**
@@ -46,8 +68,8 @@ A total of **5%** of the $SOPH supply is allocated to Full Node rewards. This wi
 
 <Tip>
 **Weekly Reward**
-- -> (10 billion × 0.05 × 10,000) ÷ (80,000 × 156)
-- -> 5 trillion ÷ 12,480,000 
+- **->** (10 billion **×** 0.05 **×** 10,000) **÷** (80,000 **×** 156)
+- **->** 5 trillion **÷** 12,480,000 
 - **Total: 400,000 SOPH**
 </Tip>
 
@@ -60,9 +82,9 @@ A total of **10%** of the $SOPH supply is allocated to Light Node rewards. This 
 <Info>
 **Steps**
 1. **Start with total supply:** 10 billion $SOPH
-2. **Multiply by allocation:** 10 billion × 0.05
+2. **Multiply by allocation:** 10 billion **×** 0.05
 3. **Multiply by your memberships**
-4. **Divide by** (total memberships × 156 weeks)
+4. **Divide by** (total memberships **×** 156 weeks)
 </Info>
 
 **Example:**
@@ -72,8 +94,8 @@ A total of **10%** of the $SOPH supply is allocated to Light Node rewards. This 
 
 <Tip>
 **Weekly Reward**
-- -> (10 billion × 0.1 × 10) ÷ (80,000 × 156)
-- -> 10 billion  ÷ 12,480,000
+- **->** (10 billion **×** 0.1 **×** 10) **÷** (80,000 **×** 156)
+- **->** 10 billion **÷** 12,480,000
 - **Total: 801 SOPH**
 </Tip>
 
@@ -88,9 +110,9 @@ A total of **5%** of the $SOPH supply is allocated to Delegated Guardian rewards
 <Info>
 **Steps**
 1. **Start with total supply:** 10 billion $SOPH
-2. **Multiply by allocation:** 10 billion × 0.05
+2. **Multiply by allocation:** 10 billion **×** 0.05
 3. **For single membership:** multiply by 1
-4. **Divide by** (total memberships × 156 weeks)
+4. **Divide by** (total memberships **×** 156 weeks)
 </Info>
 
 **Example:**
@@ -100,7 +122,7 @@ A total of **5%** of the $SOPH supply is allocated to Delegated Guardian rewards
 
 <Tip>
 **Weekly Reward**
-- -> (10 billion × 0.05 × 1) ÷ (80,000 × 156)
-- -> 500 million ÷ 12,480,000
+- **->** (10 billion **×** 0.05 **×** 1) **÷** (80,000 **×** 156)
+- **->** 500 million **÷** 12,480,000
 - **Total: 40 SOPH**
 </Tip>
