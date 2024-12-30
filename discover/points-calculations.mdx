@@ -11,6 +11,7 @@ Sophon Farming is a staking system where users can earn **Sophon Points (SP)** b
 - Users earn points by staking tokens in pools.
 - Staking positions can be boosted for increased earnings.
 - Points distribution is based on pool values and stake amounts.
+- Some pools can have multipliers greater than 1.
 </Info>
 
 ## Points Generation and Distribution
@@ -18,12 +19,11 @@ Sophon Farming is a staking system where users can earn **Sophon Points (SP)** b
 ### Global Point Generation
 
 - A **fixed number** of points (`10 SP`) are generated each block.
-- The rate (`pointsPerBlock`) is set by the **contract owner**.
 - Points are distributed **proportionally** across all active pools.
 
 ### Pool Value Calculations
 
-Each pool's value is calculated using the following formula **(note that the multiplier is `1e18` based):**
+Each pool's value is calculated using the following formula:
 
 <Tip>
 $ \text{Pool Value} = \frac{\text{Total Tokens Staked} \times \text{Token Price} \times \text{Pool Multiplier}}{10^{18}} $
@@ -66,17 +66,13 @@ Updates occur when:
 
 ### User State Tracking
 
-For each user, the system tracks:
+The system keeps track of each user's information using the following details:
 
-```
-struct UserInfo {
-    uint256 amount;        // Total stake (deposit + boost)
-    uint256 boostAmount;   // Amount of boost applied
-    uint256 depositAmount; // Original deposit
-    uint256 rewardDebt;    // For reward calculations
-    uint256 rewardSettled; // Accumulated points
-}
-```
+- **Total Stake:** The combined total of the user's deposit and any additional boost applied to their stake.
+- **Boost Amount:** The extra amount added to the user's stake through a boost mechanism.
+- **Original Deposit:** The initial amount the user deposited without any boosts.
+- **Reward Debt:** A value used internally to calculate rewards. It helps track how much of the rewards the user has already earned.
+- **Accumulated Rewards:** The total points or rewards the user has accumulated over time.
 
 ### Points Calculation
 
