@@ -4,10 +4,15 @@ description: ''
 ---
 
 <Info>
-**Overview**
-- The total $SOPH supply is **10 billion** (10,000,000,000)
-- Rewards are distributed weekly over the course of **156 weeks** (3 years)
-- You must maintain **active status** to qualify for rewards
+  **Overview**
+
+  * The total $SOPH supply is **10 billion** (10,000,000,000)
+
+  * Rewards are distributed weekly over the course of **156 weeks** (3 years)
+
+  * You must maintain **active status** to qualify for rewards, meaning, you delegated your membership(s)
+
+  * Full and light node operators might have set a % commission
 </Info>
 
 ## Reward Formula
@@ -15,92 +20,127 @@ description: ''
 Your weekly rewards are calculated using this formula:
 
 ```
-Weekly Reward = (Total Supply × Allocation % × Your Memberships) ÷ (Total Memberships × Total Weeks)
+Weekly Reward = (SOPH Total Supply × Allocation % × Your active NFT Memberships) ÷ (Total active NFT Memberships × Total Weeks)
 ```
 
 <Note>
-**Where**
-- **Total Supply** = 10 billion (10,000,000,000)
-- **Allocation %** varies (**5% for Full Nodes, 10% for Light Nodes, 5% for Delegated Guardians**)
-- **Total Weeks** = 156 (3 years)
-</Note>
+  **Where**
 
----
+  * **Total Supply** = 10 billion (10,000,000,000)
+
+  * **Allocation %** varies (**5% for delegating to Full Nodes, 10% for delegating to Light Nodes, extra 5% if you did any of these delegations**)
+
+  * **Total Weeks** = 156 (3 years)
+</Note>
 
 ## Full Nodes
 
-A total of **5%** of the $SOPH supply is allocated to Full Node rewards. This will be distributed proportionally over **3 years**, with approximately **0.032%** distributed weekly.
+A total of **5%** of the $SOPH supply is allocated to active NFT delegations to Full Nodes. This will be distributed proportionally over **3 years**, with approximately **0.032%** distributed weekly.
 
 <Info>
-**Steps**
-1. **Start with total supply:** 10 billion $SOPH
-2. **Multiply by allocation:** 10 billion × 0.05
-3. **Multiply by your memberships**
-4. **Divide by** (total memberships × 156 weeks)
+  **Steps**
+
+  1. **Start with total supply:** 10 billion $SOPH
+
+  2. **Multiply by allocation:** 10 billion × 0.05
+
+  3. **Multiply by your delegated NFT memberships**
+
+  4. **Divide by** total active NFT memberships × 156 weeks
+
+  5. Multiply by (100 - operator commission)/100 - **IMPORTANT**: while there is only a single full node operated by Sophon, its commission is **ZERO**
 </Info>
 
 **Example:**
 
-- **You have:** 10,000 delegated memberships
-- **Total active:** 80,000 memberships
+* **You have:** 20 delegated memberships
+
+* **Total active:** 80,000 memberships
+
+* Full Node has **zero** commission
 
 <Tip>
-**Weekly Reward**
-- -> (10 billion × 0.05 × 10,000) ÷ (80,000 × 156)
-- -> 5 trillion ÷ 12,480,000 
-- **Total: 400,000 SOPH**
-</Tip>
+  **Weekly Reward**
 
----
+  * -> (10 billion × 0.05 × 20) ÷ (80,000 × 156)
+
+  * -> 10 billion ÷ 12,480,000
+
+  * **Total: \~801 SOPH**
+</Tip>
 
 ## Light Nodes
 
-A total of **10%** of the $SOPH supply is allocated to Light Node rewards. This will be distributed proportionally over **3 years**, with approximately **0.064%** distributed weekly.
+A total of **10%** of the $SOPH supply is allocated to active NFT delegations to Light Nodes. This will be distributed proportionally over **3 years**, with approximately **0.064%** distributed weekly.
 
 <Info>
-**Steps**
-1. **Start with total supply:** 10 billion $SOPH
-2. **Multiply by allocation:** 10 billion × 0.05
-3. **Multiply by your memberships**
-4. **Divide by** (total memberships × 156 weeks)
+  **Steps**
+
+  1. **Start with total supply:** 10 billion $SOPH
+
+  2. **Multiply by allocation:** 10 billion × 0.05
+
+  3. **Multiply by your memberships**
+
+  4. **Divide by** (total memberships × 156 weeks)
+
+  5. Multiply by (100 - operator commission)/100
 </Info>
 
 **Example:**
 
-- **You have:** 10 delegated memberships
-- **Total active:** 80,000 memberships
+* **You have:** 10 delegated memberships
+
+* **Total active:** 80,000 memberships
+
+* A given Light Node operator set a 3% commission
 
 <Tip>
-**Weekly Reward**
-- -> (10 billion × 0.1 × 10) ÷ (80,000 × 156)
-- -> 10 billion  ÷ 12,480,000
-- **Total: 801 SOPH**
+  **Weekly Reward**
+
+  * -> (10 billion × 0.1 × 10) ÷ (80,000 × 156)
+
+  * -> 10 billion  ÷ 12,480,000
+
+  * -> 801 X (100-3)/100
+
+  * **Total: \~777 SOPH**
 </Tip>
 
----
+## Extra delegation rewards
 
-## Delegated Guardians
+A total of **5%** of the $SOPH supply is allocated to active delegated memberships (regardless of being to a full node, light node, or both). This will be distributed proportionally over **3 years**, with approximately **0.032%** distributed weekly.
 
-A total of **5%** of the $SOPH supply is allocated to Delegated Guardian rewards. This will be distributed proportionally over **3 years**, with approximately **0.032%** distributed weekly.
-
-<Warning>Memberships that are **not active** for a given week will not receive the weekly reward.</Warning>
+<Warning>Memberships that are **not active** for a given week will not receive the weekly reward.</Warning>
 
 <Info>
-**Steps**
-1. **Start with total supply:** 10 billion $SOPH
-2. **Multiply by allocation:** 10 billion × 0.05
-3. **For single membership:** multiply by 1
-4. **Divide by** (total memberships × 156 weeks)
+  **Steps**
+
+  1. **Start with total supply:** 10 billion $SOPH
+
+  2. **Multiply by allocation:** 10 billion × 0.05
+
+  3. **For single membership:** multiply by 1
+
+  4. **Divide by** (total memberships × 156 weeks)
 </Info>
 
 **Example:**
 
-- **You have:** 1 delegated membership
-- **Total active:** 80,000 memberships
+* **You have:** 1 delegated membership
+
+* **Total active:** 80,000 memberships
 
 <Tip>
-**Weekly Reward**
-- -> (10 billion × 0.05 × 1) ÷ (80,000 × 156)
-- -> 500 million ÷ 12,480,000
-- **Total: 40 SOPH**
+  **Weekly Reward**
+
+  * -> (10 billion × 0.05 × 1) ÷ (80,000 × 156)
+
+  * -> 500 million ÷ 12,480,000
+
+  * **Total: 40 SOPH**
 </Tip>
+
+## Operator commission
+
+As stated, node operators (Light or Full) can define a commission. When they do so, a percentage of the weekly rewards are sent to the operator, and the remaining rewards directly to active membership owners.
