@@ -3,35 +3,38 @@ title: 'Points Calculations'
 description: ''
 ---
 
-Sophon Farming is a way to earn rewards by staking your tokens in various pools. This guide explains how the system works and how to optimize your earnings.
+**Sophon Farming** is a way to earn rewards by **staking your tokens** in **various pools**. This guide explains how the system works and how to optimize your earnings.
 
 <Info>
 **Key Concepts**
-- Points are generated **every block** and shared across pools.
-- Your earnings are based on your **staked tokens**.
-- **Boosting** can increase your rewards.
-- **Pool values** determine **point distribution**.
-- Some pools have a **multiplier** greater than 1.
+- Points are generated **every block** and shared across pools
+- Your earnings are based on your **staked tokens**
+- **Boosting** can increase your rewards
+- **Pool values** determine **point distribution**
+- Some pools may have a **multiplier** greater than 1
 </Info>
 
 ## Points Distribution
 
 **Block Generation**
 
-Every block, a fixed number of points (`10 SPs`) are created and distributed among active pools based on their relative value.
+Every block, a **fixed number of points** (`10 SPs`) are created and distributed among **active pools** based on their **relative value**.
 
 **Example:**
 
-Imagine we have 3 active pools with a combined value of $1,000:
+Imagine we have **3 active pools** with a combined value of **$1,000:**
 
-<Note>**Pool A:** $500 value (50% of total)</Note>
-- Gets **5 SPs** per block (50% of 10 SPs)
+<Note>**Pool A:** $500 value (**50%** of total)</Note>
 
-<Note>**Pool B:** $300 value (30% of total)</Note>
-- Gets **3 SPs** per block (30% of 10 SPs)
+Gets **5 SPs** per block (**50%** of 10 SPs)
 
-<Note>Pool C: $200 value (20% of total)</Note>
-- Gets **2 SPs** per block (20% of 10 SPs)
+<Note>**Pool B:** $300 value (**30%** of total)</Note>
+
+Gets **3 SPs** per block (**30%** of 10 SPs)
+
+<Note>**Pool C:** $200 value (**20%** of total)</Note>
+
+Gets **2 SPs** per block (**20%** of 10 SPs)
 
 <Tip>
 - **Total System Value:** $1,000
@@ -46,20 +49,20 @@ Imagine we have 3 active pools with a combined value of $1,000:
 Pool Value = (Total Tokens Staked × Token Price × Pool Multiplier)
 ```
 
-The higher a pool's relative value, the more points it receives from the global distribution.
+The higher a pool's **relative value**, the more **points** it receives from the **global distribution**.
 
 #### Example Distribution
 
-Given:
+**Given:**
 
 - **Pool A:** $300 in staked tokens
 - **Pool B:** $700 in staked tokens
 - **Total value:** $1,000
 
-Distribution:
+**Distribution:**
 
-- Pool A receives **30%** (300 ÷ 1,000)
-- Pool B receives **70%** (700 ÷ 1,000)
+- Pool A receives **30%** (300 **÷** 1,000)
+- Pool B receives **70%** (700 **÷** 1,000)
 
 ---
 
@@ -67,9 +70,9 @@ Distribution:
 
 <Info>
 **Pools update during:**
-- Token deposits and withdrawals.
-- Boosting.
-- Claiming Points.
+- Token deposits and withdrawals
+- Boosting
+- Claiming Points
 </Info>
 
 ### Reward Calculation
@@ -80,44 +83,36 @@ To calculate your earnings, use the following forumla:
 SPs per block = (Your Stake / Pool Total Stake) x Pool Share
 ```
 
-Where:
+<Info>
+**Where:**
+- **Your Stake:** Amount of tokens you've deposited in the pool
+- **Pool Total Stake:** Total amount of tokens deposited in the pool by all users
+- **Pool Share:** Number of SPs allocated to the pool per block
+</Info>
 
-- **Your Stake:** Amount of tokens you've deposited in the pool.
-- **Pool Total Stake:** Total amount of tokens deposited in the pool by all users.
-- **Pool Share:** Number of SPs allocated to the pool per block.
-
-<Tip>Points accumulate continuously while staking.</Tip>
+<Tip>Points accumulate **continuously** while staking.</Tip>
 
 ---
 
 ## Boosts
 
-Boosts are multipliers that enhance your earning power by increasing your effective stake. When you apply a boost:
+**Boosts** are multipliers that enhance your earning power by increasing your effective stake. When you apply a boost:
 
 - You choose **how many** of your staked tokens to boost.
 - The boosted tokens earn **multiplied rewards**.
-- Those tokens remain locked until the boost period ends.
-- Unboosted tokens can still be withdrawn anytime.
+- Those tokens remain **locked** until the boost period ends.
+- **Unboosted tokens** can still be **withdrawn** at any time.
 
 ### How Boosts Work
 
 **Example:**
 
 - You have staked 100 tokens in a pool.
-- You apply a 2x boost to 50 of your tokens.
-- Those 50 boosted tokens now count as 100 tokens (50 × 2).
+- You apply a 5x boost to 50 of your tokens.
+- Those 50 boosted tokens now count as 250 tokens (50 × 5).
 - Your remaining 50 tokens stay unboosted, counting as 50.
-- Your total effective stake is now 150 tokens (100 from boosted + 50 from unboosted).
-- This means a **50% increase** in point earnings.
-
-<Warning>
-**Important**
-- Only the boosted portion of your stake is locked.
-- You can boost different amounts of tokens with different multipliers.
-- Boosts expire after their set duration.
-- After expiration, tokens return to normal earning rate.
-- You can withdraw previously boosted tokens once their boost expires.
-</Warning>
+- Your total effective stake is now 300 tokens (**250** from boosted + **50** from unboosted).
+- This means a **200% increase** in point earnings.
 
 ---
 
@@ -133,7 +128,6 @@ Boosts are multipliers that enhance your earning power by increasing your effect
 After 10 blocks:
 
 - **Total Points Generated:** 100 SP
-- **Points per Share:** 1e18
 
 <Note>**Your Earnings:** 100 SP</Note>
 
@@ -181,10 +175,10 @@ As aforementioned, some pools can have a multiplier greater than 1. Here's how t
 
 <Warning>
 **Remember**
-- Points generate continuously per block.
-- Larger stakes yield more points.
-- Boosts increase earnings but lock tokens.
-- Unboosted tokens can be withdrawn.
+- Points generate continuously per block
+- Larger stakes yield more points
+- Boosts increase earnings but lock tokens
+- Unboosted tokens can be withdrawn
 </Warning>
 
 Happy farming! 🌾
