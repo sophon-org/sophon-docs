@@ -26,21 +26,21 @@ Imagine we have **3 active pools** with a combined value of **$1,000:**
 
 <Note>**Pool A:** $500 value (**50%** of total)</Note>
 
-Gets **5 SPs** per block (**50%** of 10 SPs)
+Gets **5 SPs** per block (**50%** of **10 SPs**)
 
 <Note>**Pool B:** $300 value (**30%** of total)</Note>
 
-Gets **3 SPs** per block (**30%** of 10 SPs)
+Gets **3 SPs** per block (**30%** of **10 SPs**)
 
 <Note>**Pool C:** $200 value (**20%** of total)</Note>
 
-Gets **2 SPs** per block (**20%** of 10 SPs)
+Gets **2 SPs** per block (**20%** of **10 SPs**)
 
 <Tip>
 - **Total System Value:** $1,000
 - **Total SPs Per Block:** 10 SPs
 - **Emission Rate:** 0.01 SP per USD equivalent staked
-- **Pool A Share:** 0.005 SPs (50% of emissions)
+- **Pool A Share:** 0.005 SPs (**50% of emissions**)
 </Tip>
 
 ### Pool Value Calculation
@@ -51,13 +51,21 @@ Pool Value = (Total Tokens Staked × Token Price × Pool Multiplier)
 
 The higher a pool's **relative value**, the more **points** it receives from the **global distribution**.
 
+<Note>
+**Pool Multipliers**
+- **Multipliers** (usually **2x** or **3x**) **increase the rewards** for certain pools, making them more appealing
+- The **higher the multiplier**, the **more rewards** you earn for the **same amount staked**
+</Note>
+
+<Warning>For the time being, **all pools** on **Sophon Mainnet** only have a **1x multiplier.**</Warning>
+
 #### Example Distribution
 
 **Given:**
 
 - **Pool A:** $300 in staked tokens
 - **Pool B:** $700 in staked tokens
-- **Total value:** $1,000
+- **Total value: $1,000**
 
 **Distribution:**
 
@@ -80,7 +88,7 @@ The higher a pool's **relative value**, the more **points** it receives from the
 To calculate your earnings, use the following forumla:
 
 ```
-SPs per block = (Your Stake / Pool Total Stake) x Pool Share
+SPs per block = (Your Stake / Pool Total Stake) × Pool Share
 ```
 
 <Info>
@@ -99,20 +107,30 @@ SPs per block = (Your Stake / Pool Total Stake) x Pool Share
 **Boosts** are multipliers that enhance your earning power by increasing your effective stake. When you apply a boost:
 
 - You choose **how many** of your staked tokens to boost.
-- The boosted tokens earn **multiplied rewards**.
-- Those tokens remain **locked** until the boost period ends.
-- **Unboosted tokens** can still be **withdrawn** at any time.
+- Boosted tokens earn **accelerated rewards**, calculated using the **boost multiplier (5x)**.
+- These tokens are **permanently committed** to providing liquidity on **Sophon Mainnet**.
+- **Unboosted tokens** can be **withdrawn** at **any time**.
 
 ### How Boosts Work
 
+Boosting is a strategic choice to maximize your **Sophon Points (SPs)** earnings by allocating part of your deposit to a **higher reward rate**. But remember, this comes with a commitment
+
+<Warning>
+**Boosted assets are permanently locked to support liquidity on the Sophon network.**
+</Warning>
+
 **Example:**
 
-- You have staked 100 tokens in a pool.
-- You apply a 5x boost to 50 of your tokens.
-- Those 50 boosted tokens now count as 250 tokens (50 × 5).
-- Your remaining 50 tokens stay unboosted, counting as 50.
-- Your total effective stake is now 300 tokens (**250** from boosted + **50** from unboosted).
+- You have staked **100 tokens** in a pool.
+- You apply a **5x boost** to **50** of your tokens.
+- Those **50 boosted tokens** now count as **250 tokens** (**50** × **5**).
+- Your remaining **50 tokens** stay **unboosted**, counting as **50**.
+- Your total effective stake is now **300 tokens** (**250** from **boosted** + **50** from **unboosted**).
 - This means a **200% increase** in point earnings.
+
+<Tip>
+For more on boosting, see [Boosts](/discover/boosts).
+</Tip>
 
 ---
 
@@ -157,30 +175,30 @@ As aforementioned, some pools can have a multiplier greater than 1. Here's how t
 
 **Two Pools (Base Values):**
 
-- **Pool A:** $400 × 3x multiplier = $1,200 effective value
-- **Pool B:** $800 × 1x multiplier = $800 effective value
+- **Pool A:** `$400`× `3x multiplier` = **$1,200 effective value**
+- **Pool B:** `$800` × `1x multiplier` = **$800 effective value**
 
-<Tip>**Total System Value:** $1,200 + $800 = $2,000 effective value</Tip>
+<Tip>**Total System Value:** `$1,200` + `$800` = **$2,000 effective value**</Tip>
 
 **Per-Block Distribution (10 SP total):**
 
-- **Pool A:** ($1,200/$2,000) × 10 SP = 6 SP per block
-- **Pool B:** ($800/$2,000) × 10 SP = 4 SP per block
+- **Pool A:** `($1,200 / $2,000)` × `10 SP` = **6 SP per block**
+- **Pool B:** `($800 / $2,000)` × `10 SP` = **4 SP per block**
 
 <Note>
 **10-Block Earnings**
-- **Pool A User:** 6 SP × 10 blocks = 60 SP
-- **Pool B User:** 4 SP × 10 blocks = 40 SP
+- **Pool A User:** 6 SP **×** 10 blocks = **60 SP**
+- **Pool B User:** 4 SP **×** 10 blocks = **40 SP**
 </Note>
 
 <Warning>
 **Remember**
-- Points generate continuously per block
-- Larger stakes yield more points
-- Boosts increase earnings but lock tokens
-- Unboosted tokens can be withdrawn
+- Points generate **continuously** per block
+- **Larger stakes** yield **more points**
+- **Boosts increase earnings** but **lock tokens**
+- **Unboosted tokens** can be **withdrawn**
 </Warning>
 
-Happy farming! 🌾
+**Happy farming!** 🌾
 
 **For more information, please see the [relevant contract](https://github.com/sophon-org/farming-contracts/blob/bridgin/contracts/farm/SophonFarmingL2.sol) on our [GitHub](https://github.com/sophon-org).**
