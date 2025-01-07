@@ -108,6 +108,15 @@
       "pages": ["discover/our-universe"]
     },
     {
+      "group": "Bridging",
+      "pages": [
+        "discover/bridging/bridging-intro",
+        "discover/bridging/sophon-bridge",
+        "discover/bridging/layerswap",
+        "discover/bridging/bridging-faqs"
+      ]
+    },
+    {
       "group": "Farming",
       "pages": [
         "discover/farming-intro",
