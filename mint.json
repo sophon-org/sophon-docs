@@ -5,6 +5,11 @@
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
   },
+  "metadata": {
+    "og:title": "Sophon Documentation",
+    "og:description": "Comprehensive guide and documentation for Sophon",
+    "keywords": "Sophon, Blockchain, Tokenomics, Nodes, Smart Contracts, Farming"
+  },
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#175aad",
