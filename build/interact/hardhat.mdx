@@ -139,7 +139,7 @@ export default async function(hre: HardhatRuntimeEnvironment) {
     const contract = await deployer.deploy(
       artifact,
       [], // Constructor arguments
-      undefined, // Deployment type (omit or use undefined for regular contract deployment)
+      undefined, // Deployment type (use undefined for regular contract deployment)
       {
           customData: {
               paymasterParams: params,
