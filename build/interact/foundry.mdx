@@ -1,23 +1,29 @@
 ---
 title: 'Foundry'
-description: 'Learn about how to develop on Sophon using Foundry'
+description: ''
 ---
 
-## Installing foundry
+## Installing Foundry
+
 On your command line, run:
+
 ```
 curl -L https://raw.githubusercontent.com/matter-labs/foundry-zksync/main/install-foundry-zksync | bash
 ```
-You can find more information on the official [zksync foundry](https://foundry-book.zksync.io/getting-started/installation) website 
 
-## Create a new project
+<Tip>You can find more info on the official [ZKsync Foundry](https://foundry-book.zksync.io/getting-started/installation) website.</Tip>
+
+## Create a New Project
+
 ```
 forge init
 forge build --zksync
 ```
+
 This will create a new simple Foundry project with a `Counter` contract.
 
-## Set configs
+## Set Configs
+
 Use the following configs on your `foundry.toml`
 
 ```.toml
@@ -31,6 +37,7 @@ sophon = "${MAINNET_RPC_URL}"
 ```
 
 Create an `.env` file and set these env vars:
+
 ```.env
 PRIVATE_KEY= # your deployer private key
 ETHERSCAN_API_KEY= # your etherscan API key
@@ -47,59 +54,72 @@ MAINNET_VERIFIER_URL=https://verification-explorer.sophon.xyz/contract_verificat
 MAINNET_CHAIN_ID="50104"
 ```
 
-## Counter contract deployment
+## Counter Contract Deployment
 
-### Basic deployment
+### Basic Deployment
+
 ```
 source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync
 ```
 
-### Deployment and verification
-- Same as [Basic deployment](###basic-deployment) but you append the `--verify` flag
-- **Note** that this will only verify on Sophscan
+### Deployment and Verification
+
+Same as [Basic Deployment](#basic-deployment) but you append the `--verify` flag
+
+<Note>This will only verify on **Sophscan**</Note>
 
 ```
 source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --verify
 ```
 
-### Deployment using paymaster
-- Same as [Basic deployment](###basic-deployment) but you append the `--zk-paymaster-address` flag
-- **Note** that the paymaster allows you to perform gasless transactions, no need to have a SOPH balance
+### Deployment Using Paymaster
+
+Same as [Basic Deployment](#basic-deployment) but you append the `--zk-paymaster-address` flag
+
+<Note>The paymaster allows you to perform gasless transactions, so there's no need to have a $SOPH balance</Note>
 
 ```
 source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --zk-paymaster-address $PAYMASTER_ADDRESS --zk-paymaster-input $(cast calldata "general(bytes)" "0x")
 ```
 
-### Deployment with paymaster and verification (all-in-one) 
+### Deployment With Paymaster and Verification (All-in-One)
+
 ```
 source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --zk-paymaster-address $PAYMASTER_ADDRESS --zk-paymaster-input $(cast calldata "general(bytes)" "0x") --verify
 ```
 
-## Deploy contracts using foundry Scripts
-### Deployment using script
+## Deploy Contracts Using Foundry Scripts
+
+### Deployment Using Script
+
 ```
 source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
 ```
 
-### Deployment using script and verification 
-- Same as [Basic deployment using script](###basic-deployment-using-script) but you append the `--verify` flag
-- **Note** that this will only verify on Sophscan
+### Deployment Using Script and Verification
+
+Same as [Deployment Using Script](#deployment-using-script) but you append the `--verify` flag
+
+<Note>This will only verify on **Sophscan**</Note>
+
 ```
 source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --verify
 ```
 
-### Deployment using script with paymaster
-- Same as [Basic deployment using script](###basic-deployment-using-script) but you append the `--zk-paymaster-address` flag
-- **Note** that this will only verify on Sophscan
+### Deployment Using Script With Paymaster
 
-To use the paymaster within a script you have 2 options: using a **cheatcode** or making a **low-level** call:
+Same as [Deployment Using Script](#deployment-using-script) but you append the `--zk-paymaster-address` flag
 
-#### Using a foundry cheatcode
+<Note>This will only verify on **Sophscan**</Note>
+
+To use the paymaster within a script, you have 2 options: using a **cheatcode** or making a **low-level** call:
+
+#### Using a Foundry Cheatcode
 
 - Install [forge-zksync-std library](https://foundry-book.zksync.io/zksync-specifics/forge-zksync-std)
 - Use the [vmExt.zkUsePaymaster](https://foundry-book.zksync.io/zksync-specifics/cheatcodes/zk-use-paymaster) cheatcode
-- For simplicity, you can copy paste the following script:
-    
+- For your convenience, you can copy-paste the following script:
+
     ```
     // SPDX-License-Identifier: UNLICENSED
     pragma solidity ^0.8.13;
@@ -128,15 +148,19 @@ To use the paymaster within a script you have 2 options: using a **cheatcode** o
         }
     }
     ```
-- You can now run the following command
+
+You can now run the following command
 
     ```
     source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
     ```
 
 
-#### Using a low-level call (in case you can't install the cheatcode library)
-- For simplicity, you can copy paste the following script (**note** that here we are using `address(vm).call`):
+#### Using a Low-Level Call (in Case You Can't Install the Cheatcode Library)
+
+For your convenience, you can copy-paste the following script:
+
+<Warning>Here we use `address(vm).call`</Warning>
     
     ```
     // SPDX-License-Identifier: UNLICENSED
@@ -174,39 +198,55 @@ To use the paymaster within a script you have 2 options: using a **cheatcode** o
     }
 
     ```
-- You can now run the following command:
+
+You can now run the following command:
+
     ```
     source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
     ```
 
-### Deployment using script with paymaster and verification 
-- Same as [Basic deployment using script with paymaster](###basic-deployment-using-script-with-paymaster) but you append the `--verify` flag
-- **Note** that this will only verify on Sophscan
+### Deployment Using Script With Paymaster and Verification
+
+Same as [Deployment Using Script With Paymaster](#deployment-using-script-with-paymaster) but you append the `--verify` flag
+
+<Note>This will only verify on **Sophscan**</Note>
 
 ```
 source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast --verify
 ```
 
-## Contract verification
+## Contract Verification
 
 If you want to verify an already deployed contract, you can do so on [Sophscan](https://sophscan.xyz) (an Etherscan-like explorer) and/or on [Sophon's Explorer](https://explorer.sophon.xyz).
 
-- on Sophscan
+**On Sophscan**
+
 ```
 source .env && forge verify-contract COUNTER_CONTRACT_ADDRESS ./src/Counter.sol:Counter:Counter --watch --rpc-url testnet --zksync
 ```
 
-- on Sophon's explorer
+**On Sophon's Explorer**
+
 ```
 forge verify-contract COUNTER_CONTRACT_ADDRESS ./src/Counter.sol:Counter --watch --verifier zksync --verifier-url $TESTNET_VERIFIER_URL --zksync
 ```
 
-with lib:
-forge build --zksync --libraries ./contracts/util/SignatureChecker.sol:SignatureChecker:0xb0A2cf27Bf984bd0c56dCFb37C9DA0F2c5028844
+### Using Libraries
 
-## Contracts with constructor params
-If your contracts receives constructor params, you can use the `--constructor-args` flag:
-- Modify your Counter contract to receive a constructor param:
+If your contract relies on external libraries, you need to build it with the linked libraries during deployment. For example:
+
+```
+forge build --zksync --libraries ./contracts/util/SignatureChecker.sol:SignatureChecker:0xb0A2cf27Bf984bd0c56dCFb37C9DA0F2c5028844
+```
+
+This ensures the library is properly linked during the build and deploy process, enabling verification to succeed.
+
+## Contracts With Constructor Params
+
+If your contract receives constructor params, you can use the `--constructor-args` flag:
+
+Modify your Counter contract to receive a constructor param:
+
     ```
     // SPDX-License-Identifier: UNLICENSED
     pragma solidity ^0.8.13;
@@ -227,8 +267,11 @@ If your contracts receives constructor params, you can use the `--constructor-ar
         }
     }
     ```
-- You can now run:
+
+You can now run:
+
     ```
     forge create ./src/CounterWithConstructorParams.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --constructor-args "$(cast abi-encode "constructor(uint256)" "123")"
     ```
-- To verify or use paymaster, you can use the flags `--verify` and/or `----zk-paymaster-address` as explained above.
+
+<Tip>To verify or use the paymaster, you can use the flags `--verify` and/or `----zk-paymaster-address` as explained above.</Tip>
