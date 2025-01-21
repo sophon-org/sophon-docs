@@ -5,30 +5,30 @@ description: ""
 
 A **Sophon Full Node** is a complete node that stores a full copy of the blockchain and can serve as either a sequencer or a validator.
 
-- During the initial phase of the network, only one node, operated by Sophon Labs, is authorized to submit batches
-- However, efforts are underway to allow multiple nodes to collaborate through a consensus mechanism, adhering to the relevant network criteria, which will further decentralize block creation.
+- During the initial phase of the network, only **one node**, operated by Sophon Labs, is authorized to submit batches.
+- However, efforts are underway to allow **multiple nodes** to collaborate through a consensus mechanism, adhering to the relevant network criteria, which will further decentralize block creation.
 
-<Tip>At present, anyone can run a **read-only** version of the Full Node.</Tip>
+<Tip>At present, you can only run a **read-only** version of the Full Node.</Tip>
 
 ## High-level Overview
 
 At a high level, the Full Node consists of the following modules:
 
-- **API Server**: Provides the publicly available Web3 interface
-- **Synchronization Layer**: Interacts with the main node and retrieves transactions and blocks to re-execute
-- **Sequencer Component**: Executes and persists transactions received from the synchronization layer
-- **Checker Modules**: Ensure the consistency of the ZKsync node state
+- **API Server:** Provides the publicly available Web3 interface
+- **Synchronization Layer:** Interacts with the main node and retrieves transactions and blocks to re-execute
+- **Sequencer Component:** Executes and persists transactions received from the synchronization layer
+- **Checker Modules:** Ensure the consistency of the ZKsync node state
 
 ### Capabilities and Limitations
 
-With the Full Node, you can:
+With the **Full Node**, you can:
 
 - Locally recreate and verify the Sophon mainnet/testnet state
 - Interact with the recreated state in a trustless way
 - Use the Web3 API without querying the main node
 - Send L2 transactions (proxied to the main node)
 
-However, the Full Node cannot:
+However, the **Full Node** cannot:
 
 - Create L2 blocks or L1 batches independently
 - Generate proofs
@@ -36,16 +36,15 @@ However, the Full Node cannot:
 
 ## Running a Full Node
 
-The process of running a Full Node on Sophon is identical to running one on zkSync Era. The node can be initialized in two modes:
+The process of running a **Full Node** on Sophon is identical to running one on ZKsync Era. The node can be initialized in two modes:
 
-- Recovery from a DB dump (equivalent to an Ethereum archival node)
-- Recovery from a snapshot (equivalent to an Ethereum light node)
+- Recovery from a **DB dump** (equivalent to an Ethereum archival node)
+- Recovery from a **snapshot** (equivalent to an Ethereum light node)
 
 <Tip>
-  For local testing, it's recommended to set up an in-memory node and fork
-  mainnet using the [zkSync CLI](../build/interact/zksync-cli).
+For local testing, we recommend setting up an in-memory node and forking mainnet using the [ZKsync CLI](../build/interact/zksync-cli).
 </Tip>
 
-For detailed information on how to run, configure, and maintain a Full Node, please refer to:
-
-- [ZkSync Node Documentation](https://matter-labs.github.io/zksync-era/core/latest/guides/external-node/01_intro.html)
+<Note>
+For detailed info on how to run, configure, and maintain a **Full Node**, see [ZKsync's docs](https://matter-labs.github.io/zksync-era/core/latest/guides/external-node/01_intro.html)
+</Note>
