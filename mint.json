@@ -64,7 +64,7 @@
     },
     {
       "group": "Links",
-      "pages": ["links/audits", "links/security", "links/socials"]
+      "pages": ["links/audits", "links/security", "links/status", "links/socials"]
     },
     {
       "group": "",
