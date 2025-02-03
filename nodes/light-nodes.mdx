@@ -12,11 +12,29 @@ description: ''
 - Light Node Operators **with a delegated Guardian NFT** can earn **$SOPH rewards** as well as a % commission from their delegators’ rewards.
 </Warning>
 
-**Sophon Light Nodes** present the more cost-effective option for participating in the Sophon network.
+**Sophon Light Nodes** present the most cost-effective way to participate in the Sophon network. Unlike traditional blockchain nodes that require specialized hardware and constant processing of hundreds of gigabytes of data, **Light Nodes** are designed for efficiency and accessibility.
 
-Currently, they are responsible for performing **data availability sampling** - a critical step for a Validium to ensure all data is accessible, enabling the reconstruction of the chain state at any time.
+---
+
+## Avail's Light Clients
+
+Light Nodes leverage [Avail's](https://www.availproject.org/) light client technology to perform **data availability sampling** - a critical step that ensures all data remains accessible while enabling chain state reconstruction. The process works as follows:
+
+- When new blocks are produced on Avail, Light Nodes request **random samples** (cells) from each block
+- After verification, **block confidence** is calculated as a percentage (%)
+- Data is considered available when the **confidence factor** exceeds the certainty threshold defined by the user
+
+This sampling approach is like quality assurance inspection - verifying data availability without downloading entire blocks, making the process much more efficient than traditional node operation.
+
+<Note>For more info on **Avail's light clients**, see their [docs.](https://docs.availproject.org/docs/operate-a-node/run-a-light-client/Overview)</Note>
 
 <Tip>**Sophon Light Nodes** will continue to evolve in order to carry out more work within the Sophon network.</Tip>
+
+## Decentralization Through Accessibility
+
+Sophon's **Light Nodes** allow users with average hardware and technical knowledge to perform valuable work for the ecosystem. This democratizes network operations, ensuring they aren't centralized among a fortunate few.
+
+Light Node operators earn rewards based on their individual contributions, and since they simply perform spot checks of the network, they can run their nodes for a fraction of the cost required for traditional nodes.
 
 ***
 
@@ -38,13 +56,14 @@ Deploying a Light Node is one of the most accessible ways to help maintain the S
 - [Easeflow](https://easeflow.io)
 - [NodeOps](https://console.nodeops.xyz/deployNode/sophon)
 - [NodeLayer](https://app.nodelayer.network/deploy/sophon-light-mainnet)
-- **Additional providers coming soon!**
+
+<Tip>**Additional providers coming soon!**</Tip>
 
 ***
 
 ## Deployment Options
 
-### Easiest Path: Railway
+### Easiest Path - Railway
 
 We provide a [Railway template](https://railway.app/template/wEhaxi?referralCode=qB-i6S) for automatic deployment. This method simplifies the process and provides you with full control of your light node.
 
@@ -53,7 +72,7 @@ We provide a [Railway template](https://railway.app/template/wEhaxi?referralCode
 
 1. Visit the [Railway template](https://railway.app/template/wEhaxi?referralCode=qB-i6S).
 2. Follow the guided instructions within Railway to deploy your environment.
-3. Once complete, your Light Node will be up and running.
+3. Once complete, your **Light Node** will be up and running.
 </Warning>
 
 ### For Tech-Savvy Users
@@ -77,7 +96,7 @@ If you prefer to manage your own environment, use our Docker files to deploy you
 
 Regardless of how you deploy your Light Node, you can use the [Guardians app](https://guardian.sophon.xyz) to:
 
-- Monitor the status of your node.
-- Track rewards and performance.
+- Monitor the **status** of your node.
+- **Track rewards** and **performance**.
 
 <Note>This dashboard ensures you stay informed about your node’s operational state and contributions to the **Sophon Network**.</Note>
