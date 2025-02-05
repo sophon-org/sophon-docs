@@ -129,6 +129,7 @@
         "discover/farming-cycle",
         "discover/active-pools",
         "discover/points-calculations",
+        "discover/reward-locking",
         "discover/boosts",
         "discover/withdrawals",
         "discover/farming-faqs"
