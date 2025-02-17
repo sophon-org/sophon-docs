@@ -34,10 +34,10 @@ To ensure nothing can go wrong, the following processes are necessary:
 
 * If a hacker finds a **critical bug**, it cannot be exploited as security measures are in place to detect any anomalies, allowing for the necessary action to be taken.
 
-This is why ZK Stack chains have a **batch execution delay** in place. At present, this delay lasts **24 hours** - as development progresses, this delay is set to be significantly reduced.
-
-<Note>The batch execution delay should be reduced to **3 hours** in the near future. You can read more about this [here](https://forum.zknation.io/t/zip-2-reduce-the-execution-delay-from-21-hours-to-3-hours/305).</Note>
+This is why ZK Stack chains have a **batch execution delay** in place. At present, this delay lasts **3 hours**.
 
 Regardless, every L2 block on **Sophon Mainnet** committed to **Ethereum** (L1) must be **finalized**, allowing enough time for ZK proofs to be generated and validated on L1 before the chain state is updated and considered final.
+
+It is expected that proof generation and validation happens within the 3 hours delay, but for multiple reasons it might take more time. So if you withdraw doesn't become available for claiming after 3 hours, don't worry, it just means proofs are still begin generated.
 
 <Tip>For more info on **withdrawal delays**, see [ZKsync’s docs](https://docs.zksync.io/zksync-protocol/security/withdrawal-delay).</Tip>
