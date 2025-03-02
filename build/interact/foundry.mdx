@@ -41,7 +41,7 @@ Create an `.env` file and set these env vars:
 ```.env
 PRIVATE_KEY= # your deployer private key
 ETHERSCAN_API_KEY= # your etherscan API key
-PAYMASTER_ADDRESS= # Sophon's paymaster address
+PAYMASTER_ADDRESS= 0x98546B226dbbA8230cf620635a1e4ab01F6A99B2 # Sophon's paymaster address
 
 # sophon testnet
 TESTNET_RPC_URL=https://rpc.testnet.sophon.xyz
@@ -116,94 +116,95 @@ To use the paymaster within a script, you have 2 options: using a **cheatcode** 
 
 #### Using a Foundry Cheatcode
 
-- Install [forge-zksync-std library](https://foundry-book.zksync.io/zksync-specifics/forge-zksync-std)
-- Use the [vmExt.zkUsePaymaster](https://foundry-book.zksync.io/zksync-specifics/cheatcodes/zk-use-paymaster) cheatcode
-- For your convenience, you can copy-paste the following script:
+* Install [forge-zksync-std library](https://foundry-book.zksync.io/zksync-specifics/forge-zksync-std)
 
-    ```
-    // SPDX-License-Identifier: UNLICENSED
-    pragma solidity ^0.8.13;
-    
-    import {Script, console} from "forge-std/Script.sol";
-    import {Counter} from "../src/Counter.sol";
-    import {TestExt} from "lib/forge-zksync-std/src/TestExt.sol";
-    
-    contract CounterScript is Script, TestExt {
-        Counter public counter;
-    
-        function setUp() public {}
-    
-        function run() public {
-            vm.startBroadcast();
-    
-            // Encode paymaster input
-            bytes memory paymaster_encoded_input = abi.encodeWithSelector(
-                bytes4(keccak256("general(bytes)")),
-                bytes("0x")
-            );
-            vmExt.zkUsePaymaster(vm.envAddress("PAYMASTER_ADDRESS"), paymaster_encoded_input);
-            counter = new Counter();
-    
-            vm.stopBroadcast();
-        }
-    }
-    ```
+* Use the [vmExt.zkUsePaymaster](https://foundry-book.zksync.io/zksync-specifics/cheatcodes/zk-use-paymaster) cheatcode
+
+* For your convenience, you can copy-paste the following script:
+
+  ```
+  // SPDX-License-Identifier: UNLICENSED
+  pragma solidity ^0.8.13;
+
+  import {Script, console} from "forge-std/Script.sol";
+  import {Counter} from "../src/Counter.sol";
+  import {TestExt} from "lib/forge-zksync-std/src/TestExt.sol";
+
+  contract CounterScript is Script, TestExt {
+      Counter public counter;
+
+      function setUp() public {}
+
+      function run() public {
+          vm.startBroadcast();
+
+          // Encode paymaster input
+          bytes memory paymaster_encoded_input = abi.encodeWithSelector(
+              bytes4(keccak256("general(bytes)")),
+              bytes("0x")
+          );
+          vmExt.zkUsePaymaster(vm.envAddress("PAYMASTER_ADDRESS"), paymaster_encoded_input);
+          counter = new Counter();
+
+          vm.stopBroadcast();
+      }
+  }
+  ```
 
 You can now run the following command
 
-    ```
-    source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
-    ```
-
+```
+source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
+```
 
 #### Using a Low-Level Call (in Case You Can't Install the Cheatcode Library)
 
 For your convenience, you can copy-paste the following script:
 
 <Warning>Here we use `address(vm).call`</Warning>
-    
-    ```
-    // SPDX-License-Identifier: UNLICENSED
-    pragma solidity ^0.8.13;
-    
-    import {Script, console} from "forge-std/Script.sol";
-    import {Counter} from "../src/Counter.sol";
-    import {TestExt} from "lib/forge-zksync-std/src/TestExt.sol";
-    
-    contract CounterScript is Script, TestExt {
-        Counter public counter;
-    
-        function setUp() public {}
-    
-        function run() public {
-            vm.startBroadcast();
-    
-            // Encode paymaster input
-            bytes memory paymaster_encoded_input = abi.encodeWithSelector(
-                bytes4(keccak256("general(bytes)")),
-                bytes("0x")
-            );
-            (bool success, ) = address(vm).call(
-                abi.encodeWithSignature(
-                    "zkUsePaymaster(address,bytes)",
-                    vm.envAddress("PAYMASTER_ADDRESS"),
-                    paymaster_encoded_input
-                )
-            );
-            require(success, "zkUsePaymaster() call failed");
-            counter = new Counter();
-    
-            vm.stopBroadcast();
-        }
-    }
 
-    ```
+```
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import {Script, console} from "forge-std/Script.sol";
+import {Counter} from "../src/Counter.sol";
+import {TestExt} from "lib/forge-zksync-std/src/TestExt.sol";
+
+contract CounterScript is Script, TestExt {
+    Counter public counter;
+
+    function setUp() public {}
+
+    function run() public {
+        vm.startBroadcast();
+
+        // Encode paymaster input
+        bytes memory paymaster_encoded_input = abi.encodeWithSelector(
+            bytes4(keccak256("general(bytes)")),
+            bytes("0x")
+        );
+        (bool success, ) = address(vm).call(
+            abi.encodeWithSignature(
+                "zkUsePaymaster(address,bytes)",
+                vm.envAddress("PAYMASTER_ADDRESS"),
+                paymaster_encoded_input
+            )
+        );
+        require(success, "zkUsePaymaster() call failed");
+        counter = new Counter();
+
+        vm.stopBroadcast();
+    }
+}
+
+```
 
 You can now run the following command:
 
-    ```
-    source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
-    ```
+```
+source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
+```
 
 ### Deployment Using Script With Paymaster and Verification
 
@@ -247,31 +248,31 @@ If your contract receives constructor params, you can use the `--constructor-arg
 
 Modify your Counter contract to receive a constructor param:
 
-    ```
-    // SPDX-License-Identifier: UNLICENSED
-    pragma solidity ^0.8.13;
-    
-    contract Counter {
-        uint256 public number;
-    
-        constructor(uint256 _number) {
-            number = _number;
-        }
-    
-        function setNumber(uint256 newNumber) public {
-            number = newNumber;
-        }
-    
-        function increment() public {
-            number++;
-        }
+```
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+contract Counter {
+    uint256 public number;
+
+    constructor(uint256 _number) {
+        number = _number;
     }
-    ```
+
+    function setNumber(uint256 newNumber) public {
+        number = newNumber;
+    }
+
+    function increment() public {
+        number++;
+    }
+}
+```
 
 You can now run:
 
-    ```
-    forge create ./src/CounterWithConstructorParams.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --constructor-args "$(cast abi-encode "constructor(uint256)" "123")"
-    ```
+```
+forge create ./src/CounterWithConstructorParams.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --constructor-args "$(cast abi-encode "constructor(uint256)" "123")"
+```
 
 <Tip>To verify or use the paymaster, you can use the flags `--verify` and/or `----zk-paymaster-address` as explained above.</Tip>
