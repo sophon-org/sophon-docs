@@ -26,15 +26,9 @@ This will create a new simple Foundry project with a `Counter` contract.
 
 Use the following configs on your `foundry.toml`
 
-```.toml
-[etherscan]
-testnet = { key = "${ETHERSCAN_API_KEY}", url = "${TESTNET_VERIFIER_URL}", chain = 531050104 } 
-sophon = { key = "${ETHERSCAN_API_KEY}", url = "${MAINNET_VERIFIER_URL}", chain = 50104 } 
-
-[rpc_endpoints]
-testnet = "${TESTNET_RPC_URL}"
-sophon = "${MAINNET_RPC_URL}"
-```
+<Warning>
+  In order to obtain a Sophscan API Key, you need to create an account and get an API Key [here](https://docs.sophscan.xyz/getting-started/viewing-api-usage-statistics).
+</Warning>
 
 Create an `.env` file and set these env vars:
 
