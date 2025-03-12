@@ -76,7 +76,6 @@
         "build/early-partners",
         "build/network-information",
         "build/evm-differences",
-        "build/tenderly-support"
       ]
     },
     {
@@ -85,7 +84,8 @@
         "build/interact/hardhat",
         "build/interact/foundry",
         "build/interact/zksync-cli",
-        "build/interact/sdks"
+        "build/interact/sdks",
+        "build/tenderly-support"
       ]
     },
     {
