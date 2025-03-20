@@ -33,19 +33,31 @@ Use the following configs on your `foundry.toml`
 Create an `.env` file and set these env vars:
 
 ```.env
-PRIVATE_KEY= # your deployer private key
-ETHERSCAN_API_KEY= # your etherscan API key
-PAYMASTER_ADDRESS= 0x98546B226dbbA8230cf620635a1e4ab01F6A99B2 # Sophon's paymaster address
+# general
+PRIVATE_KEY= # YOUR_PRIVATE_KEY your developer private key here
+ETHERSCAN_API_KEY="YOUR_ETHERSCAN_API_KEY" # your Sophscan API gey obtained from sophscan
+PROXY_ADMIN=WHOEVER_IS_THE_PROXY_ADMIN
+PAYMASTER_ADDRESS=0x98546B226dbbA8230cf620635a1e4ab01F6A99B2 # the paymaster address you want to use
+
+# ethereum sepolia
+SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/sp2BM_VFMURcKWMWg8HDVSBgvnm75_NS
+SEPOLIA_VERIFIER_URL=https://api.etherscan.io/api
+SEPOLIA_CHAIN_ID="11155111"
+
+# ethereum
+RPC_URL=https://eth.g.alchemy.com/v2/sp2BM_VFMURcKWMWg8HDVSBgvnm75_NS
+VERIFIER_URL=https://api.etherscan.io/api
+CHAIN_ID=""
 
 # sophon testnet
-TESTNET_RPC_URL=https://rpc.testnet.sophon.xyz
-TESTNET_VERIFIER_URL=https://api-explorer-verify.testnet.sophon.xyz/contract_verification
-TESTNET_CHAIN_ID="531050104"
+SOPHON_TESTNET_RPC_URL=https://rpc.testnet.sophon.xyz
+SOPHON_TESTNET_VERIFIER_URL=https://api-explorer-verify.testnet.sophon.xyz/contract_verification
+SOPHON_TESTNET_CHAIN_ID="531050104"
 
 # sophon
-MAINNET_RPC_URL=https://rpc.sophon.xyz
-MAINNET_VERIFIER_URL=https://verification-explorer.sophon.xyz/contract_verification
-MAINNET_CHAIN_ID="50104"
+SOPHON_RPC_URL=https://rpc.sophon.xyz
+SOPHON_VERIFIER_URL=https://verification-explorer.sophon.xyz/contract_verification
+SOPHON_CHAIN_ID="50104"
 ```
 
 ## Counter Contract Deployment
