@@ -306,3 +306,86 @@ forge create ./src/CounterWithConstructorParams.sol:Counter --rpc-url testnet --
 ```
 
 <Tip>To verify or use the paymaster, you can use the flags `--verify` and/or `----zk-paymaster-address` as explained above.</Tip>
+
+### Checking if a contract is whitelisted by the paymaster restrictions contract
+
+In some cases, if you want to call a freshly deployed contract outright, it is advisable to check if it has been whitelisted before the call itself. 
+
+<Check>
+  Our automated contract whitelisting service requires a couple seconds to do this in normal network circumstances, but checking for it gives you greater transparency in what is happening in case of an error.
+</Check>
+
+```
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import {Script, console} from "forge-std/Script.sol";
+import {Counter} from "../src/Counter.sol";
+import {TestExt} from "lib/forge-zksync-std/src/TestExt.sol";
+
+interface IRestrictionContract {
+    function contractWhitelist(address) external view returns (bool);
+}
+
+contract CounterScript is Script, TestExt {
+    Counter public counter;
+
+    function setUp() public {}
+
+    function run() public {
+        vm.startBroadcast();
+
+        address restrictionContractAddress = vm.envAddress("RESTRICTION_CONTRACT");
+        address paymasterAddress = vm.envAddress("PAYMASTER_ADDRESS");
+        uint256 waitTime = 5_000; // wait time in milliseconds
+        uint256 maxAttempts = 5;
+        bool isWhitelisted = false;
+        uint256 attempts = 0;
+
+        if (restrictionContractAddress != address(0)) {
+            IRestrictionContract restrictionContract = IRestrictionContract(restrictionContractAddress);
+            while (!isWhitelisted && attempts < maxAttempts) {
+                try restrictionContract.contractWhitelist(address(this)) returns (bool whitelisted) {
+                    isWhitelisted = whitelisted;
+                    if (isWhitelisted) {
+                        console.log("Contract is whitelisted on restriction contract!");
+                        break;
+                    } else {
+                        attempts++;
+                        if (attempts < maxAttempts) {
+                            console.log("Contract not yet whitelisted. Waiting before retrying...");
+                            vm.sleep(waitTime);
+                        } else {
+                            console.log("Contract still not whitelisted after max attempts. Proceeding anyway.");
+                        }
+                    }
+                } catch {
+                    console.log("Error checking whitelist status. Retrying...");
+                    attempts++;
+                    if (attempts < maxAttempts) {
+                        vm.sleep(waitTime);
+                    }
+                }
+            }
+        }
+
+        // Encode paymaster input
+        bytes memory paymaster_encoded_input = abi.encodeWithSelector(
+            bytes4(keccak256("general(bytes)")),
+            bytes("0x")
+        );
+        (bool success, ) = address(vm).call(
+            abi.encodeWithSignature(
+                "zkUsePaymaster(address,bytes)",
+                paymasterAddress,
+                paymaster_encoded_input
+            )
+        );
+        require(success, "zkUsePaymaster() call failed");
+
+        counter = new Counter();
+
+        vm.stopBroadcast();
+    }
+}
+```
