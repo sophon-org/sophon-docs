@@ -60,6 +60,30 @@ SOPHON_VERIFIER_URL=https://verification-explorer.sophon.xyz/contract_verificati
 SOPHON_CHAIN_ID="50104"
 ```
 
+Then, add the following to your root level foundry.toml:
+
+```foundry.toml
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+auto_detect_solc = true
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+
+[etherscan]
+sepoliaTestnet = { key = "${ETHERSCAN_API_KEY}", url = "${SEPOLIA_VERIFIER_URL}", chain = 11155111 }
+testnet = { key = "${ETHERSCAN_API_KEY}", url = "${SOPHON_TESTNET_VERIFIER_URL}", chain = 531050104 } 
+sophon = { key = "${ETHERSCAN_API_KEY}", url = "${SOPHON_VERIFIER_URL}", chain = 50104 } 
+ethereum = { key = "${ETHERSCAN_API_KEY}", url = "${VERIFIER_URL}", chain = 1 } 
+
+[rpc_endpoints]
+sepoliaTestnet = "${SEPOLIA_RPC_URL}"
+testnet = "${SOPHON_TESTNET_RPC_URL}"
+sophon = "${SOPHON_RPC_URL}"
+ethereum = "${RPC_URL}"
+```
+
 ## Counter Contract Deployment
 
 ### Basic Deployment
