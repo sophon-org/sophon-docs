@@ -24,29 +24,66 @@ This will create a new simple Foundry project with a `Counter` contract.
 
 ## Set Configs
 
-Use the following configs on your `foundry.toml`
+
+Set your `foundry.toml` and `.env` as follows:
+
+<CodeGroup>
+```.toml foundry.toml
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+auto_detect_solc = true
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+
+[etherscan]
+sepoliaTestnet = { key = "${ETHERSCAN_API_KEY}", url = "${SEPOLIA_VERIFIER_URL}", chain = 11155111 }
+testnet = { key = "${ETHERSCAN_API_KEY}", url = "${SOPHON_TESTNET_VERIFIER_URL}", chain = 531050104 } 
+sophon = { key = "${ETHERSCAN_API_KEY}", url = "${SOPHON_VERIFIER_URL}", chain = 50104 } 
+ethereum = { key = "${ETHERSCAN_API_KEY}", url = "${VERIFIER_URL}", chain = 1 } 
+
+[rpc_endpoints]
+sepoliaTestnet = "${SEPOLIA_RPC_URL}"
+testnet = "${SOPHON_TESTNET_RPC_URL}"
+sophon = "${SOPHON_RPC_URL}"
+ethereum = "${RPC_URL}"
+```
+
+```.env .env
+# general
+PRIVATE_KEY= # YOUR_PRIVATE_KEY your developer private key here
+ETHERSCAN_API_KEY="YOUR_ETHERSCAN_API_KEY" # your Sophscan API gey obtained from sophscan
+PROXY_ADMIN=WHOEVER_IS_THE_PROXY_ADMIN
+PAYMASTER_ADDRESS=0x98546B226dbbA8230cf620635a1e4ab01F6A99B2 # the paymaster address you want to use
+
+# ethereum sepolia
+SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/sp2BM_VFMURcKWMWg8HDVSBgvnm75_NS
+SEPOLIA_VERIFIER_URL=https://api.etherscan.io/api
+SEPOLIA_CHAIN_ID="11155111"
+
+# ethereum
+RPC_URL=https://eth.g.alchemy.com/v2/sp2BM_VFMURcKWMWg8HDVSBgvnm75_NS
+VERIFIER_URL=https://api.etherscan.io/api
+CHAIN_ID=""
+
+# sophon testnet
+SOPHON_TESTNET_RPC_URL=https://rpc.testnet.sophon.xyz
+SOPHON_TESTNET_VERIFIER_URL=https://api-explorer-verify.testnet.sophon.xyz/contract_verification
+SOPHON_TESTNET_CHAIN_ID="531050104"
+
+# sophon
+SOPHON_RPC_URL=https://rpc.sophon.xyz
+SOPHON_VERIFIER_URL=https://verification-explorer.sophon.xyz/contract_verification
+SOPHON_CHAIN_ID="50104"
+```
+
+</CodeGroup>
 
 <Tip>
   In order to obtain a Sophscan API Key, you need to create an account and get an API Key [here](https://docs.sophscan.xyz/getting-started/viewing-api-usage-statistics).
 </Tip>
 
-Create an `.env` file and set these env vars:
-
-```.env
-PRIVATE_KEY= # your deployer private key
-ETHERSCAN_API_KEY= # your etherscan API key
-PAYMASTER_ADDRESS= 0x98546B226dbbA8230cf620635a1e4ab01F6A99B2 # Sophon's paymaster address
-
-# sophon testnet
-TESTNET_RPC_URL=https://rpc.testnet.sophon.xyz
-TESTNET_VERIFIER_URL=https://api-explorer-verify.testnet.sophon.xyz/contract_verification
-TESTNET_CHAIN_ID="531050104"
-
-# sophon
-MAINNET_RPC_URL=https://rpc.sophon.xyz
-MAINNET_VERIFIER_URL=https://verification-explorer.sophon.xyz/contract_verification
-MAINNET_CHAIN_ID="50104"
-```
 
 ## Counter Contract Deployment
 
@@ -116,7 +153,7 @@ To use the paymaster within a script, you have 2 options: using a **cheatcode** 
 
 * For your convenience, you can copy-paste the following script:
 
-  ```
+  ```solidity
   // SPDX-License-Identifier: UNLICENSED
   pragma solidity ^0.8.13;
 
@@ -155,9 +192,9 @@ source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-k
 
 For your convenience, you can copy-paste the following script:
 
-<Warning>Here we use `address(vm).call`</Warning>
+<Info>Here we use `address(vm).call`</Info>
 
-```
+```solidity
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
@@ -236,13 +273,13 @@ forge build --zksync --libraries ./contracts/util/SignatureChecker.sol:Signature
 
 This ensures the library is properly linked during the build and deploy process, enabling verification to succeed.
 
-## Contracts With Constructor Params
+### Contracts With Constructor Params
 
 If your contract receives constructor params, you can use the `--constructor-args` flag:
 
 Modify your Counter contract to receive a constructor param:
 
-```
+```solidity
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
@@ -265,8 +302,89 @@ contract Counter {
 
 You can now run:
 
-```
+```shell
 forge create ./src/CounterWithConstructorParams.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --constructor-args "$(cast abi-encode "constructor(uint256)" "123")"
 ```
 
 <Tip>To verify or use the paymaster, you can use the flags `--verify` and/or `----zk-paymaster-address` as explained above.</Tip>
+
+## Check if a contract is whitelisted by the paymaster
+
+Before making calls to a newly deployed contract using a paymaster, it's important to verify that the contract has been added to the paymaster's whitelist. Our automated contract whitelisting service typically takes 2-3 seconds to whitelist new contracts under normal network conditions. While optional, checking the whitelist status before proceeding makes deployment scripts more robust by ensuring contracts are ready to interact with the paymaster.
+
+The code below provides a reference implementation for checking the whitelist status:
+
+```solidity
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import {Script, console} from "forge-std/Script.sol";
+import {Counter} from "../src/Counter.sol";
+import {TestExt} from "lib/forge-zksync-std/src/TestExt.sol";
+
+interface IRestrictionContract {
+    function contractWhitelist(address) external view returns (bool);
+}
+
+contract CounterScript is Script, TestExt {
+    Counter public counter;
+
+    function setUp() public {}
+
+    function run() public {
+        vm.startBroadcast();
+
+        address restrictionContractAddress = vm.envAddress("RESTRICTION_CONTRACT");
+        address paymasterAddress = vm.envAddress("PAYMASTER_ADDRESS");
+        uint256 waitTime = 5_000; // wait time in milliseconds
+        uint256 maxAttempts = 5;
+        bool isWhitelisted = false;
+        uint256 attempts = 0;
+
+        if (restrictionContractAddress != address(0)) {
+            IRestrictionContract restrictionContract = IRestrictionContract(restrictionContractAddress);
+            while (!isWhitelisted && attempts < maxAttempts) {
+                try restrictionContract.contractWhitelist(address(this)) returns (bool whitelisted) {
+                    isWhitelisted = whitelisted;
+                    if (isWhitelisted) {
+                        console.log("Contract is whitelisted on restriction contract!");
+                        break;
+                    } else {
+                        attempts++;
+                        if (attempts < maxAttempts) {
+                            console.log("Contract not yet whitelisted. Waiting before retrying...");
+                            vm.sleep(waitTime);
+                        } else {
+                            console.log("Contract still not whitelisted after max attempts. Proceeding anyway.");
+                        }
+                    }
+                } catch {
+                    console.log("Error checking whitelist status. Retrying...");
+                    attempts++;
+                    if (attempts < maxAttempts) {
+                        vm.sleep(waitTime);
+                    }
+                }
+            }
+        }
+
+        // Encode paymaster input
+        bytes memory paymaster_encoded_input = abi.encodeWithSelector(
+            bytes4(keccak256("general(bytes)")),
+            bytes("0x")
+        );
+        (bool success, ) = address(vm).call(
+            abi.encodeWithSignature(
+                "zkUsePaymaster(address,bytes)",
+                paymasterAddress,
+                paymaster_encoded_input
+            )
+        );
+        require(success, "zkUsePaymaster() call failed");
+
+        counter = new Counter();
+
+        vm.stopBroadcast();
+    }
+}
+```
