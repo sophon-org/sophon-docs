@@ -195,13 +195,11 @@ You can verify contracts on both Sophscan and Sophon's explorer:
 npx hardhat verify --network sophonTestnet DEPLOYED_CONTRACT_ADDRESS constructor_arguments
 ```
 
-### Checking if a contract is whitelisted by the paymaster restrictions contract
+## Check if a contract is whitelisted by the paymaster
 
-In some cases, if you want to call a freshly deployed contract outright, it is advisable to check if it has been whitelisted before the call itself. 
+Before making calls to a newly deployed contract using a paymaster, it's important to verify that the contract has been added to the paymaster's whitelist. Our automated contract whitelisting service typically takes 2-3 seconds to whitelist new contracts under normal network conditions. While optional, checking the whitelist status before proceeding makes deployment scripts more robust by ensuring contracts are ready to interact with the paymaster.
 
-<Check>
-  Our automated contract whitelisting service requires a couple seconds to do this in normal network circumstances, but checking for it gives you greater transparency in what is happening in case of an error.
-</Check>
+The code below provides a reference implementation for checking the whitelist status:
 
 ```typescript
  const restrictionContractAddress = (hre.network.config as unknown as CustomNetworkConfig)?.restrictionContract;

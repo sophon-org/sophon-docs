@@ -24,15 +24,33 @@ This will create a new simple Foundry project with a `Counter` contract.
 
 ## Set Configs
 
-Use the following configs on your `foundry.toml`
 
-<Tip>
-  In order to obtain a Sophscan API Key, you need to create an account and get an API Key [here](https://docs.sophscan.xyz/getting-started/viewing-api-usage-statistics).
-</Tip>
+Set your `foundry.toml` and `.env` as follows:
 
-Create an `.env` file and set these env vars:
+<CodeGroup>
+```.toml foundry.toml
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+auto_detect_solc = true
 
-```.env
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+
+[etherscan]
+sepoliaTestnet = { key = "${ETHERSCAN_API_KEY}", url = "${SEPOLIA_VERIFIER_URL}", chain = 11155111 }
+testnet = { key = "${ETHERSCAN_API_KEY}", url = "${SOPHON_TESTNET_VERIFIER_URL}", chain = 531050104 } 
+sophon = { key = "${ETHERSCAN_API_KEY}", url = "${SOPHON_VERIFIER_URL}", chain = 50104 } 
+ethereum = { key = "${ETHERSCAN_API_KEY}", url = "${VERIFIER_URL}", chain = 1 } 
+
+[rpc_endpoints]
+sepoliaTestnet = "${SEPOLIA_RPC_URL}"
+testnet = "${SOPHON_TESTNET_RPC_URL}"
+sophon = "${SOPHON_RPC_URL}"
+ethereum = "${RPC_URL}"
+```
+
+```.env .env
 # general
 PRIVATE_KEY= # YOUR_PRIVATE_KEY your developer private key here
 ETHERSCAN_API_KEY="YOUR_ETHERSCAN_API_KEY" # your Sophscan API gey obtained from sophscan
@@ -60,29 +78,12 @@ SOPHON_VERIFIER_URL=https://verification-explorer.sophon.xyz/contract_verificati
 SOPHON_CHAIN_ID="50104"
 ```
 
-Then, add the following to your root level foundry.toml:
+</CodeGroup>
 
-```foundry.toml
-[profile.default]
-src = "src"
-out = "out"
-libs = ["lib"]
-auto_detect_solc = true
+<Tip>
+  In order to obtain a Sophscan API Key, you need to create an account and get an API Key [here](https://docs.sophscan.xyz/getting-started/viewing-api-usage-statistics).
+</Tip>
 
-# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
-
-[etherscan]
-sepoliaTestnet = { key = "${ETHERSCAN_API_KEY}", url = "${SEPOLIA_VERIFIER_URL}", chain = 11155111 }
-testnet = { key = "${ETHERSCAN_API_KEY}", url = "${SOPHON_TESTNET_VERIFIER_URL}", chain = 531050104 } 
-sophon = { key = "${ETHERSCAN_API_KEY}", url = "${SOPHON_VERIFIER_URL}", chain = 50104 } 
-ethereum = { key = "${ETHERSCAN_API_KEY}", url = "${VERIFIER_URL}", chain = 1 } 
-
-[rpc_endpoints]
-sepoliaTestnet = "${SEPOLIA_RPC_URL}"
-testnet = "${SOPHON_TESTNET_RPC_URL}"
-sophon = "${SOPHON_RPC_URL}"
-ethereum = "${RPC_URL}"
-```
 
 ## Counter Contract Deployment
 
@@ -272,7 +273,7 @@ forge build --zksync --libraries ./contracts/util/SignatureChecker.sol:Signature
 
 This ensures the library is properly linked during the build and deploy process, enabling verification to succeed.
 
-## Contracts With Constructor Params
+### Contracts With Constructor Params
 
 If your contract receives constructor params, you can use the `--constructor-args` flag:
 
@@ -307,13 +308,11 @@ forge create ./src/CounterWithConstructorParams.sol:Counter --rpc-url testnet --
 
 <Tip>To verify or use the paymaster, you can use the flags `--verify` and/or `----zk-paymaster-address` as explained above.</Tip>
 
-### Checking if a contract is whitelisted by the paymaster restrictions contract
+## Check if a contract is whitelisted by the paymaster
 
-In some cases, if you want to call a freshly deployed contract outright, it is advisable to check if it has been whitelisted before the call itself. 
+Before making calls to a newly deployed contract using a paymaster, it's important to verify that the contract has been added to the paymaster's whitelist. Our automated contract whitelisting service typically takes 2-3 seconds to whitelist new contracts under normal network conditions. While optional, checking the whitelist status before proceeding makes deployment scripts more robust by ensuring contracts are ready to interact with the paymaster.
 
-<Check>
-  Our automated contract whitelisting service requires a couple seconds to do this in normal network circumstances, but checking for it gives you greater transparency in what is happening in case of an error.
-</Check>
+The code below provides a reference implementation for checking the whitelist status:
 
 ```
 // SPDX-License-Identifier: UNLICENSED
