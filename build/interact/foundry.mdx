@@ -1,6 +1,5 @@
 ---
-title: 'Foundry'
-description: ''
+title: "Foundry"
 ---
 
 ## Installing Foundry
@@ -11,7 +10,9 @@ On your command line, run:
 curl -L https://raw.githubusercontent.com/matter-labs/foundry-zksync/main/install-foundry-zksync | bash
 ```
 
-<Tip>You can find more info on the official [ZKsync Foundry](https://foundry-book.zksync.io/getting-started/installation) website.</Tip>
+<Tip>
+  You can find more info on the official [ZKsync Foundry](https://foundry-book.zksync.io/getting-started/installation) website.
+</Tip>
 
 ## Create a New Project
 
@@ -24,10 +25,14 @@ This will create a new simple Foundry project with a `Counter` contract.
 
 ## Set Configs
 
+<Note>
+  A full baseline Foundry example can be found on our GitHub [here](https://github.com/sophon-org/hello-foundry-template).
+</Note>
 
 Set your `foundry.toml` and `.env` as follows:
 
 <CodeGroup>
+
 ```.toml foundry.toml
 [profile.default]
 src = "src"
@@ -49,6 +54,7 @@ testnet = "${SOPHON_TESTNET_RPC_URL}"
 sophon = "${SOPHON_RPC_URL}"
 ethereum = "${RPC_URL}"
 ```
+
 
 ```.env .env
 # general
@@ -84,7 +90,6 @@ SOPHON_CHAIN_ID="50104"
   In order to obtain a Sophscan API Key, you need to create an account and get an API Key [here](https://docs.sophscan.xyz/getting-started/viewing-api-usage-statistics).
 </Tip>
 
-
 ## Counter Contract Deployment
 
 ### Basic Deployment
@@ -97,7 +102,9 @@ source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --privat
 
 Same as [Basic Deployment](#basic-deployment) but you append the `--verify` flag
 
-<Note>This will only verify on **Sophscan**</Note>
+<Note>
+  This will only verify on **Sophscan**
+</Note>
 
 ```
 source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --verify
@@ -107,7 +114,9 @@ source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --privat
 
 Same as [Basic Deployment](#basic-deployment) but you append the `--zk-paymaster-address` flag
 
-<Note>The paymaster allows you to perform gasless transactions, so there's no need to have a $SOPH balance</Note>
+<Note>
+  The paymaster allows you to perform gasless transactions, so there's no need to have a $SOPH balance
+</Note>
 
 ```
 source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --zk-paymaster-address $PAYMASTER_ADDRESS --zk-paymaster-input $(cast calldata "general(bytes)" "0x")
@@ -131,7 +140,9 @@ source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-k
 
 Same as [Deployment Using Script](#deployment-using-script) but you append the `--verify` flag
 
-<Note>This will only verify on **Sophscan**</Note>
+<Note>
+  This will only verify on **Sophscan**
+</Note>
 
 ```
 source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --verify
@@ -141,34 +152,34 @@ source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --privat
 
 Same as [Deployment Using Script](#deployment-using-script) but you append the `--zk-paymaster-address` flag
 
-<Note>This will only verify on **Sophscan**</Note>
+<Note>
+  This will only verify on **Sophscan**
+</Note>
 
 To use the paymaster within a script, you have 2 options: using a **cheatcode** or making a **low-level** call:
 
 #### Using a Foundry Cheatcode
 
-* Install [forge-zksync-std library](https://foundry-book.zksync.io/zksync-specifics/forge-zksync-std)
-
-* Use the [vmExt.zkUsePaymaster](https://foundry-book.zksync.io/zksync-specifics/cheatcodes/zk-use-paymaster) cheatcode
-
-* For your convenience, you can copy-paste the following script:
+- Install [forge-zksync-std library](https://foundry-book.zksync.io/zksync-specifics/forge-zksync-std)
+- Use the [vmExt.zkUsePaymaster](https://foundry-book.zksync.io/zksync-specifics/cheatcodes/zk-use-paymaster) cheatcode
+- For your convenience, you can copy-paste the following script:
 
   ```solidity
   // SPDX-License-Identifier: UNLICENSED
   pragma solidity ^0.8.13;
-
+  
   import {Script, console} from "forge-std/Script.sol";
   import {Counter} from "../src/Counter.sol";
   import {TestExt} from "lib/forge-zksync-std/src/TestExt.sol";
-
+  
   contract CounterScript is Script, TestExt {
       Counter public counter;
-
+  
       function setUp() public {}
-
+  
       function run() public {
           vm.startBroadcast();
-
+  
           // Encode paymaster input
           bytes memory paymaster_encoded_input = abi.encodeWithSelector(
               bytes4(keccak256("general(bytes)")),
@@ -176,7 +187,7 @@ To use the paymaster within a script, you have 2 options: using a **cheatcode** 
           );
           vmExt.zkUsePaymaster(vm.envAddress("PAYMASTER_ADDRESS"), paymaster_encoded_input);
           counter = new Counter();
-
+  
           vm.stopBroadcast();
       }
   }
@@ -192,7 +203,9 @@ source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-k
 
 For your convenience, you can copy-paste the following script:
 
-<Info>Here we use `address(vm).call`</Info>
+<Info>
+  Here we use `address(vm).call`
+</Info>
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
@@ -228,7 +241,6 @@ contract CounterScript is Script, TestExt {
         vm.stopBroadcast();
     }
 }
-
 ```
 
 You can now run the following command:
@@ -241,7 +253,9 @@ source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-k
 
 Same as [Deployment Using Script With Paymaster](#deployment-using-script-with-paymaster) but you append the `--verify` flag
 
-<Note>This will only verify on **Sophscan**</Note>
+<Note>
+  This will only verify on **Sophscan**
+</Note>
 
 ```
 source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast --verify
@@ -306,7 +320,9 @@ You can now run:
 forge create ./src/CounterWithConstructorParams.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --constructor-args "$(cast abi-encode "constructor(uint256)" "123")"
 ```
 
-<Tip>To verify or use the paymaster, you can use the flags `--verify` and/or `----zk-paymaster-address` as explained above.</Tip>
+<Tip>
+  To verify or use the paymaster, you can use the flags `--verify` and/or `----zk-paymaster-address` as explained above.
+</Tip>
 
 ## Check if a contract is whitelisted by the paymaster
 
