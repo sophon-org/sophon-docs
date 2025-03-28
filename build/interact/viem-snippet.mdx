@@ -1,0 +1,135 @@
+---
+title: "New file"
+description: "Description of your new file."
+---
+
+# Using `viem` with Sophon Paymasters
+
+When building dApps on **Sophon**, it's important to correctly integrate **Paymaster** support for sponsored transactions, especially until the **Paymaster** program is live and **$SOPH** is not launched. While the sdk supports **Paymasters** on zkSync-based chains, documentation is limited, especially for contract interactions (not just simple transfers).
+
+This guide provides a working pattern, using `viem` and `wagmi`, for sending contract calls with Paymaster support on **Sophon**.
+
+## ✅ Working Code Snippet
+
+```ts
+"use client";
+
+import {
+  getAccount,
+  getPublicClient,
+  switchChain,
+  writeContract,
+} from "@wagmi/core";
+import {
+  Abi,
+  AbiItemArgs,
+  Address,
+  createWalletClient,
+  custom,
+  encodeFunctionData,
+  Hash,
+  Hex,
+} from "viem";
+import { Config } from "wagmi";
+import { eip712WalletActions, getGeneralPaymasterInput } from "viem/zksync";
+import { sophonTestnet } from "viem/chains";
+
+// Mainnet config also available if needed
+// import { sophonMainnet } from "viem/chains";
+
+export default async function sendTransaction(
+  wagmiConfig: Config,
+  chainId: number,
+  address: Address,
+  abi: Abi,
+  functionName: string,
+  args: AbiItemArgs,
+  value?: bigint
+): Promise<Hash> {
+  const account = getAccount(wagmiConfig);
+
+  if (!account.address) throw new Error("No account connected.");
+  if (account.chainId !== chainId) await switchChain(wagmiConfig, { chainId });
+
+  const publicClient = getPublicClient(wagmiConfig, { chainId });
+  if (!publicClient) throw new Error("No public client available.");
+
+  const gasPrice = await publicClient.getGasPrice();
+  const estimateGas = await publicClient.estimateContractGas({
+    account: account.address,
+    address,
+    abi,
+    functionName,
+    args,
+    value,
+  });
+
+  // Handle Sophon-specific logic
+  if (chainId === 50104 || chainId === 531050104) {
+    const walletClient = createWalletClient({
+      chain: sophonTestnet, // or `sophonMainnet`
+      transport: custom(window.ethereum!),
+    }).extend(eip712WalletActions());
+
+    const paymaster: Address = "0x98546B226dbbA8230cf620635a1e4ab01F6A99B2";
+
+    const paymasterInput: Hex = getGeneralPaymasterInput({
+      innerInput: "0x", // customize if needed
+    });
+
+    const txData = encodeFunctionData({ abi, functionName, args });
+
+    const hash = await walletClient.sendTransaction({
+      account: account.address,
+      to: address,
+      data: txData,
+      value,
+      gas: estimateGas * BigInt(2),
+      chain: sophonTestnet, // must match chain client is connected to
+      gasPrice,
+      paymaster,
+      paymasterInput,
+    } as any); // use `as any` to bypass TS restrictions on ZKSync extensions
+
+    return hash;
+  }
+
+  // Fallback for non-zkSync chains
+  return await writeContract(wagmiConfig, {
+    address,
+    chainId,
+    abi,
+    functionName,
+    args,
+    value,
+    gas: estimateGas * BigInt(2),
+    gasPrice,
+  });
+}
+```
+
+## **⚠️ Key Gotchas to Watch Out For**
+
+### **1. Missing paymasterInput or incorrect format**
+
+_paymasterInput_ **must** be passed, even if it’s an empty `0x` using: 
+
+```
+getGeneralPaymasterInput({ innerInput: "0x" }).
+```
+
+<Warning>
+  Avoid manually hardcoding `paymasterInput = "0x"` , it won’t work correctly.
+</Warning>
+
+### **2. Use zkSync wallet extensions**
+
+Extend your wallet client with `eip712WalletActions()` to support `sendTransaction` with Paymasters.
+
+### **3. Bypass TypeScript edge cases**
+
+Currently, viem doesn’t fully type `sendTransaction()` with zkSync extensions. You’ll need to bypass this by:
+
+```
+sendTransaction({...} as any)
+```
