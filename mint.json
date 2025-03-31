@@ -85,6 +85,7 @@
         "build/interact/foundry",
         "build/interact/zksync-cli",
         "build/interact/tenderly",
+        "build/interact/viem-wagmi",
         "build/interact/sdks"
       ]
     },
