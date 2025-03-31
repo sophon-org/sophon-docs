@@ -1,0 +1,161 @@
+---
+title: "Interacting with Sophon using Viem and WAGMI"
+description: "Learn about how to use Viem and WAGMI together with Sophon"
+---
+
+With a little bit of setup, the popular WAGMI \+ Viem based frontend codebases can also be used with Sophon. This section will provide a workign PoC repository, relevant code snippets, and some cool gotchas that will help you while working with this stack.
+
+<Check>
+  Check out our super simple PoC repository that demonstrates how to use **Viem **and**WAGMI ** together with the **Paymaster** to interact with smart contracts [here](https://github.com/sophon-org/hello-paymaster-wagmi-viem).
+</Check>
+
+# Using `viem` with Sophon Paymasters
+
+When building dApps on **Sophon**, it's important to correctly integrate **Paymaster** support for sponsored transactions, especially until the **Paymaster** program is live and **$SOPH** is not launched.
+
+This guide provides a working pattern, using `viem` and `wagmi`, for sending contract calls with Paymaster support on **Sophon**.
+
+## ✅ Working Code Snippet
+
+```ts
+"use client";
+
+import { getAccount, getPublicClient, switchChain, writeContract } from "@wagmi/core";
+import {
+  Abi,
+  AbiItemArgs,
+  Address,
+  createWalletClient,
+  custom,
+  encodeFunctionData,
+  Hash,
+  Hex,
+} from "viem";
+import { Config } from "wagmi";
+import { eip712WalletActions, getGeneralPaymasterInput } from "viem/zksync";
+import { sophonTestnet } from "viem/chains";
+
+// Mainnet config also available if needed
+// import { sophonMainnet } from "viem/chains";
+
+export default async function sendTransaction(
+  wagmiConfig: Config,
+  chainId: number,
+  address: Address,
+  abi: Abi,
+  functionName: string,
+  args: AbiItemArgs,
+  value?: bigint
+): Promise<Hash> {
+  const account = getAccount(wagmiConfig);
+
+  if (!account.address) throw new Error("No account connected.");
+  if (account.chainId !== chainId) await switchChain(wagmiConfig, { chainId });
+
+  const publicClient = getPublicClient(wagmiConfig, { chainId });
+  if (!publicClient) throw new Error("No public client available.");
+
+  const estimateGas = await publicClient.estimateContractGas({
+    account: account.address,
+    address,
+    abi,
+    functionName,
+    args,
+    value,
+  });
+
+  //   const nextNonce = await publicClient.getTransactionCount({
+  //     address: account.address,
+  //   });
+
+  // Handle Sophon-specific logic
+  if (chainId === 50104 || chainId === 531050104) {
+    const walletClient = createWalletClient({
+      chain: sophonTestnet, // or `sophonMainnet`
+      transport: custom(window.ethereum!),
+    }).extend(eip712WalletActions());
+
+    const paymaster: Address = "0x98546B226dbbA8230cf620635a1e4ab01F6A99B2";
+
+    const paymasterInput: Hex = getGeneralPaymasterInput({
+      innerInput: "0x", // customize if needed
+    });
+
+    const txData = encodeFunctionData({ abi, functionName, args });
+
+    const hash = await walletClient.sendTransaction({
+      account: account.address,
+      to: address,
+      data: txData,
+      value,
+      gas: estimateGas,
+      chain: sophonTestnet, // chain client that is connected
+      paymaster,
+      paymasterInput,
+      //   nonce: nextNonce, enable if you want to use a specific nonce
+    });
+
+    return hash;
+  }
+
+  // Fallback for non-zkSync chains
+  return await writeContract(wagmiConfig, {
+    address,
+    chainId,
+    abi,
+    functionName,
+    args,
+    value,
+    gas: estimateGas,
+  });
+}
+```
+
+## **⚠️ Key Gotchas to Watch Out For**
+
+### **1. Missing paymasterInput or incorrect format**
+
+_paymasterInput_ **must** be passed, even if it’s an empty `0x` using:
+
+```
+getGeneralPaymasterInput({ innerInput: "0x" }).
+```
+
+<Warning>
+  Avoid manually hardcoding `paymasterInput = "0x"` , it won’t work correctly.
+</Warning>
+
+### **2. Use zkSync wallet extensions**
+
+Extend your wallet client with `eip712WalletActions()` to support `sendTransaction` with Paymasters.
+
+```typescript
+const walletClient = createWalletClient({
+      chain: sophonTestnet, // or `sophonMainnet`
+      transport: custom(window.ethereum!),
+    }).extend(eip712WalletActions());
+```
+
+### **3. Pre-calculating nonce is possible, but optional**
+
+Based on your personal use-cases, you can pre-calculate nonces, but this is also handled internally by WAGMI's _publicClient_ **provider wrapper.**
+
+```typescript
+const publicClient = getPublicClient(wagmiConfig, { chainId });
+
+ const nextNonce = await publicClient.getTransactionCount({
+      address: account.address,
+    });
+
+const hash = await walletClient.sendTransaction({
+      account: account.address,
+      to: address,
+      data: txData,
+      value,
+      gas: estimateGas,
+      chain: sophonTestnet, // chain client that is connected
+      paymaster,
+      paymasterInput,
+      nonce: nextNonce,
+    });
+```
