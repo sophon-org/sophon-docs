@@ -82,6 +82,7 @@
       "group": "Deploy & Interact",
       "pages": [
         "build/interact/hardhat",
+        "build/interact/viem-wagmi",
         "build/interact/foundry",
         "build/interact/zksync-cli",
         "build/interact/tenderly",
