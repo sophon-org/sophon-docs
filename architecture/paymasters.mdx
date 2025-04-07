@@ -1,6 +1,5 @@
 ---
-title: 'Paymasters'
-description: ''
+title: "Paymasters"
 ---
 
 Paymasters are a new type of specialized account within the ZKsync ecosystem. These accounts are designed to subsidize transaction fees for other accounts, enabling greater flexibility and enhanced user experience. Paymasters allow fees to be paid using ERC-20 tokens other than ETH, which makes them well-suited for use with Sophon.
@@ -13,6 +12,25 @@ The implementation of Paymasters significantly improves the user experience by o
 - **Transaction Limits:** Limits can be set for specific users. For example, the top five users can receive 1,000 free transactions each, encouraging engagement and usage.
 - **NFT-Based Fee Waivers:** An NFT can be created that allows holders to bypass paying transaction fees, adding value to the NFT while providing users with benefits.
 - **Alternative Gas Payments:** Users can pay gas fees with an ERC-20 token other than SOPH, allowing for value accrual and expanding the range of token options for gas payment.
+
+## How to create your own paymaster
+
+You can create your own paymaster with your custom logic to subsidize users in multiple ways.
+
+### Deploy via txSync
+
+[txSync Tsuko](https://app.txsync.io/tsuko) offers everyone an easy way to create simple sponsored paymasters on Sophon and Sophon testnet. To create one, please follow our [walkthrough video](https://www.loom.com/share/bf5d2d2d774646eaa2aed3c71a822263?sid=7ba4d65f-465b-442e-b22a-30f52d75997d). 
+
+Via **txSync Tsuko**, you can do various things with your paymasters:
+
+- Top it up with **$SOPH**
+- Withdraw your **$SOPH** from it at any time 
+- Monitor it(see usage)
+- Add extensions to it
+
+### Deploy via hardhat/foundry
+
+The [zkSync contract templates](https://github.com/matter-labs/zksync-contract-templates/tree/main/templates/101/contracts/4-paymaster) repository has examples for both ERC20-based paymasters as well as sponsored(gasless) ones. If you are proficient with direct on-chain deployments, you can tailor these examples to your needs and deploy it following their respective [deployment templates](https://github.com/matter-labs/zksync-contract-templates/blob/main/templates/101/deploy/4-paymaster/gasless/deploy.ts).
 
 ## Conclusion
 
