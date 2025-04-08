@@ -9,27 +9,26 @@ You can create your own paymaster with your custom logic to subsidize users in m
 
 ### 1. Deploy via txSync
 
-[txSync Tsuko](https://app.txsync.io/tsuko) offers everyone an easy way to create simple sponsored paymasters on Sophon and Sophon testnet. To create one, please follow our [walkthrough video](https://www.loom.com/share/bf5d2d2d774646eaa2aed3c71a822263?sid=7ba4d65f-465b-442e-b22a-30f52d75997d).
+[txSync Tsuko](https://app.txsync.io/tsuko) offers everyone an easy way to create sponsored paymasters on Sophon and Sophon testnet. To create one, please follow our [walkthrough video](https://www.loom.com/share/bf5d2d2d774646eaa2aed3c71a822263?sid=7ba4d65f-465b-442e-b22a-30f52d75997d).
 
-Via **txSync Tsuko**, you can do various things with your paymasters:
+Via **txSync Tsuko**, you can:
 
 - Top it up with **$SOPH**
 - Withdraw your **$SOPH** from it at any time
 - Monitor it (see usage)
-- Add extensions to it
+- Add extensions
 
 <Tip>
-  It is important to restrict your paymasters to your target audience only, elsehow anyone that
-  knows the paymaster's address can use it.
+  It is important to restrict your paymasters to your target audience only to avoid unintended usage.
 </Tip>
 
 ### Configure Your Restrictions
 
-[txSync Tsuko](https://app.txsync.io/tsuko) extensions offer you a list of pre-built restrictions you can simply plug into your paymasters and also remove them at will. This list includes:
+[txSync Tsuko](https://app.txsync.io/tsuko) extensions offer you a list of pre-built restrictions you can plug into your paymasters to filter transactions. This list includes:
 
-- **Contract whitelisting** (contract list based subsidizing): specify which contract addresses can use your Paymaster.
-- **User whitelisting** (wallet list based subsidizing): specify which user addresses(EOAs) can use your Paymaster.
-- **Function whitelisting** (function list based subsidizing): specify both contracts AND functions from those contracts to use your Paymaster. Any user calling these functions would be able to be subsidized by your Paymaster.
+- **User whitelisting**: specify which user addresses (EOAs) can send a transaction.
+- **Contract whitelisting**: specify which contract addresses can be interacted with.
+- **Function whitelisting**: specify both contracts AND functions from those contracts that can be interacted with.
 - **NFT(ERC721) whitelisting**: exclusively authorize paymaster access for holders of a specific NFT collection on Sophon.
 
 For more detail, check their detailed list [here](https://app.txsync.io/tsuko/restriction-catalog).
