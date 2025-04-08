@@ -75,7 +75,8 @@
       "pages": [
         "build/early-partners",
         "build/network-information",
-        "build/evm-differences"
+        "build/evm-differences",
+        "build/setting-up-paymasters"
       ]
     },
     {
