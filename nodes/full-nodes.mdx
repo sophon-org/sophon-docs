@@ -1,6 +1,5 @@
 ---
 title: "Full Nodes"
-description: ""
 ---
 
 A **Sophon Full Node** is a complete node that stores a full copy of the blockchain and can serve as either a sequencer or a validator.
@@ -8,7 +7,9 @@ A **Sophon Full Node** is a complete node that stores a full copy of the blockch
 - During the initial phase of the network, only **one node**, operated by Sophon Labs, is authorized to submit batches.
 - However, efforts are underway to allow **multiple nodes** to collaborate through a consensus mechanism, adhering to the relevant network criteria, which will further decentralize block creation.
 
-<Tip>At present, you can only run a **read-only** version of the Full Node.</Tip>
+<Tip>
+  At present, you can only run a **read-only** version of the Full Node.
+</Tip>
 
 ---
 
@@ -40,15 +41,48 @@ However, the **Full Node** cannot:
 
 ## Running a Full Node
 
-The process of running a **Full Node** on Sophon is identical to running one on ZKsync Era. The node can be initialized in two modes:
+The process of running a **Full Node** on Sophon is identical to running one on ZKsync Era, with the addition of the **Avail Data Availability** layer. Clone and follow our [configuration repository](https://github.com/sophon-org/sophon-en-config) to set up your own full node. It can be initialized in two modes:
 
-- Recovery from a **DB dump** (equivalent to an Ethereum archival node)
-- Recovery from a **snapshot** (equivalent to an Ethereum light node)
+- Recovery from **DB dumps**
+- Syncing fully from **genesis**
+
+### How to set up your avail credentials
+
+In order to be able to configure your node with your own Avail DA, you first need to create an **Avail DA account**. Follow the instructions from the [<u>Avail DA user guide</u>](https://docs.availproject.org/user-guides/accounts) to do so.
+
+### Start your node from genesis
+
+To start your Sophon node from genesis, you need to disable recovery from snapshots:
+
+```yaml
+EN_SNAPSHOTS_RECOVERY_ENABLED: "false"
+```
+
+<Warning>
+  If not really needed for your own use-case, this is ill advised, as it takes a long time to do so.
+</Warning>
+
+### Start your node from DB dumps
+
+To start your Sophon node from database dumps, you need to enable recovery from snapshots and specify the snapshot location:
+
+```yaml
+EN_SNAPSHOTS_RECOVERY_ENABLED: "false"
+EN_SNAPSHOTS_OBJECT_STORE_BUCKET_BASE_URL: "raas-sophon-mainnet-external-node-snapshots"
+```
+
+<Check>
+  This is the most efficient way to get your node up to speed. We advise full node runners to use database dumps as much as possible while running their nodes.
+</Check>
+
+### Local Testing
+
+Following our [configuration repository](https://github.com/sophon-org/sophon-en-config) you can opt to start a local node via **Docker Compose**. For this, we provide you a [start script](https://github.com/sophon-org/sophon-en-config/blob/main/scripts/start_node.sh) that cleans up all Docker artifacts once exited (ctrl\+C).
 
 <Tip>
-For local testing, we recommend setting up an in-memory node and forking mainnet using the [ZKsync CLI](../build/interact/zksync-cli).
+  For an even simpler local testing experience, we recommend setting up an in-memory node and forking mainnet using the [ZKsync CLI](../build/interact/zksync-cli).
 </Tip>
 
 <Note>
-For detailed info on how to run, configure, and maintain a **Full Node**, see [ZKsync's docs](https://matter-labs.github.io/zksync-era/core/latest/guides/external-node/01_intro.html)
+  For detailed info on how to run, configure, and maintain a **Full Node**, see [ZKsync's docs](https://matter-labs.github.io/zksync-era/core/latest/guides/external-node/01_intro.html). However, for most of the cases, following our [configuration repository](https://github.com/sophon-org/sophon-en-config) should be enough.
 </Note>
