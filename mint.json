@@ -5,6 +5,11 @@
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
   },
+  "metadata": {
+    "og:title": "Sophon Documentation",
+    "og:description": "Comprehensive guide and documentation for Sophon",
+    "keywords": "Sophon, Blockchain, Tokenomics, Nodes, Smart Contracts, Farming"
+  },
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#175aad",
@@ -59,7 +64,7 @@
     },
     {
       "group": "Links",
-      "pages": ["links/audits", "links/security", "links/socials"]
+      "pages": ["links/audits", "links/security", "links/status", "links/socials"]
     },
     {
       "group": "",
@@ -70,15 +75,18 @@
       "pages": [
         "build/early-partners",
         "build/network-information",
-        "build/evm-differences"
+        "build/evm-differences",
+        "build/setting-up-paymasters"
       ]
     },
     {
       "group": "Deploy & Interact",
       "pages": [
         "build/interact/hardhat",
+        "build/interact/viem-wagmi",
         "build/interact/foundry",
         "build/interact/zksync-cli",
+        "build/interact/tenderly",
         "build/interact/sdks"
       ]
     },
@@ -108,14 +116,26 @@
       "pages": ["discover/our-universe"]
     },
     {
+      "group": "Bridging",
+      "pages": [
+        "discover/bridging/bridging-intro",
+        "discover/bridging/sophon-bridge",
+        "discover/bridging/layerswap",
+        "discover/bridging/withdrawal-delay",
+        "discover/bridging/bridging-faqs"
+      ]
+    },
+    {
       "group": "Farming",
       "pages": [
         "discover/farming-intro",
         "discover/farming-cycle",
         "discover/active-pools",
         "discover/points-calculations",
+        "discover/reward-locking",
         "discover/boosts",
-        "discover/withdrawals"
+        "discover/withdrawals",
+        "discover/farming-faqs"
       ]
     },
     {
@@ -124,7 +144,7 @@
     },
     {
       "group": "Node Types",
-      "pages": ["nodes/full-nodes", "nodes/light-nodes"]
+      "pages": ["nodes/full-nodes", "nodes/light-nodes", "nodes/nodes-faqs"]
     },
     {
       "group": "Node Rewards",
@@ -136,7 +156,7 @@
         "nodes/what-are-guardians",
         "nodes/guardian-membership",
         "nodes/operator-address",
-        "nodes/faqs"
+        "nodes/guardian-faqs"
       ]
     },
     {

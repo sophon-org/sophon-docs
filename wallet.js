@@ -43,7 +43,7 @@ async function addNetwork() {
             symbol: "SOPH",
             decimals: 18,
           },
-          blockExplorerUrls: ["https://explorer.sophon.xyz/"],
+          blockExplorerUrls: ["https://explorer.sophon.xyz"],
         },
       ],
     });

@@ -1,0 +1,38 @@
+---
+title: "Paymasters"
+description: "How to create and use paymasters"
+---
+
+## Creating Your Own Paymaster
+
+You can create your own paymaster with your custom logic to subsidize users in multiple ways. For general information on paymasters, please refer to the [Paymasters](/architecture/paymasters) page.
+
+### 1. Deploy via txSync
+
+[txSync Tsuko](https://app.txsync.io/tsuko) offers everyone an easy way to create sponsored paymasters on Sophon and Sophon testnet. To create one, please follow our [walkthrough video](https://www.loom.com/share/bf5d2d2d774646eaa2aed3c71a822263?sid=7ba4d65f-465b-442e-b22a-30f52d75997d).
+
+Via **txSync Tsuko**, you can:
+
+- Top it up with **$SOPH**
+- Withdraw your **$SOPH** from it at any time
+- Monitor it (see usage)
+- Add extensions
+
+<Tip>
+  It is important to restrict your paymasters to your target audience only to avoid unintended usage.
+</Tip>
+
+### Configure Your Restrictions
+
+[txSync Tsuko](https://app.txsync.io/tsuko) extensions offer you a list of pre-built restrictions you can plug into your paymasters to filter transactions. This list includes:
+
+- **User whitelisting**: specify which user addresses (EOAs) can send a transaction.
+- **Contract whitelisting**: specify which contract addresses can be interacted with.
+- **Function whitelisting**: specify both contracts AND functions from those contracts that can be interacted with.
+- **NFT(ERC721) whitelisting**: exclusively authorize paymaster access for holders of a specific NFT collection on Sophon.
+
+For more detail, check their detailed list [here](https://app.txsync.io/tsuko/restriction-catalog).
+
+### 2. Deploy via Hardhat/Foundry
+
+The [ZKsync contract templates](https://github.com/matter-labs/zksync-contract-templates/tree/main/templates/101/contracts/4-paymaster) repository has examples for both ERC20-based paymasters as well as sponsored(gasless) ones. If you are proficient with direct on-chain deployments, you can tailor these examples to your needs and deploy it following their respective [deployment templates](https://github.com/matter-labs/zksync-contract-templates/blob/main/templates/101/deploy/4-paymaster/gasless/deploy.ts).

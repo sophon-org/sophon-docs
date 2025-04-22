@@ -1,11 +1,85 @@
 ---
-title: 'Full Nodes'
-description: ''
+title: "Full Nodes"
+description: "How to run and manage a Sophon full node"
 ---
 
 A **Sophon Full Node** is a complete node that stores a full copy of the blockchain and can serve as either a sequencer or a validator.
 
-- During the initial phase of the network, only one node, operated by Sophon Labs, is authorized to submit batches
-- However, efforts are underway to allow multiple nodes to collaborate through a consensus mechanism, adhering to the relevant network criteria, which will further decentralize block creation.
+- During the initial phase of the network, only **one node**, operated by Sophon Labs, is authorized to submit batches.
+- However, efforts are underway to allow **multiple nodes** to collaborate through a consensus mechanism, adhering to the relevant network criteria, which will further decentralize block creation.
 
-<Tip>At present, anyone can run a **read-only** version of the Full Node.</Tip>
+<Tip>
+  At present, you can only run a **read-only** version of the Full Node. The full size of the database at the time of writing is ~1.3TB.
+</Tip>
+
+---
+
+## High-level Overview
+
+At a high level, the Full Node consists of the following modules:
+
+- **API Server:** Provides the publicly available Web3 interface
+- **Synchronization Layer:** Interacts with the main node and retrieves transactions and blocks to re-execute
+- **Sequencer Component:** Executes and persists transactions received from the synchronization layer
+- **Checker Modules:** Ensure the consistency of the ZKsync node state
+
+### Capabilities and Limitations
+
+With the **Full Node**, you can:
+
+- Locally recreate and verify the Sophon mainnet/testnet state
+- Interact with the recreated state in a trustless way
+- Use the Web3 API without querying the main node
+- Send L2 transactions (proxied to the main node)
+
+However, the **Full Node** cannot:
+
+- Create L2 blocks or L1 batches independently
+- Generate proofs
+- Submit data to L1
+
+---
+
+## Running a Full Node
+
+The process of running a **Full Node** on Sophon is identical to running one on ZKsync Era, with the addition of the **Avail Data Availability** layer. Clone and follow our [configuration repository](https://github.com/sophon-org/sophon-en-config) to set up your own full node. It can be initialized in two modes:
+
+- Recovery from **DB dumps**
+- Syncing fully from **genesis**
+
+### How to set up your avail credentials
+
+In order to be able to configure your node with your own Avail DA, you first need to create an **Avail DA account**. Please check the instructions from the [Avail DA user guide](https://docs.availproject.org/user-guides/accounts).
+
+### Start your node from DB dumps (recommended)
+
+To start your Sophon node from database dumps, you need to enable recovery from snapshots and specify the snapshot location:
+
+```yaml
+EN_SNAPSHOTS_RECOVERY_ENABLED: "false"
+EN_SNAPSHOTS_OBJECT_STORE_BUCKET_BASE_URL: "raas-sophon-mainnet-external-node-snapshots"
+```
+
+### Start your node from genesis
+
+To start your Sophon node from genesis, you need to disable recovery from snapshots:
+
+```yaml
+EN_SNAPSHOTS_RECOVERY_ENABLED: "false"
+```
+
+<Warning>
+  This is not recommended unless necessary for your use case, as it takes multiple days to sync.
+</Warning>
+
+### Local Testing
+
+Following our [configuration repository](https://github.com/sophon-org/sophon-en-config) you can opt to start a local node via **Docker Compose**. For this, we provide you a [start script](https://github.com/sophon-org/sophon-en-config/blob/main/scripts/start_node.sh) that cleans up all Docker artifacts once you exit the process in the terminal (with ctrl\+C).
+
+<Tip>
+  For an even simpler local testing experience, we recommend setting up an in-memory node and forking mainnet using the [ZKsync CLI](../build/interact/zksync-cli).
+</Tip>
+
+<Note>
+  For detailed info on how to run, configure, and maintain a **Full Node**, see [ZKsync's docs](https://matter-labs.github.io/zksync-era/core/latest/guides/external-node/01_intro.html). However, for most of the cases, following our [configuration repository](https://github.com/sophon-org/sophon-en-config) should be enough.
+</Note>

@@ -1,0 +1,159 @@
+---
+title: "Tenderly"
+description: ""
+---
+
+## Overview
+
+[Tenderly](https://tenderly.co/) has fully integrated with Sophon, providing developers with a suite of tools to streamline smart contract development, testing, and monitoring. This integration enables seamless debugging, simulation, and infrastructure support for dApps deployed on the Sophon network, both on mainnet as well as on testnet.
+
+## Key Features
+
+### Virtual TestNets
+
+Tenderly Virtual TestNets allow developers to create forked environments of the Sophon mainnet or testnet for safe and controlled testing. These environments can be configured to stay up-to-date with the latest mainnet transactions, ensuring that developers work with the most recent blockchain state.
+
+**Benefits:**
+
+* Real-time synchronisation with mainnet
+
+* Safe testing without affecting on-chain data
+
+* Improved contract iteration speed
+
+<Check>
+  For more details, refer to the [Sophon Testnet RPC Reference](https://docs.tenderly.co/node/rpc-reference/sophon-testnet).
+</Check>
+
+### Node RPC
+
+Tenderly provides high-performance RPC endpoints for both the Sophon mainnet and testnet, allowing developers to interact with the blockchain reliably and at scale.
+
+**RPC Endpoints:**
+
+\- **Mainnet RPC Reference:** `https://sophon.gateway.tenderly.co/$TENDERLY_NODE_ACCESS_KEY`
+\- **Testnet RPC Reference:** `https://sophon-testnet.gateway.tenderly.co/$TENDERLY_NODE_ACCESS_KEY`
+
+#### Example Configuration:
+
+```javascript
+const provider = new ethers.providers.JsonRpcProvider('https://sophon.gateway.tenderly.co/$TENDERLY_NODE_ACCESS_KEY');
+```
+
+<Note>
+  Replace `$TENDERLY_NODE_ACCESS_KEY` with your actual access key obtained from the Tenderly dashboard. For this you need to sign up [here](https://dashboard.tenderly.co/register).
+</Note>
+
+### Smart Contract Debugging
+
+Developers can leverage Tenderly’s real-time debugging tools to inspect transaction execution, variables, and state changes. This significantly improves the debugging process and helps identify contract issues before deployment.
+
+**Debugging Features:**
+
+* **Transaction Replays:** Re-execute failed transactions to diagnose issues.
+
+* **Real-time Debugger:** Step through contract execution and inspect variables.
+
+* **Gas Profiling:** Analyse gas consumption and optimize contract efficiency.
+
+<Note>
+  For detailed usage, see the [debug\_traceCall reference](https://docs.tenderly.co/node/rpc-reference/sophon/debug_traceCall).
+</Note>
+
+### Simulation and Testing
+
+Tenderly enables developers to simulate transactions before execution, reducing the risk of unexpected behaviour.
+
+**Simulation Capabilities:**
+
+\- **Transaction Simulator:** Preview transaction outcomes before submission.
+\- **Forking Capabilities:** Create isolated forks of the Sophon mainnet for testing.
+\- **Unit Testing:** Execute smart contract tests in a controlled environment.
+
+#### Example usage:
+
+* **Mainnet Simulation:** [tenderly\_simulateTransaction](https://docs.tenderly.co/node/rpc-reference/sophon/tenderly_simulateTransaction)
+
+* **Testnet Simulation:** [tenderly\_simulateTransaction](https://docs.tenderly.co/node/rpc-reference/sophon-testnet/tenderly_simulateTransaction)
+
+### Gas Estimation
+
+Tenderly provides advanced gas estimation to optimise transaction costs.
+
+<Check>
+  For more details, check out the [tenderly\_estimateGas reference](https://docs.tenderly.co/node/rpc-reference/sophon/tenderly_estimateGas).
+</Check>
+
+### Monitoring and Alerting
+
+Tenderly offers robust monitoring and alerting solutions, allowing developers to track the performance and security of their smart contracts.
+
+**Monitoring Features:**
+
+* **Real-time Alerts:** Notifications for failed transactions, gas spikes, and security threats.
+
+* **Webhook Integrations:** Connect alerts with Slack, Discord, Telegram, or other tools.
+
+* **Custom Metrics:** Monitor specific contract activities and dApp performance.
+
+### Infrastructure Services
+
+Tenderly provides essential infrastructure services to support developers in deploying and maintaining dApps on Sophon.
+
+**Available Services:**
+
+* **Tenderly Node:** High-performance RPC with built-in simulation and debugging tools.
+
+* **Event Streaming:** Subscribe to real-time contract events.
+
+* **Gas Estimation API:** Optimize gas fees for transactions.
+
+## Getting Started
+
+### 1. Set Up Your Tenderly Account
+
+1. Sign up or log in to [Tenderly](https://dashboard.tenderly.co/)
+
+2. Navigate to the **Sophon** integration page
+
+3. Generate your **TENDERLY\_NODE\_ACCESS\_KEY**
+
+### 2. Configure RPC in Your Project
+
+```javascript
+const provider = new ethers.providers.JsonRpcProvider('https://sophon.gateway.tenderly.co/YOUR_ACCESS_KEY');
+```
+
+### 3. Fork the Sophon Mainnet/Testnet
+
+```bash
+curl -X POST 'https://api.tenderly.co/api/v1/fork' \
+-H 'Authorization: Bearer YOUR_ACCESS_KEY' \
+-d '{"network_id":"sophon-mainnet"}'
+```
+
+### 4. Debug Transactions
+
+```bash
+curl -X POST 'https://api.tenderly.co/api/v1/debug' \
+-H 'Authorization: Bearer YOUR_ACCESS_KEY' \
+-d '{"hash":"0xYourTransactionHash"}'
+```
+
+## Supported SDKs
+
+Sophon is compatible with multiple programming languages and frameworks, including:
+
+* **JavaScript/TypeScript:** Ethers.js, Viem
+
+* **Go, Python, Java, Swift, Rust**
+
+## Additional Resources
+
+* [Tenderly Documentation](https://docs.tenderly.co/)
+
+* [Sophon Documentation](https://docs.sophon.xyz/build/interact/sdks)
+
+* [Tenderly Blog on Sophon Integration](https://blog.tenderly.co/creating-engaging-dapps-on-sophon-with-tenderly/)
+
+By leveraging Tenderly’s tools, developers can enhance their workflow, improve contract reliability, and create high-quality dApps on the Sophon blockchain.

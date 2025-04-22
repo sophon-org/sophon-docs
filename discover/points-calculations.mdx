@@ -3,47 +3,204 @@ title: 'Points Calculations'
 description: ''
 ---
 
-## How SP Accrues Onchain
+**Sophon Farming** is a way to earn rewards by **staking your tokens** in **various pools**. This guide explains how the system works and how to optimize your earnings.
 
-```plaintext
-SP per Block = (User’s Pool Allocation * Pool's SP Per Allocation)
+<Info>
+**Key Concepts**
+- Points are generated **every block** and shared across pools
+- Your earnings are based on your **staked tokens**
+- **Boosting** can increase your rewards
+- **Pool values** determine **point distribution**
+- Some pools may have a **multiplier** greater than 1
+</Info>
+
+## Points Distribution
+
+**Block Generation**
+
+Every block, a **fixed number of points** (`10 SPs`) are created and distributed among **active pools** based on their **relative value**.
+
+**Example:**
+
+Imagine we have **3 active pools** with a combined value of **$1,000:**
+
+<Note>**Pool A:** $500 value (**50%** of total)</Note>
+
+Gets **5 SPs** per block (**50%** of **10 SPs**)
+
+<Note>**Pool B:** $300 value (**30%** of total)</Note>
+
+Gets **3 SPs** per block (**30%** of **10 SPs**)
+
+<Note>**Pool C:** $200 value (**20%** of total)</Note>
+
+Gets **2 SPs** per block (**20%** of **10 SPs**)
+
+<Tip>
+- **Total System Value:** $1,000
+- **Total SPs Per Block:** 10 SPs
+- **Emission Rate:** 0.01 SP per USD equivalent staked
+- **Pool A Share:** 0.005 SPs (**50% of emissions**)
+</Tip>
+
+### Pool Value Calculation
+
+```
+Pool Value = (Total Tokens Staked × Token Price × Pool Multiplier)
 ```
 
-The amount of SP a user has is calculated by considering:
+The higher a pool's **relative value**, the more **points** it receives from the **global distribution**.
 
-- **User's portion of the pool:** The system takes the total amount of assets the user has staked in the pool (including any boosted amounts) and calculates the percentage the user deposited in relation to the pool total.
-- **Pool's SP per each user’s portion:** Within the Sophon Points framework, rewards are distributed from a shared pool that accumulates over time. Each participant's portion of this pool is determined by their proportional liquidity contribution. As the number of participating pools increases or decreases, the points allocated proportionally fluctuate. For example, if a pool initially has 100 points to distribute, and Alice deposits 60% of the total liquidity while Bob deposits 40%, Alice would receive 60 SP, and Bob would receive 40 SP. If another participant joins or someone withdraws, the points allocation will be recalculated to reflect the updated proportions. Keep an eye on the Farming Portal for details on pool distribution totals.
-- **User's rewards:** A user's rewards are calculated based on their portion of the pool and the total points the pool has earned. This is done by considering the user's proportional contribution to the pool's liquidity, including any boosted amounts, and multiplying it by the points per share the pool has accumulated.
+<Note>
+**Pool Multipliers**
+- **Multipliers** (usually **2x** or **3x**) **increase the rewards** for certain pools, making them more appealing
+- The **higher the multiplier**, the **more rewards** you earn for the **same amount staked**
+</Note>
 
-This final number represents the amount of SP the user can claim.
+<Warning>For the time being, **all pools** on **Sophon Mainnet** only have a **1x multiplier.**</Warning>
 
-## SP Calculation Example
+#### Example Distribution
 
-Let's say a user has staked 100 BEAM in a pool, and the pool's SP earned per BEAM is 50.
+**Given:**
 
-Using the formula, we can find the total SP:
+- **Pool A:** $300 in staked tokens
+- **Pool B:** $700 in staked tokens
+- **Total value: $1,000**
 
-```plaintext
-SP = (100 BEAM * 50 SP/BEAM) = 5000 SP
+**Distribution:**
+
+- Pool A receives **30%** (300 **÷** 1,000)
+- Pool B receives **70%** (700 **÷** 1,000)
+
+---
+
+## Pool Mechanics
+
+<Info>
+**Pools update during:**
+- Token deposits and withdrawals
+- Boosting
+- Claiming Points
+</Info>
+
+### Reward Calculation
+
+To calculate your earnings, use the following forumla:
+
+```
+SPs per block = (Your Stake / Pool Total Stake) × Pool Share
 ```
 
-The user has 5000 SP.
+<Info>
+**Where:**
+- **Your Stake:** Amount of tokens you've deposited in the pool
+- **Pool Total Stake:** Total amount of tokens deposited in the pool by all users
+- **Pool Share:** Number of SPs allocated to the pool per block
+</Info>
 
-### SP to SOPH Conversions
+<Tip>Points accumulate **continuously** while staking.</Tip>
 
-Your share of the 6% token allocation on Ethereum Mainnet is determined by your portion of the total SP earned during this period:
+---
 
-```plaintext
-(Your SP / Total SP emitted) * 6% = Your $SOPH Reward
-```
+## Boosts
 
-The final figure for Total SP emitted will be determined and communicated before the conclusion of the Ethereum Mainnet farming period.
+**Boosts** are multipliers that enhance your earning power by increasing your effective stake. When you apply a boost:
 
-### Tracking Your SP
+- You choose **how many** of your staked tokens to boost.
+- Boosted tokens earn **accelerated rewards**, calculated using the **boost multiplier (5x)**.
+- These tokens are **permanently committed** to providing liquidity on **Sophon Mainnet**.
+- **Unboosted tokens** can be **withdrawn** at **any time**.
 
-- **Real-time SP tracking:** You can monitor your Sophon Points earned in real-time within the Farming Portal.
-- **Accrual rates:** Each pool displays its unique point accrual rate, indicating how quickly your points will accumulate. A user’s individual rate within a pool is relative to the total deposits of all users in that pool. The amount of SP each pool earns per block is calculated using this formula:
+### How Boosts Work
 
-```plaintext
-Pool's SP per Block = (Total SP Per Block * Pool's Allocation) / Total Allocation of All Pools
-```
+Boosting is a strategic choice to maximize your **Sophon Points (SPs)** earnings by allocating part of your deposit to a **higher reward rate**. But remember, this comes with a commitment
+
+<Warning>
+**Boosted assets are permanently locked to support liquidity on the Sophon network.**
+</Warning>
+
+**Example:**
+
+- You have staked **100 tokens** in a pool.
+- You apply a **5x boost** to **50** of your tokens.
+- Those **50 boosted tokens** now count as **250 tokens** (**50** × **5**).
+- Your remaining **50 tokens** stay **unboosted**, counting as **50**.
+- Your total effective stake is now **300 tokens** (**250** from **boosted** + **50** from **unboosted**).
+- This means a **200% increase** in point earnings.
+
+<Tip>
+For more on boosting, see [Boosts](/discover/boosts).
+</Tip>
+
+---
+
+## Example Calculations
+
+### One Pool
+
+- **Points per Block:** 10 SP
+- **Pool Multiplier:** 1x
+- **Token Price:** $2.00
+- **Your Stake:** 100 tokens
+
+After 10 blocks:
+
+- **Total Points Generated:** 100 SP
+
+<Note>**Your Earnings:** 100 SP</Note>
+
+### Multiple Pools
+
+**Two Pools:**
+
+Values:
+
+- **Pool A:** $300
+- **Pool B:** $700
+
+Per-Block Distribution:
+
+- **Pool A:** 3 SP
+- **Pool B:** 7 SP
+
+<Note>
+**10-Block Earnings**
+- **Pool A User:** 30 SP
+- **Pool B User:** 70 SP
+</Note>
+
+### Multiple Pools with Multipliers
+
+<Warning>For the time being, **all pools** on **Sophon Mainnet** only have a **1x multiplier.**</Warning>
+
+As aforementioned, some pools can have a multiplier greater than 1. Here's how this works in practice:
+
+**Two Pools (Base Values):**
+
+- **Pool A:** `$400`× `3x multiplier` = **$1,200 effective value**
+- **Pool B:** `$800` × `1x multiplier` = **$800 effective value**
+
+<Tip>**Total System Value:** `$1,200` + `$800` = **$2,000 effective value**</Tip>
+
+**Per-Block Distribution (10 SP total):**
+
+- **Pool A:** `($1,200 / $2,000)` × `10 SP` = **6 SP per block**
+- **Pool B:** `($800 / $2,000)` × `10 SP` = **4 SP per block**
+
+<Note>
+**10-Block Earnings**
+- **Pool A User:** 6 SP **×** 10 blocks = **60 SP**
+- **Pool B User:** 4 SP **×** 10 blocks = **40 SP**
+</Note>
+
+<Warning>
+**Remember**
+- Points generate **continuously** per block
+- **Larger stakes** yield **more points**
+- **Boosts increase earnings** but **lock tokens**
+- **Unboosted tokens** can be **withdrawn**
+</Warning>
+
+**Happy farming!** 🌾
+
+**For more information, please see the [relevant contract](https://github.com/sophon-org/farming-contracts/blob/bridgin/contracts/farm/SophonFarmingL2.sol) on our [GitHub](https://github.com/sophon-org).**

@@ -1,0 +1,147 @@
+---
+title: 'FAQs'
+description: ''
+---
+
+<Note>Please see the questions below in order to resolve any issue(s) you may be facing. If none of these relate to your problem, please contact <a href="mailto:product@sophon.xyz">product@sophon.xyz</a> for direct assistance.</Note>
+
+## General Information About Nodes
+
+<Accordion title="Who can run a node?">
+  Anyone can run a **Light Node** and earn a % commission from members who delegate their Guardian NFTs to them.
+</Accordion>
+
+<Accordion title="What do you need to run a node?">
+  Deploying a Light Node is simple if you use [Easeflow](https://easeflow.io/) or [Railway](https://railway.com/) as they take care of all the setup and hardware requirements. For more info, see [Light Nodes](/nodes/light-nodes).
+</Accordion>
+
+<Accordion title="What is the difference between a Full and a Light Node?">
+  A Sophon **Full Node** is a complete node that stores a full copy of the blockchain and can serve as either a sequencer or a validator.
+  
+  Sophon **Light Nodes** offer a more cost-effective way to participate in the Sophon network as they require less data run and support the network, generally helping with data availability sampling.
+</Accordion>
+
+<Accordion title="I am running a node through Docker, what are the hardware requirements?">
+  - **Minimum:** 512 MB, 2 core.
+  - **Recommended:** 1 GB, 4 core.
+</Accordion>
+
+---
+
+## Node Setup and Configuration
+
+<Accordion title="What is an operator address?">
+  An operator address is the onchain identity for a node. It is used to receive Guardian Membership delegations from your own accounts or other peers on the network.
+</Accordion>
+
+<Accordion title="Where do I find and configure my operator address?">
+  If you use **Easeflow** or another Node-as-a Service (NaaS) platform, they should take care of all of this for you automatically.
+  
+  If you are deploying your node via **Railway/Docker**, you'll need to set the operator address. It can be any standard Ethereum-based address, but we recommend you use a different wallet to the one holding your Guardian Membership NFTs.
+</Accordion>
+
+<Accordion title="Where can I monitor my nodes?">
+  You can access the Node Dashboard via the [Guardian App](https://guardian.sophon.xyz/) by connecting the wallet that holds the Guardian Membership NFT.
+</Accordion>
+
+---
+
+## Node Operations
+
+<Accordion title="How do I retrieve all nodes' information?">
+  <>
+    <p>To retrieve all nodes' information, use the following command:</p>
+    <pre>
+      <code>
+        {`curl -X GET "https://monitor.sophon.xyz/nodes"`}
+      </code>
+    </pre>
+  </>
+</Accordion>
+
+<Accordion title="How do I retrieve my node information?">
+  <>
+    <p>
+      You can retrieve your node information by filtering nodes using the <strong>operators</strong> filter. 
+      It takes comma-separated addresses. Here’s an example:
+    </p>
+    <pre>
+      <code>
+        {`curl -X GET "https://monitor.sophon.xyz/nodes?operators=0xOPERATOR1,0xOPERATOR2"`}
+      </code>
+    </pre>
+    <p>
+      You can also define the <strong>page</strong> and <strong>per_page</strong> parameters. For example:
+    </p>
+    <pre>
+      <code>
+        {`curl -X GET "https://monitor.sophon.xyz/nodes?page=3&per_page=10"`}
+      </code>
+    </pre>
+    <p>
+      This will return **10 nodes** per page, and the request will retrieve the 3rd page of results.
+    </p>
+  </>
+</Accordion>
+
+<Accordion title="What do I do in the event of a re-register issue?">
+  <>
+    <p>You can change your node's URL (or IP) and/or destination address using the following:</p>
+    <pre>
+      <code>
+        {`curl -X PUT "https://monitor.sophon.xyz/nodes" \\
+-H "Content-Type: application/json" \\
+-H "Authorization: Bearer SIGNED_MESSAGE" \\
+-d '{ "operator": "OPERATOR_ADDRESS", "url": "NEW_URL", "destination": "NEW_DESTINATION", "timestamp": TIMESTAMP}'`}
+      </code>
+    </pre>
+  </>
+</Accordion>
+
+<Accordion title="Can I delete my node?">
+  Registered nodes cannot be deleted.
+</Accordion>
+
+---
+
+## Node Rewards and Membership
+
+<Accordion title="How do node rewards work?">
+  20% of the $SOPH supply is emitted over 156 weeks to node operators. Node rewards are distributed weekly throughout this period.
+  
+  Ensure you maintain the minimum uptime requirements to be eligible.
+</Accordion>
+
+<Accordion title="What uptime is required to get weekly rewards?">
+  Currently you need to maintain at least **60% uptime** over the week to receive rewards. Note that this requirement may be updated over time.
+</Accordion>
+
+<Accordion title="How do I claim rewards?">
+  The Dashboard in the [Guardian App](https://guardian.sophon.xyz/) contains an overview of rewards and what is available to claim. Click **Claim Rewards** when you have an available balance to redeem to your wallet.
+</Accordion>
+
+<Accordion title="When can I claim rewards">
+  Rewards will only be viewable as of 15/01/25 and claimable around the time of TGE (which should occur End Q1 2025).
+</Accordion>
+
+<Accordion title="Are nodes transferrable?">
+  For the first 12 months, Guardian Membership NFTs are non-transferrable from the wallet they are redeemed to.
+</Accordion>
+
+---
+
+## Troubleshooting and Other Questions
+
+<Accordion title="My node's status shows an error, what does this mean?">
+  This means that your node is not currently reporting as active to the Sophon network. You may need to restart or reconfigure your node to bring it back online.
+</Accordion>
+
+<Accordion title="How do I sign the authorization message?">
+  The signed message is a UNIX timestamp (in seconds format) signed with your operator wallet. Signatures expire after 15 minutes.
+
+  You can use [Etherscan](https://etherscan.io/verifiedSignatures#) to sign messages.
+</Accordion>
+
+<Accordion title="Can I buy a node?">
+  The Sophon node sale was held on 30/04/24 and concluded shortly afterwards. You can find more details on the sale [here](/nodes/details). The unsold supply has been burnt and there are no plans for further node sales.
+</Accordion>
