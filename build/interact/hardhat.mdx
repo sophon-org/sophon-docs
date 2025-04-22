@@ -12,7 +12,8 @@ We recommend scaffolding your project using the [zksync-cli](https://github.com/
 ### Configuration
 
 <Tip>
-  In order to obtain a Sophscan API Key, you need to create an account and get an API Key [here](https://docs.sophscan.xyz/getting-started/viewing-api-usage-statistics).
+  In order to obtain a Sophscan API Key, you need to create an account and get an API Key
+  [here](https://docs.sophscan.xyz/getting-started/viewing-api-usage-statistics).
 </Tip>
 
 Set up your project with the following configuration:
@@ -23,7 +24,7 @@ Set up your project with the following configuration:
 import type { HardhatUserConfig } from "hardhat/config";
 
 import "@matterlabs/hardhat-zksync";
-import * as dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -41,7 +42,7 @@ const config: HardhatUserConfig = {
       browserVerifyURL: "https://explorer.sophon.xyz/",
       enableVerifyURL: true,
       zksync: true,
-      accounts: [process.env.WALLET_PRIVATE_KEY as string]
+      accounts: [process.env.WALLET_PRIVATE_KEY as string],
     },
     sophonTestnet: {
       url: "https://rpc.testnet.sophon.xyz",
@@ -50,13 +51,12 @@ const config: HardhatUserConfig = {
       browserVerifyURL: "https://explorer.testnet.sophon.xyz/",
       enableVerifyURL: true,
       zksync: true,
-      accounts: [process.env.WALLET_PRIVATE_KEY as string]
+      accounts: [process.env.WALLET_PRIVATE_KEY as string],
     },
   },
   zksolc: {
     version: "latest",
-    settings: {
-    },
+    settings: {},
   },
   solidity: {
     version: "0.8.27",
@@ -85,12 +85,11 @@ const config: HardhatUserConfig = {
         },
       },
     ],
-  }
+  },
 };
 
 export default config;
 ```
-
 
 ```env .env
 WALLET_PRIVATE_KEY=your_private_key_here
@@ -110,10 +109,7 @@ import { utils } from "zksync-ethers";
 
 const deployer = new Deployer(hre, wallet);
 const artifact = await deployer.loadArtifact("Your_Contract");
-const contract = await deployer.deploy(
-    artifact,
-    constructorArguments || []
-);
+const contract = await deployer.deploy(artifact, constructorArguments || []);
 ```
 
 ### Deployment with Paymaster
@@ -121,28 +117,36 @@ const contract = await deployer.deploy(
 During the alpha stage, you'll need to use our Paymaster to sponsor transactions. Here's how to deploy using the paymaster:
 
 ```typescript
-import { utils } from "zksync-ethers";
+import { Provider, Wallet, utils } from "zksync-ethers";
+import { Deployer } from "@matterlabs/hardhat-zksync-deploy";
+import { HardhatRuntimeEnvironment } from "hardhat/types";
 
-const deployer = new Deployer(hre, wallet);
-const artifact = await deployer.loadArtifact("Your_Contract");
+export default async function (hre: HardhatRuntimeEnvironment) {
+  const provider = new Provider(hre.network.config.url);
+  const wallet = new Wallet(process.env.WALLET_PRIVATE_KEY!, provider);
+  const deployer = new Deployer(hre, wallet);
+  const artifact = await deployer.loadArtifact("your_contract");
 
-const params = utils.getPaymasterParams(
-  "0x98546B226dbbA8230cf620635a1e4ab01F6A99B2", // Paymaster address
-  {
-    type: "General",
-    innerInput: new Uint8Array(),
-  }
-);
+  const params = utils.getPaymasterParams(
+    "0x98546B226dbbA8230cf620635a1e4ab01F6A99B2", // Paymaster address
+    {
+      type: "General",
+      innerInput: new Uint8Array(),
+    }
+  );
 
-const contract = await deployer.deploy(
+  const contract = await deployer.deploy(
     artifact,
-    constructorArguments || [], 
+    [], // Constructor arguments
+    undefined, // Deployment type (use undefined for regular contract deployment)
     {
       customData: {
         paymasterParams: params,
         gasPerPubdata: utils.DEFAULT_GAS_PER_PUBDATA_LIMIT,
-    },
-});
+      },
+    }
+  );
+}
 ```
 
 ### Proxy Deployment
@@ -155,13 +159,11 @@ import { utils } from "zksync-ethers";
 const deployer = new Deployer(hre, wallet);
 const artifact = await deployer.loadArtifact("Your_Contract");
 
-await hre.zkUpgrades.deployProxy(deployer.zkWallet, artifact, [initializerArgs], 
- {
-   initializer: "initialize",
-   paymasterProxyParams: params,
-   paymasterImplParams: params,
- }
-);
+await hre.zkUpgrades.deployProxy(deployer.zkWallet, artifact, [initializerArgs], {
+  initializer: "initialize",
+  paymasterProxyParams: params,
+  paymasterImplParams: params,
+});
 ```
 
 ## Contract Interaction
@@ -171,13 +173,10 @@ To interact with deployed contracts using the paymaster:
 ```typescript
 import { utils } from "zksync-ethers";
 
-const paymasterParams = utils.getPaymasterParams(
-  "0x98546B226dbbA8230cf620635a1e4ab01F6A99B2",
-  {
-    type: "General",
-    innerInput: new Uint8Array(),
-  }
-);
+const paymasterParams = utils.getPaymasterParams("0x98546B226dbbA8230cf620635a1e4ab01F6A99B2", {
+  type: "General",
+  innerInput: new Uint8Array(),
+});
 
 const tx = await contract.yourFunction(params, {
   customData: {
@@ -202,63 +201,76 @@ Before making calls to a newly deployed contract using a paymaster, it's importa
 The code below provides a reference implementation for checking the whitelist status:
 
 ```typescript
- const restrictionContractAddress = (hre.network.config as unknown as CustomNetworkConfig)?.restrictionContract;
-    if (restrictionContractAddress && usePaymaster) {
-      const contractAddress = await contract.getAddress();
-      logger.info(`Checking if ${contractName} (${contractAddress}) is whitelisted on restriction contract...`);
-      
-      // Create interface for the restriction contract
-      const restrictionContractABI = [
+const restrictionContractAddress = (hre.network.config as unknown as CustomNetworkConfig)
+  ?.restrictionContract;
+if (restrictionContractAddress && usePaymaster) {
+  const contractAddress = await contract.getAddress();
+  logger.info(
+    `Checking if ${contractName} (${contractAddress}) is whitelisted on restriction contract...`
+  );
+
+  // Create interface for the restriction contract
+  const restrictionContractABI = [
+    {
+      inputs: [
         {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "name": "contractWhitelist",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        }
-      ];
-      
-      const provider = hre.ethers.provider;
-      const restrictionContract = new hre.ethers.Contract(restrictionContractAddress, restrictionContractABI, provider);
-      
-      let isWhitelisted = false;
-      let attempts = 0;
-      const maxAttempts = 5;
-      
-      while (!isWhitelisted && attempts < maxAttempts) {
-        try {
-          isWhitelisted = await restrictionContract.contractWhitelist(contractAddress);
-          
-          if (isWhitelisted) {
-            logger.info(`${contractName} is now whitelisted on restriction contract!`);
-          } else {
-            attempts++;
-            if (attempts < maxAttempts) {
-              logger.info(`${contractName} is not yet whitelisted. Waiting ${waitTime / 1000} seconds before retry (attempt ${attempts}/${maxAttempts})...`);
-              await new Promise(resolve => setTimeout(resolve, waitTime));
-            } else {
-              logger.warn(`${contractName} is still not whitelisted after ${maxAttempts} attempts. Proceeding anyway, but paymaster transactions might fail.`);
-            }
-          }
-        } catch (error) {
-          logger.error(`Error checking whitelist status: ${error}`);
-          attempts++;
-          if (attempts < maxAttempts) {
-            await new Promise(resolve => setTimeout(resolve, waitTime));
-          }
+          internalType: "address",
+          name: "",
+          type: "address",
+        },
+      ],
+      name: "contractWhitelist",
+      outputs: [
+        {
+          internalType: "bool",
+          name: "",
+          type: "bool",
+        },
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+  ];
+
+  const provider = hre.ethers.provider;
+  const restrictionContract = new hre.ethers.Contract(
+    restrictionContractAddress,
+    restrictionContractABI,
+    provider
+  );
+
+  let isWhitelisted = false;
+  let attempts = 0;
+  const maxAttempts = 5;
+
+  while (!isWhitelisted && attempts < maxAttempts) {
+    try {
+      isWhitelisted = await restrictionContract.contractWhitelist(contractAddress);
+
+      if (isWhitelisted) {
+        logger.info(`${contractName} is now whitelisted on restriction contract!`);
+      } else {
+        attempts++;
+        if (attempts < maxAttempts) {
+          logger.info(
+            `${contractName} is not yet whitelisted. Waiting ${
+              waitTime / 1000
+            } seconds before retry (attempt ${attempts}/${maxAttempts})...`
+          );
+          await new Promise((resolve) => setTimeout(resolve, waitTime));
+        } else {
+          logger.warn(
+            `${contractName} is still not whitelisted after ${maxAttempts} attempts. Proceeding anyway, but paymaster transactions might fail.`
+          );
         }
       }
+    } catch (error) {
+      logger.error(`Error checking whitelist status: ${error}`);
+      attempts++;
+      if (attempts < maxAttempts) {
+        await new Promise((resolve) => setTimeout(resolve, waitTime));
+      }
     }
+  }
+}
 ```
