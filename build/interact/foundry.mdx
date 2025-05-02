@@ -96,7 +96,8 @@ SOPHON_CHAIN_ID="50104"
 ### Basic Deployment
 
 ```
-source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync
+source .env && forge create ./src/Counter.sol:Counter \
+--rpc-url testnet --private-key $PRIVATE_KEY --zksync
 ```
 
 ### Deployment and Verification
@@ -106,7 +107,8 @@ Same as [Basic Deployment](#basic-deployment) but you append the `--verify` flag
 <Note>This will only verify on **Sophscan**</Note>
 
 ```
-source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --verify
+source .env && forge create ./src/Counter.sol:Counter \
+--rpc-url testnet --private-key $PRIVATE_KEY --zksync --verify
 ```
 
 ### Deployment Using Paymaster
@@ -119,13 +121,19 @@ Same as [Basic Deployment](#basic-deployment) but you append the `--zk-paymaster
 </Note>
 
 ```
-source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --zk-paymaster-address $PAYMASTER_ADDRESS --zk-paymaster-input $(cast calldata "general(bytes)" "0x")
+source .env && forge create ./src/Counter.sol:Counter \
+--rpc-url testnet --private-key $PRIVATE_KEY --zksync \
+--zk-paymaster-address $PAYMASTER_ADDRESS \
+--zk-paymaster-input $(cast calldata "general(bytes)" "0x")
 ```
 
 ### Deployment With Paymaster and Verification (All-in-One)
 
 ```
-source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --zk-paymaster-address $PAYMASTER_ADDRESS --zk-paymaster-input $(cast calldata "general(bytes)" "0x") --verify
+source .env && forge create ./src/Counter.sol:Counter \
+--rpc-url testnet --private-key $PRIVATE_KEY --zksync \
+--zk-paymaster-address $PAYMASTER_ADDRESS \
+--zk-paymaster-input $(cast calldata "general(bytes)" "0x") --verify
 ```
 
 ## Deploy Contracts Using Foundry Scripts
@@ -133,7 +141,8 @@ source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --privat
 ### Deployment Using Script
 
 ```
-source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
+source .env && forge script ./script/Counter.s.sol \
+--rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
 ```
 
 ### Deployment Using Script and Verification
@@ -143,7 +152,8 @@ Same as [Deployment Using Script](#deployment-using-script) but you append the `
 <Note>This will only verify on **Sophscan**</Note>
 
 ```
-source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --verify
+source .env && forge create ./src/Counter.sol:Counter \
+--rpc-url testnet --private-key $PRIVATE_KEY --zksync --verify
 ```
 
 ### Deployment Using Script With Paymaster
@@ -192,7 +202,8 @@ To use the paymaster within a script, you have 2 options: using a **cheatcode** 
 You can now run the following command
 
 ```
-source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
+source .env && forge script ./script/Counter.s.sol \
+--rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
 ```
 
 #### Using a Low-Level Call (in Case You Can't Install the Cheatcode Library)
@@ -240,7 +251,8 @@ contract CounterScript is Script, TestExt {
 You can now run the following command:
 
 ```
-source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
+source .env && forge script ./script/Counter.s.sol \
+--rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast
 ```
 
 ### Deployment Using Script With Paymaster and Verification
@@ -250,7 +262,8 @@ Same as [Deployment Using Script With Paymaster](#deployment-using-script-with-p
 <Note>This will only verify on **Sophscan**</Note>
 
 ```
-source .env && forge script ./script/Counter.s.sol --rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast --verify
+source .env && forge script ./script/Counter.s.sol \
+--rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast --verify
 ```
 
 ## Contract Verification
@@ -260,13 +273,15 @@ If you want to verify an already deployed contract, you can do so on [Sophscan](
 **On Sophscan**
 
 ```
-source .env && forge verify-contract COUNTER_CONTRACT_ADDRESS ./src/Counter.sol:Counter:Counter --watch --rpc-url testnet --zksync
+source .env && forge verify-contract COUNTER_CONTRACT_ADDRESS \
+./src/Counter.sol:Counter:Counter --watch --rpc-url testnet --zksync
 ```
 
 **On Sophon's Explorer**
 
 ```
-forge verify-contract COUNTER_CONTRACT_ADDRESS ./src/Counter.sol:Counter --watch --verifier zksync --verifier-url $TESTNET_VERIFIER_URL --zksync
+forge verify-contract COUNTER_CONTRACT_ADDRESS ./src/Counter.sol:Counter \
+--watch --verifier zksync --verifier-url $TESTNET_VERIFIER_URL --zksync
 ```
 
 ### Using Libraries
@@ -309,7 +324,9 @@ contract Counter {
 You can now run:
 
 ```shell
-forge create ./src/CounterWithConstructorParams.sol:Counter --rpc-url testnet --private-key $PRIVATE_KEY --zksync --constructor-args "$(cast abi-encode "constructor(uint256)" "123")"
+forge create ./src/CounterWithConstructorParams.sol:Counter \
+--rpc-url testnet --private-key $PRIVATE_KEY --zksync \
+--constructor-args "$(cast abi-encode "constructor(uint256)" "123")"
 ```
 
 <Tip>
