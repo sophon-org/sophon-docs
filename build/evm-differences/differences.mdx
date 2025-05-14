@@ -1,0 +1,99 @@
+---
+title: "Detailed Differences"
+description: "Specific differences between Sophon and Ethereum EVM"
+---
+
+## Detailed EVM Differences
+
+While Sophon's v27 upgrade with the EVM Bytecode Interpreter allows for running unmodified EVM bytecode, developers should be aware of the following specific differences when deploying their Ethereum contracts to Sophon via the normal zksync compiler:
+
+## EVM Bytecode Interpreter Limitations
+
+### EVM Version
+
+The EVM Bytecode Interpreter targets the **Cancun** EVM version. This means it includes Cancun's opcodes and features, but may not include future Ethereum upgrades immediately.
+
+### Unsupported opcodes
+
+The following opcodes are not supported due to underlying limitations of ZKsync VM:
+
+- `CALLCODE`
+- `SELFDESTRUCT`
+- `BLOBHASH`
+- `BLOBBASEFEE`
+
+### Gas Handling
+
+- **Block Gas Limit**: `block.gaslimit` returns `1125899906842624n`, which differs from EVM chains (`36000000n`)
+- **Gas Conversion**: A fixed ratio (5:1) is used to convert between EVM gas and native zkEVM gas (ergs)
+- **Out-of-Gas Behavior**: If an EVM contract runs out of native zkEVM gas, it triggers a revert of the entire EVM call stack
+
+### Contract Interactions
+
+- **EVM-zkEVM Interaction**: Standard calls between EVM and zkEVM contracts work, but `delegatecall` operations are not supported
+- **L1-L2 Deployment**: EVM contracts can't be deployed directly via L1-L2 transactions (which require a `to` field)
+
+### Tools and Verification
+
+- **Foundry Scripts**: Require the `--skip-simulation` flag due to gas model differences
+- **Contract Verification**: Must use Sophon's native block explorer API
+
+## General zkEVM vs EVM Differences
+
+In addition to the EVM Bytecode Interpreter specifics, there are general differences between Sophon's zkEVM and Ethereum's EVM:
+
+### EVM Instructions
+
+Some EVM opcodes function differently on Sophon:
+
+- Certain operations related to code hashing return different values
+- Contract self-destruction has implementation differences
+- Contract creation has specific constraints
+
+[Learn more about EVM instruction differences](https://docs.zksync.io/zksync-protocol/differences/evm-instructions)
+
+### Nonces
+
+Sophon implements account nonces with some specific differences from Ethereum:
+
+- Different nonce management for account abstraction
+- Deployment nonce vs. transaction nonce
+
+[Learn more about nonce differences](https://docs.zksync.io/zksync-protocol/differences/nonces)
+
+### Libraries
+
+There are some differences in how libraries are handled:
+
+- Library linking works differently
+- Immutable references implementation
+
+[Learn more about library differences](https://docs.zksync.io/zksync-protocol/differences/libraries)
+
+### Precompiled Contracts
+
+Sophon supports different precompiled contracts:
+
+- Standard Ethereum precompiles
+- Additional ZK-specific precompiles
+
+[Learn more about precompile differences](https://docs.zksync.io/zksync-protocol/differences/pre-compiles)
+
+### Account Abstraction
+
+Sophon implements native account abstraction, which differs from EIP-4337:
+
+- Native AA provides better performance
+- Different implementation details
+
+[Learn more about AA differences](https://docs.zksync.io/zksync-protocol/differences/native-vs-eip4337)
+
+### Contract Deployment
+
+Contract deployment on Sophon has some differences:
+
+- Factory contract interactions
+- CREATE/CREATE2 behavior
+- Deployment gas costs
+
+[Learn more about deployment differences](https://docs.zksync.io/zksync-protocol/differences/contract-deployment)

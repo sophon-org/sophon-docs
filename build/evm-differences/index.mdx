@@ -1,0 +1,62 @@
+---
+title: "EVM Differences"
+description: "Understanding how Sophon's EVM implementation compares to Ethereum"
+---
+
+# EVM Differences
+
+> Learn the differences between Sophon and Ethereum.
+
+While Sophon is EVM compatible and you can use familiar development tools from the Ethereum ecosystem, the bytecode that Sophon's VM (the [zkEVM](https://docs.zksync.io/build/developer-reference/era-vm)) understands is different than what Ethereum's [EVM](https://ethereum.org/en/developers/docs/evm/) understands.
+
+These differences exist to both optimize the VM to perform efficiently with ZK proofs and to provide more powerful ways for developers to build consumer-facing applications.
+
+When building smart contracts on Sophon, it's helpful to understand what the differences are between Sophon and Ethereum, and how best to leverage these differences to create the best experience for your users.
+
+## EVM Equivalence Module (v27 Upgrade)
+
+With the v27 upgrade, Sophon introduced an EVM Bytecode Interpreter that enables direct execution of unmodified EVM bytecode. This means:
+
+- Deploy **Solidity & Vyper contracts** without recompilation — just like on Ethereum
+- Use **standard tooling** (Hardhat, Foundry, Remix) without plugins
+- Benefit from the **same address derivation** as Ethereum
+- Enable **interoperability** between EVM and zkEVM contracts
+
+## Core Differences and Implementations
+
+Learn about the zkEVM and how it differs from standard Ethereum EVM.
+
+<CardGroup cols={2}>
+  <Card title="Overview" icon="eye" href="/build/evm-differences/overview">
+    A general overview of Sophon's EVM compatibility and the v27 upgrade.
+  </Card>
+
+  <Card title="EVM Interpreter" icon="microchip" href="/build/evm-differences/evm-interpreter">
+    How Sophon's EVM Bytecode Interpreter works and enables EVM equivalence.
+  </Card>
+</CardGroup>
+
+## Detailed Differences
+
+See how Sophon's VM differs from the EVM's opcodes and precompiled contracts.
+
+<CardGroup cols={1}>
+  <Card title="Detailed Differences" icon="binary" href="/build/evm-differences/differences">
+    Specific differences between Sophon and Ethereum, including opcode and precompile differences.
+  </Card>
+</CardGroup>
+
+## Recommended Best Practices
+
+When developing for Sophon, consider the following:
+
+1. **Test thoroughly on Sophon testnet** before deploying to mainnet
+2. Be aware of **gas model differences** between Ethereum and Sophon
+3. Understand **limitations in contract interactions** between EVM and zkEVM contracts
+4. Take advantage of **zkEVM-specific features** like paymasters and account abstraction
+
+## Additional Resources
+
+- [EVM Bytecode Interpreter Documentation](https://docs.zksync.io/zksync-era/unique-features/evm-interpreter/evm-interpreter)
+- [zkEVM ↔ EVM Contract Interactions](https://docs.zksync.io/zksync-protocol/evm-interpreter/era-evm-interactions)
+- [EVM Bytecode Interpreter FAQ](https://docs.zksync.io/zksync-era/unique-features/evm-interpreter/faq)
