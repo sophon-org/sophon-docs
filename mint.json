@@ -316,6 +316,10 @@
     {
       "source": "/sophon/links/community",
       "destination": "/links/socials"
+    },
+    {
+      "source": "/build/evm-differences",
+      "destination": "/build/evm-compatibility/overview"
     }
   ]
 }

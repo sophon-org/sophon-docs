@@ -1,61 +1,82 @@
 ---
-title: "ZkVM vs EVM Differences"
-description: "Specific differences between Sophon's Native zkVM and Ethereum EVM"
+title: "zkVM vs EVM Differences"
+description: "Core differences between Sophon's native zkVM and Ethereum's EVM"
 ---
 
-# Technical Differences
+# zkVM vs EVM Differences
 
-While Sophon provides EVM compatibility, there are important technical differences between native zkVM and EVM that developers should be aware of:
+Sophon's native zkVM is fundamentally different from Ethereum's EVM as it's designed to generate zero-knowledge proofs while executing smart contracts. While the EVM Bytecode Interpreter enables EVM compatibility (see [limitations](/build/evm-compatibility/evm-interpreter#limitations)), here are the core differences between zkVM and EVM:
 
-## Contract Deployment
+## Execution Model
 
-- **L1-L2 Deployment**: EVM contracts can't be deployed directly via L1-L2 transactions (which require a `to` field)
+- **Proof Generation**: zkVM operations must be ZK-proof friendly, affecting how certain operations work
+- **Gas Model**: Uses "ergs" instead of gas, with different cost calculations for operations
+- **State Management**: Different approach to handling state changes due to ZK-proof requirements
 
-## EVM Instructions
+## EVM Instruction Differences
 
-Some EVM opcodes function differently on Sophon:
+To check what opcodes differ in behavior between Sophon and Ethereum, see the official [EVM Instructions](https://docs.zksync.io/zksync-protocol/differences/evm-instructions) page.
 
-- Certain operations related to code hashing return different values
-- Contract self-destruction has implementation differences
-- Contract creation has specific constraints
+## Native Features
 
-[Learn more about EVM instruction differences](https://docs.zksync.io/zksync-protocol/differences/evm-instructions)
+### Account Abstraction
 
-## Nonces
+Unlike EVM which requires EIP-4337 for AA, Sophon's zkVM:
 
-- Different nonce management for account abstraction
-- Deployment nonce vs. transaction nonce
-
-[Learn more about nonce differences](https://docs.zksync.io/zksync-protocol/differences/nonces)
-
-## Libraries
-
-- Library linking works differently
-- Immutable references implementation
-
-[Learn more about library differences](https://docs.zksync.io/zksync-protocol/differences/libraries)
-
-## Precompiled Contracts
-
-- Standard Ethereum precompiles
-- Additional ZK-specific precompiles
-
-[Learn more about precompile differences](https://docs.zksync.io/zksync-protocol/differences/pre-compiles)
-
-## Account Abstraction
-
-Sophon implements native account abstraction, which differs from EIP-4337:
-
-- Native AA provides better performance
-- Different implementation details
+- Has native account abstraction built into the VM
+- Provides better performance for AA operations
+- Handles nonces differently for AA accounts
 
 [Learn more about AA differences](https://docs.zksync.io/zksync-protocol/differences/native-vs-eip4337)
 
-## Contract Deployment d
+### Paymasters
 
-- Factory contract interactions
-- CREATE/CREATE2 behavior
-- Deployment gas costs
+zkVM has native support for paymasters:
+
+- Built-in paymaster functionality
+- More efficient fee abstraction
+- Different gas accounting for sponsored transactions
+
+### System Contracts
+
+- Additional precompiled contracts specific to zkVM
+- Different handling of system-level operations
+- Native multi-transaction support
+
+[Learn more about precompile differences](https://docs.zksync.io/zksync-protocol/differences/pre-compiles)
+
+## State and Storage
+
+### Nonce Handling
+
+- Separate nonces for deployments and transactions
+- Different nonce management for smart contract accounts
+- Unique nonce behavior for batched transactions
+
+[Learn more about nonce differences](https://docs.zksync.io/zksync-protocol/differences/nonces)
+
+### Storage Layout
+
+- Different storage slot calculation
+- Unique handling of immutable references
+- Modified library linking process
+
+[Learn more about storage differences](https://docs.zksync.io/zksync-protocol/differences/libraries)
+
+## Contract Lifecycle
+
+### Deployment
+
+- Different bytecode format for native zkVM contracts
+- Unique contract creation flow
+- Modified CREATE/CREATE2 behavior for zkVM contracts
 
 [Learn more about deployment differences](https://docs.zksync.io/zksync-protocol/differences/contract-deployment)
-q
+
+### Code Execution
+
+- Different handling of contract calls
+- Modified return data handling
+- Unique error propagation model
+
+[Learn more about execution differences](https://docs.zksync.io/zksync-protocol/differences/evm-instructions)
