@@ -72,17 +72,12 @@
     },
     {
       "group": "Setup",
-      "pages": [
-        "build/early-partners",
-        "build/network-information",
-        "build/evm-compatibility/index",
-        "build/setting-up-paymasters"
-      ]
+      "pages": ["build/early-partners", "build/network-information", "build/setting-up-paymasters"]
     },
     {
       "group": "EVM Compatibility",
       "pages": [
-        "build/evm-compatibility/overview",
+        "build/evm-compatibility/index",
         "build/evm-compatibility/evm-interpreter",
         "build/evm-compatibility/differences"
       ]

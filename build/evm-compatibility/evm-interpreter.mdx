@@ -5,7 +5,7 @@ description: "How Sophon's EVM equivalence module works"
 
 # EVM Bytecode Interpreter
 
-The **EVM Bytecode Interpreter** is a key component of Sophon's **v27 upgrade**, enabling true **EVM equivalence** by allowing the direct execution of unmodified EVM bytecode on Sophon's zkEVM. With this upgrade, you can deploy your unmodified Solidity contracts in exactly the same way as on Ethereum, but with **higher gas fees** than native ZKsync VM bytecode.
+The **EVM Bytecode Interpreter** is a key component of Sophon's **v27 upgrade**, enabling true **EVM equivalence** by allowing the direct execution of unmodified EVM bytecode on Sophon's zkEVM.
 
 ## What is EVM Equivalence?
 
@@ -18,25 +18,15 @@ The **EVM Bytecode Interpreter** is a key component of Sophon's **v27 upgrade**,
 
 This is different from mere "EVM compatibility," which typically requires specialized tooling or compilation steps.
 
-## What is the EVM Bytecode Interpreter?
-
-The **EVM Bytecode Interpreter** is a specialized system component that allows Sophon to:
-
-- **Execute standard EVM bytecode** without modification or recompilation
-- **Bridge the gap** between Ethereum's EVM and Sophon's zkEVM
-- **Support standard Ethereum development tools** without specialized plugins or adaptations
-
-This represents a significant advancement beyond the previous approach of requiring zkEVM-specific compilation.
-
 ## How the EVM Bytecode Interpreter Works
 
 The **EVM Bytecode Interpreter** serves as a crucial system contract that enables the execution of standard EVM bytecode on Sophon's zkEVM, ensuring EVM equivalence. This involves:
 
 1. **Effortless Contract Deployment**: Deploy contracts just as you would on Ethereum, using transactions without a `to` field and embedding contract initialization code as calldata. This process guarantees identical address derivation and behavior as on Ethereum.
-2. **Comprehensive Tool Compatibility**: Utilize standard Ethereum development tools like Hardhat and Foundry without needing additional plugins or modifications, facilitating a seamless transition for developers accustomed to the Ethereum ecosystem.
-3. **Transparent Execution**: The interpreter operates behind the scenes, invoked automatically by the protocol, so developers can focus on their code without extra steps.
+2. **Comprehensive Tool Compatibility**: Utilize standard Ethereum development tools like Hardhat and Foundry without needing additional plugins or modifications.
+3. **Transparent Execution**: The interpreter operates behind the scenes, invoked automatically by the protocol.
 
-Contracts deployed in this manner are flagged as EVM bytecode and executed through the EVM interpreter. During execution, the contract’s EVM opcodes are translated into the ZKsync VM’s instruction set and executed by the ZKsync VM. However, this translation process results in gas fees that are **150-400% higher** than those for contracts deployed using native ZKsync VM bytecode. Therefore, this approach is recommended only for use cases that require specific EVM features not supported by the ZKsync VM (see EVM differences).
+Contracts deployed in this manner are flagged as EVM bytecode and executed through the EVM interpreter. During execution, the contract's EVM opcodes are translated into the ZKsync VM's instruction set and executed by the ZKsync VM.
 
 ![Contract Deployment](/images/evm-equivalence/contract-deployment.png)
 
@@ -58,54 +48,49 @@ You can check if a contract was deployed with EVM bytecode by calling the `isAcc
 - **Familiar Debugging**: Use standard Ethereum debugging tools with deployed contracts
 - **Cross-VM Interoperability**: EVM and zkEVM contracts can interact (with some limitations)
 - **Simplified Migration**: Move existing Ethereum contracts to Sophon without code changes
-- **Familiar Tooling**: Use existing Ethereum tools and workflows without adaptation
-- **Consistent Testing**: Test contracts in the same way as on Ethereum
 - **Code Reuse**: Leverage existing libraries and patterns without modification
 
-## Technical Details
+## Limitations
 
 ### EVM Version Support
 
-The EVM bytecode interpreter targets the **Cancun** EVM version.
+The EVM Bytecode Interpreter targets the **Cancun** EVM version. This means it includes Cancun's opcodes and features, but may not include future Ethereum upgrades immediately.
 
-### Gas Model
+### Unsupported Opcodes
 
-The **gas model** in Sophon differs slightly from Ethereum:
+The following opcodes are not supported due to underlying limitations of ZKsync VM:
 
-- The EVM interpreter uses a **fixed ratio (5:1)** to derive EVM gas from native zkEVM gas (ergs)
-- `block.gaslimit` returns `1125899906842624n` directly from underlying zkEVM, which differs from the value returned by EVM chains (`36000000n`)
-- Different gas costs for certain operations due to the ZK-proof generation overhead
-- **150-400% higher gas fees** than those for contracts deployed using native ZKsync VM bytecode
+- `CALLCODE`
+- `SELFDESTRUCT`
+- `BLOBHASH`
+- `BLOBBASEFEE`
 
-### Contract Interaction Limitations
+### Gas Handling
 
-There are some limitations when EVM and zkEVM contracts interact:
+- **Block Gas Limit**: `block.gaslimit` returns `1125899906842624n`, which differs from EVM chains (`36000000n`)
+- **Gas Conversion**: A fixed ratio (5:1) is used to convert between EVM gas and native zkEVM gas (ergs)
+- **Higher Costs**: EVM contracts have 150-400% higher gas fees than native zkEVM contracts
+- **Out-of-Gas Behavior**: If an EVM contract runs out of native zkEVM gas, it triggers a revert of the entire EVM call stack
 
-- **`delegatecall` is not supported between EVM and zkEVM contracts** due to execution model differences
-- Out-of-gas handling differs depending on whether it's EVM gas or native zkEVM gas
+### Contract Interactions
 
-## Development Considerations
+- **EVM-zkEVM Interaction**: Standard calls between EVM and zkEVM contracts work, but `delegatecall` operations are not supported
 
-When developing for Sophon using the **EVM Bytecode Interpreter**:
+### Tools and Verification
 
-1. **Verification**: Contract verification must be done using Sophon's native block explorer API
-2. **L1-L2 Transactions**: EVM contracts can't be deployed directly via L1-L2 transactions, but you can use factory contracts
-3. **Foundry Scripts**: When using Foundry scripts, use the `--skip-simulation` flag due to differences in gas models
+- **Foundry Scripts**: Require the `--skip-simulation` flag due to gas model differences
+- **Contract Verification**: Must use Sophon's native block explorer API
 
 ## The Road to Full EVM Equivalence
 
 While the **v27 upgrade** with the **EVM Bytecode Interpreter** brings Sophon much closer to true EVM equivalence, complete equivalence is expected with the next proving system. The current implementation covers most developers' needs but does have some limitations due to the underlying zkEVM architecture.
 
-## FAQ About EVM Equivalence
+## zkEVM: The Foundation
 
-**Q: Can I use standard Hardhat and Foundry with Sophon?**  
-A: Yes, with the **v27 upgrade**, you can use standard Hardhat without plugins. For Foundry scripts, use the `--skip-simulation` flag.
+Sophon's zkEVM is a specialized virtual machine designed to execute smart contracts while generating zero-knowledge proofs of execution. It:
 
-**Q: Is contract verification different for EVM contracts on Sophon?**  
-A: Yes, contract verification must be done using Sophon's native block explorer API.
+- Maintains compatibility with most Ethereum smart contracts
+- Optimizes operations for efficient ZK-proof generation
+- Extends functionality with features like paymasters and account abstraction
 
-**Q: Can EVM contracts interact with zkEVM contracts?**  
-A: Yes, they can interact via standard calls, though `delegatecall` is not supported between them.
-
-**Q: Is the gas model identical to Ethereum?**  
-A: Not completely. While the **EVM Bytecode Interpreter** handles gas conversion, there are still some differences in gas costs for certain operations due to the ZK-proof overhead.
+The EVM Bytecode Interpreter builds on this foundation to provide true EVM equivalence while maintaining the benefits of the underlying zkEVM architecture.
