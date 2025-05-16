@@ -1,0 +1,65 @@
+---
+title: "Overview"
+description: "Understanding how Sophon's EVM implementation compares to Ethereum"
+---
+
+# EVM Compatibility
+
+While Sophon is EVM compatible and you can use familiar development tools from the Ethereum ecosystem, it provides two ways to deploy contracts:
+
+- Native zkEVM contracts (optimized for performance and lower gas costs)
+- Standard EVM contracts (through the EVM Bytecode Interpreter)
+
+## Key Benefits
+
+- **EVM Compatibility**: Most Ethereum smart contracts will work on Sophon
+- **Familiar Development Tools**: Use the same development tools like Hardhat and Foundry
+- **Extended Functionality**: Access to additional features like Paymasters
+- **Dual Execution Models**: Support for both zkEVM native contracts and EVM bytecode contracts
+
+## Recommended Best Practices
+
+When developing for Sophon, consider the following:
+
+1. **Test thoroughly on Sophon testnet** before deploying to mainnet
+2. Be aware of **gas model differences** between Ethereum and Sophon
+3. Understand **limitations in contract interactions** between EVM and zkEVM contracts
+4. Take advantage of **zkEVM-specific features** like paymasters and account abstraction
+
+## Core Differences and Implementations
+
+Learn about the zkEVM and how it differs from standard Ethereum EVM.
+
+<CardGroup cols={2}>
+  <Card title="EVM Interpreter" icon="microchip" href="/build/evm-compatibility/evm-interpreter">
+    How Sophon's EVM Bytecode Interpreter works and enables EVM equivalence.
+  </Card>
+
+  <Card title="Detailed ZkVM vs EVM Differences" icon="binary" href="/build/evm-compatibility/differences">
+    Specific differences between Sophon's zkVM and Ethereum EVM, including opcode and precompile differences.
+  </Card>
+</CardGroup>
+
+## Getting Started
+
+If you're unfamiliar with developing or deploying on the ZK Stack, check out:
+
+- [Start Building](/build/start-building)
+- [Network Information](/build/network-information)
+- [Mainnet Information](/build/mainnet)
+- [Setting Up Paymasters](/build/setting-up-paymasters)
+- [Your First Contract](https://docs.zksync.io/build/start-coding/quick-start/deploy-your-first-contract)
+
+## Additional Resources
+
+Below are some important resources to help you understand Sophon's EVM compatibility:
+
+- [Hello zkSync](https://docs.zksync.io/build/zksync-101/hello-zksync)
+- [Getting Started: Hardhat](https://docs.zksync.io/zksync-era/tooling/hardhat/guides/getting-started)
+- [Paymaster](https://docs.zksync.io/zksync-era/unique-features/paymaster)
+- [EVM Bytecode Interpreter](https://docs.zksync.io/zksync-era/unique-features/evm-interpreter/evm-interpreter)
+- [zkEVM ↔ EVM Contract Interactions](https://docs.zksync.io/zksync-protocol/evm-interpreter/era-evm-interactions)
+
+- [EVM Bytecode Interpreter Documentation](https://docs.zksync.io/zksync-era/unique-features/evm-interpreter/evm-interpreter)
+- [zkEVM ↔ EVM Contract Interactions](https://docs.zksync.io/zksync-protocol/evm-interpreter/era-evm-interactions)
+- [EVM Bytecode Interpreter FAQ](https://docs.zksync.io/zksync-era/unique-features/evm-interpreter/faq)
