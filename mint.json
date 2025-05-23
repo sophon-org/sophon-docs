@@ -7,14 +7,14 @@
   },
   "metadata": {
     "og:title": "Sophon Documentation",
-    "og:description": "Comprehensive guide and documentation for Sophon",  
+    "og:description": "Comprehensive guide and documentation for Sophon",
     "og:image": "https://docs.sophon.xyz/logo/og.png",
     "og:image:width": "1200",
     "og:image:height": "675",
     "og:image:type": "image/png",
     "og:image:alt": "Sophon Docs",
 
-    "keywords": "Sophon, Blockchain, Tokenomics, Nodes, Smart Contracts, Farming"
+    "keywords": "Sophon, Blockchain, Tokenomics, Nodes, Smart Contracts, Farming, Global Account, Smart Account"
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -48,6 +48,10 @@
     {
       "name": "Nodes",
       "url": "nodes"
+    },
+    {
+      "name": "Global Account",
+      "url": "global-account"
     }
   ],
   "navigation": [
@@ -86,6 +90,19 @@
         "build/evm-compatibility/index",
         "build/evm-compatibility/evm-interpreter",
         "build/evm-compatibility/differences"
+      ]
+    },
+    {
+      "group": "Global Account",
+      "pages": ["global-account/intro", "global-account/architecture", "global-account/examples"]
+    },
+    {
+      "group": "Integrate the Sophon Global Account",
+      "pages": [
+        "global-account/examples/rainbowkit",
+        "global-account/examples/appkit",
+        "global-account/examples/connectkit",
+        "global-account/examples/thirdweb"
       ]
     },
     {
