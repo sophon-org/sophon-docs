@@ -5,10 +5,7 @@ title: "Viem/Wagmi"
 The popular Viem \+ Wagmi frontend setup can be used with Sophon. This section will provide a working PoC repository, relevant code snippets, and some cool gotchas that will help you working with this stack.
 
 <Check>
-  Check out our simple PoC
-  [repository](https://github.com/sophon-org/hello-paymaster-wagmi-viem) that
-  demonstrates how to use **Viem** and **Wagmi** together with the **Paymaster**
-  .
+  Check out our simple PoC [repository](https://github.com/sophon-org/hello-paymaster-wagmi-viem) that demonstrates how to use **Viem** and **Wagmi** together with the **Paymaster** .
 </Check>
 
 # Using `Viem` with a Paymaster
@@ -121,7 +118,9 @@ export default async function sendTransaction(
 getGeneralPaymasterInput({ innerInput: "0x" }).
 ```
 
-<Warning>Manually hardcoding `paymasterInput = "0x"` will not work.</Warning>
+<Warning>
+  Manually hardcoding `paymasterInput = "0x"` will not work.
+</Warning>
 
 ### **2. Use ZKsync wallet extensions**
 
@@ -129,9 +128,9 @@ Extend your wallet client with `eip712WalletActions()` to support `sendTransacti
 
 ```typescript
 const walletClient = createWalletClient({
-  chain: sophonTestnet, // or `sophonMainnet`
-  transport: custom(window.ethereum!),
-}).extend(eip712WalletActions());
+      chain: sophonTestnet, // or `sophonMainnet`
+      transport: custom(window.ethereum!),
+    }).extend(eip712WalletActions());
 ```
 
 ### **3. Pre-calculating the nonce is possible, but optional**
@@ -141,19 +140,19 @@ Based on your personal use-cases, you can pre-calculate nonces, but this is also
 ```typescript
 const publicClient = getPublicClient(wagmiConfig, { chainId });
 
-const nextNonce = await publicClient.getTransactionCount({
-  address: account.address,
-});
+ const nextNonce = await publicClient.getTransactionCount({
+      address: account.address,
+    });
 
 const hash = await walletClient.sendTransaction({
-  account: account.address,
-  to: address,
-  data: txData,
-  value,
-  gas: estimateGas,
-  chain: sophonTestnet, // chain client that is connected
-  paymaster,
-  paymasterInput,
-  nonce: nextNonce,
-});
+      account: account.address,
+      to: address,
+      data: txData,
+      value,
+      gas: estimateGas,
+      chain: sophonTestnet, // chain client that is connected
+      paymaster,
+      paymasterInput,
+      nonce: nextNonce,
+    });
 ```
