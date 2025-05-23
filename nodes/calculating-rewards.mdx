@@ -134,3 +134,23 @@ A total of **5%** of the **SOPH supply** is allocated to **active delegated memb
 ## Operator Commission
 
 > **Node Operators** (whether **Light** or **Full**) can set a **commission rate**. When they do, a **portion** of the **weekly rewards** is allocated to the **operator**, while the remainder is distributed **directly** to **active membership owners**.
+
+# Reward Distribution
+
+Rewards are calculated and distributed on a weekly basis, **every Wednesday at 00:00 UTC**. After calculation, our systems begin creating the reward stream for each destination. Bear in mind this process can take some time – it’s normal for rewards to appear later in the day on Wednesday.
+Each reward stream has the following properties:
+- A specific amount of SOPH
+- A start date (that Wednesday at 00:00 UTC)
+- A **90-day cliff** – the stream does not begin vesting during this period
+- A **7-day vesting period** – meaning the rewards become fully available over the course of 7 days. For example, if you claim halfway through the vesting period (after 3.5 days), you’ll have access to half of your rewards. You don’t lose the rest – you’ll just need to wait the remaining 3.5 days for the full amount to vest. You can claim a stream as many times as you like until it is fully vested and claimed.
+
+<Info>
+You can view all your reward streams at https://guardian.sophon.xyz/dashboard/claim
+</Info>
+
+## Pre-TGE Rewards
+All rewards accrued by Guardians and Operators before the SOPH TGE (i.e., from January 1st to May 27th) are made available on the TGE date according to the following properties:
+- A specific amount of SOPH (the total rewards accrued during that period)
+- A start date of May 28th at 00:00 UTC
+- A **90-day lockup**
+- A **1-second vesting period** – meaning once the 90-day cliff ends, the entire stream becomes immediately claimable.
