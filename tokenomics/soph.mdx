@@ -1,28 +1,103 @@
 ---
-title: '$SOPH'
-description: ''
+title: "SOPH"
+description: ""
 ---
 
-<Warning>
-**Important**
-- The **SOPH token** will be the main utility token of the Sophon Network.
-- It will be used to pay **gas fees** on the network and reward node operators.
-- A total supply of $SOPH tokens is **10 billion** (10,000,000,000).
-</Warning>
+## **Token Details**
 
-<img className="block dark:hidden" src="/images/tokenomics/soph-tokenomics-light.webp" />
-<img className="hidden dark:block" src="/images/tokenomics/soph-tokenomics-dark.webp" />
+- Ticker: **SOPH**
+- Token standard: **ERC20**
+- Total supply: **10 billion** (10,000,000,000)
+- Allocation to the Sophon community: **57%**
+- Sophon Contract Address (Sophon): **[0x000000000000000000000000000000000000800A](https://sophscan.xyz/token/0x000000000000000000000000000000000000800A)** 
+- Sophon Contract Address (Ethereum): **[0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0](https://etherscan.io/token/0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0)**
 
-This is what the emission schedule looks like:
+There are two reasons SOPH is native to Ethereum. The first is that the ZK Stack only support chains with a base token that exists on L1. The second is that we are an L2, relying on L1 security, and it is therefore important for our community to have L1 backed security for their SOPH.
 
-- **Node Rewards** - 20% of supply emitted over 36 months
-- **Sophon Foundation** - 25% of the supply is subject to a 12-month cliff and 36-month vesting
-- **Investors** - 20% of the supply subject to a 12-month cliff and 24-month vesting
-- **Advisors** - 5% of the supply with a 12-month cliff and 36-month vesting
-- **Ecosystem Reserve** - 30% of the supply, which will be used for grants, incentives, ecosystem initiatives, and so on
+## Token Allocations
 
-<Note>
-**Note**
-- 10% of the $SOPH supply will be allocated to farmers.
-- These are not the absolute final tokenomics and are subject to change.
-</Note>
+Sophon’s native token, SOPH, has a fixed supply of 10 billion tokens. These are allocated across seven core buckets, with 57% of rewards gradually going to the community.
+
+<img src="/images/tokenomics/token_allocation.webp" />
+
+| **Category**                         | **Tokens**    | **Allocation** | **Vesting**                                                                                                                                                                                                                                      |
+| ------------------------------------ | ------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Node Operators                       | 2,000,000,000 | 20%            | Rewards earned between 1 January and TGE will be subject to a 3-month cliff from the date of TGE. Rewards earned during each week after TGE will be subject to a 3-month cliff from the beginning of that week, followed by a 7-day linear vest. |
+| Seed Investors                       | 1,800,000,000 | 18%            | 12 month cliff, 2 year linear vest.                                                                                                                                                                                                              |
+| Core Contributors                    | 2,500,000,000 | 25%            | 12 month cliff, 3 year linear vest.                                                                                                                                                                                                              |
+| Ecosystem Reserve                    | 2,600,000,000 | 25%            | 42% unlocked, remaining 58% subject to a linear vest over 5 years.                                                                                                                                                                               |
+| Post Mainnet Liquidity Mining        | 200,000,000   | 2%             | 6 month cliff, 6 month linear vest.                                                                                                                                                                                                              |
+| Pre-Mainnet Liquidity Mining Airdrop | 600,000,000   | 6%             | 100% unlocked.                                                                                                                                                                                                                                   |
+| Bonus Airdrop                        | 300,000,000   | 3%             | 100% unlocked.                                                                                                                                                                                                                                   |
+
+## Granular Breakdown
+
+**Node Operators**
+
+_2,000,000,000 SOPH (20% of total supply)_
+
+When Sophon first started its journey, it conducted a node sale to provide early backers with the ability to support its technical decentralisation. Node holders are currently able to act as Light Nodes, which leverage Avail’s light client technology to perform data availability sampling - a critical step that ensures all data remains accessible while enabling chain state reconstruction. Once decentralised sequencing is live on ZKsync, node holders will also be able to operate Full Nodes – a complete node that stores a full copy of the blockchain and can serve as either a sequencer or a validator.
+
+Node rewards are a mechanism for rewarding early backers of Sophon, whilst providing them with a stable stream of tokens to facilitate the technical operations of the Light Node or Full Node they operate. Rewards started on January 1st, 2025 but will be subject to a 3 month cliff at TGE to ensure extended participation in the technical operations of the chain. As a reward for the wait, node holders have been included in the airdrop – more details below.
+
+**Seed Investors**
+
+_1,800,000,000 SOPH (18% of total supply)_
+
+Sophon would not be here without the valuable set of investors that have backed us from the start and have helped facilitate our growth. These investors are receiving a comparably lower allocation compared to many other networks and will be subject to a 3 year vesting period to ensure their continued support.
+
+**Core Contributors**
+
+_2,500,000,000 SOPH (25% of total supply)_
+
+The Sophon team has, and will continue to, work tirelessly to build and grow Sophon into a ubiquitous, consumer-focussed technology. A portion of these tokens have been allocated to the team for their hard work so far, as well as to act as a continuous motivator to take Sophon to the next level. The remainder has been reserved to ensure we are able to attract the best talent in the space. All team allocations are subject to a 4 year vesting period.
+
+**Ecosystem Reserves**
+
+_2,600,000,000 SOPH (26% of total supply)_
+
+Ecosystem Reserves are to grow the ecosystem! Its use cases will be broad — including helping to attract key partners, bootstrapping CEX liquidity, future incentive campaigns, and much more. These funds are specifically to be used to grow the Sophon ecosystem, whether it be users, applications or functionality. For instance, Sophon will be providing 1% of the token supply at TGE to Binance to support Binance Alpha and perpetuals trading for SOPH.
+
+While governance is not a utility at TGE (we want governance to be more than a glorified polling mechanism and that means launching it when there is sufficient functionality to govern), it will eventually be controlled by governance once it is implemented.
+
+**Post-Mainnet Liquidity Mining**
+
+_200,000,000 SOPH (2% of total supply)_
+
+A continuation of the L1 Farm, the post-mainnet liquidity mining campaign (L2 Farm) has retained liquidity on Sophon whilst we continue to grow. Now, with a strong set of builders and applications on Sophon, and with many more coming, the L2 Farm will end shortly after TGE. These tokens will be subject to a 6 month vesting schedule once claims are made available in the coming months.
+
+The total amount has been reduced from 4% to 2%. This is due to the programme’s duration being reduced as it was originally planned to go on until December 2025. Once governance is implemented, future farms may be proposed, with the funds coming from Ecosystem Reserves.
+
+### Airdrop Breakdown
+
+**Pre-Mainnet Liquidity Mining Airdrop**
+
+_600,000,000 SOPH (6% of total supply)_
+
+To kickstart liquidity on Sophon, a pre-mainnet liquidity mining campaign (L1 Farm) was ongoing up until mainnet launch on the 18th December, 2024. This bootstrapped substantial amounts of liquidity that incentivised top applications to build on Sophon, without the worry of being in an ecosystem with thin liquidity. Without it we would not have the brilliant ecosystem of applications we have now, or the many more exciting projects on their way. All rewards from this phase will be entirely unlocked at TGE and distributed as a part of the airdrop.
+
+**Bonus Airdrop**
+
+_300,000,000 SOPH (3% of total supply)_
+
+On top of the 6% of tokens being distributed to L1 Farmers at TGE, Sophon is also distributing 3% of the supply as an airdrop. It has been carefully thought through to attract new, value-aligned users to the ecosystem, whilst rewarding early adopters.
+
+Outside of the L1 Farm rewards, the airdrop will be split amongst the following categories: Sophon’s early users and community, Node holders, ZKsync power users and select NFT communities.
+
+Node holders were the first community members to back Sophon. Without their support we would not be where we are today. Despite node holders already receiving an allocation, we want to provide an additional bonus for their patience and continued support as we look to build the future of consumer technology.
+
+The airdrop to early adopters and ZKsync power users is a token of gratitude for using Sophon after its launch on mainnet or for being a key role within the broader ZKsync ecosystem that Sophon falls under.
+
+NFTs are one of the fundamental pillars of consumer culture within crypto. As a consumer focussed chain we think it is important to provide a reward to holders of key NFT projects for their role in creating and sustaining crypto culture, as well as to incentivise these users to come and explore Sophon. Holders of specified NFT collections that accepted the role of Friends of Sophon will receive a larger portion of rewards.
+
+Lastly, we have our social community across Discord and Telegram. Your support has been noticed and our most active community members across these channels will receive an airdrop.
+
+For some it will be a significant airdrop. For those less engaged in the ecosystem it will be gas money and an invite to fully explore what Sophon has to offer.
+
+### **Emissions Schedule**
+
+**Monthly**
+<img src="/images/tokenomics/soph_supply_monthly.webp" />
+
+**Annually**
+<img src="/images/tokenomics/soph_supply_annually.webp" />

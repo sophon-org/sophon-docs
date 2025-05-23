@@ -8,9 +8,12 @@
   "metadata": {
     "og:title": "Sophon Documentation",
     "og:description": "Comprehensive guide and documentation for Sophon",
-    "og:image": "https://docs.sophon.xyz/logo/og.png",
+    "og:image": "/images/og.png",
+    "twitter:image": "/images/og.png",
     "og:image:width": "1200",
     "og:image:height": "675",
+    "twitter:image:width": "1200",
+    "twitter:image:height": "675",
     "og:image:type": "image/png",
     "og:image:alt": "Sophon Docs",
 
@@ -70,7 +73,7 @@
     },
     {
       "group": "Tokenomics",
-      "pages": ["tokenomics/soph"]
+      "pages": ["tokenomics/soph", "tokenomics/soph-utility"]
     },
     {
       "group": "Links",

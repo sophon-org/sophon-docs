@@ -10,7 +10,7 @@ The popular Viem \+ Wagmi frontend setup can be used with Sophon. This section w
 
 # Using `Viem` with a Paymaster
 
-When building dApps on **Sophon**, it's important to correctly integrate our **Paymaster** to sponsor transactions, especially before **$SOPH** is distributed.
+When building dApps on **Sophon**, it's important to correctly integrate our **Paymaster** to sponsor transactions, especially before **SOPH** is distributed.
 
 This guide provides a working pattern, using `Viem` and `Wagmi`, for sending contract calls with Paymaster support on **Sophon**.
 
@@ -95,7 +95,7 @@ export default async function sendTransaction(
     return hash;
   }
 
-  // Fallback for non-zkSync chains
+  // Fallback for non-ZKsync chains
   return await writeContract(wagmiConfig, {
     address,
     chainId,
@@ -122,7 +122,7 @@ getGeneralPaymasterInput({ innerInput: "0x" }).
   Manually hardcoding `paymasterInput = "0x"` will not work.
 </Warning>
 
-### **2. Use zkSync wallet extensions**
+### **2. Use ZKsync wallet extensions**
 
 Extend your wallet client with `eip712WalletActions()` to support `sendTransaction` with Paymasters.
 

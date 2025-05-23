@@ -1,0 +1,44 @@
+---
+title: "SOPH Utility"
+---
+
+## **What is SOPH?**
+
+SOPH is the main utility token for the Sophon Network, playing an essential role in its current and future operations.
+
+We expect the utility to evolve over time as our network and our product offering grows,  incorporating new utilities as we do. There is plenty planned on the product front so stay tuned for the evolution of SOPH.
+
+At launch SOPH will serve two purposes. It will be used to pay gas fees on the network and it will be used to facilitate the decentralisation of Sophon’s sequencer using a staking mechanism.
+
+## **Gas**
+
+All transactions on the Sophon Network will be paid for in gas.
+
+This does not necessarily require all users to hold SOPH due to ZKsync’s native paymaster technology.  Paymasters are a type of specialised account designed to subsidize or customize transaction fees for other accounts, providing a seamless user experience and greater flexibility. That means, no more being forced to bridge whenever you run out of the native gas token and depending on what you’re doing, maybe no gas to be paid at all. Check out our [Paymaster page](/architecture/paymasters) for more detail.
+
+<img src="/images/tokenomics/soph_gas.webp" />
+
+With all gas being paid in SOPH, either by the network, the user or the dapp, the token is redistributed to those operating the chain, which brings us onto the next utility.
+
+## **Staking**
+
+Staking on Sophon supports the cryptoeconomic security of the network.
+
+As the ZKsync network launches its decentralised sequencing in the coming months, it will enable new entities to begin operating sequencers. In Sophon’s case sequencer operators will be restricted to Full Nodes – operators that have received at least 1500 delegated Guardian NFTs. This was a core tenet of our node sale in 2024, which promised the right for node holders to operate the foundational infrastructure of the Sophon Network. Prior to the decentralisation of the sequencer, the Sophon Foundation will operate the only Full Node, as is currently the case. Staking will be available directly after TGE to bootstrap staking participation and to provide ample time for the Sophon team to finetune parameters and patch any issues.
+
+Once decentralised sequencing is live, Full Nodes will be required to put up a minimum stake of 100,000 SOPH to become active. In return for performing sequencer capabilities, Full Nodes will receive a portion of gas fees. The remainder will be distributed to SOPH stakers and delegated stakers. Delegated stakers can be any holder of SOPH tokens – simply go to Sophon Home’s Earn section and either autodelegate or choose the Full Node you wish to delegate to. Staking rewards will then be distributed based on relative stake.
+
+Delegations to a particular Full Node can be changed at any time. Rewards are accrued after batches are sealed and distributed to stakers immediately. Staking rewards compound, meaning that they will automatically be added to your existing staked assets and begin accruing rewards.
+
+The staking reward rate formula draws inspiration from Ethereum, utilising an inverse square root reward function. This is done for two reasons. Firstly, to stabilise yields based on the staking ratio (i.e., the percentage of circulating tokens staked). Secondly, it leaves a portion of tokens “unutilised” when the staking ratio is below 100%. These unutilised tokens are deposited in a separate contract, which will be either burned or distributed to users periodically.
+
+Gas fees, potentially supplemented with ecosystem reserves to boost adoption, will make up all staking rewards. Given that a portion of unutilised rewards will be burned, and that it is not possible to mint new SOPH, that makes the SOPH token deflationary.
+
+<img src="/images/tokenomics/soph_staking.webp" />
+
+Token transfers from a spot account to staking are instant. However, withdrawing stake will be subject to a 5 day cooldown period. Tokens not claimed within the withdrawal period will automatically revert to being staked to ensure that users are able to continue benefitting from staking rewards. The cooldown period for removing stake is common practice on proof of stake chains, allowing for penalties to be applied retroactively where applicable.
+
+Further details on Full Node proof-of-stake decentralisation will be released as the ZKsync decentralised sequencer roadmap is publicly released.
+<Note>
+  **Note** Further details on Full Node proof-of-stake decentralisation will be released as the ZKsync decentralised sequencer roadmap is publicly released.
+</Note>
