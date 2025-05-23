@@ -66,7 +66,7 @@
     },
     {
       "group": "Tokenomics",
-      "pages": ["tokenomics/soph"]
+      "pages": ["tokenomics/soph", "tokenomics/soph-utility"]
     },
     {
       "group": "Links",

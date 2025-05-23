@@ -1,15 +1,17 @@
 ---
-title: 'Light Nodes'
-description: ''
+title: "Light Nodes"
+description: ""
 ---
 
 <Warning>
 **Attention Node Operators**
 
 **Important info regarding your Node light client:**
+
 - Following the passage of [Avail Improvement Proposal 6](https://forum.availproject.org/t/aip-6-increase-block-size-to-4mb-maxappdatalength-to-1-mb/1648) **(AIP 6)**, all Node operators must upgrade their light node client to the latest version before **February 25th** to avoid missing out on any rewards.
 
 **Operators have until February 25th to upgrade to the latest version.**
+
 - Light clients that are not running the latest version may see issues and crashes.
 - During these days, any light client failures will not impact uptime and rewards.
 - **After Feb 25th**, we will enforce use of the latest version. Any crashes and issues that occur at that point will negatively affect uptime and rewards.
@@ -17,20 +19,24 @@ description: ''
 You can find the latest Docker image [here.](https://hub.docker.com/repository/docker/sophonhub/sophon-light-node/general)
 
 **Node operators, please make sure you upgrade your light client in a timely manner!**
+
 </Warning>
 
 <Tip>
-If you are a **Guardian** who has delegated your NFT to an existing Node: **you do not need to do anything.** However, be aware that if the Node you delegated to has not upgraded to the latest version by **February 25th**, it may affect your rewards.
+  If you are a **Guardian** who has delegated your NFT to an existing Node:
+  **you do not need to do anything.** However, be aware that if the Node you
+  delegated to has not upgraded to the latest version by **February 25th**, it
+  may affect your rewards.
 </Tip>
 
-
 <Warning>
-**Important**
-- Anyone can set up and run a **Light Node**.
-- Node Operators set a **% commission** (usually 1%-3%).
-- **Guardian Membership NFTs** allow members to earn their [full rewards allocation](/nodes/calculating-rewards) (20% of total $SOPH supply).
-- Light Node Operators **without a Guardian NFT** only earn a % commission from the rewards of members who delegate their NFTs to them.
-- Light Node Operators **with a delegated Guardian NFT** can earn **$SOPH rewards** as well as a % commission from their delegators’ rewards.
+  **Important** - Anyone can set up and run a **Light Node**. - Node Operators
+  set a **% commission** (usually 1%-3%). - **Guardian Membership NFTs** allow
+  members to earn their [full rewards allocation](/nodes/calculating-rewards)
+  (20% of total SOPH supply). - Light Node Operators **without a Guardian NFT**
+  only earn a % commission from the rewards of members who delegate their NFTs
+  to them. - Light Node Operators **with a delegated Guardian NFT** can earn
+  **SOPH rewards** as well as a % commission from their delegators’ rewards.
 </Warning>
 
 **Sophon Light Nodes** present the most cost-effective way to participate in the Sophon network. Unlike traditional blockchain nodes that require specialized hardware and constant processing of hundreds of gigabytes of data, **Light Nodes** are designed for efficiency and accessibility.
@@ -47,9 +53,15 @@ Light Nodes leverage [Avail's](https://www.availproject.org/) light client techn
 
 This sampling approach is like quality assurance inspection - verifying data availability without downloading entire blocks, making the process much more efficient than traditional node operation.
 
-<Note>For more info on **Avail's light clients**, see their [docs.](https://docs.availproject.org/docs/operate-a-node/run-a-light-client/Overview)</Note>
+<Note>
+  For more info on **Avail's light clients**, see their
+  [docs.](https://docs.availproject.org/docs/operate-a-node/run-a-light-client/Overview)
+</Note>
 
-<Tip>**Sophon Light Nodes** will continue to evolve in order to carry out more work within the Sophon network.</Tip>
+<Tip>
+  **Sophon Light Nodes** will continue to evolve in order to carry out more work
+  within the Sophon network.
+</Tip>
 
 ## Decentralization Through Accessibility
 
@@ -57,7 +69,7 @@ Sophon's **Light Nodes** allow users with average hardware and technical knowled
 
 Light Node operators earn rewards based on their individual contributions, and since they simply perform spot checks of the network, they can run their nodes for a fraction of the cost required for traditional nodes.
 
-***
+---
 
 # Deployment
 
@@ -70,7 +82,12 @@ Deploying a Light Node is one of the most accessible ways to help maintain the S
 | **RAM**                          | 512 MB      | 1 GB            |
 | **CPU (amd64/x86 architecture)** | 2 cores     | 4 cores         |
 
-<Note>You don’t need to deploy a node yourself if you don’t want to. You can use a **Node-as-a-Service (NaaS)** provider that supports Sophon Light Nodes, or leverage the [Guardians app](https://guardian.sophon.xyz) for a one-click setup with a provider.</Note>
+<Note>
+  You don’t need to deploy a node yourself if you don’t want to. You can use a
+  **Node-as-a-Service (NaaS)** provider that supports Sophon Light Nodes, or
+  leverage the [Guardians app](https://guardian.sophon.xyz) for a one-click
+  setup with a provider.
+</Note>
 
 ### Current Node as-a-Service (NaaS) Providers
 
@@ -80,7 +97,7 @@ Deploying a Light Node is one of the most accessible ways to help maintain the S
 
 <Tip>**Additional providers coming soon!**</Tip>
 
-***
+---
 
 ## Deployment Options
 
@@ -94,7 +111,7 @@ We provide a [Railway template](https://railway.app/template/wEhaxi?referralCode
 1. Visit the [Railway template](https://railway.app/template/wEhaxi?referralCode=qB-i6S).
 2. Follow the guided instructions within Railway to deploy your environment.
 3. Once complete, your **Light Node** will be up and running.
-</Warning>
+   </Warning>
 
 ### For Tech-Savvy Users
 
@@ -109,9 +126,9 @@ If you prefer to manage your own environment, use our Docker files to deploy you
 1. Download the **Docker files** from the links above.
 2. Follow the provided **instructions** to configure and run the light node.
 3. Customize **configurable variables** as needed for your setup.
-</Warning>
+   </Warning>
 
-***
+---
 
 ## **Monitoring Your Light Node**
 
@@ -120,4 +137,7 @@ Regardless of how you deploy your Light Node, you can use the [Guardians app](ht
 - Monitor the **status** of your node.
 - **Track rewards** and **performance**.
 
-<Note>This dashboard ensures you stay informed about your node’s operational state and contributions to the **Sophon Network**.</Note>
+<Note>
+  This dashboard ensures you stay informed about your node’s operational state
+  and contributions to the **Sophon Network**.
+</Note>
