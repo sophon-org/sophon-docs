@@ -59,26 +59,4 @@ Each login method associated with the Sophon account must, in turn, be associate
 
 These signers, along with passkeys or EOA signers, are then associated with a smart contract account deployed on the Sophon network.
 
-```mermaid
-graph TD
-    Email["Email"]
-    Google["Google"]
-    Passkey["Passkey"]
-    EOAs["Existing EOAs"]
-
-    Embedded["Embedded Signer"]
-    PKeySigner["Passkey Signer"]
-    EOASigner["EOA Signer"]
-
-    Wallet["Sophon Account"]
-
-    Email --> Embedded
-    Google --> Embedded
-    Passkey --> Embedded
-    Passkey --> PKeySigner
-    EOAs --> EOASigner
-
-    Embedded --> Wallet
-    PKeySigner --> Wallet
-    EOASigner --> Wallet
-```
+![Sophon Account Architecture](/images/sophon-account-architecture.png)
