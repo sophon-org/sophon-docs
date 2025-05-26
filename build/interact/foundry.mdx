@@ -95,6 +95,13 @@ SOPHON_CHAIN_ID="50104"
 
 ### Basic Deployment
 
+<Warning>
+  If you run into deployment or interaction issues, always check for possible short-circuit errors
+  caused by environment variables not being properly exposed to the foundry script. You can do so by
+  running `source .env` before running the script or check the variable in your env by running `echo
+  $VARIABLE_NAME`.
+</Warning>
+
 ```
 source .env && forge create ./src/Counter.sol:Counter \
 --rpc-url testnet --private-key $PRIVATE_KEY --zksync
