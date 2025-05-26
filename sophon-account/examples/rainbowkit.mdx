@@ -1,0 +1,105 @@
+---
+title: "RainbowKit"
+description: "Integrate the Sophon Account with RainbowKit"
+---
+
+## RainbowKit
+
+RainbowKit is a popular wallet connector for React that allows users to connect to a wallet and sign transactions.
+
+<CardGroup cols={1}>
+  <Card
+    title="Sophon Account + RainbowKit example repository"
+    icon="code"
+    href="https://github.com/sophon-org/sophon-account/tree/main/examples/eip-6963-rainbowkit-wagmi"
+  >
+    RainbowKit Example
+  </Card>
+</CardGroup>
+
+### Installation
+
+<CodeGroup>
+
+```npm yarn pnpm bun
+npm install @sophon-labs/account-eip6963 wagmi viem @rainbow-me/rainbowkit @tanstack/react-query
+```
+
+</CodeGroup>
+
+### Live demo
+
+<div
+  style={{
+    position: "relative",
+    width: "100%",
+    paddingBottom: "75%", // 4:3 aspect ratio, adjust as needed
+    height: 0,
+    overflow: "hidden",
+    borderRadius: "16px",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+  }}
+>
+  <iframe
+    src="https://sophon-account-eip-6963-rainbowkit-wagmi.vercel.app/"
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      border: "none",
+    }}
+    allowFullScreen
+  />
+</div>
+
+### Sample configuration
+
+<Warning>
+  Make sure to get your project ID from [Reown](https://cloud.reown.com) and set it in your
+  environment variables.
+</Warning>
+
+```typescript {6, 11-20}
+"use client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { WagmiProvider } from "wagmi";
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+
+import "@sophon-labs/account-eip6963/testnet";
+
+import { getDefaultConfig } from "@rainbow-me/rainbowkit";
+import { sophonTestnet } from "wagmi/chains";
+import { http } from "wagmi";
+
+const config = getDefaultConfig({
+  appName: "RainbowKit App",
+  // Get your project ID from https://cloud.reown.com
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID || "",
+  transports: {
+    [sophonTestnet.id]: http(),
+  },
+  chains: [sophonTestnet],
+  ssr: true,
+});
+
+export default function AppProviders({ children }: { children: React.ReactNode }) {
+  const client = new QueryClient();
+
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={client}>
+        <RainbowKitProvider
+          appInfo={{
+            appName: "RainbowKit Demo",
+            learnMoreUrl: "https://rainbow.me/",
+          }}
+        >
+          {children}
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
+}
+```

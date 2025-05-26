@@ -17,7 +17,7 @@
     "og:image:type": "image/png",
     "og:image:alt": "Sophon Docs",
 
-    "keywords": "Sophon, Blockchain, Tokenomics, Nodes, Smart Contracts, Farming"
+    "keywords": "Sophon, Blockchain, Tokenomics, Nodes, Smart Contracts, Farming, Account, Smart Account"
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -43,6 +43,10 @@
     {
       "name": "Build",
       "url": "build"
+    },
+    {
+      "name": "Account",
+      "url": "sophon-account"
     },
     {
       "name": "Discover",
@@ -121,6 +125,20 @@
         "build/partners/oracles",
         "build/partners/gaming",
         "build/partners/payments"
+      ]
+    },
+    {
+      "group": "Sophon Account",
+      "pages": ["sophon-account/intro", "sophon-account/architecture"]
+    },
+    {
+      "group": "Integration",
+      "pages": [
+        "sophon-account/examples/intro",
+        "sophon-account/examples/rainbowkit",
+        "sophon-account/examples/appkit",
+        "sophon-account/examples/connectkit",
+        "sophon-account/examples/thirdweb"
       ]
     },
     {
