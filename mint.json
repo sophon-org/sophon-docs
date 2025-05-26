@@ -45,16 +45,16 @@
       "url": "build"
     },
     {
+      "name": "Account",
+      "url": "sophon-account"
+    },
+    {
       "name": "Discover",
       "url": "discover"
     },
     {
       "name": "Nodes",
       "url": "nodes"
-    },
-    {
-      "name": "Account",
-      "url": "sophon-account"
     }
   ],
   "navigation": [
@@ -96,20 +96,6 @@
       ]
     },
     {
-      "group": "Sophon Account",
-      "pages": ["sophon-account/intro", "sophon-account/architecture"]
-    },
-    {
-      "group": "Integrating Sophon Account",
-      "pages": [
-        "sophon-account/examples/intro",
-        "sophon-account/examples/rainbowkit",
-        "sophon-account/examples/appkit",
-        "sophon-account/examples/connectkit",
-        "sophon-account/examples/thirdweb"
-      ]
-    },
-    {
       "group": "Deploy & Interact",
       "pages": [
         "build/interact/hardhat",
@@ -139,6 +125,20 @@
         "build/partners/oracles",
         "build/partners/gaming",
         "build/partners/payments"
+      ]
+    },
+    {
+      "group": "Sophon Account",
+      "pages": ["sophon-account/intro", "sophon-account/architecture"]
+    },
+    {
+      "group": "Integration",
+      "pages": [
+        "sophon-account/examples/intro",
+        "sophon-account/examples/rainbowkit",
+        "sophon-account/examples/appkit",
+        "sophon-account/examples/connectkit",
+        "sophon-account/examples/thirdweb"
       ]
     },
     {
