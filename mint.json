@@ -73,7 +73,11 @@
     },
     {
       "group": "Tokenomics",
-      "pages": ["tokenomics/soph", "tokenomics/soph-utility"]
+      "pages": [
+        "tokenomics/soph",
+        "tokenomics/soph-utility",
+        "tokenomics/staking-badges"
+      ]
     },
     {
       "group": "Links",
