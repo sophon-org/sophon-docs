@@ -116,7 +116,11 @@
     },
     {
       "group": "Tokens",
-      "pages": ["build/tokens/USDC", "build/tokens/layerzero_integration"]
+      "pages": [
+        "build/tokens/soph-bridging",
+        "build/tokens/USDC",
+        "build/tokens/layerzero_integration"
+      ]
     },
     {
       "group": "Partners",
