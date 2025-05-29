@@ -17,7 +17,7 @@
     "og:image:type": "image/png",
     "og:image:alt": "Sophon Docs",
 
-    "keywords": "Sophon, Blockchain, Tokenomics, Nodes, Smart Contracts, Farming"
+    "keywords": "Sophon, Blockchain, Tokenomics, Nodes, Smart Contracts, Farming, Account, Smart Account"
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -45,6 +45,10 @@
       "url": "build"
     },
     {
+      "name": "Account",
+      "url": "sophon-account"
+    },
+    {
       "name": "Discover",
       "url": "discover"
     },
@@ -69,7 +73,11 @@
     },
     {
       "group": "Tokenomics",
-      "pages": ["tokenomics/soph", "tokenomics/soph-utility"]
+      "pages": [
+        "tokenomics/soph",
+        "tokenomics/soph-utility",
+        "tokenomics/staking-badges"
+      ]
     },
     {
       "group": "Links",
@@ -108,7 +116,11 @@
     },
     {
       "group": "Tokens",
-      "pages": ["build/tokens/USDC", "build/tokens/layerzero_integration"]
+      "pages": [
+        "build/tokens/soph-bridging",
+        "build/tokens/USDC",
+        "build/tokens/layerzero_integration"
+      ]
     },
     {
       "group": "Partners",
@@ -124,6 +136,20 @@
       ]
     },
     {
+      "group": "Sophon Account",
+      "pages": ["sophon-account/intro", "sophon-account/architecture"]
+    },
+    {
+      "group": "Integration",
+      "pages": [
+        "sophon-account/examples/intro",
+        "sophon-account/examples/rainbowkit",
+        "sophon-account/examples/appkit",
+        "sophon-account/examples/connectkit",
+        "sophon-account/examples/thirdweb"
+      ]
+    },
+    {
       "group": "",
       "pages": ["discover/our-universe"]
     },
@@ -133,7 +159,7 @@
         "discover/home/welcome",
         "discover/home/getting-started/creating-account",
         "discover/home/getting-started/early-access",
-        "discover/home/getting-started/we3-wallet-activity-support",
+        "discover/home/getting-started/web3-wallet-activity-support",
         "discover/home/core-features/sophon-name-service",
         "discover/home/core-features/sophon-plus",
         "discover/home/core-features/daily-streak",
@@ -146,8 +172,9 @@
       "pages": [
         "discover/bridging/bridging-intro",
         "discover/bridging/sophon-bridge",
-        "discover/bridging/layerswap",
         "discover/bridging/orbiter",
+        "discover/bridging/stargate",
+        "discover/bridging/layerswap",
         "discover/bridging/withdrawal-delay",
         "discover/bridging/bridging-faqs"
       ]

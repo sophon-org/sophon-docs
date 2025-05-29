@@ -1,0 +1,63 @@
+---
+title: "Architecture"
+description: "Learn how the Sophon Account works"
+mode: "wide"
+---
+
+The Sophon Account utilizes native account abstraction, creating smart contract accounts for users, offering enhanced security and flexibility compared to traditional Externally Owned Accounts (EOAs).
+
+Key Features:
+
+- **Modularity**: The Sophon account is designed on top of (EIP-7579)[https://eips.ethereum.org/EIPS/eip-7579], which bring the concept of modular accounts, where you can install and remove modules providing extra functionality to it.
+- **EOA + Web 2 Signers**: Users can sign using regular EOAs. This makes easy for existing EOA users to be onboarded, but also enable to use use services that provide Web 2 logins (Google, Apple, Email, etc), running backend services with secured private keys as signers.
+- **Passkey Signers**: Incredible UX for users with enhanced security of passkeys.
+- **Session Keys**: Enable temporary permissions for specific actions or dApps.
+- **Guardians**: Users can define guardians, who have permissions to reset the signers of an account, in the case of losing access to a passkey for example. The users themselves could set a (cold) hardware wallet they own as a Guardian.
+
+## Live demos
+
+<CardGroup cols={2}>
+
+<Card
+  title="Try the Sophon Account with Reown AppKit"
+  icon="code"
+  href="https://sophon-account-eip-6963-appkit.vercel.app/"
+>
+  Try the Sophon Account with Reown AppKit
+</Card>
+
+<Card
+  title="Try the Sophon Account with RainbowKit"
+  icon="code"
+  href="https://sophon-account-eip-6963-rainbowkit-wagmi.vercel.app/"
+>
+  Try the Sophon Account with RainbowKit
+</Card>
+
+<Card
+  title="Try the Sophon Account with Thirdweb"
+  icon="code"
+  href="https://sophon-account-eip-6963-thirdweb.vercel.app/"
+>
+  Try the Sophon Account with Thirdweb
+</Card>
+
+<Card
+  title="Try the Sophon Account with ConnectKit"
+  icon="code"
+  href="https://sophon-account-eip-6963-connectkit.vercel.app/"
+>
+  Try the Sophon Account with ConnectKit
+</Card>
+
+</CardGroup>
+
+## Architecture
+
+To create a Sophon account, the user needs to provide a login method. This can be an email, a social login (Google, Apple, etc.), a Passkey, or an existing EOA.
+
+Each login method associated with the Sophon account must, in turn, be associated with an embedded wallet signer in order to sign transactions.
+
+These signers, along with passkeys or EOA signers, are then associated with a smart contract account deployed on the Sophon network.
+
+![Sophon Account Architecture](/images/sophon-account-architecture.png)

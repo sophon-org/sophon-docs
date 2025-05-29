@@ -1,16 +1,29 @@
 ---
 title: "SOPH"
 description: ""
+mode: "wide"
 ---
 
 ## **Token Details**
 
 - Ticker: **SOPH**
 - Token standard: **ERC20**
-- Total supply: **10 billion** (10,000,000,000)
+- Total supply: **10 billion** (10,000,000,000)
 - Allocation to the Sophon community: **57%**
-- Sophon Contract Address (Sophon): **[0x000000000000000000000000000000000000800A](https://sophscan.xyz/token/0x000000000000000000000000000000000000800A)** 
-- Sophon Contract Address (Ethereum): **[0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0](https://etherscan.io/token/0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0)**
+
+### Contract Addresses
+
+| Chain | Address |
+|-------|---------|
+| Ethereum | `0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0` ([link](https://etherscan.io/token/0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0)) |
+| Sophon | `0x000000000000000000000000000000000000800A` ([link](https://sophscan.xyz/token/0x000000000000000000000000000000000000800A)) |
+| Sophon (WSOPH) | `0x2b1A859dE6A55c553520D7780Bc5805712B128F9` ([link](https://sophscan.xyz/token/0x2b1A859dE6A55c553520D7780Bc5805712B128F9)) |
+| BSC | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([link](https://bscscan.com/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
+| Base | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([link](https://basescan.org/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
+| Arbitrum | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([link](https://arbiscan.io/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
+| Polygon | `0xEb971Fd26783f32694dbB392dD7289de23109148` ([link](https://polygonscan.com/token/0xEb971Fd26783f32694dbB392dD7289de23109148)) |
+
+For detailed technical information about bridging SOPH across different chains, see the [SOPH Bridging Guide](/build/tokens/soph-bridging).
 
 There are two reasons SOPH is native to Ethereum. The first is that the ZK Stack only support chains with a base token that exists on L1. The second is that we are an L2, relying on L1 security, and it is therefore important for our community to have L1 backed security for their SOPH.
 
@@ -25,7 +38,7 @@ Sophon’s native token, SOPH, has a fixed supply of 10 billion tokens. These ar
 | Node Operators                       | 2,000,000,000 | 20%            | Rewards earned between 1 January and TGE will be subject to a 3-month cliff from the date of TGE. Rewards earned during each week after TGE will be subject to a 3-month cliff from the beginning of that week, followed by a 7-day linear vest. |
 | Seed Investors                       | 1,800,000,000 | 18%            | 12 month cliff, 2 year linear vest.                                                                                                                                                                                                              |
 | Core Contributors                    | 2,500,000,000 | 25%            | 12 month cliff, 3 year linear vest.                                                                                                                                                                                                              |
-| Ecosystem Reserve                    | 2,600,000,000 | 25%            | 42% unlocked, remaining 58% subject to a linear vest over 5 years.                                                                                                                                                                               |
+| Ecosystem Reserve                    | 2,600,000,000 | 26%            | 42% unlocked, remaining 58% subject to a linear vest over 5 years.                                                                                                                                                                               |
 | Post Mainnet Liquidity Mining        | 200,000,000   | 2%             | 6 month cliff, 6 month linear vest.                                                                                                                                                                                                              |
 | Pre-Mainnet Liquidity Mining Airdrop | 600,000,000   | 6%             | 100% unlocked.                                                                                                                                                                                                                                   |
 | Bonus Airdrop                        | 300,000,000   | 3%             | 100% unlocked.                                                                                                                                                                                                                                   |
@@ -36,7 +49,7 @@ Sophon’s native token, SOPH, has a fixed supply of 10 billion tokens. These ar
 
 _2,000,000,000 SOPH (20% of total supply)_
 
-When Sophon first started its journey, it conducted a node sale to provide early backers with the ability to support its technical decentralisation. Node holders are currently able to act as Light Nodes, which leverage Avail’s light client technology to perform data availability sampling - a critical step that ensures all data remains accessible while enabling chain state reconstruction. Once decentralised sequencing is live on ZKsync, node holders will also be able to operate Full Nodes – a complete node that stores a full copy of the blockchain and can serve as either a sequencer or a validator.
+When Sophon first started its journey, it conducted a node sale to provide early backers with the ability to support its technical decentralisation. Node holders are currently able to act as Light Nodes, which leverage Avail's light client technology to perform data availability sampling - a critical step that ensures all data remains accessible while enabling chain state reconstruction. Once decentralised sequencing is live on ZKsync, node holders will also be able to operate Full Nodes – a complete node that stores a full copy of the blockchain and can serve as either a sequencer or a validator.
 
 Node rewards are a mechanism for rewarding early backers of Sophon, whilst providing them with a stable stream of tokens to facilitate the technical operations of the Light Node or Full Node they operate. Rewards started on January 1st, 2025 but will be subject to a 3 month cliff at TGE to ensure extended participation in the technical operations of the chain. As a reward for the wait, node holders have been included in the airdrop – more details below.
 
@@ -64,9 +77,9 @@ While governance is not a utility at TGE (we want governance to be more than a g
 
 _200,000,000 SOPH (2% of total supply)_
 
-A continuation of the L1 Farm, the post-mainnet liquidity mining campaign (L2 Farm) has retained liquidity on Sophon whilst we continue to grow. Now, with a strong set of builders and applications on Sophon, and with many more coming, the L2 Farm will end shortly after TGE. These tokens will be subject to a 6 month vesting schedule once claims are made available in the coming months.
+A continuation of the L1 Farm, the post-mainnet liquidity mining campaign (L2 Farm) has retained liquidity on Sophon whilst we continue to grow. Now, with a strong set of builders and applications on Sophon, and with many more coming, the L2 Farm will end shortly after TGE.  The SOPH tokens claimable by participants in the L2 Farm will be subject to a 6-month cliff at TGE, followed by a 6-month linear vest.
 
-The total amount has been reduced from 4% to 2%. This is due to the programme’s duration being reduced as it was originally planned to go on until December 2025. Once governance is implemented, future farms may be proposed, with the funds coming from Ecosystem Reserves.
+The total amount of SOPH allocated to the L2 Farm has been reduced from 4% to 2% of the total supply. This is due to the reduction in the program's duration, as it was originally intended to run until December 2025, but will now conclude in May 2025. Once governance is implemented, future farms may be proposed by SOPH holders, with the funds allocated to such farms coming from Ecosystem Reserves.
 
 ### Airdrop Breakdown
 
@@ -82,7 +95,7 @@ _300,000,000 SOPH (3% of total supply)_
 
 On top of the 6% of tokens being distributed to L1 Farmers at TGE, Sophon is also distributing 3% of the supply as an airdrop. It has been carefully thought through to attract new, value-aligned users to the ecosystem, whilst rewarding early adopters.
 
-Outside of the L1 Farm rewards, the airdrop will be split amongst the following categories: Sophon’s early users and community, Node holders, ZKsync power users and select NFT communities.
+Outside of the L1 Farm rewards, the airdrop will be split amongst the following categories: Sophon's early users and community, Node holders, ZKsync power users and select NFT communities.
 
 Node holders were the first community members to back Sophon. Without their support we would not be where we are today. Despite node holders already receiving an allocation, we want to provide an additional bonus for their patience and continued support as we look to build the future of consumer technology.
 
