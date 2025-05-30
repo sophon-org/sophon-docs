@@ -35,7 +35,7 @@ This design ensures that SOPH maintains its native status on Sophon while provid
 - **Sophon ↔ Other Chains**: LayerZero OFT bridging
 - **Ethereum ↔ Other Chain**: Currently not supported
 
-<Note>We want to avoid having multiple SOPH addresses on the same chain </Note>
+<Note>We want to avoid having multiple SOPH addresses on the same chain</Note>
 
 ## Key Features
 
@@ -43,3 +43,15 @@ This design ensures that SOPH maintains its native status on Sophon while provid
 - **Cross-Chain Compatibility**: Seamless bridging to major blockchain networks
 - **LayerZero Integration**: Leverages LayerZero's omnichain infrastructure for secure cross-chain transfers
 - **Wrapped Version**: WSOPH available for DeFi applications requiring ERC-20 compatibility
+
+## LayerZero OFT
+
+To support the bridging with LayerZero, the OFT adapter and OFT tokens linked [above](#contract-addresses) were created.
+- The adapters are owned by a Sophon Foundation Multisig on each chain, which only has permission to set delegates.
+- The adapters' main delegate is also the same Sophon Foundation Multisig, and the delegate has permission to add new routes for new chains.
+
+This structure doesn't give the Sophon Foundation any powers over the token itself.
+The security of minting and burning is still ensured by the LayerZero protocol itself.
+The foundation can just include new routes for new chains, and such changes require approval from LayerZero.
+
+A script that shows and validates the configuration (and the approval needed) can be found [here](https://github.com/sophon-org/sophon-oft/blob/main/layerzero.config.ts).
