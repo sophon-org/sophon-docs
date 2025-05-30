@@ -1,18 +1,48 @@
 ---
-title: 'Early Partners Program'
+title: "Early Partners Program"
 # description: ''
 ---
 
-As with any blockchain, you need the native token (**SOPH** in our case) to interact with Sophon.
+To use Sophon, you'll need our native token (**SOPH**), just like with any blockchain.
 
-However, during the alpha stage, we won't distribute tokens for either Testnet or Mainnet. Instead, you'll interact with our Paymaster, which will sponsor your deployment transactions and interactions with your deployed contracts.
+## Gas Fees & Paymaster
 
-The Paymaster operates under the following rules:
+<Warning>
+  Since the SOPH TGE happened on May 28th, we'll be winding down our ecosystem-wide paymaster two
+  weeks after the launch. Until then, our Paymaster will cover your deployment transactions and
+  contract interactions.
+</Warning>
+
+<Tip>
+  Gas costs for L1 to L2 native bridging and transactions done within Sophon Home will still be
+  sponsored by us.
+</Tip>
+
+Here's how the Paymaster works:
+
 - Only whitelisted addresses can deploy new contracts
-- Any user can interact with contracts deployed by whitelisted addresses
+- Anyone can interact with contracts deployed by whitelisted addresses
 
-This approach eliminates the need for **SOPH** tokens for both you and your users during the Alpha Stage.
+<Tip>
+  Want to get on the allow list? Just fill out this [form](https://forms.gle/j3BTuHJUL2apBT8d9) and
+  we'll reach out to help you get started. Deployments will still be permissioned to only
+  whitelisted addresses.
+</Tip>
 
-<Tip>To join the allow list, please complete this [form](https://forms.gle/j3BTuHJUL2apBT8d9). We will contact you to assist you with your deployment.</Tip>
+<Info>
+  Curious about paymasters in general? Check out the [Paymasters](/architecture/paymasters) page for
+  more details.
+</Info>
 
-Upon completing the onboarding process, please follow the [Hardhat](/build/interact/hardhat) or [Foundry](/build/interact/foundry) guides to deploy your contracts.
+Once you're onboarded, you can follow our [Hardhat](/build/interact/hardhat) or [Foundry](/build/interact/foundry) guides to deploy your contracts.
+
+## Set Up Your Own Paymaster
+
+As a partner, you'll be able to run your own paymaster. This means you can sponsor your team's transactions and contract interactions, using your own rules and budgets.
+
+Even after our paymaster sunsets, contract deployments will still be limited to whitelisted addresses.
+
+<Info>
+  Want to set up your own paymaster? Check out our [How to set up a
+  Paymaster](/build/setting-up-paymasters) guide for a step-by-step walkthrough.
+</Info>
