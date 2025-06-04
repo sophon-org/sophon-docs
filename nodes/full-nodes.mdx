@@ -9,7 +9,8 @@ A **Sophon Full Node** is a complete node that stores a full copy of the blockch
 - However, efforts are underway to allow **multiple nodes** to collaborate through a consensus mechanism, adhering to the relevant network criteria, which will further decentralize block creation.
 
 <Tip>
-  At present, you can only run a **read-only** version of the Full Node. The full size of the database at the time of writing is ~1.3TB.
+  At present, you can only run a **read-only** version of the Full Node. The full size of the
+  database at the time of writing is ~1.3TB.
 </Tip>
 
 ---
@@ -58,7 +59,7 @@ In order to be able to configure your node with your own Avail DA, you first nee
 To start your Sophon node from database dumps, you need to enable recovery from snapshots and specify the snapshot location:
 
 ```yaml
-EN_SNAPSHOTS_RECOVERY_ENABLED: "false"
+EN_SNAPSHOTS_RECOVERY_ENABLED: "true"
 EN_SNAPSHOTS_OBJECT_STORE_BUCKET_BASE_URL: "raas-sophon-mainnet-external-node-snapshots"
 ```
 
@@ -79,9 +80,13 @@ EN_SNAPSHOTS_RECOVERY_ENABLED: "false"
 Following our [configuration repository](https://github.com/sophon-org/sophon-en-config) you can opt to start a local node via **Docker Compose**. For this, we provide you a [start script](https://github.com/sophon-org/sophon-en-config/blob/main/scripts/start_node.sh) that cleans up all Docker artifacts once you exit the process in the terminal (with ctrl\+C).
 
 <Tip>
-  For an even simpler local testing experience, we recommend setting up an in-memory node and forking mainnet using the [ZKsync CLI](../build/interact/zksync-cli).
+  For an even simpler local testing experience, we recommend setting up an in-memory node and
+  forking mainnet using the [ZKsync CLI](../build/interact/zksync-cli).
 </Tip>
 
 <Note>
-  For detailed info on how to run, configure, and maintain a **Full Node**, see [ZKsync's docs](https://matter-labs.github.io/zksync-era/core/latest/guides/external-node/01_intro.html). However, for most of the cases, following our [configuration repository](https://github.com/sophon-org/sophon-en-config) should be enough.
+  For detailed info on how to run, configure, and maintain a **Full Node**, see [ZKsync's
+  docs](https://matter-labs.github.io/zksync-era/core/latest/guides/external-node/01_intro.html).
+  However, for most of the cases, following our [configuration
+  repository](https://github.com/sophon-org/sophon-en-config) should be enough.
 </Note>
