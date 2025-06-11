@@ -1,26 +1,18 @@
 ---
-title: "SOPH Utility"
+title: "Staking"
 ---
 
-## **What is SOPH?**
+<Tip>
+**Key Points**
 
-SOPH is the main utility token for the Sophon Network, playing an essential role in its current and future operations.
+* Staking SOPH will contribute to the cryptoeconomic decentralisation of Sophon’s sequencing function.  
+* Only Full Nodes are able to run sequencers. To become a Full Node you will need **1500** delegated Guardian NFTs and a minimum stake of **100,000** SOPH. Anyone can delegate stake to an operational Full Node.  
+* Rewards compound and balances are updated automatically to reflect total staked assets (your initial stake plus rewards).  
+* Gas fees are used for staking rewards.   
+* Staking rewards use an inverse square root reward model. Unless all circulating tokens are staked, there will be “unutilised rewards”, which will either be burned or redistributed to users periodically.  
+* To withdraw, staked assets are subject to a 5-day cooldown period. 
+</Tip>
 
-We expect the utility to evolve over time as our network and our product offering grows,  incorporating new utilities as we do. There is plenty planned on the product front so stay tuned for the evolution of SOPH.
-
-At launch SOPH serves two purposes. It is used to pay gas fees on the network and to facilitate the decentralisation of Sophon’s sequencer using a staking mechanism.
-
-## **Gas**
-
-All transactions on the Sophon Network will be paid for in gas.
-
-This does not necessarily require all users to hold SOPH due to ZKsync’s native paymaster technology.  Paymasters are a type of specialised account designed to subsidize or customize transaction fees for other accounts, providing a seamless user experience and greater flexibility. That means, no more being forced to bridge whenever you run out of the native gas token and depending on what you’re doing, maybe no gas to be paid at all. Check out our [Paymaster page](/architecture/paymasters) for more detail.
-
-<img src="/images/tokenomics/soph_gas.webp" />
-
-With all gas being paid in SOPH, either by the network, the user or the dapp, the token is redistributed to those operating the chain, which brings us onto the next utility.
-
-## **Staking**
 
 Staking on Sophon supports the cryptoeconomic security of the network.
 
@@ -28,7 +20,7 @@ As the ZKsync network launches its decentralised sequencing in the coming months
 
 Once decentralised sequencing is live, Full Nodes will be required to put up a minimum stake of 100,000 SOPH to become active. In return for performing sequencer capabilities, Full Nodes will receive a portion of gas fees. The remainder will be distributed to SOPH stakers and delegated stakers. Delegated stakers can be any holder of SOPH tokens – simply go to Sophon Home’s Earn section and either autodelegate or choose the Full Node you wish to delegate to. Staking rewards will then be distributed based on relative stake.
 
-Delegations to a particular Full Node can be changed at any time. Rewards are accrued after batches are sealed and distributed to stakers immediately. Staking rewards compound, meaning that they will automatically be added to your existing staked assets and begin accruing rewards.
+Delegations to a particular Full Node can be changed at any time. Rewards are accrued after batches are sealed and distributed to stakers immediately. Staking rewards compound, meaning that they will automatically be added to your existing staked assets and begin accruing rewards. Balances will always be up to date and reflect your total staked assets – those that you initially staked as well as rewards. 
 
 The staking reward rate formula draws inspiration from Ethereum, utilising an inverse square root reward function. This is done for two reasons. Firstly, to stabilise yields based on the staking ratio (i.e., the percentage of circulating tokens staked). Secondly, it leaves a portion of tokens “unutilised” when the staking ratio is below 100%. These unutilised tokens are deposited in a separate contract, which will be either burned or distributed to users periodically.
 
