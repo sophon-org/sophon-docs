@@ -1,0 +1,21 @@
+---
+title: "Consume a session key"
+description: ""
+---
+
+
+Once you have created a session key, you can consume it by instantiating a `ZksyncSsoSessionClient` with the <Tooltip tip="https://github.com/sophon-org/sophon-account/blob/main/packages/account-core/src/sessionHelper.ts#L103">[getViemSessionClient](https://github.com/sophon-org/sophon-account/blob/main/packages/account-core/src/sessionHelper.ts#L103)</Tooltip> function.
+
+<Info>
+  To create a `ZksyncSsoSessionClient`, you must have the full account configuration object as well as the private key of the account that serves as the target of the session key.
+</Info>
+
+ ```typescript
+    const sessionClient = await sophonAccount.getViemSessionClient(sessionConfig, from, PRIVATE_KEY, chain);
+```
+
+ This function will return a `ZksyncSsoSessionClient` that you can use to interact with the session key.
+
+<Note>
+ Check out the full [Zksync SSO SDK](https://github.com/matter-labs/zksync-sso) for more details.
+</Note>

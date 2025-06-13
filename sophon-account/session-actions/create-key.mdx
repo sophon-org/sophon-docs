@@ -1,0 +1,42 @@
+---
+title: "Create a session key"
+description: ""
+---
+ 
+Our SDK's <Tooltip tip="https://www.npmjs.com/package/@sophon-labs/account-core">[account-core](https://www.npmjs.com/package/@sophon-labs/account-core)</Tooltip> package provides a function to create a session key transaction for you.
+<Info>
+  In order to create a session key, you must ensure that the smart account has the session key module enabled. 
+  You can check by calling <Tooltip tip="https://github.com/sophon-org/sophon-account/blob/main/packages/account-core/src/sessionHelper.ts#L123">[isSessionKeyModuleInstalled(address)](https://github.com/sophon-org/sophon-account/blob/main/packages/account-core/src/sessionHelper.ts#L123)</Tooltip> and install it for the smart account with
+  <Tooltip tip="https://github.com/sophon-org/sophon-account/blob/main/packages/account-core/src/sessionHelper.ts#L146">[getInstallSessionKeyModuleTxForViem(address)](https://github.com/sophon-org/sophon-account/blob/main/packages/account-core/src/sessionHelper.ts#L146)</Tooltip>.
+</Info>
+```typescript
+const tx = await sophonAccount.getCreateSessionTxForViem();
+```
+This function will return a transaction that you can sign and send to the network. It consumes a `SessionKey` object, which is defined as follows:
+```typescript
+const sessionConfig = {
+    signer: signer as `0x${string}`, // the EOA account that is the target of the session key
+    expiresAt: new Date().getTime() / 1000, // the date and time the session key will expire
+    feeLimit: {
+        limitType: LimitType.Lifetime, 
+        limit: BigInt(feeLimit), // the fee limit for the session key, in wei
+        period: 604800n, // 1 week
+    },
+    callPolicies: [], // the actions the session key can call
+    transferPolicies: [ // the actions the session key can transfer to
+        {
+            target: transferTarget as `0x${string}`, // the address the session key can send to
+            maxValuePerUse: BigInt(transferValue), // the maximum value the session key can send per use
+            valueLimit: {
+                limitType: LimitType.Lifetime, // the limit type for the session key
+                limit: BigInt(transferValue), // the maximum value the session key can send per use
+                period: 604800n, // 1 week
+            },
+        },
+    ],
+};
+```
+
+<Note>
+  Check out the exact contract function implementation in the [Zksync SSO contract](https://github.com/matter-labs/zksync-sso-clave-contracts/blob/main/src/validators/SessionKeyValidator.sol#L100).
+</Note>

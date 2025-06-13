@@ -1,0 +1,106 @@
+---
+title: "Overview"
+description: ""
+---
+
+Adding session key support into your app has never been easier.
+
+## Session Keys
+
+Session keys enable any Sophon Account to delegate execution of a pre-defined set of actions to a specific signer, without annoying the user with constant signing.
+
+### Why should you use session keys with the Sophon Account?
+
+The Sophon Account's end goal is to allow users to log in through a simple, seamless flow using biometrics, like FaceID, or social accounts, eliminating the need to create a seed phrase or manage private keys. 
+
+Regardless of these UX improvements, users retain full control over their private keys and can choose to sign transactions individually or approve a temporary session key.
+
+This is where session keys play a crucial role in enabling applications to provide a net superior user experience by asking for a set of transparent actions that it can execute on behalf of the user. This enables games to be played or assets to be transferred without the user having to sign every transaction, all between the clear boundaries defined by the session key details. 
+<br/>
+<b>The days of constant popups appearing during open gameplay are gone.</b>
+
+### How it works
+
+![Sophon Account Architecture](/images/sophon-account-architecture.png)
+
+The Session Key module is a substantial part of the Sophon Account's modular design. It is responsible for:
+
+- Creating session keys
+- Validating session keys
+- Revoking session keys
+- Exposing session key data
+
+### What can a session key do?
+
+A session key can do anything that the Sophon Account can. However, at creation, the owner of the Sophon Account must specify:
+
+- A scoped set of actions that the session key is approved to execute.
+- A specific EOA account, _the signer_, that is permitted to execute the scoped actions.
+
+<Warning>
+ A session key is supposed to be consumed in an enclosed, secure backend environment.
+ Consuming it in environment that exposes the signer's private key should be avoided at all costs.
+</Warning>
+
+## Session key management
+
+
+### Session Key Management Overview
+
+Our [account-core](https://www.npmjs.com/package/@sophon-labs/account-core) package provides a set of functions to manage session keys within the Sophon Account. Each of the following sections details a key operation:
+
+<Steps>
+<Step title="Creating a Session Key">
+To create a session key, you can use the `getCreateSessionTxForViem()` function provided by the Sophon Account SDK. This function helps in generating a transaction for creating a session key. For more details, visit the [Create a session key](./session-actions/create-key) page.
+</Step>
+
+<Step title="Consuming a Session Key">
+Once a session key is created, it can be consumed by instantiating a `ViemSessionClient` using the `getViemSessionClient()` function. This allows interaction with the session key. For further information, see the [Consume a session key](./session-actions/consume-key) page.
+</Step>
+
+<Step title="Reading a Session Key">
+You can retrieve the status and state of a session key using the `getSessionStatus()` and `getSessionState()` functions, respectively. These functions provide insights into the session key's current status and state. More details can be found on the [Read a session key](./session-actions/read-key) page.
+</Step>
+
+<Step title="Revoking a Session Key">
+If a session key is no longer needed, it can be revoked using the `getRevokeSessionTxForViem()` function. This ensures that the session key is no longer valid. For more information, refer to the [Revoke a session key](./session-actions/revoke-key) page.
+</Step>
+
+</Steps>
+
+### Interactive demo
+
+
+We have set up an interactive demo that simulates the creation, consumption, and revocation of a session key in a minimalistic real-world application. 
+
+It is a powerful example of how session keys can be used to provide a seamless user experience.
+
+<Note>
+    Check out the full code for the demo [in our example repository](https://github.com/sophon-org/sophon-account/tree/main/examples/eip-6963-appkit-sessionkeys).
+</Note>
+
+<div
+  style={{
+    position: "relative",
+    width: "100%",
+    paddingBottom: "75%", // 4:3 aspect ratio, adjust as needed
+    height: 0,
+    overflow: "hidden",
+    borderRadius: "16px",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+  }}
+>
+  <iframe
+    src="https://sophon-account-eip-6963-connectkit.vercel.app/"
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      border: "none",
+    }}
+    allowFullScreen
+  />
+</div>
+

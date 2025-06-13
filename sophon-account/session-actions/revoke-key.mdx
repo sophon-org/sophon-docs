@@ -1,0 +1,38 @@
+---
+title: "Revoke a session key"
+description: ""
+---
+
+If you ever feel like a session key is no longer needed, you can revoke it by calling <Tooltip tip="https://github.com/sophon-org/sophon-account/blob/main/packages/account-core/src/sessionHelper.ts#L160">[getRevokeSessionTxForViem](https://github.com/sophon-org/sophon-account/blob/main/packages/account-core/src/sessionHelper.ts#L160)</Tooltip> function.
+
+<Info>
+    The function will return a transaction that you can sign and send to the network. It requires the session hash and the address of the EOA account that is the target of the session key.
+</Info>
+
+
+```typescript
+  const tx = await sophonAccount.getRevokeSessionTxForViem({
+        sessionHash,
+      }, address);
+```
+
+<Note>
+  Check out the exact contract function implementation in the [Zksync SSO contract](https://github.com/matter-labs/zksync-sso-clave-contracts/blob/main/src/validators/SessionKeyValidator.sol#L157).
+</Note>
+
+After revoking the session key, the signer can no longer use it to execute the scoped actions.
+
+<Note>
+  Revoking a session key does not delete it from the blockchain. It only marks it as revoked.
+  The session key will be marked as `Closed` in the `getSessionState()` function.
+
+    ```typescript
+    export enum SessionStatus {
+        NotInitialized = 0,
+        Active = 1,
+        Closed = 2, //  <-- 
+        Expired = 3,
+    }
+    ```
+  
+</Note>

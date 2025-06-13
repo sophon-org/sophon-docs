@@ -150,6 +150,16 @@
       ]
     },
     {
+      "group": "Session Keys",
+      "pages": [
+        "sophon-account/session-keys",
+        "sophon-account/session-actions/create-key",
+        "sophon-account/session-actions/consume-key",
+        "sophon-account/session-actions/read-key",
+        "sophon-account/session-actions/revoke-key"
+      ]
+    },
+    {
       "group": "",
       "pages": ["discover/our-universe"]
     },
