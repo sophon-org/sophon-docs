@@ -43,24 +43,10 @@ zksolc_version = "1.5.11"
 evm_version = "cancun"
 src = "src"
 out = "out"
-ffi = true
-ast = true
-build_info = true
-extra_output = ["storageLayout"]
 libs = ["lib"]
 remappings = [
     "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
 ]
-
-[fmt]
-line_length = 100
-
-[profile.default.fuzz]
-runs = 5
-
-[invariant]
-depth = 15
-runs = 10
 
 [etherscan]
 sepoliaTestnet = { key = "${ETHERSCAN_API_KEY}", url = "${SEPOLIA_VERIFIER_URL}", chain = 11155111 }
@@ -89,7 +75,7 @@ SEPOLIA_VERIFIER_URL=https://api.etherscan.io/api
 SEPOLIA_CHAIN_ID="11155111"
 
 # ethereum
-RPC_URL=https://eth.g.alchemy.com/v2/sp2BM_VFMURcKWMWg8HDVSBgvnm75_NS
+RPC_URL=https://ethereum-rpc.publicnode.com
 VERIFIER_URL=https://api.etherscan.io/api
 CHAIN_ID="1"
 
