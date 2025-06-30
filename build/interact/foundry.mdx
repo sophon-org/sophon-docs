@@ -36,13 +36,31 @@ Set your `foundry.toml` and `.env` as follows:
 <CodeGroup>
 
 ```.toml foundry.toml
+# The Default Profile
 [profile.default]
+solc_version = "0.8.24"
+zksolc_version = "1.5.11"
+evm_version = "cancun"
 src = "src"
 out = "out"
+ffi = true
+ast = true
+build_info = true
+extra_output = ["storageLayout"]
 libs = ["lib"]
-auto_detect_solc = true
+remappings = [
+    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/",
+]
 
-# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+[fmt]
+line_length = 100
+
+[profile.default.fuzz]
+runs = 5
+
+[invariant]
+depth = 15
+runs = 10
 
 [etherscan]
 sepoliaTestnet = { key = "${ETHERSCAN_API_KEY}", url = "${SEPOLIA_VERIFIER_URL}", chain = 11155111 }
@@ -55,11 +73,13 @@ sepoliaTestnet = "${SEPOLIA_RPC_URL}"
 testnet = "${SOPHON_TESTNET_RPC_URL}"
 sophon = "${SOPHON_RPC_URL}"
 ethereum = "${RPC_URL}"
+
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
 ```
 
 ```.env .env
-# general
-PRIVATE_KEY= # YOUR_PRIVATE_KEY your developer private key here
+
+PRIVATE_KEY="" # YOUR_PRIVATE_KEY your developer private key here
 ETHERSCAN_API_KEY="YOUR_ETHERSCAN_API_KEY" # your Sophscan API gey obtained from sophscan
 PAYMASTER_ADDRESS=0x98546B226dbbA8230cf620635a1e4ab01F6A99B2 # the paymaster address you want to use
 
@@ -71,15 +91,17 @@ SEPOLIA_CHAIN_ID="11155111"
 # ethereum
 RPC_URL=https://eth.g.alchemy.com/v2/sp2BM_VFMURcKWMWg8HDVSBgvnm75_NS
 VERIFIER_URL=https://api.etherscan.io/api
-CHAIN_ID=""
+CHAIN_ID="1"
 
 # sophon testnet
 SOPHON_TESTNET_RPC_URL=https://rpc.testnet.sophon.xyz
+SOPHSCAN_TESTNET_VERIFIER_URL="https://api-sepolia.etherscan.io/api"
 SOPHON_TESTNET_VERIFIER_URL=https://api-explorer-verify.testnet.sophon.xyz/contract_verification
 SOPHON_TESTNET_CHAIN_ID="531050104"
 
 # sophon
 SOPHON_RPC_URL=https://rpc.sophon.xyz
+SOPHSCAN_MAINNET_VERIFIER_URL="https://api.sophscan.xyz/api"
 SOPHON_VERIFIER_URL=https://verification-explorer.sophon.xyz/contract_verification
 SOPHON_CHAIN_ID="50104"
 ```
@@ -109,13 +131,14 @@ source .env && forge create ./src/Counter.sol:Counter \
 
 ### Deployment and Verification
 
-Same as [Basic Deployment](#basic-deployment) but you append the `--verify` flag
+Same as [Basic Deployment](#basic-deployment) but you append the `--verify` flag and use the `--verifier zksync` flag to specify the verifier to use the Sophon Explorer or `--verifier etherscan` to use Sophscan.
 
 <Note>This will only verify on **Sophscan**</Note>
 
 ```
-source .env && forge create ./src/Counter.sol:Counter \
---rpc-url testnet --private-key $PRIVATE_KEY --zksync --verify
+source .env && forge create ./src/Counter.sol:Counter --rpc-url testnet \
+ --private-key $PRIVATE_KEY --zksync --verifier zksync \
+ --verifier-url $TESTNET_VERIFIER_URL  
 ```
 
 ### Deployment Using Paymaster
@@ -140,7 +163,8 @@ source .env && forge create ./src/Counter.sol:Counter \
 source .env && forge create ./src/Counter.sol:Counter \
 --rpc-url testnet --private-key $PRIVATE_KEY --zksync \
 --zk-paymaster-address $PAYMASTER_ADDRESS \
---zk-paymaster-input $(cast calldata "general(bytes)" "0x") --verify
+--zk-paymaster-input $(cast calldata "general(bytes)" "0x") --verify \
+--verifier zksync --verifier-url $TESTNET_VERIFIER_URL
 ```
 
 ## Deploy Contracts Using Foundry Scripts
@@ -160,7 +184,8 @@ Same as [Deployment Using Script](#deployment-using-script) but you append the `
 
 ```
 source .env && forge create ./src/Counter.sol:Counter \
---rpc-url testnet --private-key $PRIVATE_KEY --zksync --verify
+--rpc-url testnet --private-key $PRIVATE_KEY --zksync --verify \
+--verifier zksync --verifier-url $TESTNET_VERIFIER_URL
 ```
 
 ### Deployment Using Script With Paymaster
@@ -270,7 +295,8 @@ Same as [Deployment Using Script With Paymaster](#deployment-using-script-with-p
 
 ```
 source .env && forge script ./script/Counter.s.sol \
---rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast --verify
+--rpc-url testnet --private-key $PRIVATE_KEY --zksync --broadcast --verify \
+--verifier etherscan --verifier-url $SOPHSCAN_TESTNET_VERIFIER_URL
 ```
 
 ## Contract Verification
@@ -281,19 +307,25 @@ If you want to verify an already deployed contract, you can do so on [Sophscan](
 
 ```
 source .env && forge verify-contract COUNTER_CONTRACT_ADDRESS \
-./src/Counter.sol:Counter:Counter --watch --rpc-url testnet --zksync
+./src/Counter.sol:Counter:Counter --watch --rpc-url testnet --zksync \
+--verifier zksync --verifier-url $SOPHSCAN_TESTNET_VERIFIER_URL
 ```
 
 **On Sophon's Explorer**
 
 ```
 forge verify-contract COUNTER_CONTRACT_ADDRESS ./src/Counter.sol:Counter \
---watch --verifier zksync --verifier-url $TESTNET_VERIFIER_URL --zksync
+--watch --verifier zksync --verifier-url $SOPHON_VERIFIER_URL --zksync
 ```
 
 ### Using Libraries
 
 If your contract relies on external libraries, you need to build it with the linked libraries during deployment. For example:
+
+<Warning>
+  If you deploy a library via the EVM Equivalence Module, you can't link it to a zkEVM contract.
+  We advise to keep your libraries inline, in possible. Check how to compile non-inlinable libraries [here](https://docs.zksync.io/zksync-era/tooling/hardhat/guides/compiling-libraries).
+</Warning>
 
 ```
 forge build --zksync --libraries ./contracts/util/SignatureChecker.sol:SignatureChecker:0xb0A2cf27Bf984bd0c56dCFb37C9DA0F2c5028844
