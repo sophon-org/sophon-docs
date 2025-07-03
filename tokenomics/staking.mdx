@@ -3,16 +3,15 @@ title: "Staking"
 ---
 
 <Tip>
-**Key Points**
+  **Key Points**
 
-* Staking SOPH will contribute to the cryptoeconomic decentralisation of Sophon’s sequencing function.  
-* Only Full Nodes are able to run sequencers. To become a Full Node you will need **1500** delegated Guardian NFTs and a minimum stake of **100,000** SOPH. Anyone can delegate stake to an operational Full Node.  
-* Rewards compound and balances are updated automatically to reflect total staked assets (your initial stake plus rewards).  
-* Gas fees are used for staking rewards.   
-* Staking rewards use an inverse square root reward model. Unless all circulating tokens are staked, there will be “unutilised rewards”, which will either be burned or redistributed to users periodically.  
-* To withdraw, staked assets are subject to a 5-day cooldown period. 
+  - Staking SOPH will contribute to the cryptoeconomic decentralisation of Sophon’s sequencing function.
+  - Only Full Nodes are able to run sequencers. To become a Full Node you will need **1500** delegated Guardian NFTs and a minimum stake of **100,000** SOPH. Anyone can delegate stake to an operational Full Node.
+  - Rewards compound and balances are updated automatically to reflect total staked assets (your initial stake plus rewards).
+  - Gas fees are used for staking rewards.
+  - Staking rewards use an inverse square root reward model. Unless all circulating tokens are staked, there will be “unutilised rewards”, which will either be burned or redistributed to users periodically.
+  - To withdraw, staked assets are subject to a 5-day cooldown period.
 </Tip>
-
 
 Staking on Sophon supports the cryptoeconomic security of the network.
 
@@ -20,17 +19,41 @@ As the ZKsync network launches its decentralised sequencing in the coming months
 
 Once decentralised sequencing is live, Full Nodes will be required to put up a minimum stake of 100,000 SOPH to become active. In return for performing sequencer capabilities, Full Nodes will receive a portion of gas fees. The remainder will be distributed to SOPH stakers and delegated stakers. Delegated stakers can be any holder of SOPH tokens – simply go to Sophon Home’s Earn section and either autodelegate or choose the Full Node you wish to delegate to. Staking rewards will then be distributed based on relative stake.
 
-Delegations to a particular Full Node can be changed at any time. Rewards are accrued after batches are sealed and distributed to stakers immediately. Staking rewards compound, meaning that they will automatically be added to your existing staked assets and begin accruing rewards. Balances will always be up to date and reflect your total staked assets – those that you initially staked as well as rewards. 
+Delegations to a particular Full Node can be changed at any time. Rewards are accrued after batches are sealed and distributed to stakers immediately. Staking rewards compound, meaning that they will automatically be added to your existing staked assets and begin accruing rewards. Balances will always be up to date and reflect your total staked assets – those that you initially staked as well as rewards.
 
-The staking reward rate formula draws inspiration from Ethereum, utilising an inverse square root reward function. This is done for two reasons. Firstly, to stabilise yields based on the staking ratio (i.e., the percentage of circulating tokens staked). Secondly, it leaves a portion of tokens “unutilised” when the staking ratio is below 100%. These unutilised tokens are deposited in a separate contract, which will be either burned or distributed to users periodically.
+The staking reward rate formula draws inspiration from Ethereum, utilising an inverse square root reward function. This is done for two reasons. Firstly, to stabilise yields based on the staking ratio (i.e., the percentage of circulating tokens staked). Secondly, it leaves a portion of tokens “unutilised” when the staking ratio is below 100%. 
+
+Diving deeper, if x is the proportion of the total SOPH supply that is staked, then only √x of the total reward pool is distributed. This means that rewards are only fully utilized when 100% of SOPH is staked. At lower staking ratios, a smaller fraction of the reward pool is emitted — for example, if only 25% of SOPH is staked, just 50% of the rewards are distributed. This mechanism creates a natural incentive for higher overall staking participation, while preserving long-term sustainability by reducing emissions when network engagement is low. These unutilised tokens are deposited in a separate contract, which will be either burned or distributed to users periodically.
+
+**Variables**
+
+- `S_total` = total SOPH supply
+- `S_staked` = total SOPH staked
+- `R_max` = maximum reward pool per period
+- `R_actual` = actual rewards emitted per period
+
+**Formulas**
+
+1. Staking Ratio\
+` x = S_staked / S_total`
+
+2. Reward Utilization (Inverse Square Root Function)\
+` R_actual = R_max * sqrt(x)`
+
+**Examples**
+
+- If `x = 0.25`, then `sqrt(0.25) = 0.5 → 50.00%` of `R_max` is emitted
+- If `x = 0.5`, then `sqrt(0.5) ≈ 0.7071 → 70.71%` of `R_max` is emitted
+- If `x = 0.75`, then `sqrt(0.75) ≈ 0.8660 → 86.60%` of `R_max` is emitted
 
 Gas fees, potentially supplemented with ecosystem reserves to boost adoption, will make up all staking rewards. Given that a portion of unutilised rewards will be burned, and that it is not possible to mint new SOPH, that makes the SOPH token deflationary.
 
-<img src="/images/tokenomics/soph_staking.webp" />
+![](/images/tokenomics/soph_staking.webp)
 
 Token transfers from a spot account to staking are instant. However, withdrawing stake will be subject to a 5 day cooldown period. Tokens not claimed within the withdrawal period will automatically revert to being staked to ensure that users are able to continue benefitting from staking rewards. The cooldown period for removing stake is common practice on proof of stake chains, allowing for penalties to be applied retroactively where applicable.
 
 Further details on Full Node proof-of-stake decentralisation will be released as the ZKsync decentralised sequencer roadmap is publicly released.
+
 <Note>
   **Note** Further details on Full Node proof-of-stake decentralisation will be released as the ZKsync decentralised sequencer roadmap is publicly released.
 </Note>
