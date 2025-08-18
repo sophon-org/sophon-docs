@@ -1,0 +1,73 @@
+---
+title: "React Native"
+---
+
+<Warning>
+  Because of how **React Native** libraries work, you will need to install
+  dependencies that have native code directly in your app so that we can use
+  them.
+</Warning>
+
+You can add support for Sophon Account in your React Native application by using the `@sophon-labs/account-react-native` package.
+
+## Installation
+
+Before you start, you need these libraries:
+
+```sh
+# Passkey requirements
+npm install @simplewebauthn/browser @simplewebauthn/server
+
+# Pollyfills
+npm install expo-crypto expo-standard-web-crypto \
+  react-native-url-polyfill text-encoding-polyfill
+
+# Overall native requirements
+npm install expo-network react-native-mmkv react-native-webview
+```
+
+After that, you are ready to install our SDK:
+
+```sh
+# Sophon Library
+npm install @sophon-labs/account-react-native
+```
+
+## Usage
+
+Before anything, you need to wrap your application with `SophonContextProvider`, that will store context information about the accoint and walletClient connection.
+
+```ts
+import { SophonContextProvider } from "@sophon-labs/account-react-native";
+
+export default function RootLayout() {
+  // ...
+
+  return (
+    <SophonContextProvider network="testnet">
+      {/* Your components*/}
+    </SophonContextProvider>
+  );
+}
+```
+
+With that ready, you can now use our hooks to interact with Sophon.
+
+```ts
+import { useSophonAccount } from "@sophon-labs/account-react-native";
+
+export default function YourComponent() {
+  const { connect, account } = useSophonAccount();
+  // ...
+}
+```
+
+<Card
+  title="React Native Sandbox Example"
+  icon="github"
+  href="https://github.com/sophon-org/sophon-account-sso/tree/main/examples/sandbox-react-native"
+  arrow="true"
+  cta="Read more"
+>
+  You can check an example of implementing React Native with Sophon Account.
+</Card>

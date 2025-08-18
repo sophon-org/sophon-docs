@@ -29,6 +29,9 @@
       "to": "#07C983"
     }
   },
+  "codeBlock": {
+    "mode": "dark"
+  },
   "feedback": {
     "thumbsRating": true
   },
@@ -83,7 +86,12 @@
     },
     {
       "group": "Links",
-      "pages": ["links/audits", "links/security", "links/status", "links/socials"]
+      "pages": [
+        "links/audits",
+        "links/security",
+        "links/status",
+        "links/socials"
+      ]
     },
     {
       "group": "",
@@ -91,7 +99,11 @@
     },
     {
       "group": "Setup",
-      "pages": ["build/early-partners", "build/network-information", "build/setting-up-paymasters"]
+      "pages": [
+        "build/early-partners",
+        "build/network-information",
+        "build/setting-up-paymasters"
+      ]
     },
     {
       "group": "EVM Compatibility",
@@ -139,7 +151,30 @@
     },
     {
       "group": "Sophon Account",
-      "pages": ["sophon-account/intro", "sophon-account/architecture"]
+      "pages": [
+        "sophon-account/intro",
+        "sophon-account/getting-started",
+        "sophon-account/architecture",
+        "sophon-account/faq"
+      ]
+    },
+    {
+      "group": "Authentication",
+      "pages": [
+        "sophon-account/authentication/intro",
+        "sophon-account/authentication/eip6963",
+        "sophon-account/authentication/react",
+        "sophon-account/authentication/react-native",
+        "sophon-account/authentication/access-tokens"
+      ]
+    },
+    {
+      "group": "Connectors",
+      "pages": [
+        "sophon-account/connectors/intro",
+        "sophon-account/connectors/viem",
+        "sophon-account/connectors/wagmi"
+      ]
     },
     {
       "group": "Integration",
@@ -150,6 +185,10 @@
         "sophon-account/examples/connectkit",
         "sophon-account/examples/thirdweb"
       ]
+    },
+    {
+      "group": "Recipes",
+      "pages": ["sophon-account/recipes/intro"]
     },
     {
       "group": "",
