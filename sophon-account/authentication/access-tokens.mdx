@@ -1,41 +1,70 @@
 ---
 title: "JWT & Access Tokens"
 ---
-<Warning>Tokens are accessible only when using the React and React Native SDKs with a valid `partnerId`. Partners integrating via EIP-6963 will not have access to user tokens.</Warning>
+
+<Warning>
+  Tokens are accessible only when using the React and React Native SDKs with a
+  valid `partnerId`. Partners integrating via EIP-6963 will not have access to
+  user tokens.
+</Warning>
 
 When using the Sophon Account, everytime a user authorizes an application connection our Account Server issues an access token using RS256 algorithm, with a secret private key.
 You can use this token to authenticate requests to our API, and if you don't want to implemente a custom SIWE flow, you can use the token on your own to make sure that the user is authenticated and owns the account.
 
-<Tabs>
-  <Tab title="React" icon="react">
-```javascript
+<CodeGroup>
+```typescript React
 import { useSophonToken } from '@sophon-labs/account-react-native';
 
 export default function App() {
-  const { token } = useSophonToken();
+  const [token, setToken] = useState<SophonJWTToken | null>(null);
+  const [loading, setLoading] = useState(false);
+  const { getAccessToken } = useSophonToken();
+  const updateAccessToken = useCallback(async () => {
+    setLoading(true);
+    const newToken = await getAccessToken();
+    setToken(newToken);
+    setLoading(false);
+  }, [getAccessToken]);
+
+  useEffect(() => {
+    updateAccessToken();
+  }, [updateAccessToken]);
+  
   return (
     <div>
-      <h1>Hello World</h1>
+      <h1>My Token: {token?.value}</h1>
     </div>
   );
 }
 ```
-  </Tab>
-  <Tab title="React Native" icon="react">
-```javascript
-import { useSophonToken } from '@sophon-labs/account-react';
+
+```typescript React Native
+import { useSophonToken } from "@sophon-labs/account-react";
+
 
 export default function App() {
-  const { token } = useSophonToken();
+  const [token, setToken] = useState<SophonJWTToken | null>(null);
+  const [loading, setLoading] = useState(false);
+  const { getAccessToken } = useSophonToken();
+  const updateAccessToken = useCallback(async () => {
+    setLoading(true);
+    const newToken = await getAccessToken();
+    setToken(newToken);
+    setLoading(false);
+  }, [getAccessToken]);
+
+  useEffect(() => {
+    updateAccessToken();
+  }, [updateAccessToken]);
+  
   return (
     <div>
-      <h1>Hello World</h1>
+      <h1>My Token: {token?.value}</h1>
     </div>
   );
 }
 ```
-  </Tab>
-</Tabs>
+</CodeGroup>
 
 ## JWT Token Payload
 
@@ -72,9 +101,8 @@ When processing and validating the token by yourself, the value of this field sh
 
 Once you got the token issued, you can send it during the calls to your API using the classic header `Authorization: Bearer <token>`. See how to do it with different frameworks:
 
-<Tabs>
-  <Tab title="axios">
-````typescript
+<CodeGroup>
+```typescript axios
 import axios from 'axios';
 
 export const callBackend = (token: string) => {
@@ -90,11 +118,9 @@ export const callBackend = (token: string) => {
 
 return response.data;
 };
+```
 
-````
-  </Tab>
-  <Tab title="fetch">
-```typescript
+```typescript fetch
 export const callBackend = (token: string) => {
   const response = await fetch(`${process.env.BACKEND_URL}/do-something`, {
     method: 'POST',
@@ -112,15 +138,43 @@ export const callBackend = (token: string) => {
 }
 ```
 
-  </Tab>
-
-</Tabs>
+</CodeGroup>
 
 ## Decoding the JWT
 
 When you have the token, it is usefull to decode it for additional verification during your backend processing. Given that only Sophon can issue tokens, you can validate that the token you are receiving is valid, and it assert that the user owns the account.
 
 By using the JWKS standard, and having the public key we provide, you can decode by yourself, without having to making additional calls.
+
+### Decode Using Sophon Account SDK
+
+To make things easier, we provide a SDK that can decode the token for you:
+
+<CodeGroup>
+```bash npm
+npm install @sophon-labs/account-api-sdk
+```
+
+```bash yarn
+yarn add @sophon-labs/account-api-sdk
+```
+
+```bash pnpm
+pnpm add @sophon-labs/account-api-sdk
+```
+</CodeGroup>
+
+Then, you can use it in your code:
+
+```typescript
+import { SophonAPISDK } from "@sophon-labs/account-api-sdk";
+
+const partnerId = "my-partner-id";
+const sdk = SophonAPISDK("testnet", partnerId);
+const decodedToken = sdk.auth.decodeJWT(token);
+
+console.log(decodedToken); // { iss: 'xxxx', exp: nnnn, ... }
+```
 
 ### Decoding the token using JWKS libraries
 
@@ -148,25 +202,6 @@ const publicKey = signingKey.getPublicKey();
 const decodedToken: JwtPayload = jwt.verify(encodedJwt, publicKey, {
   ignoreExpiration: false,
 }) as JwtPayload;
-
-console.log(decodedToken); // { iss: 'xxxx', exp: nnnn, ... }
-```
-
-### Decode Using Sophon Account SDK
-To make things easier, we provide a SDK that can decode the token for you:
-
-```bash
-npm install @sophon-labs/account-api-sdk
-```
-
-Then, you can use it in your code:
-
-```typescript
-import { SophonAPISDK } from '@sophon-labs/account-api-sdk';
-
-const partnerId = 'my-partner-id';
-const sdk = SophonAPISDK('testnet', partnerId);
-const decodedToken = sdk.auth.decodeJWT(token);
 
 console.log(decodedToken); // { iss: 'xxxx', exp: nnnn, ... }
 ```

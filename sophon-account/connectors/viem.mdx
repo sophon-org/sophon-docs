@@ -2,4 +2,73 @@
 title: "Integrating with Viem"
 ---
 
-<Note>Viem is actually a depencency for Sophon Account.</Note>
+<Note>Viem is actually a dependency for Sophon Account.</Note>
+
+We expose an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider that can be used directly with [Viem](https://viem.sh/).
+
+```ts
+import { createSophonProvider } from "@sophon-labs/account-connector";
+import { useCallback, useMemo, useState } from "react";
+import { type Address, createWalletClient, custom } from "viem";
+import { sophonTestnet } from "viem/chains";
+import { eip712WalletActions } from "viem/zksync";
+
+export default function Home() {
+  const [address, setAddress] = useState<Address>();
+  const [error, setError] = useState<string>();
+  const [signature, setSignature] = useState<string>();
+
+  const provider = useMemo(() => {
+    return createSophonEIP1193Provider(
+      'testnet',
+      '123b216c-678e-4611-af9a-2d5b7b061258',
+    );
+  }, []);
+
+  const walletClient = useMemo(() => {
+    return createWalletClient({
+      chain: sophonTestnet,
+      transport: custom(provider),
+    }).extend(eip712WalletActions());
+  }, [provider]);
+
+  const handleConnect = useCallback(async () => {
+    const addresses = await walletClient.requestAddresses();
+    if (!addresses.length) {
+      setError("No addresses found");
+      return;
+    }
+
+    setAddress(addresses[0]);
+
+    const signature = await walletClient.signMessage({
+      account: addresses[0],
+      message: 'Hello from Sophon',
+    });
+    setSignature(signature);
+  }, [walletClient]);
+
+  const handleDisconnect = useCallback(async () => {
+    setAddress(undefined);
+    setError(undefined);
+    setSignature(undefined);
+    await provider.disconnect();
+  }, [provider]);
+
+  return (
+    // ... your logic here
+  );
+}
+```
+
+You can find our example repository [here](https://github.com/sophon-org/sophon-account-sso/tree/main/examples/web/viem).
+
+<Card
+  title="Viem Example"
+  icon="github"
+  href="https://github.com/sophon-org/sophon-account-sso/tree/main/examples/web/viem"
+  arrow="true"
+  cta="Read more"
+>
+  You can check an example of using Viem directly with Sophon Account.
+</Card>

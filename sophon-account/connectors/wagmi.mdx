@@ -56,18 +56,18 @@ const { signMessage } = useSignTypedData();
 // ...
 signTypedData({
   domain: {
-    name: 'Sophon SSO',
-    version: '1',
+    name: "Sophon SSO",
+    version: "1",
     chainId: sophonTestnet.id,
   },
   types: {
     Message: [
-      { name: 'content', type: 'string' },
-      { name: 'from', type: 'address' },
-      { name: 'timestamp', type: 'uint256' },
+      { name: "content", type: "string" },
+      { name: "from", type: "address" },
+      { name: "timestamp", type: "uint256" },
     ],
   },
-  primaryType: 'Message',
+  primaryType: "Message",
   message: {
     content: `Hello from Sophon SSO!\n\nThis message confirms you control this wallet.`,
     from: address as `0x${string}`,
@@ -77,9 +77,9 @@ signTypedData({
 ```
 
 <Card
-  title="Wagmi Connector Sandbox Example"
+  title="Wagmi Connector Example"
   icon="github"
-  href="https://github.com/sophon-org/sophon-account-sso/tree/main/examples/sandbox-web"
+  href="https://github.com/sophon-org/sophon-account-sso/tree/main/examples/web/wagmi"
   arrow="true"
   cta="Read more"
 >

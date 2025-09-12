@@ -1,0 +1,43 @@
+---
+title: "Data Scopes"
+---
+
+<Warning>
+  Tokens are accessible only when using the React and React Native SDKs with a
+  valid `partnerId`. Partners integrating via EIP-6963 will not have access to
+  user tokens.
+</Warning>
+
+As a authentication provider, Sophon Account is able to provide a list of data scopes that the user can grant to the application.
+You are required to specify the data scopes that you want to request from the user when you are initializing the SDK Context Provider.
+
+The available scopes right now are:
+
+- `email`
+- `x`
+- `gmail`
+- `discord`
+- `telegram`
+
+The user has the option to grant or not to grant the scopes to the application durint the authentication process.
+
+To use it in code, you can do the following:
+
+```typescript Requesting Data Scopes
+import { DataScopes } from "@sophon-labs/account-core";
+import { SophonContextProvider } from "@sophon-labs/account-react-native";
+
+export default function App() {
+  return (
+    <SophonContextProvider
+      partnerId="$YOUR_PARTNER_ID"
+      dataScopes={[DataScopes.email, DataScopes.x]}
+      network="testnet"
+    >
+      {/* Your components*/}
+    </SophonContextProvider>
+  );
+}
+```
+
+Then you will have the scopes available in the user JWT token, and fetch the info in the backend. For more information, please check the [JWT & Access Tokens](./access-tokens) documentation.

@@ -3,82 +3,23 @@ title: "Getting started"
 description: "First steps integrating Sophon Account in your project."
 ---
 
+<Warning>This documentation only valid for version >=2.0.0.</Warning>
+
 ## Getting Started with Sophon Account
 
-The easiest way to get started with the Sophon Account is to use our EIP-6963 package, which allows you to use the Sophon Account in your web application by just importing a single package and using any wallet kit available in the market.
+You can use Sophon Account in a few different ways, depending on your needs:
 
-Its as simple as:
-
-```bash Install the package as dependency
-npm install @sophon-labs/account-eip6963
-```
-
-Then you need to import and initialize the [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) emitter in your application entry point:
-
-<Tabs>
-  <Tab title="Dynamically" icon="diagram-project">
-```javascript
-import { createSophonEIP6963Emitter } from "@sophon-labs/account-eip6963";
-createSophonEIP6963Emitter(process.env.NETWORK_KEY);
-
-// The Sophon wallet will now announce itself via the EIP-6963 protocol
-// No additional setup is required
-
-````
-  </Tab>
-  <Tab title="Statically Testnet" icon="vial">
-```javascript
-import "@sophon-labs/account-eip6963/testnet";
-
-// The Sophon wallet will now announce itself via the EIP-6963 protocol
-// No additional setup is required
-````
-
-  </Tab>
-  <Tab title="Statically Mainnet" icon="gem">
-```javascript
-import "@sophon-labs/account-eip6963/mainnet";
-
-// The Sophon wallet will now announce itself via the EIP-6963 protocol
-// No additional setup is required
-
-````
-  </Tab>
-</Tabs>
-
-This will automatically:
-
-- Register the Sophon wallet provider
-- Announce it through the [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) events
-- Make it available to [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) compatible applications
-
-### Working with Wallet Connection Libraries
-
-Most modern wallet connection libraries, like RainbowKit, wagmi, or Reown Appkit, support [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963). Here's how to connect with wagmi:
-
-```javascript
-import { getDefaultConfig } from "@rainbow-me/rainbowkit";
-import { sophonTestnet, sophon } from "wagmi/chains";
-import { createSophonEIP6963Emitter } from "@sophon-labs/account-eip6963";
-
-createSophonEIP6963Emitter("testnet");
-
-export const config = getDefaultConfig({
-  appName: "Your Application",
-  projectId: "YOUR_PROJECT_ID",
-  chains: [sophon, sophonTestnet],
-  ssr: true,
-});
-````
-
-With this setup, the Sophon wallet will appear in the wallet selection UI provided by RainbowKit.
+- You can use our [EIP-6963 SDK](./authentication/eip6963) package to add **Sophon Account** as a connection option to any wallet kit available in the market.
+- You can add our [React SDK](./authentication/react) to your web project to use the **Sophon** as your login provider.
+- You can also use our [React Native SDK](./authentication/react-native) to add **Sophon** as a connection option to your mobile application.
 
 ## Main Packages
 
 To integrate the Sophon Account into your project, we've created a few packages to help you get started, these are the main ones:
 
-- [@sophon-labs/account-connector](https://www.npmjs.com/package/@sophon-labs/account-connector): A generic Viem connector for the Sophon Account, to be used with any wallet kit.
+- [@sophon-labs/account-connector](https://www.npmjs.com/package/@sophon-labs/account-provider): Our EIP-1193 provider for the Sophon Account, to be used with any library that supports EIP-1193, like Viem.
+- [@sophon-labs/account-connector](https://www.npmjs.com/package/@sophon-labs/account-connector): A generic Wagmi connector for the Sophon Account, to be used with any wallet kit that supports Wagmi.
 - [@sophon-labs/account-eip6963](https://www.npmjs.com/package/@sophon-labs/account-eip6963): Allow web applications to use the Sophon Account by using the [EIP-6963 standard](https://eips.ethereum.org/EIPS/eip-6963).
 - [@sophon-labs/account-react-native](https://www.npmjs.com/package/@sophon-labs/account-react-native): Library to help you integrate the Sophon Account into your React Native projects, requires a partnerId to start up.
-- [@sophon-labs/account-react](https://www.npmjs.com/package/@sophon-labs/account-react-native): Web library to unleash the full power of Sophon Account, requires a partnerId to start up.
+- [@sophon-labs/account-react](https://www.npmjs.com/package/@sophon-labs/account-react): Web library to unleash the full power of Sophon Account, requires a partnerId to start up.
 - [@sophon-labs/account-api-sdk](https://www.npmjs.com/package/@sophon-labs/account-api-sdk): Utility package to wrap API calls, jwt decoding etc...

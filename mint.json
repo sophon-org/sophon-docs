@@ -29,9 +29,6 @@
       "to": "#07C983"
     }
   },
-  "codeBlock": {
-    "mode": "dark"
-  },
   "feedback": {
     "thumbsRating": true
   },
@@ -165,6 +162,7 @@
         "sophon-account/authentication/eip6963",
         "sophon-account/authentication/react",
         "sophon-account/authentication/react-native",
+        "sophon-account/authentication/data-scopes",
         "sophon-account/authentication/access-tokens"
       ]
     },

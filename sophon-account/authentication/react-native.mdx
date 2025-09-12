@@ -12,39 +12,66 @@ You can add support for Sophon Account in your React Native application by using
 
 ## Installation
 
+<Tip>
+  The SDK is compatible with Expo Go without the need of prebuilding the app.
+</Tip>
+
 Before you start, you need these libraries:
 
-```sh
-# Passkey requirements
-npm install @simplewebauthn/browser @simplewebauthn/server
-
-# Pollyfills
-npm install expo-crypto expo-standard-web-crypto \
-  react-native-url-polyfill text-encoding-polyfill
-
-# Overall native requirements
-npm install expo-network react-native-mmkv react-native-webview
+<CodeGroup>
+```sh npm
+# Expo packages
+npx expo install react-native-webview expo-standard-web-crypto expo-crypto expo-network expo-secure-store
 ```
+
+```sh yarn
+# Expo packages
+npx expo install react-native-webview expo-standard-web-crypto expo-crypto expo-network expo-secure-store
+```
+
+```sh pnpm
+# Expo packages
+npx expo install react-native-webview expo-standard-web-crypto expo-crypto expo-network expo-secure-store
+```
+</CodeGroup>
 
 After that, you are ready to install our SDK:
 
-```sh
+<CodeGroup>
+```sh npm
 # Sophon Library
 npm install @sophon-labs/account-react-native
 ```
+
+```sh yarn
+# Sophon Library
+yarn add @sophon-labs/account-react-native
+```
+
+```sh pnpm
+# Sophon Library
+pnpm add @sophon-labs/account-react-native
+```
+
+</CodeGroup>
 
 ## Usage
 
 Before anything, you need to wrap your application with `SophonContextProvider`, that will store context information about the accoint and walletClient connection.
 
 ```ts
+import { DataScopes } from "@sophon-labs/account-core";
 import { SophonContextProvider } from "@sophon-labs/account-react-native";
 
 export default function RootLayout() {
   // ...
 
   return (
-    <SophonContextProvider network="testnet">
+    <SophonContextProvider
+      partnerId="$YOUR_PARTNER_ID"
+      dataScopes={[DataScopes.email, DataScopes.x]}
+      network="testnet"
+    >
       {/* Your components*/}
     </SophonContextProvider>
   );
@@ -57,15 +84,15 @@ With that ready, you can now use our hooks to interact with Sophon.
 import { useSophonAccount } from "@sophon-labs/account-react-native";
 
 export default function YourComponent() {
-  const { connect, account } = useSophonAccount();
+  const { connect, account, disconnect } = useSophonAccount();
   // ...
 }
 ```
 
 <Card
-  title="React Native Sandbox Example"
+  title="React Native Example"
   icon="github"
-  href="https://github.com/sophon-org/sophon-account-sso/tree/main/examples/sandbox-react-native"
+  href="https://github.com/sophon-org/sophon-account-sso/tree/main/examples/mobile/expo-53-go"
   arrow="true"
   cta="Read more"
 >
