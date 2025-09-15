@@ -9,7 +9,7 @@ title: "JWT & Access Tokens"
 </Warning>
 
 When using Sophon Account, everytime a user authorizes an application connection our Account Server issues an access token using RS256 algorithm, with a secret private key.
-You can use this token to authenticate requests to our API, and if you don't want to implemente a custom SIWE flow, you can use the token on your own to make sure that the user is authenticated and owns the account.
+You can use this token to authenticate requests to our API, and if you don't want to implement a custom SIWE flow, you can use the token on your own to make sure that the user is authenticated and owns the account.
 
 <CodeGroup>
 ```typescript React
@@ -121,7 +121,7 @@ export const callBackend = (token: string) => {
 
 ## Decoding the JWT
 
-When you have the token, it is usefull to decode it for additional verification during your backend processing. Given that only Sophon can issue tokens, you can validate that the token you are receiving is valid, and it assert that the user owns the account.
+When you have the token, it is useful to decode it for additional verification during your backend processing. Given that only Sophon can issue tokens, you can validate that the token you are receiving is valid, and it assert that the user owns the account.
 
 By using the JWKS standard, and having the public key we provide, you can decode by yourself, without having to making additional calls.
 

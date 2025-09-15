@@ -7,7 +7,7 @@ title: "Integrating with Viem"
 We expose an [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) provider that can be used directly with [Viem](https://viem.sh/).
 
 ```ts
-import { createSophonProvider } from "@sophon-labs/account-connector";
+import { createSophonEIP1193Provider } from "@sophon-labs/account-connector";
 import { useCallback, useMemo, useState } from "react";
 import { type Address, createWalletClient, custom } from "viem";
 import { sophonTestnet } from "viem/chains";
