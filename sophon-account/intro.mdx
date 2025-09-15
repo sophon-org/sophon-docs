@@ -1,53 +1,37 @@
 ---
-title: "Getting started"
+title: "Overview"
 description: "Learn what makes the Sophon Account unique."
 ---
 
-## What is the Sophon Account?
+![Sophon Account V2](/images/account/sophon-account-v2.png)
 
-The **Sophon Account** is a cross-application smart contract account designed to enhance the user experience across the Sophon ecosystem. Built on Sophon's native account abstraction, it allows users to interact seamlessly with decentralized applications (dApps) using familiar login methods such as email, social accounts, or existing EOA wallets without needing to re-authenticate on each supported application.
+## What is Sophon Account?
+
+The **Sophon Account** is a cross-application smart contract account designed to enhance the user experience across the [Sophon ecosystem](/build/partners/overview). Built on Sophon's native **Account Abstraction**, it allows users to interact seamlessly with decentralized applications (dApps) using familiar login methods such as email, social accounts, or existing EOA wallets without needing to re-authenticate on each supported application.
 
 By leveraging Sophon's infrastructure, the wallet ensures a secure and smooth onboarding, making it easy even for non crypto native users to engage with the decentralized world.
 
-## Getting Started with Sophon Account
+<Warning>This documentation only valid for version >=2.0.0. Versions below 2.0.0 are deprecated and not functional anymore.</Warning>
 
-### New Projects
+## Features and Goals
 
-To initialize a new project with the Sophon Account:
+These are our main features and goals:
 
-```bash
-npx @sophon-labs/create-sophon-app@latest my-app
-```
+- 🧩 Modular smart accounts based on [ERC-7579](https://eips.ethereum.org/EIPS/eip-7579#modules)
+- 🔑 Passkey authentication (no seed phrases)
+- ⏰ Sessions w/ easy configuration and management
+- 💰 Integrated paymaster support
+- ❤️‍🩹 Account recovery
+- Setup EOA or other SSO Guardian accounts to create new passkey
+- Use Google Auth (OIDC) recovery flow to create new passkey
+- 💻 Simple SDKs :
+  - Node.js
+  - React Native
+- 🤝 Open-source authentication server & api
+- 🎓 Examples to get started quickly
 
-The **create-sophon-app** script will create a new project and prompt you to select your preferred wallet kit, with the Sophon Account already integrated.
+## Source Code
 
-<CardGroup cols={2}>
-  <Card title="How the Sophon Account works" icon="gear" href="/sophon-account/architecture">
-    Learn how the Sophon Account works under the hood
-  </Card>
-  <Card title="Check out our examples with live demos" icon="code" href="/sophon-account/examples">
-    Check out our examples with live demos
-  </Card>
-</CardGroup>
+All the code for our Sophon Account is open-source and available on [GitHub](https://github.com/sophon-org/sophon-account-sso) under the MIT License. Feel free to contribute, report issues, or suggest new features to help us improve the tool for everyone.
 
-### Relevant Resources and Packages
-
-<CardGroup cols={1}>
-
-<Card
-  title="Sophon Account GitHub Repository"
-  icon="github"
-  href="https://github.com/sophon-org/sophon-account"
-/>
-
-</CardGroup>
-
-<CardGroup cols={1}>
-
-<Card
-  title="Sophon Account NPM package"
-  icon="npm"
-  href="https://www.npmjs.com/package/@sophon-labs/account-eip6963"
-/>
-
-</CardGroup>
+The contracts used for the Account Abstraction are a fork of [ZKsync SSO Smart Contracts](https://github.com/matter-labs/zksync-sso-clave-contracts), open-source and available on [GitHub](https://github.com/sophon-org/zksync-sso-clave-contracts) under the GNU License.
