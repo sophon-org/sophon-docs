@@ -6,7 +6,7 @@ title: "EIP-6963"
 standard way to add support for **Sophon Account** using the main wallet providers
 in the market.
 
-The implementation is very simple, you just need to import the package and it will automatically broadcast the provider to the wallet provider that you are using.
+The implementation is very simple, you just need to import the package and it will automatically broadcast the provider to the wallet provider that you are using. Most modern wallet connection libraries, like RainbowKit, wagmi, or Reown Appkit, support [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963). 
 
 <CodeGroup>
 ```bash npm
@@ -58,27 +58,6 @@ This will automatically:
 - Register the **Sophon Account** provider
 - Announce it through the [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) events
 - Make it available to [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) compatible applications
-
-### Working with Wallet Connection Libraries
-
-Most modern wallet connection libraries, like RainbowKit, wagmi, or Reown Appkit, support [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963). Here's how to connect with wagmi:
-
-```javascript
-import { getDefaultConfig } from "@rainbow-me/rainbowkit";
-import { sophonTestnet, sophon } from "wagmi/chains";
-import { createSophonEIP6963Emitter } from "@sophon-labs/account-eip6963";
-
-createSophonEIP6963Emitter("testnet");
-
-export const config = getDefaultConfig({
-  appName: "Your Application",
-  projectId: "YOUR_PROJECT_ID",
-  chains: [sophon, sophonTestnet],
-  ssr: true,
-});
-```
-
-With this setup, the Sophon Account will appear in the wallet selection UI provided by RainbowKit.
 
 You can find examples of implementing EIP-6963 with other common libraries:
 
