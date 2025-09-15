@@ -14,34 +14,14 @@ You can use this token to authenticate requests to our API, and if you don't wan
 <CodeGroup>
 ```typescript React
 import { useSophonToken } from '@sophon-labs/account-react-native';
-
-export default function App() {
-  const [token, setToken] = useState<SophonJWTToken | null>(null);
-  const [loading, setLoading] = useState(false);
-  const { getAccessToken } = useSophonToken();
-  const updateAccessToken = useCallback(async () => {
-    setLoading(true);
-    const newToken = await getAccessToken();
-    setToken(newToken);
-    setLoading(false);
-  }, [getAccessToken]);
-
-  useEffect(() => {
-    updateAccessToken();
-  }, [updateAccessToken]);
-  
-  return (
-    <div>
-      <h1>My Token: {token?.value}</h1>
-    </div>
-  );
-}
 ```
 
 ```typescript React Native
 import { useSophonToken } from "@sophon-labs/account-react";
+```
+</CodeGroup>
 
-
+```typescript General Implementation
 export default function App() {
   const [token, setToken] = useState<SophonJWTToken | null>(null);
   const [loading, setLoading] = useState(false);
@@ -64,7 +44,6 @@ export default function App() {
   );
 }
 ```
-</CodeGroup>
 
 ## JWT Token Payload
 
