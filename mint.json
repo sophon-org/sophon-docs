@@ -185,10 +185,6 @@
       ]
     },
     {
-      "group": "Recipes",
-      "pages": ["sophon-account/recipes/intro"]
-    },
-    {
       "group": "",
       "pages": ["discover/our-universe"]
     },
