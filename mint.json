@@ -207,6 +207,7 @@
       "pages": [
         "discover/bridging/bridging-intro",
         "discover/bridging/sophon-bridge",
+        "discover/bridging/deBridge",
         "discover/bridging/orbiter",
         "discover/bridging/stargate",
         "discover/bridging/layerswap",
