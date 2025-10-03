@@ -210,6 +210,7 @@
         "discover/bridging/orbiter",
         "discover/bridging/stargate",
         "discover/bridging/layerswap",
+        "discover/bridging/decent",
         "discover/bridging/withdrawal-delay",
         "discover/bridging/bridging-faqs"
       ]
