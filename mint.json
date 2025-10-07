@@ -209,6 +209,8 @@
         "discover/bridging/sophon-bridge",
         "discover/bridging/orbiter",
         "discover/bridging/stargate",
+        "discover/bridging/deBridge",
+        "discover/bridging/decent",
         "discover/bridging/layerswap",
         "discover/bridging/withdrawal-delay",
         "discover/bridging/bridging-faqs"
