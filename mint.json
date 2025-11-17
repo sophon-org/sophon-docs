@@ -60,10 +60,7 @@
     {
       "group": "Architecture",
       "pages": [
-        "architecture/validiums",
-        "architecture/zk-stack",
-        "architecture/account-abstraction",
-        "architecture/paymasters"
+        "architecture/overview"
       ] 
     },
     {
@@ -149,14 +146,6 @@
       ]
     },
     {
-      "group": "EVM Compatibility",
-      "pages": [
-        "build/evm-compatibility/index",
-        "build/evm-compatibility/evm-interpreter",
-        "build/evm-compatibility/differences"
-      ]
-    },
-    {
       "group": "Deploy & Interact",
       "pages": [
         "build/interact/hardhat",
@@ -179,16 +168,9 @@
         "build/tokens/layerzero_integration"
       ]
     },
-    {
-      "group": "Partners",
-      "pages": [
-        "build/partners/overview",
-        "build/partners/infrastructure",
-        "build/partners/account-abstraction",
-        "build/partners/oracles",
-        "build/partners/gaming",
-        "build/partners/payments"
-      ]
+        {
+      "group": "",
+      "pages": ["ecosystem/our-universe"]
     },
     {
       "group": "Bridging",
@@ -204,36 +186,39 @@
         "ecosystem/bridging/bridging-faqs"
       ]
     },
-        {
+            {
       "group": "Sophon Mobile App",
       "pages": [
         "ecosystem/sophon-app"
       ]
     },
-    {
-      "group": "",
-      "pages": ["ecosystem/our-universe"]
+        {
+      "group": "Partners",
+      "pages": [
+        "ecosystem/partners/overview",
+        "ecosystem/partners/infrastructure",
+        "ecosystem/partners/account-abstraction",
+        "ecosystem/partners/oracles",
+        "ecosystem/partners/gaming",
+        "ecosystem/partners/payments"
+      ]
     },
     {
       "group": "Farming",
       "pages": [
         "ecosystem/farming/farming-intro",
-        "ecosystem/farming/farming-cycle",
-        "ecosystem/farming/active-pools",
         "ecosystem/farming/points-calculations",
-        "ecosystem/farming/reward-locking",
-        "ecosystem/farming/boosts",
-        "ecosystem/farming/withdrawals",
         "ecosystem/farming/farming-faqs"
       ]
     },
     {
       "group": "Nodes",
-      "pages": ["ecosystem/nodes/our-infra", 
-    "ecosystem/nodes/full-nodes",
-    "ecosystem/nodes/light-nodes",
-    "ecosystem/nodes/nodes-faqs",
-    "ecosystem/nodes/calculating-rewards"
+      "pages": [
+        "ecosystem/nodes/our-infra", 
+        "ecosystem/nodes/full-nodes",
+        "ecosystem/nodes/light-nodes",
+        "ecosystem/nodes/nodes-faqs",
+        "ecosystem/nodes/calculating-rewards"
   ]
     },
         {
@@ -243,10 +228,10 @@
     {
       "group": "Guardians",
       "pages": [
-        "nodes/what-are-guardians",
-        "nodes/guardian-membership",
-        "nodes/operator-address",
-        "nodes/guardian-faqs"
+        "ecosystem/nodes/what-are-guardians",
+        "ecosystem/nodes/guardian-membership",
+        "ecosystem/nodes/operator-address",
+        "ecosystem/nodes/guardian-faqs"
       ]
     }
   ],
