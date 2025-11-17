@@ -40,26 +40,22 @@
   "layout": "topnav",
   "tabs": [
     {
+      "name": "Aura",
+      "url": "aura"
+    },
+    {
       "name": "Build",
       "url": "build"
     },
     {
-      "name": "Account",
-      "url": "sophon-account"
-    },
-    {
-      "name": "Discover",
-      "url": "discover"
-    },
-    {
-      "name": "Nodes",
-      "url": "nodes"
+      "name": "Ecosystem",
+      "url": "ecosystem"
     }
   ],
   "navigation": [
     {
       "group": "",
-      "pages": ["welcome", "using-sophon", "what-is-sophon", "why-sophon"]
+      "pages": ["welcome", "what-is-sophon", "why-sophon"]
     },
     {
       "group": "Architecture",
@@ -68,6 +64,14 @@
         "architecture/zk-stack",
         "architecture/account-abstraction",
         "architecture/paymasters"
+      ] 
+    },
+    {
+      "group": "Links",
+      "pages": [
+          "links/block-explorers",
+        "links/indexers",
+        "links/github"
       ]
     },
     {
@@ -80,24 +84,67 @@
         "tokenomics/token-allocation"
       ]
     },
-    {
-      "group": "Links",
+        {
+      "group": "",
       "pages": [
-        "links/audits",
-        "links/security",
-        "links/status",
-        "links/socials"
+        "audits",
+        "security",
+        "status"
       ]
     },
     {
       "group": "",
       "pages": ["build/start-building"]
     },
+        {
+      "group": "",
+      "pages": [
+        "build/network-information",
+        "build/account-abstraction"
+      ]
+    },
+    {
+      "group": "Sophon Account",
+      "pages": [
+        "build/intro",
+        "build/getting-started",
+        "build/architecture",
+        "build/faq"
+      ]
+    },
+    {
+      "group": "Examples",
+      "pages": [
+                "build/intro",
+        "build/rainbowkit",
+        "build/appkit",
+        "build/connectkit",
+        "build/thirdweb"
+      ]
+      },
+          {
+      "group": "Authentication",
+      "pages": [
+        "build/intro",
+        "build/eip6963",
+        "build/react",
+        "build/react-native",
+        "build/data-scopes",
+        "build/access-tokens"
+      ]
+    },
+    {
+      "group": "Connectors",
+      "pages": [
+        "build/intro",
+        "build/viem",
+        "build/wagmi"
+      ]
+    },
     {
       "group": "Setup",
       "pages": [
         "build/early-partners",
-        "build/network-information",
         "build/setting-up-paymasters"
       ]
     },
@@ -136,8 +183,6 @@
       "group": "Partners",
       "pages": [
         "build/partners/overview",
-        "build/partners/block-explorers",
-        "build/partners/indexers",
         "build/partners/infrastructure",
         "build/partners/account-abstraction",
         "build/partners/oracles",
@@ -146,91 +191,54 @@
       ]
     },
     {
-      "group": "Sophon Account",
+      "group": "Bridging",
       "pages": [
-        "sophon-account/intro",
-        "sophon-account/getting-started",
-        "sophon-account/architecture",
-        "sophon-account/faq"
+        "ecosystem/bridging/bridging-intro",
+        "ecosystem/bridging/sophon-bridge",
+        "ecosystem/bridging/orbiter",
+        "ecosystem/bridging/stargate",
+        "ecosystem/bridging/deBridge",
+        "ecosystem/bridging/decent",
+        "ecosystem/bridging/layerswap",
+        "ecosystem/bridging/withdrawal-delay",
+        "ecosystem/bridging/bridging-faqs"
       ]
     },
-    {
-      "group": "Authentication",
+        {
+      "group": "Sophon Mobile App",
       "pages": [
-        "sophon-account/authentication/intro",
-        "sophon-account/authentication/eip6963",
-        "sophon-account/authentication/react",
-        "sophon-account/authentication/react-native",
-        "sophon-account/authentication/data-scopes",
-        "sophon-account/authentication/access-tokens"
-      ]
-    },
-    {
-      "group": "Connectors",
-      "pages": [
-        "sophon-account/connectors/intro",
-        "sophon-account/connectors/viem",
-        "sophon-account/connectors/wagmi"
-      ]
-    },
-    {
-      "group": "Integration",
-      "pages": [
-        "sophon-account/examples/intro",
-        "sophon-account/examples/rainbowkit",
-        "sophon-account/examples/appkit",
-        "sophon-account/examples/connectkit",
-        "sophon-account/examples/thirdweb"
+        "ecosystem/sophon-app"
       ]
     },
     {
       "group": "",
-      "pages": ["discover/our-universe"]
-    },
-    {
-      "group": "Sophon Mobile App",
-      "pages": [
-        "discover/app/sophon-app"
-      ]
-    },
-    {
-      "group": "Bridging",
-      "pages": [
-        "discover/bridging/bridging-intro",
-        "discover/bridging/sophon-bridge",
-        "discover/bridging/orbiter",
-        "discover/bridging/stargate",
-        "discover/bridging/deBridge",
-        "discover/bridging/decent",
-        "discover/bridging/layerswap",
-        "discover/bridging/withdrawal-delay",
-        "discover/bridging/bridging-faqs"
-      ]
+      "pages": ["ecosystem/our-universe"]
     },
     {
       "group": "Farming",
       "pages": [
-        "discover/farming-intro",
-        "discover/farming-cycle",
-        "discover/active-pools",
-        "discover/points-calculations",
-        "discover/reward-locking",
-        "discover/boosts",
-        "discover/withdrawals",
-        "discover/farming-faqs"
+        "ecosystem/farming/farming-intro",
+        "ecosystem/farming/farming-cycle",
+        "ecosystem/farming/active-pools",
+        "ecosystem/farming/points-calculations",
+        "ecosystem/farming/reward-locking",
+        "ecosystem/farming/boosts",
+        "ecosystem/farming/withdrawals",
+        "ecosystem/farming/farming-faqs"
       ]
     },
     {
-      "group": "",
-      "pages": ["nodes/our-infra"]
+      "group": "Nodes",
+      "pages": ["ecosystem/nodes/our-infra", 
+    "ecosystem/nodes/full-nodes",
+    "ecosystem/nodes/light-nodes",
+    "ecosystem/nodes/nodes-faqs",
+    "ecosystem/nodes/calculating-rewards"
+  ]
     },
-    {
-      "group": "Node Types",
-      "pages": ["nodes/full-nodes", "nodes/light-nodes", "nodes/nodes-faqs"]
-    },
-    {
-      "group": "Node Rewards",
-      "pages": ["nodes/calculating-rewards"]
+        {
+      "group": "Node Sale",
+      "pages": ["ecosystem/nodes/details", "ecosystem/nodes/contracts"]
     },
     {
       "group": "Guardians",
@@ -240,10 +248,6 @@
         "nodes/operator-address",
         "nodes/guardian-faqs"
       ]
-    },
-    {
-      "group": "Node Sale",
-      "pages": ["nodes/details", "nodes/contracts"]
     }
   ],
   "footerSocials": {
