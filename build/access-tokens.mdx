@@ -1,0 +1,186 @@
+---
+title: "JWT & Access Tokens"
+---
+
+<Warning>
+  Tokens are accessible only when using the React and React Native SDKs with a
+  valid `partnerId`. Partners integrating via EIP-6963 will not have access to
+  user tokens.
+</Warning>
+
+When using Sophon Account, everytime a user authorizes an application connection our Account Server issues an access token using RS256 algorithm, with a secret private key.
+You can use this token to authenticate requests to our API, and if you don't want to implement a custom SIWE flow, you can use the token on your own to make sure that the user is authenticated and owns the account.
+
+<CodeGroup>
+```typescript React
+import { useSophonToken } from '@sophon-labs/account-react-native';
+```
+
+```typescript React Native
+import { useSophonToken } from "@sophon-labs/account-react";
+```
+</CodeGroup>
+
+```typescript General Implementation
+export default function App() {
+  const [token, setToken] = useState<SophonJWTToken | null>(null);
+  const [loading, setLoading] = useState(false);
+  const { getAccessToken } = useSophonToken();
+  const updateAccessToken = useCallback(async () => {
+    setLoading(true);
+    const newToken = await getAccessToken();
+    setToken(newToken);
+    setLoading(false);
+  }, [getAccessToken]);
+
+  useEffect(() => {
+    updateAccessToken();
+  }, [updateAccessToken]);
+  
+  return (
+    <div>
+      <h1>My Token: {token?.value}</h1>
+    </div>
+  );
+}
+```
+
+## JWT Token Payload
+
+We follow standard JWT [RFC-7519](https://www.rfc-editor.org/rfc/rfc7519#section-4.1), and add some more fields to give more context to the token.
+
+<ResponseField name="aud" type="string">
+  Audience for the JWT token. This claim shows what domain of the intended
+  audience of the JWT. In this context, the audience is your **partnerId**.
+
+When processing and validating the token by yourself, the value of this field should match with your **partnerId** that we provided you.
+
+</ResponseField>
+<ResponseField name="iss" type="string">
+  Issuer of the JWT token. This claim always shows **auth.sophon.xyz** generated
+  and issued the JWT.
+</ResponseField>
+<ResponseField name="sub" type="string">
+  Subject of the JWT token, representing the user's smart wallet address.
+</ResponseField>
+<ResponseField name="iat" type="string">
+  Timestamp when the JWT token was issued.
+</ResponseField>
+<ResponseField name="exp" type="string">
+  Timestamp when the JWT token will expire. This is generally some hours after the token was issued.
+</ResponseField>
+<ResponseField name="scope" type="string">
+  The scope of data granted by the user that allows us to share specific data
+  with the application that the user is connecting to. Possible scopes are:
+  `email`, `twitter`, `gmail`, `discord` and `telegram`. Multiple scopes could
+  be provided and they are separated by a space.
+</ResponseField>
+
+## Sending the Token
+
+Once you got the token issued, you can send it during the calls to your API using the classic header `Authorization: Bearer <token>`. See how to do it with different frameworks:
+
+<CodeGroup>
+```typescript axios
+import axios from 'axios';
+
+export const callBackend = (token: string) => {
+  const response = await axios.get(`${process.env.BACKEND_URL}/do-something`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  
+  if (response.status !== 200) {
+    throw new Error('Failed to call backend.');
+  }
+
+return response.data;
+};
+```
+
+```typescript fetch
+export const callBackend = (token: string) => {
+  const response = await fetch(`${process.env.BACKEND_URL}/do-something`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    },
+    body: JSON.stringify(data)
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to call backend.');
+  }
+
+  return response.json();
+}
+```
+
+</CodeGroup>
+
+## Decoding the JWT
+
+When you have the token, it is useful to decode it for additional verification during your backend processing. Given that only Sophon can issue tokens, you can validate that the token you are receiving is valid, and it assert that the user owns the account.
+
+By using the JWKS standard, and having the public key we provide, you can decode by yourself, without having to making additional calls.
+
+### Decode Using Sophon Account SDK
+
+To make things easier, we provide a SDK that can decode the token for you:
+
+<CodeGroup>
+```bash npm
+npm install @sophon-labs/account-api-sdk
+```
+
+```bash yarn
+yarn add @sophon-labs/account-api-sdk
+```
+
+```bash pnpm
+pnpm add @sophon-labs/account-api-sdk
+```
+</CodeGroup>
+
+Then, you can use it in your code:
+
+```typescript
+import { SophonAPISDK } from "@sophon-labs/account-api-sdk";
+
+const partnerId = "my-partner-id";
+const sdk = SophonAPISDK("testnet", partnerId);
+const decodedToken = sdk.auth.decodeJWT(token);
+
+console.log(decodedToken); // { iss: 'xxxx', exp: nnnn, ... }
+```
+
+### Decoding the token using JWKS libraries
+
+One of the options is to use a JWKS library to decode the token. For example, using `jsonwebtoken` and `jwks-rsa` libraries:
+
+```typescript
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { JwksClient } from "jwks-rsa";
+
+const jwksUrl = `https://api.my.staging.sophon.xyz/.well-known/jwks.json`;
+// https://api.my.sophon.xyz/.well-known/jwks.json for production
+
+// The client should be initialized as
+const client = new JwksClient({
+  jwksUri: jwksUrl,
+  rateLimit: true,
+  cache: true,
+  cacheMaxEntries: 5, // Maximum number of cached keys
+  cacheMaxAge: 600000, // Cache duration in milliseconds (10 minutes in this case))}
+});
+
+const signingKey = await client.getSigningKey();
+const publicKey = signingKey.getPublicKey();
+
+const decodedToken: JwtPayload = jwt.verify(encodedJwt, publicKey, {
+  ignoreExpiration: false,
+}) as JwtPayload;
+
+console.log(decodedToken); // { iss: 'xxxx', exp: nnnn, ... }
+```

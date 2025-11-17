@@ -1,0 +1,25 @@
+---
+title: "Getting started"
+description: "First steps integrating Sophon Account in your project."
+---
+
+<Warning>This documentation only valid for version >=2.0.0. Versions below 2.0.0 are deprecated and not functional anymore.</Warning>
+
+## Getting Started with Sophon Account
+
+You can use Sophon Account in a few different ways, depending on your needs:
+
+- You can use our [EIP-6963 SDK](./authentication/eip6963) package to add **Sophon Account** as a connection option to any wallet kit available in the market.
+- You can add our [React SDK](./authentication/react) to your web project to use the **Sophon** as your login provider.
+- You can also use our [React Native SDK](./authentication/react-native) to add **Sophon** as a connection option to your mobile application.
+
+## Main Packages
+
+To integrate the Sophon Account into your project, we've created a few packages to help you get started, these are the main ones:
+
+- [@sophon-labs/account-connector](https://www.npmjs.com/package/@sophon-labs/account-provider): Our EIP-1193 provider for the Sophon Account, to be used with any library that supports EIP-1193, like Viem.
+- [@sophon-labs/account-connector](https://www.npmjs.com/package/@sophon-labs/account-connector): A generic Wagmi connector for the Sophon Account, to be used with any wallet kit that supports Wagmi.
+- [@sophon-labs/account-eip6963](https://www.npmjs.com/package/@sophon-labs/account-eip6963): Allow web applications to use the Sophon Account by using the [EIP-6963 standard](https://eips.ethereum.org/EIPS/eip-6963).
+- [@sophon-labs/account-react-native](https://www.npmjs.com/package/@sophon-labs/account-react-native): Library to help you integrate the Sophon Account into your React Native projects, requires a partnerId to start up.
+- [@sophon-labs/account-react](https://www.npmjs.com/package/@sophon-labs/account-react): Web library to unleash the full power of Sophon Account, requires a partnerId to start up.
+- [@sophon-labs/account-api-sdk](https://www.npmjs.com/package/@sophon-labs/account-api-sdk): Utility package to wrap API calls, jwt decoding etc...
