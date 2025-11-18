@@ -3,35 +3,60 @@ title: 'What Is Sophon?'
 description: ''
 ---
 
-**Sophon** is a **ZK chain** that is part of ZKsync’s broader [Elastic Chain vision](https://zksync.mirror.xyz/BqdsMuLluf6AlWBgWOKoa587eQcFZq20zTf7dYblxsU).  
+**Sophon** is an **EVM-compatible Layer 2** ([Atlas-era zk stack](https://paragraph.com/@zksync/introducing-the-zk-stack-s-atlas-upgrade-beyond-15k-tps-with-one-second-zk-finality)) built for consumer UX. It pairs a lifestyle app (Aura), a premium stablecoin card, and a zkTLS-powered **Social Oracle** that turns verified digital signals into utility, without exposing raw data.
 
 ## Key Features of Sophon
 
-### 1. **Built on Validium and the ZK Stack**
+### 1. **Consumer-first L2**
 
-Sophon leverages **Validium** as part of the **ZK Stack**, offering the following advantages:
-- **Higher Throughput**: Process a larger volume of transactions efficiently.
-- **Low Transaction Fees**: Enable cost-effective interactions for users.
-- **Layer 2 Benefits**: As a **Layer 2 network**, Sophon ensures scalability while maintaining the security of the Ethereum mainnet.
+Fast, low-fee, fully EVM: standard tooling, familiar contracts.
 
-<Warning>These features empower users to fully experience the engaging and culturally rich ecosystem that Sophon is building.</Warning>
+Built for **products**, not pilots: optimized for **payments**, **high-frequency reads/writes**, and **simple integration paths.**
 
-### 2. **Interoperability through Elastic Chains**
+<Warning> Sophon no longer relies on **native AA** at the protocol layer. AA-style UX (sponsored gas, session keys) is provided via our SDKs and SSO at the **integration layer**. </Warning>
 
-A key advantage of being part of the **Elastic Chain vision** is **seamless interoperability**:
-- Sophon enables **frictionless interactions** between itself and other ZK chains.  
-- Users and applications can operate across chains without liquidity fragmentation.
+### 2. **Social Oracle**
 
-<Note>Interoperability prevents silos, allowing liquidity to flow freely between chains, which further enhances the **on-chain experience**.</Note>
+Bring real-world signals onchain as proofs:
 
-### 3. **Enhanced User Experience**
+Verify traits like **creator reach**, **fitness activity**, **travel history**, **onchain behavior*, or any traits.
 
-By combining scalability with interoperability, Sophon ensures that:
-- Users benefit from a fast, seamless, and secure environment.
-- Developers can build applications that interact effortlessly with the entire ZK ecosystem.
+Partners query eligibility (e.g., “meets criteria”) without accessing personal details.
+
+<Note> **Prove, don’t expose**: traits are zero-knowledge proofs you can revoke at any time. </Note>
+
+### 3. **Sophon Account & SSO**
+
+Sophon Account abstracts setup and key management behind **social/passkey sign-in**.
+
+Our **SSO** provide AA-style flows without protocol changes.
+
+### 4 **Payments & Card**
+
+**Stablecoin** card that ties spend to gamified upside.
+
+App + card loop: verified traits → perks → spending → upgraded access.
 
 ---
 
-## Conclusion
+## How It Fits Together
 
-Sophon’s foundation on Validium, its integration into the ZK Stack, and its alignment with the **Elastic Chain vision** make it a powerful platform. Whether you’re a user or developer, Sophon eliminates barriers, offering **scalability, interoperability**, and a superior **on-chain experience**.
+**App:** build your **Aura** (private, verified digital DNA) from connected signals: unlock status, perks, and rewards.
+
+**Card:** everyday spend on stablecoin rails: upside mechanics instead of fixed cashback.
+
+**Chain:** EVM L2 where settlement, trait verification, and partner activations run end-to-end.
+
+## For Users
+
+**Privacy by default:** connect only what you want and revoke anytime.
+
+**Immediate utility:** perks based on verified traits. Spend with the card.
+
+
+## For Builders & Partners
+
+**SSO:** For sign-in, sponsored flows, and session keys.
+
+**Social Oracle:** APIs to target verified cohorts (eligibility checks, not data dumps).
+
