@@ -86,7 +86,8 @@
         "links/audits",
         "links/security",
         "links/status",
-        "links/socials"
+        "links/socials",
+        "links/support"
       ]
     },
     {
@@ -399,6 +400,10 @@
     {
       "source": "/build/evm-differences",
       "destination": "/build/evm-compatibility/overview"
+    },
+    {
+      "source": "/sophon/links/support",
+      "destination": "/links/support"
     }
   ]
 }
