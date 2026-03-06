@@ -23,10 +23,7 @@
   "colors": {
     "primary": "#175aad",
     "light": "#2b95ff",
-    "dark": "#1710a1",
-    "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+    "dark": "#1710a1"
     }
   },
   "feedback": {
