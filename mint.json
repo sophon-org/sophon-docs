@@ -189,12 +189,6 @@
       "pages": ["discover/our-universe"]
     },
     {
-      "group": "Sophon Mobile App",
-      "pages": [
-        "discover/app/sophon-app"
-      ]
-    },
-    {
       "group": "Bridging",
       "pages": [
         "discover/bridging/bridging-intro",
