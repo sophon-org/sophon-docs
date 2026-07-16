@@ -1,28 +1,20 @@
 ---
-title: 'Validiums'
-description: ''
+title: "Validium Architecture (Legacy)"
+description: "How Sophon v1 used offchain data availability"
 ---
-
-<Note>
-A **Validium** is a specialized blockchain scaling solution designed to improve scalability by making use of offchain **data availability**. This approach offers several advantages, including enhanced privacy and reduced transaction costs.
-</Note>
 
 <Warning>
-[Avail](https://www.availproject.org/) serves as Sophon's **data availability** layer, meaning most data is stored and processed on Avail's blockchain. This reduces costs and improves performance as the burden on [Ethereum](https://ethereum.org/en/) L1 is much lower. Since Avail is designed to scale with an increase in user activity, it means that Sophon's own blockchain is able to support thousands, or even millions, of users.
+  This page documents the legacy Sophon v1 chain architecture. The Sophon Chain is
+  being wound down; see the [migration guide](/migration) for current actions.
 </Warning>
 
----
+Sophon v1 was implemented as a Validium built with the ZK Stack. A Validium keeps
+transaction data outside Ethereum while publishing validity proofs to Ethereum,
+reducing data costs while retaining proof-based verification of chain state.
 
-## Key Features of Validiums
+Sophon used [Avail](https://www.availproject.org/) as its external data-availability
+layer. Avail stored the data needed to reconstruct state, while Ethereum verified
+the validity proofs associated with transaction batches.
 
-**Offchain Transaction Processing:** Validiums process most transactions offchain, reducing the load on the base layer. Only a limited set of transaction data is published to the Ethereum base layer, optimizing performance and lowering costs.
-
-**Validity Proofs:** To ensure the integrity of offchain transactions, Validiums use validity proofs on Ethereum Layer 1. These proofs ensure that the transaction data is trustworthy and has not been tampered with.
-
-**Transaction Verification:** A validity proof is attached to every batch of transactions before it is published on the Ethereum base layer. The Ethereum network only accepts and verifies these transactions if they are accompanied by a valid proof, confirming the correctness of the data.
-
-### Sophon and Validiums
-
-<Tip>
-Sophon leverages **Validium technology** to provide an efficient, scalable solution. It will be implemented on the [ZKsync Elastic Chain](https://zksync.io/), bringing the benefits of Validium’s offchain processing and privacy features to the ZKsync ecosystem.
-</Tip>
+This architecture is retained as historical context only; it is not a roadmap for a
+new Sophon chain deployment.

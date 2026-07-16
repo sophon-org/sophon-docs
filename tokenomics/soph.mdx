@@ -1,48 +1,90 @@
 ---
 title: "SOPH"
+description: "SOPH utility, chain transition, and official contract addresses"
 mode: "wide"
 ---
 
-SOPH is the main utility token for the Sophon Network, playing an essential role in its current and future operations.
+SOPH is an ERC-20 token native to Ethereum. It launched with an original supply of
+**10 billion SOPH** and was used as the Sophon Chain's gas token and for staking.
 
-We expect the utility to evolve over time as our network and our product offering grows, incorporating new utilities as we do. There is plenty planned on the product front so stay tuned for the evolution of SOPH.
+<Warning>
+  The Sophon Chain is being wound down. Gas and staking—the two chain-era SOPH
+  utilities—will be phased out with the chain. If you hold SOPH on Sophon, follow
+  the [migration guide](/migration) to withdraw it.
+</Warning>
 
-There are two reasons SOPH is native to Ethereum. The first is that the ZK Stack only support chains with a base token that exists on L1. The second is that we are an L2, relying on L1 security, and it is therefore important for our community to have L1 backed security for their SOPH.
+SOPH itself does **not** need to be migrated or swapped. SOPH on the Sophon Chain is
+a bridged representation of the Ethereum-native token.
 
-At launch SOPH serves two purposes. It is used to pay gas fees on the network and to facilitate the decentralisation of Sophon's sequencer using a staking mechanism.
+## Product-funded buybacks and burns
 
-## **Token Details**
+SOPH's new model links token burns to revenue from products built by Sophon. A
+portion of profits will be used to buy SOPH on the open market on an ongoing basis,
+and the purchased tokens will be permanently burned. They will not be redistributed
+to token holders.
+
+The first announced burn covers more than **46.5 million SOPH** from the unutilized
+staking-reward pool and node buybacks. Subsequent purchases are intended to be
+funded by product revenue.
+
+Pyre's announced revenue sources are:
+
+- interchange fees from card transactions;
+- performance fees from vault usage;
+- reserve yield from PYRUSD, Pyre's custom stablecoin and settlement currency.
+
+As tokens are burned, circulating supply contracts. Percentages in the historical
+allocation schedule are calculated against the original 10 billion issuance.
+
+## Chain-era utility transition
+
+### Staking
+
+Staking remains available while the Sophon Chain is operational and will be
+discontinued when the chain is decommissioned. Staked SOPH positions are transitioned
+to Ethereum automatically. SOPH that is unstaked is claimable on Ethereum through
+[claim.sophon.com](https://claim.sophon.com).
+
+### Guardian rewards
+
+The Guardian programme continues on its original schedule: Guardian NFT holders
+receive a pro-rata share of **20% of the original SOPH supply over three years**.
+Current reward streams continue vesting on Sophon through **September 29, 2026 at
+00:00 GMT**. New rewards then accrue on Ethereum. Guardian NFT holders do not need
+to migrate their NFTs manually.
+
+## Token details
 
 - Ticker: **SOPH**
-- Token standard: **ERC20**
-- Total supply: **10 billion** (10,000,000,000)
-- Allocation to the Sophon community: **57%**
+- Token standard: **ERC-20**
+- Original supply: **10 billion** (10,000,000,000)
+- Original community allocation: **57%**
 
-### Contract Addresses
+## Official contract addresses
 
-| Chain          | Address                                                                                                                         |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Ethereum       | `0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0` ([link](https://etherscan.io/token/0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0))    |
-| Sophon         | `0x000000000000000000000000000000000000800A` ([link](https://sophscan.xyz/token/0x000000000000000000000000000000000000800A))    |
-| Sophon - Wrapped SOPH (WSOPH) | `0x2b1A859dE6A55c553520D7780Bc5805712B128F9` ([link](https://sophscan.xyz/token/0x2b1A859dE6A55c553520D7780Bc5805712B128F9))    |
-| BSC            | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([link](https://bscscan.com/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742))     |
-| Base           | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([link](https://basescan.org/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742))    |
-| Arbitrum       | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([link](https://arbiscan.io/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742))     |
-| Polygon        | `0xEb971Fd26783f32694dbB392dD7289de23109148` ([link](https://polygonscan.com/token/0xEb971Fd26783f32694dbB392dD7289de23109148)) |
-
-For detailed technical information about bridging SOPH across different chains, see the [SOPH Bridging Guide](/build/tokens/soph-bridging).
+| Chain | Address |
+| --- | --- |
+| Ethereum | `0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0` ([Etherscan](https://etherscan.io/token/0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0)) |
+| Sophon | `0x000000000000000000000000000000000000800A` ([Sophon Explorer](https://explorer.sophon.xyz/address/0x000000000000000000000000000000000000800A)) |
+| Base | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([Basescan](https://basescan.org/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
+| BSC | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([BscScan](https://bscscan.com/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
+| Arbitrum | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([Arbiscan](https://arbiscan.io/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
+| Polygon | `0xEb971Fd26783f32694dbB392dD7289de23109148` ([PolygonScan](https://polygonscan.com/token/0xEb971Fd26783f32694dbB392dD7289de23109148)) |
+| Beam | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([Beam Explorer](https://subnets.avax.network/beam/address/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
 
 <CardGroup cols={2}>
-  <Card title="Gas" icon="gas-pump" href="/tokenomics/gas">
-    Learn how SOPH is used to pay for gas fees on the Sophon Network and how paymasters provide flexibility for users.
+  <Card title="Chain Migration" icon="arrow-right-arrow-left" href="/migration">
+    Claim rewards and move assets off the Sophon Chain.
   </Card>
-  <Card title="Staking" icon="coins" href="/tokenomics/staking">
-    Discover how staking SOPH contributes to the decentralization of Sophon's sequencing function and earn rewards.
+  <Card title="SOPH Bridging" icon="bridge" href="/build/tokens/soph-bridging">
+    Review the current canonical and LayerZero routes.
   </Card>
-  <Card title="Staking Badges" icon="badge" href="/tokenomics/staking-badges">
-    Earn Bronze, Silver, or Gold badges by staking your SOPH airdrop and unlock future benefits in the Sophon ecosystem.
+  <Card title="Staking Transition" icon="coins" href="/tokenomics/staking">
+    Learn how staking is handled during the wind-down.
   </Card>
-  <Card title="Token Allocation" icon="chart-pie" href="/tokenomics/token-allocation">
-    Explore how the SOPH tokens are distributed across node operators, investors, contributors, and the community.
+  <Card title="Original Allocation" icon="chart-pie" href="/tokenomics/token-allocation">
+    Review the original token allocation and vesting schedule.
   </Card>
 </CardGroup>
+
+[Read the official SOPH announcement](https://sophon.com/content/soph-token)

@@ -1,57 +1,47 @@
 ---
-title: 'FAQs'
-description: ''
+title: "Withdrawal FAQs"
+description: "Common questions about moving assets off the Sophon Chain"
 ---
 
-<Note>
-Please see the questions below to resolve any issue(s) you may be facing. If none of these relate to your problem, please contact <a href="mailto:product@sophon.xyz">product@sophon.xyz</a> for direct assistance.
-</Note>
-
-## Bridging Basics
-
-<Accordion title="Does the native Sophon Bridge use LayerZero for all assets?">
-  No, it doesn’t. The Sophon Bridge is our canonical bridge, the official one connecting Sophon to Ethereum. Some tokens might use LayerZero, and Sophon also supports them.
+<Accordion title="Can I still bridge assets into Sophon?">
+  No. New canonical deposits were disabled on June 25, 2026. Sophon is also no
+  longer connected to LayerZero.
 </Accordion>
 
-<Accordion title="Is it possible to bridge assets in both directions?">
-  Yes, but it depends:
-  <ol>
-    <li>Assets that exist on <strong>Ethereum</strong> can be bridged natively.</li>
-    <li>Assets on protocols like <strong>LayerZero</strong> or <strong>Wormhole</strong> must use their respective bridges instead of Sophon’s Bridge, otherwise two versions of the asset will end up on Sophon’s side.</li>
-    <li><strong>Sophon-native assets</strong> such as MUP can’t be bridged to Ethereum using Sophon’s native bridge. They can only be bridged if they were created using some specific protocol (like LayerZero).</li>
-  </ol>
+<Accordion title="Where should I start a withdrawal?">
+  Use [claim.sophon.com](https://claim.sophon.com). It shows Sophon balances and the
+  withdrawal routes currently available for each asset.
 </Accordion>
 
-<Accordion title="Will support be added for other networks like Arbitrum, Optimism and Base?">
-  Support for these networks is already available on <a href="https://layerswap.io/app">Layerswap</a>. As Sophon grows, more tokens, chains, and protocols will be added.
+<Accordion title="Does SOPH need to be migrated or swapped?">
+  No. SOPH is native to Ethereum. SOPH on the Sophon Chain is its bridged
+  representation, so you only need to withdraw it.
 </Accordion>
 
----
-
-## Fees and Security
-
-<Accordion title="Is there a fee for bridging?">
-  It depends on the token:
-  <ul>
-    <li>For the <strong>Sophon Bridge</strong>, only standard gas fees on L1 and L2 apply.</li>
-    <li>When it comes to other protocols like <strong>LayerZero</strong> or <strong>Layerswap</strong>, additional fees may apply.</li>
-  </ul>
+<Accordion title="How do I move SOPH to another chain?">
+  Withdraw from Sophon to Ethereum through the canonical route. From Ethereum, use
+  a supported LayerZero SOPH route to the destination chain.
 </Accordion>
 
-<Accordion title="How secure is the native Sophon Bridge?">
-  The native Sophon Bridge is as secure as the protocol itself, making it one of the safest components of our system. Sophon is built on a widely tested tech stack and reinforced with ZK proofs, so it’s very secure.
+<Accordion title="How do I withdraw ETH, USN, or another token?">
+  Choose **Withdraw from Sophon** at the claim portal. The portal uses Jumper to
+  present available routes, which may include a direct destination or a path through
+  Ethereum.
 </Accordion>
 
----
-
-## Processes and Third-Party Support
-
-<Accordion title="Why do users need to wait 24 hours to claim after bridging?">
-  This delay ensures transaction batches are finalized on Ethereum, preventing invalid withdrawals if the chain state rolls back. The wait time will soon drop to 3 hours.
-    
-    For more info, see ZKsync’s <a href="https://docs.zksync.io/zksync-protocol/security/withdrawal-delay">Official Docs</a>.
+<Accordion title="Why is a canonical withdrawal not immediate?">
+  The Sophon batch containing the transaction must be finalized and proven on
+  Ethereum before the withdrawal can be completed. The exact time can vary. See
+  [Withdrawal Delay](/discover/bridging/withdrawal-delay).
 </Accordion>
 
-<Accordion title="Are third-party bridges like Layerswap officially recognized by Sophon?">
-  Sophon has partnered with Layerswap and trusts in their infrastructure and security. With this in mind, third-party bridges are fully responsible for maintaining the integrity of their operations. In the event of any issues, we will work with these providers to address the situation and arrive at a resolution as soon as possible.
+<Accordion title="When is the final withdrawal deadline?">
+  No fixed date has been announced. The chain is expected to remain operational
+  until late 2026, and Sophon has said the final date will be communicated in
+  advance. Withdraw before that announced cutoff.
+</Accordion>
+
+<Accordion title="Where can I get help?">
+  Use [Sophon's official Discord or X account](/links/socials). Never follow an
+  unsolicited claim, migration, or token-swap link.
 </Accordion>

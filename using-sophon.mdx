@@ -1,28 +1,22 @@
 ---
-title: 'Using Sophon'
-description: ''
+title: "Using the Legacy Sophon Chain"
+description: "Connect to Sophon to review balances, claim rewards, and withdraw"
 ---
 
-Follow these steps to begin:
+<Warning>
+  The Sophon Chain is being wound down. New deposits have been disabled since
+  **June 25, 2026**. Connect to the network only as needed to review balances, claim
+  rewards, or withdraw assets.
+</Warning>
 
-### Connecting Your Wallet
+Use [claim.sophon.com](https://claim.sophon.com) as the primary interface for claims
+and withdrawals. See the [migration guide](/migration) before taking action.
 
-As an EVM chain, Sophon will be readily available on every wallet interface and supported by [Metamask](https://metamask.io/), Rabby, Rainbow, and any other EVM wallet.
+## Add Sophon to a wallet
 
-<span class="wallet-related">
-  <span class="soph-button" onClick={() => connectWalletAndAddNetwork()}>
-    <span>Add network to wallet</span>
-  </span>
-</span>
+If the portal asks you to connect directly to the legacy network, use:
 
-To add the Sophon Network manually, follow these steps:
-
-1. Open your browser wallet
-2. Go to **Settings**
-3. Click on **Add Network**
-4. Fill in the following information in the relevant fields:
-
-```html Network Information
+```text Network Information
 Network Name: Sophon
 RPC URL: https://rpc.sophon.xyz
 Chain ID: 50104
@@ -31,20 +25,17 @@ Block Explorer: https://explorer.sophon.xyz
 WebSocket URL: wss://rpc.sophon.xyz/ws
 ```
 
-<Check>After adding this, you are now ready to use **Sophon**.</Check>
+<Info>
+  Always verify that your wallet shows chain ID `50104` and that you are using
+  [claim.sophon.com](https://claim.sophon.com) before signing a transaction.
+</Info>
 
-### Bridging to Sophon
+## Withdraw from Sophon
 
-You can bridge to Sophon from Ethereum using the native bridge:
+1. Open [claim.sophon.com](https://claim.sophon.com).
+2. Connect the wallet that holds your Sophon assets.
+3. Select **Withdraw from Sophon** for the relevant balance.
+4. Review the available route and destination carefully before confirming.
 
-https://portal.sophon.xyz
-
-<Note>The chain supports [LayerZero](https://layerzero.network/) as well.</Note>
-
-### Interacting With Sophon
-
-<Warning>Before using any app, make sure Sophon is set as the **active network**. While other wallets automatically switch to Sophon when interacting with its apps, [Metamask](https://metamask.io/) requires that you select it manually.</Warning>
-
-1. Navigate to the top of your wallet pop-up.
-2. Click on the drop-down menu.
-3. Select the **Sophon Network**, and you should be good to go.
+Sophon is no longer connected to LayerZero. SOPH withdrawals to Ethereum use the
+canonical route; from Ethereum, SOPH can be bridged onward to other supported chains.
