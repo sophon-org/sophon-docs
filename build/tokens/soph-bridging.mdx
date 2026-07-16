@@ -1,58 +1,62 @@
 ---
 title: "SOPH Bridging"
+description: "Current SOPH routes during the Sophon Chain wind-down"
 mode: "wide"
 ---
 
-## Overview
+<Warning>
+  Since **June 25, 2026**, deposits into the Sophon Chain have been disabled and
+  Sophon is no longer connected to LayerZero. Use
+  [claim.sophon.com](https://claim.sophon.com) to withdraw SOPH from Sophon.
+</Warning>
 
-The SOPH token was minted on Ethereum mainnet and canonically bridged to Sophon as the native fee token. To enable seamless cross-chain functionality, we added an OFTAdapter (Omnichain Fungible Token Adapter) on Sophon that allows easy bridging to other supported chains.
+## Current architecture
 
-## Contract Addresses
+SOPH is an ERC-20 token native to Ethereum. The token at the system address on the
+Sophon Chain is a canonically bridged representation, not a separate token that
+needs to be migrated.
+
+As part of the chain wind-down, the SOPH NativeOFTAdapter moved from Sophon to
+Ethereum. This makes Ethereum the hub for LayerZero routes to other supported chains.
+
+## Supported flows
+
+- **Sophon → Ethereum:** use the canonical withdrawal route through
+  [claim.sophon.com](https://claim.sophon.com).
+- **Ethereum → another supported chain:** use the LayerZero SOPH route available
+  for the destination.
+- **Sophon → another chain:** first withdraw SOPH canonically to Ethereum, then use
+  LayerZero from Ethereum to the supported destination.
+
+The following flows are no longer supported:
+
+- Ethereum → Sophon deposits;
+- LayerZero transfers to or from Sophon.
+
+## Official contract addresses
 
 | Chain | Address |
-|-------|---------|
-| Ethereum | `0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0` ([link](https://etherscan.io/token/0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0)) |
-| Sophon | `0x000000000000000000000000000000000000800A` ([link](https://sophscan.xyz/token/0x000000000000000000000000000000000000800A)) |
-| Sophon (WSOPH) | `0x2b1A859dE6A55c553520D7780Bc5805712B128F9` ([link](https://sophscan.xyz/token/0x2b1A859dE6A55c553520D7780Bc5805712B128F9)) |
-| Sophon (NativeOFTAdapter) | `0x70ff61C1436d19090321A312b1f4be89D62ac55C` ([link](https://explorer.sophon.xyz/address/0x70ff61C1436d19090321A312b1f4be89D62ac55C)) |
-| BSC | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([link](https://bscscan.com/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
-| Base | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([link](https://basescan.org/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
-| Arbitrum | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([link](https://arbiscan.io/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
-| Polygon | `0xEb971Fd26783f32694dbB392dD7289de23109148` ([link](https://polygonscan.com/token/0xEb971Fd26783f32694dbB392dD7289de23109148)) |
-| Beam | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([link](https://subnets.avax.network/beam/address/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
+| --- | --- |
+| Ethereum | `0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0` ([Etherscan](https://etherscan.io/token/0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0)) |
+| Sophon | `0x000000000000000000000000000000000000800A` ([Sophon Explorer](https://explorer.sophon.xyz/address/0x000000000000000000000000000000000000800A)) |
+| Base | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([Basescan](https://basescan.org/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
+| BSC | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([BscScan](https://bscscan.com/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
+| Arbitrum | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([Arbiscan](https://arbiscan.io/token/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
+| Polygon | `0xEb971Fd26783f32694dbB392dD7289de23109148` ([PolygonScan](https://polygonscan.com/token/0xEb971Fd26783f32694dbB392dD7289de23109148)) |
+| Beam | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` ([Beam Explorer](https://subnets.avax.network/beam/address/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742)) |
 
-## Technical Implementation
+<Note>
+  The previous Sophon NativeOFTAdapter address is a legacy contract and is not a
+  current bridge entry point. Always start from the claim portal rather than calling
+  an adapter directly.
+</Note>
 
-**Architecture:**
-- **Ethereum Mainnet**: Original ERC20 token contract
-- **Sophon**: Canonically bridged as the native fee token with an additional OFTAdapter for cross-chain bridging
-- **Other Chains**: OFT (Omnichain Fungible Token) implementations that connect through LayerZero
+## Exchange and bridge integrations
 
-This design ensures that SOPH maintains its native status on Sophon while providing users with the flexibility to bridge their tokens to other major blockchain networks for DeFi activities and broader ecosystem participation.
+For partners providing SOPH exchange or bridge services, the June 25 move of the
+SOPH NativeOFTAdapter from Sophon to Ethereum is the announced operational change.
+Existing non-Sophon routes otherwise remain unchanged. Do not treat the legacy
+Sophon adapter as an active endpoint.
 
-## Bridging Flow
-
-- **Ethereum ↔ Sophon**: Use the canonical ZKsync bridge
-- **Sophon ↔ Other Chains**: LayerZero OFT bridging
-- **Ethereum ↔ Other Chain**: Currently not supported
-
-<Note>We want to avoid having multiple SOPH addresses on the same chain</Note>
-
-## Key Features
-
-- **Native Fee Token**: SOPH serves as the native gas token on Sophon
-- **Cross-Chain Compatibility**: Seamless bridging to major blockchain networks
-- **LayerZero Integration**: Leverages LayerZero's omnichain infrastructure for secure cross-chain transfers
-- **Wrapped Version**: WSOPH available for DeFi applications requiring ERC-20 compatibility
-
-## LayerZero OFT
-
-To support the bridging with LayerZero, the OFT adapter and OFT tokens linked [above](#contract-addresses) were created.
-- The adapters are owned by a Sophon Foundation Multisig on each chain, which only has permission to set delegates.
-- The adapters' main delegate is also the same Sophon Foundation Multisig, and the delegate has permission to add new routes for new chains.
-
-This structure doesn't give the Sophon Foundation any powers over the token itself.
-The security of minting and burning is still ensured by the LayerZero protocol itself.
-The foundation can just include new routes for new chains.
-
-A script that shows and validates the configurations above (and the approval needed) can be found [here](https://github.com/sophon-org/sophon-oft/blob/main/layerzero.config.ts).
+See the [Sophon Chain migration guide](/migration) for other assets, managed
+positions, and the transition timeline.

@@ -1,0 +1,173 @@
+---
+title: "Sophon Chain Migration"
+description: "How to claim rewards and move assets off the Sophon Chain"
+mode: "wide"
+---
+
+<Warning>
+  The Sophon Chain is being wound down. Since **June 25, 2026**, new deposits into
+  Sophon have been disabled. Withdrawals remain available while the chain is
+  operational, but you should move any liquid assets off Sophon before the final
+  decommissioning date.
+</Warning>
+
+Sophon is moving from operating a general-purpose chain to building applications on
+Base. The chain is expected to remain operational until late 2026, but there is no
+fixed shutdown date yet. The final date will be announced in advance.
+
+Use [claim.sophon.com](https://claim.sophon.com) for the entire transition: claim
+staking or Guardian rewards and find a route to withdraw assets from Sophon.
+
+## What you need to do
+
+1. **Claim outstanding rewards.** Check the claim portal for unlocked staking and
+   Guardian rewards.
+2. **Withdraw liquid assets.** Bridge SOPH, ETH, USN, and any other tokens you hold
+   on Sophon to another chain.
+3. **Do not manually migrate managed positions.** Guardian NFTs, vSOPH, and staked
+   SOPH are being moved to Ethereum for their holders.
+
+<Card title="Open the claim and withdrawal portal" icon="arrow-up-right-from-square" href="https://claim.sophon.com">
+  Claim rewards and review the available withdrawal routes.
+</Card>
+
+## Actions by asset type
+
+| You hold | What to do |
+| --- | --- |
+| **Guardian NFT** | Claim any outstanding rewards. Sophon's announced NFT transition to Ethereum is automatic. |
+| **vSOPH** | Claim any unlocked SOPH. The vSOPH transition to Ethereum is automatic. |
+| **Staked SOPH** | Claim any outstanding staking rewards. The staked position transition to Ethereum is automatic. |
+| **Liquid SOPH on Sophon** | Bridge it out. SOPH itself does not need a token migration. |
+| **ETH, USN, or another token on Sophon** | Use the withdrawal action at [claim.sophon.com](https://claim.sophon.com) and select an available route. |
+
+## Key dates
+
+### June 25, 2026
+
+- New deposits through the canonical Ethereum-to-Sophon bridge were disabled.
+- Sophon was removed from the LayerZero network. LayerZero can no longer be used
+  to bridge SOPH to or from the Sophon Chain.
+- Canonical withdrawals from Sophon to Ethereum remained available.
+- Sophon announced an automatic Guardian NFT transition: transfers would be locked
+  on Sophon and the same number of NFTs would be recreated in the same holder wallet
+  on Ethereum. The exact snapshot timing was still subject to confirmation.
+
+<Note>
+  Sophon's token announcement identified the June 25 Guardian snapshot timing as
+  subject to final confirmation. Follow [official Sophon channels](/links/socials)
+  for any timing update.
+</Note>
+
+### September 29, 2026 at 00:00 GMT
+
+This is the final vesting unlock and node reward distribution on the Sophon Chain.
+After this point, vesting, reward accrual, and claims continue on Ethereum without
+requiring a user migration transaction.
+
+### Late 2026
+
+The chain is expected to remain operational through roughly the end of 2026 so
+holders have time to withdraw. This is an estimate, not a hard deadline. Withdraw
+before the final date announced by Sophon.
+
+## Guardian NFTs and node rewards
+
+You do not need to move your Guardian NFT manually. Sophon has announced that it will
+recreate the same number of Guardian NFTs on Ethereum in the wallet that held them
+on Sophon.
+
+The Guardian reward programme continues on its original schedule: holders receive a
+pro-rata share of **20% of the original 10 billion SOPH supply over three years**.
+Rewards remain on Sophon through September 29, 2026 at 00:00 GMT, then continue on
+Ethereum.
+
+The Sophon light-node software has been retired. Running software, maintaining
+uptime, and delegating a Guardian NFT are no longer requirements for Guardian
+holders to continue receiving rewards.
+
+## SOPH, vSOPH, and staked SOPH
+
+### Liquid SOPH
+
+SOPH is native to Ethereum. The token on Sophon is a bridged representation, so
+there is no replacement token or token swap:
+
+1. Withdraw SOPH from **Sophon to Ethereum** through the canonical route at
+   [claim.sophon.com](https://claim.sophon.com).
+2. If desired, bridge SOPH from **Ethereum to another supported chain** through
+   LayerZero.
+
+Since June 25, the SOPH NativeOFTAdapter is based on Ethereum rather than Sophon.
+Expect the claim portal to show the currently available routes.
+
+### vSOPH and staked SOPH
+
+The vSOPH and staked SOPH transitions to Ethereum are automatic. Check the claim
+portal for unlocked SOPH from vSOPH and for outstanding staking rewards. Those
+current claims run on Sophon before the settlement transition, while SOPH principal
+that is unstaked now is claimable on Ethereum.
+
+Staking will be discontinued when the Sophon Chain is decommissioned. No new staking
+action is required for the migration.
+
+## Other assets on Sophon
+
+To withdraw ETH, USN, or another token:
+
+1. Go to [claim.sophon.com](https://claim.sophon.com) and connect the wallet that
+   holds the assets.
+2. Select **Withdraw from Sophon** for the relevant balance.
+3. Review the routes supplied through Jumper and choose the route that fits your
+   destination and asset.
+4. Confirm the transaction and wait for the selected bridge route to complete.
+
+The portal may offer a direct route to another chain or a route through Ethereum,
+depending on the asset and available liquidity.
+
+## Official SOPH addresses
+
+| Chain | Address |
+| --- | --- |
+| Ethereum | `0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0` |
+| Sophon | `0x000000000000000000000000000000000000800A` |
+| Base | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` |
+| BSC | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` |
+| Arbitrum | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` |
+| Polygon | `0xEb971Fd26783f32694dbB392dD7289de23109148` |
+| Beam | `0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742` |
+
+## Frequently asked questions
+
+<Accordion title="Do I need to act immediately?">
+  There is no hard shutdown date yet, but new deposits are already disabled. Claim
+  outstanding rewards and withdraw liquid assets before the final decommissioning
+  date announced by Sophon.
+</Accordion>
+
+<Accordion title="Do I need to migrate or swap SOPH?">
+  No. SOPH is already native to Ethereum. If you hold its bridged representation on
+  Sophon, withdraw it canonically to Ethereum. From Ethereum, you can use LayerZero
+  to reach another supported destination.
+</Accordion>
+
+<Accordion title="Do I need to move my Guardian NFT, vSOPH, or staked SOPH?">
+  No. These positions are transitioned to Ethereum automatically. You should still
+  check [claim.sophon.com](https://claim.sophon.com) for rewards that are available
+  to claim.
+</Accordion>
+
+<Accordion title="When will the Sophon Chain stop operating?">
+  No exact date has been announced. The chain is expected to remain available until
+  late 2026, and Sophon has said the final date will be communicated in advance.
+</Accordion>
+
+<Accordion title="Where can I get help?">
+  Use [Sophon's official Discord or X account](/links/socials) and never trust an
+  unsolicited claim or migration link.
+</Accordion>
+
+## Official announcements
+
+- [Sophon Chain Migration Guide](https://sophon.com/content/sophon-migration)
+- [SOPH token changes](https://sophon.com/content/soph-token)

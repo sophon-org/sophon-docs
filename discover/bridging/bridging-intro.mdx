@@ -1,79 +1,41 @@
 ---
-title: 'Introduction'
-description: ''
+title: "Withdraw from Sophon"
+description: "Move SOPH and other assets off the Sophon Chain"
 ---
 
-## How to bridge SOPH
+<Warning>
+  New deposits into Sophon have been disabled since **June 25, 2026**. The bridge
+  guidance in these docs is withdrawal-only.
+</Warning>
 
-**Sophon - Ethereum**
+[claim.sophon.com](https://claim.sophon.com) is the supported starting point for
+moving assets off the Sophon Chain. It displays your Sophon balances and the routes
+currently available for each token.
 
-1. Canonical bridge
-2. Orbiter
-3. Layerswap
+## SOPH
 
-**Sophon - Other chains**
-1. Stargate
-2. deBridge
-3. Decent
+SOPH is native to Ethereum and does not require a token swap or migration.
 
-**Sophon - CEX**
+1. Withdraw SOPH from Sophon to Ethereum using the canonical route.
+2. From Ethereum, use LayerZero if you want to move SOPH to another supported chain.
 
-Your CEX should allow direct deposit from/to Sophon
+Sophon itself is no longer on the LayerZero network, so a direct LayerZero transfer
+to or from Sophon is not available.
 
-**Bridging** lets you move assets between different blockchains, making it easier to use your tokens across ecosystems. Sophon currently offers multiple options when it comes to bridging:
+## Other assets
 
-<CardGroup cols={3}>
-  <Card
-    title="Sophon Bridge"
-    icon="bridge"
-    href="https://portal.sophon.xyz/bridge/"
-  >
-    The official bridge for moving assets between Sophon and Ethereum. It's built to be secure and reliable for supported tokens.
+For ETH, USN, and other tokens:
+
+1. Open [claim.sophon.com](https://claim.sophon.com).
+2. Select **Withdraw from Sophon** for the token.
+3. Review the routes supplied through Jumper.
+4. Choose the destination and route that fit your needs, then confirm in your wallet.
+
+<CardGroup cols={2}>
+  <Card title="Claim and Withdraw" icon="arrow-up-right-from-square" href="https://claim.sophon.com">
+    Open the unified Sophon transition portal.
   </Card>
-
-  <Card
-    title="Orbiter Finance"
-    icon="rocket"
-    href="https://www.orbiter.finance/bridge/Sophon/Ethereum?token=SOPH"
-  >
-    A fast and efficient cross-chain bridge that enables quick transfers between Sophon and Ethereum with competitive fees.
-  </Card>
-
-  <Card
-    title="Stargate"
-    icon="satellite-dish"
-    href="/discover/bridging/stargate"
-  >
-    Move SOPH tokens between Sophon, Base, Arbitrum, BNB Chain, and Polygon with guaranteed 1:1 rate and zero slippage via LayerZero.
-  </Card>
-
-  <Card
-    title="deBridge"
-    icon="link"
-    href="/discover/bridging/deBridge"
-  >
-    A cross-chain messaging and liquidity protocol enabling seamless asset transfers between Sophon, Ethereum, Arbitrum, Base, and other supported networks.
-  </Card>
-
-  <Card
-    title="Layerswap"
-    icon="arrow-right"
-    href="https://layerswap.io/"
-  >
-    A trusted third-party partner that makes it simple to bridge assets between Sophon and other networks like Arbitrum, Optimism, and Base.
-  </Card>
-  
-  <Card
-    title="Decent"
-    icon="shuffle"
-    href="https://app.decent.xyz/decent"
-  >
-    A fast and expansive cross-chain bridge with support for Sophon, Ethereum, Arbitrum, Base, Optimism, and more.
+  <Card title="Migration Guide" icon="arrow-right-arrow-left" href="/migration">
+    Review managed positions, key dates, and holder actions.
   </Card>
 </CardGroup>
-
-<Tip>
-**Learn More**
-
-Check out our [FAQs](/discover/bridging/bridging-faqs) for answers to common questions about bridging.
-</Tip>

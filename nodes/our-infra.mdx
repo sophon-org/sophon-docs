@@ -1,21 +1,40 @@
 ---
-title: "Our Infra"
-description: ""
+title: "Guardian Transition"
+description: "Guardian NFTs and node rewards during the Sophon Chain wind-down"
 ---
 
-<img className="block dark:hidden" src="/images/nodes/nodes-light.webp" />
-<img className="hidden dark:block" src="/images/nodes/nodes-dark.webp" />
+<Warning>
+  The Sophon Chain is being wound down. Light-node software has been retired, and
+  Guardian holders no longer need to run software, maintain uptime, or delegate
+  their NFTs to continue receiving rewards.
+</Warning>
 
-Find out what powers Sophon's Network.
+The Guardian reward programme continues on its original schedule. Guardian NFT
+holders receive a pro-rata share of **20% of the original 10 billion SOPH supply
+over three years**.
 
-<CardGroup cols={3}>
-  <Card title="Full Nodes" icon="atom" href="/nodes/full-nodes">
-    Learn about Sophon's Full Nodes
+## What holders need to do
+
+- Check [claim.sophon.com](https://claim.sophon.com) for outstanding node rewards.
+- Do not manually move or bridge the Guardian NFT.
+- Withdraw any liquid SOPH or other assets that remain on the Sophon Chain.
+
+Under the announced migration process, Guardian NFT transfers are locked on Sophon
+and the same number of NFTs will be recreated on Ethereum in the same holder wallet.
+Rewards remain on Sophon through
+**September 29, 2026 at 00:00 GMT**, then continue on Ethereum.
+
+<CardGroup cols={2}>
+  <Card title="Guardian Rewards" icon="coins" href="/nodes/calculating-rewards">
+    Review the reward schedule and Ethereum transition.
   </Card>
-  <Card title="Light Nodes" icon="lightbulb" href="/nodes/light-nodes">
-    Find out about Sophon's Light Nodes
+  <Card title="Migration Guide" icon="arrow-right-arrow-left" href="/migration">
+    See the complete holder actions and chain timeline.
   </Card>
-  <Card title="Guardians" icon="shield" href="/nodes/what-are-guardians">
-    Learn about Sophon Guardians
+  <Card title="Light Nodes (Retired)" icon="lightbulb" href="/nodes/light-nodes">
+    Read the status of the retired operating software.
+  </Card>
+  <Card title="Legacy Full Nodes" icon="atom" href="/nodes/full-nodes">
+    View the archived role of full nodes in Sophon v1.
   </Card>
 </CardGroup>

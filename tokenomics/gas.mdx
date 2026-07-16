@@ -1,11 +1,20 @@
 ---
-title: "Gas"
+title: "Gas Utility (Legacy)"
+description: "SOPH gas utility during the Sophon Chain wind-down"
 ---
 
-All transactions on the Sophon Network will be paid for in gas.
+<Warning>
+  SOPH's gas utility is being phased out with the Sophon Chain. This page describes
+  the remaining chain-era behavior, not Sophon's future token model.
+</Warning>
 
-This does not necessarily require all users to hold SOPH due to ZKsync’s native paymaster technology.  Paymasters are a type of specialised account designed to subsidize or customize transaction fees for other accounts, providing a seamless user experience and greater flexibility. That means, no more being forced to bridge whenever you run out of the native gas token and depending on what you’re doing, maybe no gas to be paid at all. Check out our [Paymaster page](/architecture/paymasters) for more detail.
+While the legacy chain remains operational, transactions use SOPH for gas. ZKsync
+paymasters can sponsor or customize transaction fees so an application can pay on
+behalf of its users.
 
-<img src="/images/tokenomics/soph_gas.webp" />
+New deposits into Sophon have been disabled since June 25, 2026. Use
+[claim.sophon.com](https://claim.sophon.com) to review available withdrawal routes,
+and do not bridge new assets into Sophon.
 
-With all gas being paid in SOPH, either by the network, the user or the dapp, the token is redistributed to those operating the chain, which brings us onto the next utility.
+After the chain is decommissioned, SOPH will no longer be used for Sophon Chain gas.
+Its replacement utility is a [product-funded buyback-and-burn model](/tokenomics/soph).
