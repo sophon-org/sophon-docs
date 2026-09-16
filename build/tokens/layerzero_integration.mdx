@@ -1,26 +1,246 @@
 ---
-title: "LayerZero Integration (Retired)"
-description: "Archived status of the Sophon Chain LayerZero integration"
+title: "Bridge SOPH with LayerZero"
+description: "Manually bridge SOPH between Ethereum, Base, BNB Smart Chain, Arbitrum, Polygon and Beam"
 ---
 
 <Warning>
-  Sophon was removed from the LayerZero network on **June 25, 2026**. Do not deploy
-  new OFT routes to Sophon or call the former `LzOftHelper` contracts.
+  Sophon was removed from the LayerZero network on **June 25, 2026**. LayerZero
+  transfers **to or from the Sophon Chain are no longer supported**. Do not use
+  the former Sophon adapter or `LzOftHelper`. If your SOPH is on Sophon, first
+  withdraw it to Ethereum through [claim.sophon.com](https://claim.sophon.com).
 </Warning>
 
-The previous Sophon-specific LayerZero integration and `LzOftHelper` flow are
-retired as part of the Sophon Chain wind-down. Existing code samples were removed
-because they no longer describe a supported production route.
+SOPH can be bridged directly between the six chains below. The flow is: approve
+SOPH if sending from Ethereum, query `quoteSend`, then pass the returned fee to
+`send` and attach that fee as the transaction's native value. You can use the
+contract explorer or the official LayerZero CLI.
 
-For SOPH:
+## Chains and contracts
 
-- withdraw from Sophon to Ethereum through the canonical route at
-  [claim.sophon.com](https://claim.sophon.com);
-- bridge from Ethereum to another supported chain through LayerZero.
+Use the **destination LayerZero V2 endpoint ID (EID)** in `dstEid`. An EID is not
+an EVM chain ID. Call `quoteSend` and `send` on the **source** contract below.
 
-For other assets on Sophon, use the claim portal's **Withdraw from Sophon** action.
-It routes users through Jumper and shows the paths currently available for each
-asset.
+| Chain | EVM chain ID | LayerZero V2 EID | Source OFT / adapter contract | Fee currency |
+| --- | --- | --- | --- | --- |
+| Ethereum | 1 | 30101 | [0xb09f17b1c52dcc6870070047e1d84e3aab1c4dd1](https://etherscan.io/address/0xb09f17b1c52dcc6870070047e1d84e3aab1c4dd1#code) | ETH |
+| Base | 8453 | 30184 | [0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742](https://basescan.org/address/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742#code) | ETH |
+| BNB Smart Chain | 56 | 30102 | [0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742](https://bscscan.com/address/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742#code) | BNB |
+| Arbitrum | 42161 | 30110 | [0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742](https://arbiscan.io/address/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742#code) | ETH |
+| Polygon | 137 | 30109 | [0xEb971Fd26783f32694dbB392dD7289de23109148](https://polygonscan.com/address/0xEb971Fd26783f32694dbB392dD7289de23109148#code) | POL |
+| Beam | 4337 | 30198 | [0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742](https://4337.routescan.io/address/0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742) | BEAM |
 
-See [SOPH Bridging](/build/tokens/soph-bridging) and the
-[chain migration guide](/migration) for current guidance.
+On Ethereum, the SOPH **token** is
+[`0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0`](https://etherscan.io/address/0x6B7774CB12ed7573a7586E7D0e62a2A563dDd3f0#code).
+It is separate from the adapter above. On the other five chains, the SOPH token
+and OFT are the same contract.
+
+Before sending, read `peers(destinationEid)` on the source contract and
+`peers(sourceEid)` on the destination contract. Each must match the other
+contract's address left-padded with zeros to 32 bytes. Stop if either peer is
+zero or does not match. Keep enough native currency on the source chain for
+both the LayerZero fee and transaction gas.
+
+## Manual transfer through a contract explorer
+
+The example below sends **1 SOPH from Ethereum to Base**. Change the source
+contract and destination EID to use another pair from the table.
+
+### 1. Approve SOPH when sending from Ethereum
+
+On the Ethereum **SOPH token**, open **Contract → Write Contract**, connect your
+wallet on Ethereum and call `approve`:
+
+| Field | Value |
+| --- | --- |
+| `spender` | `0xb09f17b1c52dcc6870070047e1d84e3aab1c4dd1` (the Ethereum adapter) |
+| `amount` | `1000000000000000000` (1 SOPH) |
+
+Wait for the approval to confirm. You can skip this transaction if
+`allowance(yourAddress, adapterAddress)` already covers the amount. Approve the
+adapter, **not** the LayerZero endpoint or the destination contract.
+
+The other five chains use OFTs with `approvalRequired() = false`; a direct
+`send` from your own wallet does not need ERC-20 approval there.
+
+### 2. Build the send parameters
+
+On the **Ethereum adapter**, prepare this `_sendParam` tuple. Replace the
+recipient with your own address on Base.
+
+| Field | Example / meaning |
+| --- | --- |
+| `dstEid` | `30184` (Base) |
+| `to` | Recipient's 20-byte EVM address, left-padded to 32 bytes |
+| `amountLD` | `1000000000000000000` (1 SOPH; SOPH has 18 decimals) |
+| `minAmountLD` | `1000000000000000000` (require the full 1 SOPH) |
+| `extraOptions` | `0x` |
+| `composeMsg` | `0x` |
+| `oftCmd` | `0x` |
+
+For example, address `0x1234567890123456789012345678901234567890` becomes
+`0x0000000000000000000000001234567890123456789012345678901234567890`.
+Do not use that example recipient for an actual transfer.
+
+The listed routes already enforce destination receive gas, so `extraOptions`
+can be `0x` for a plain SOPH transfer. No compose message is needed. SOPH's OFTs
+use six shared decimals: choose amounts with at most six decimal places to avoid
+dust rounding. `quoteOFT(_sendParam)` can be used to inspect the amounts sent and
+received. Do not set `minAmountLD` to zero just to bypass a failed quote.
+
+### 3. Query the fee
+
+Under **Read Contract** on the source adapter/OFT, call:
+
+```text
+quoteSend(_sendParam, false)
+```
+
+Use the exact tuple from step 2. `false` selects payment in the source chain's
+native currency. The result is a `MessagingFee` tuple:
+
+```text
+(nativeFee, lzTokenFee)
+```
+
+Both values are integers in base units; `lzTokenFee` is `0` for this flow.
+`nativeFee` pays LayerZero delivery costs and is separate from the wallet's
+transaction gas fee. Query it again immediately before sending; do not reuse a
+fee from an earlier transfer.
+
+### 4. Send with the quoted fee
+
+Under **Write Contract** on the same source adapter/OFT, call `send`:
+
+| Field | Value |
+| --- | --- |
+| `_sendParam` | Exactly the tuple used for `quoteSend` |
+| `_fee` | The returned `(nativeFee, lzTokenFee)` tuple |
+| `_refundAddress` | Your source-chain wallet address |
+| Payable transaction value | `nativeFee` |
+
+<Note>
+  The `_fee.nativeFee` field takes the integer in base units. An explorer's
+  payable **ETH / BNB / POL / BEAM amount** field typically takes whole native
+  units: divide `nativeFee` by `10^18` when that is the field's unit. For example,
+  `1000000000000000` base units is `0.001` native currency. This is a conversion
+  example, not a fee quote. Do not add the SOPH amount to the transaction value.
+</Note>
+
+Confirm the transaction in your wallet. Open its hash on
+[LayerZero Scan](https://layerzeroscan.com) and wait for destination delivery.
+A successful source transaction alone does not confirm receipt: verify the
+recipient's SOPH balance on the destination chain too.
+
+## Use the official LayerZero CLI
+
+The official [`create-lz-oapp`](https://github.com/LayerZero-Labs/devtools/tree/main/packages/create-lz-oapp)
+OFT example includes the `lz:oft:send` task. It checks allowance, approves the
+source adapter when needed, calls `quoteSend`, and supplies the fee to `send`.
+It sends real transactions; it is not a quote-only or dry-run command.
+
+### 1. Set up the official example
+
+Use Node.js 22 LTS and npm. The scaffold command tested for this guide is:
+
+```bash
+npx create-lz-oapp@0.8.3 --example oft --destination soph-bridge --package-manager npm --ci
+cd soph-bridge
+```
+
+This installs the official example and its dependencies. Keep its `tasks`
+directory unchanged. No contract deployment or route wiring is needed.
+
+Replace `hardhat.config.ts` with:
+
+```typescript
+import 'dotenv/config'
+import 'hardhat-deploy'
+import '@nomiclabs/hardhat-ethers'
+import '@layerzerolabs/toolbox-hardhat'
+import './tasks/index'
+
+const accounts = process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : []
+export default {
+  solidity: { version: '0.8.22', settings: { optimizer: { enabled: true, runs: 200 } } },
+  networks: {
+    ethereum: { eid: 30101, chainId: 1, url: process.env.RPC_URL_ETHEREUM || 'https://eth.drpc.org', accounts },
+    base: { eid: 30184, chainId: 8453, url: process.env.RPC_URL_BASE || 'https://mainnet.base.org', accounts },
+    bsc: { eid: 30102, chainId: 56, url: process.env.RPC_URL_BSC || 'https://bsc-dataseed.bnbchain.org', accounts },
+    arbitrum: { eid: 30110, chainId: 42161, url: process.env.RPC_URL_ARBITRUM || 'https://arb1.arbitrum.io/rpc', accounts },
+    polygon: { eid: 30109, chainId: 137, url: process.env.RPC_URL_POLYGON || 'https://polygon.drpc.org', accounts },
+    beam: { eid: 30198, chainId: 4337, url: process.env.RPC_URL_BEAM || 'https://build.onbeam.com/rpc', accounts },
+  },
+}
+```
+
+Replace `layerzero.config.ts` with the existing SOPH contract addresses:
+
+```typescript
+const oft = '0x31DbA3c96481FDe3CD81C2aaF51F2D8bf618C742'
+export default {
+  contracts: [
+    { contract: { eid: 30101, address: '0xb09f17b1c52dcc6870070047e1d84e3aab1c4dd1' } },
+    { contract: { eid: 30184, address: oft } },
+    { contract: { eid: 30102, address: oft } },
+    { contract: { eid: 30110, address: oft } },
+    { contract: { eid: 30109, address: '0xEb971Fd26783f32694dbB392dD7289de23109148' } },
+    { contract: { eid: 30198, address: oft } },
+  ],
+  connections: [],
+}
+```
+
+Compile the local ABIs and check the task's options:
+
+```bash
+npx hardhat compile
+npx hardhat lz:oft:send --help
+```
+
+### 2. Send SOPH
+
+Set `PRIVATE_KEY` locally for the sending wallet, for example in an uncommitted
+`.env` file. Never paste it into documentation, source control or a shared
+terminal. Override the `RPC_URL_*` variables if a public RPC is unavailable or
+rate-limited. Use the manual explorer flow above if you prefer a connected wallet.
+
+For **Ethereum → Base**, replace the recipient below with your own address:
+
+```bash
+npx hardhat lz:oft:send \
+  --src-eid 30101 \
+  --dst-eid 30184 \
+  --amount 1 \
+  --min-amount 1 \
+  --to YOUR_DESTINATION_WALLET_ADDRESS
+```
+
+Here `--amount` and `--min-amount` are in **whole SOPH**, unlike the base-unit
+fields on the explorer. This sends 1 SOPH. The task automatically submits an
+Ethereum approval first if the existing allowance is insufficient, then quotes
+and sends. It may broadcast without a further confirmation prompt.
+
+For the reverse route use `--src-eid 30184 --dst-eid 30101`. For any other pair,
+use its source and destination EIDs from the table. The config resolves each
+chain's contract separately; no `--oft-address` override is needed. Do not use
+`--simple-workers` on mainnet.
+
+Track the returned transaction on LayerZero Scan and check the destination
+balance, just as with the manual flow.
+
+## Troubleshooting
+
+- **Insufficient allowance:** on Ethereum, approve the SOPH token for the source
+  adapter and wait for confirmation. A token balance alone is not an allowance.
+- **Fee or gas error:** keep enough native currency for both costs, re-run
+  `quoteSend` with the exact send tuple, and check the payable field's units.
+- **Peer, endpoint or quote error:** verify both peers, the destination EID and
+  the source contract. Never substitute Sophon's retired endpoint.
+- **Minimum amount error:** check token units and shared-decimal rounding with
+  `quoteOFT`. For 1 SOPH, both amount fields are `1000000000000000000`.
+- **Source confirmed but destination pending:** inspect the message on LayerZero
+  Scan before initiating another transfer. Do not assume the first send failed.
+
+See the [official LayerZero OFT guide](https://docs.layerzero.network/v2/developers/evm/oft/quickstart),
+[SOPH Bridging](/build/tokens/soph-bridging), and the
+[chain migration guide](/migration) for further context.
