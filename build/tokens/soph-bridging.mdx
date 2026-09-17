@@ -16,15 +16,19 @@ SOPH is an ERC-20 token native to Ethereum. The token at the system address on t
 Sophon Chain is a canonically bridged representation, not a separate token that
 needs to be migrated.
 
-As part of the chain wind-down, the SOPH NativeOFTAdapter moved from Sophon to
-Ethereum. This makes Ethereum the hub for LayerZero routes to other supported chains.
+As part of the chain wind-down, an Ethereum OFT adapter replaced the Sophon
+NativeOFTAdapter. The Ethereum adapter locks ERC-20 SOPH; it requires token
+approval before sending. SOPH can also move directly between the other supported
+LayerZero chains.
 
 ## Supported flows
 
 - **Sophon → Ethereum:** use the canonical withdrawal route through
   [claim.sophon.com](https://claim.sophon.com).
-- **Ethereum → another supported chain:** use the LayerZero SOPH route available
-  for the destination.
+- **Between Ethereum, Base, BNB Smart Chain, Arbitrum, Polygon and Beam:** follow
+  [Bridge SOPH with LayerZero](/build/tokens/layerzero_integration) for contract
+  addresses, endpoint IDs, approval, fee quoting and sending with the official CLI
+  or a contract explorer.
 - **Sophon → another chain:** first withdraw SOPH canonically to Ethereum, then use
   LayerZero from Ethereum to the supported destination.
 
@@ -47,14 +51,15 @@ The following flows are no longer supported:
 
 <Note>
   The previous Sophon NativeOFTAdapter address is a legacy contract and is not a
-  current bridge entry point. Always start from the claim portal rather than calling
-  an adapter directly.
+  current bridge entry point. For SOPH on Sophon, start from the claim portal.
+  For the other chains, use the current contracts in the
+  [LayerZero guide](/build/tokens/layerzero_integration).
 </Note>
 
 ## Exchange and bridge integrations
 
-For partners providing SOPH exchange or bridge services, the June 25 move of the
-SOPH NativeOFTAdapter from Sophon to Ethereum is the announced operational change.
+For partners providing SOPH exchange or bridge services, the June 25 replacement
+of the Sophon NativeOFTAdapter with an Ethereum OFT adapter is the announced operational change.
 Existing non-Sophon routes otherwise remain unchanged. Do not treat the legacy
 Sophon adapter as an active endpoint.
 
