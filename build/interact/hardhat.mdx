@@ -35,7 +35,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const config: HardhatUserConfig = {
-  defaultNetwork: "sophonTestnet",
+  defaultNetwork: "sophonMainnet",
   networks: {
     hardhat: {
       zksync: true,
@@ -45,15 +45,6 @@ const config: HardhatUserConfig = {
       ethNetwork: "mainnet",
       verifyURL: "https://verification-explorer.sophon.xyz/contract_verification",
       browserVerifyURL: "https://explorer.sophon.xyz/",
-      enableVerifyURL: true,
-      zksync: true,
-      accounts: [process.env.WALLET_PRIVATE_KEY as string],
-    },
-    sophonTestnet: {
-      url: "https://rpc.testnet.sophon.xyz",
-      ethNetwork: "sepolia",
-      verifyURL: "https://api-explorer-verify.testnet.sophon.xyz/contract_verification",
-      browserVerifyURL: "https://explorer.testnet.sophon.xyz/",
       enableVerifyURL: true,
       zksync: true,
       accounts: [process.env.WALLET_PRIVATE_KEY as string],
@@ -69,18 +60,9 @@ const config: HardhatUserConfig = {
   etherscan: {
     enabled: true,
     apiKey: {
-      sophonTestnet: process.env.ETHERSCAN_SOPHON_API_KEY as string,
       sophonMainnet: process.env.ETHERSCAN_SOPHON_API_KEY as string,
     },
     customChains: [
-      {
-        network: "sophonTestnet",
-        chainId: 531050104,
-        urls: {
-          apiURL: "https://api-testnet.sophscan.xyz/api",
-          browserURL: "https://testnet.sophscan.xyz",
-        },
-      },
       {
         network: "sophonMainnet",
         chainId: 50104,
@@ -196,7 +178,7 @@ const tx = await contract.yourFunction(params, {
 You can verify contracts on both Sophscan and Sophon's explorer:
 
 ```bash
-npx hardhat verify --network sophonTestnet DEPLOYED_CONTRACT_ADDRESS constructor_arguments
+npx hardhat verify --network sophonMainnet DEPLOYED_CONTRACT_ADDRESS constructor_arguments
 ```
 
 ## Check if a contract is whitelisted by the paymaster
